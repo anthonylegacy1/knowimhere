@@ -30,6 +30,9 @@ export const Route = createFileRoute("/onboarding")({
 
 const STEPS = ["About you", "Interests", "Getting around", "Accessibility"];
 
+const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
+const MORE_CATEGORIES: CategoryId[] = ["food", "transportation", "housing", "recreation", "technology", "arts", "education", "events"];
+
 function Toggle({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (
     <button
