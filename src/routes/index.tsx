@@ -27,7 +27,7 @@ import littleCaesarsAsset from "@/assets/little-caesars-arena.jpeg.asset.json";
 import comericaAsset from "@/assets/comerica-park.png.asset.json";
 import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
 import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
-import everydayAsset from "@/assets/everyday-connect-six-screens.jpeg.asset.json";
+import everydayAsset from "@/assets/everyday-connect-multigenerational.png.asset.json";
 import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
 import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
@@ -150,7 +150,7 @@ function Index() {
       </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect learning experience with six accessible phone screens" className="w-full object-cover" loading="lazy" /></div>
+        <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
         <div><p className="text-xs font-extrabold uppercase text-sky">Digital confidence</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Everyday Connect</h2><p className="mt-4 text-foreground/70">Practical digital confidence for older adults, working adults, parents, students and youth—from smartphone basics and accessibility to healthcare technology and useful AI.</p><div className="mt-5 flex flex-wrap gap-2"><span className="chip">Easy to use</span><span className="chip">Safe & secure</span><span className="chip">Everyday support</span></div><Button asChild variant="outline" className="mt-6"><Link to="/learn">Start learning <ArrowRight /></Link></Button></div>
       </div></section>
 
