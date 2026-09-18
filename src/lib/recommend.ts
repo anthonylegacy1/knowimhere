@@ -102,6 +102,12 @@ export function scoreResources(profile: Profile, intent: Intent = EMPTY_INTENT, 
       else score -= 3;
     }
     if (intent.forSenior && !r.seniorFriendly) score -= 2;
+    if (profile.lifeStage && r.lifeStages?.includes(profile.lifeStage)) {
+      score += 2;
+      reasons.push("Fits your life stage");
+    }
+    if (profile.lifeStage === "youth" && r.audience === "senior-specific") score -= 4;
+    if (profile.lifeStage === "older-adult" && r.audience === "youth-specific") score -= 4;
 
     out.push({ resource: r, score, reasons: Array.from(new Set(reasons)) });
   }

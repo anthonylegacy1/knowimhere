@@ -19,6 +19,21 @@ export const Route = createFileRoute("/changelog")({
 
 const ENTRIES = [
   {
+    date: "Sept 18 2026 · Buildathon baseline (V3)",
+    title: "v3 — Multi-generational expansion",
+    items: [
+      "Multi-generational architecture: youth, young adult, parent, working adult, older adult, caregiver life stages",
+      "Education & Youth Opportunity Hub with age, cost, distance and transportation filters",
+      "Senior employment — Work After 55 pathways",
+      "Everyday Connect Learning Center with Older Adults and Future Ready pathways",
+      "Demo Mode expanded to three personas: Dorothy (68), Marcus (16), Tasha (35)",
+      "One intelligent front door — routing residents to the right provider",
+      "What do you need today? personalized discovery categories",
+      "Partner impact dashboard expanded with a youth program example",
+      "13 additional Detroit prototype resources across youth, education and employment",
+    ],
+  },
+  {
     date: "2026 · Venture 313 Buildathon",
     title: "v2 — Substantially rebuilt MVP",
     items: [

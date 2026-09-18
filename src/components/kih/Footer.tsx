@@ -25,6 +25,9 @@ export function Footer() {
               <li><Link to="/for-you" className="hover:text-brand">For You Today</Link></li>
               <li><Link to="/ask" className="hover:text-brand">Ask KIH</Link></li>
               <li><Link to="/neighborhood" className="hover:text-brand">My Neighborhood</Link></li>
+              <li><Link to="/opportunities" className="hover:text-brand">Education &amp; Youth Opportunities</Link></li>
+              <li><Link to="/work-after-55" className="hover:text-brand">Work After 55</Link></li>
+              <li><Link to="/learn" className="hover:text-brand">Everyday Connect Learning</Link></li>
               <li><Link to="/help" className="hover:text-brand">Need Help? Watch Instead.</Link></li>
               <li><Link to="/partners" className="hover:text-brand">Partners &amp; Impact</Link></li>
               <li><Link to="/changelog" className="hover:text-brand">Buildathon Changelog</Link></li>

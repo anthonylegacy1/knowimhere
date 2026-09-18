@@ -15,11 +15,14 @@ import { Route as ChangelogRouteImport } from './routes/changelog'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ForYouRouteImport } from './routes/for-you'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as LearnRouteImport } from './routes/learn'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as StoryRouteImport } from './routes/story'
+import { Route as WorkAfter55RouteImport } from './routes/work-after-55'
 import { Route as ResourceIdRouteImport } from './routes/resource.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +55,11 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnRoute = LearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NeighborhoodRoute = NeighborhoodRouteImport.update({
   id: '/neighborhood',
   path: '/neighborhood',
@@ -60,6 +68,11 @@ const NeighborhoodRoute = NeighborhoodRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -77,6 +90,11 @@ const StoryRoute = StoryRouteImport.update({
   path: '/story',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkAfter55Route = WorkAfter55RouteImport.update({
+  id: '/work-after-55',
+  path: '/work-after-55',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourceIdRoute = ResourceIdRouteImport.update({
   id: '/resource/$id',
   path: '/resource/$id',
@@ -90,11 +108,14 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/story': typeof StoryRoute
+  '/work-after-55': typeof WorkAfter55Route
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesByTo {
@@ -104,11 +125,14 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/story': typeof StoryRoute
+  '/work-after-55': typeof WorkAfter55Route
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesById {
@@ -119,11 +143,14 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
+  '/learn': typeof LearnRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/story': typeof StoryRoute
+  '/work-after-55': typeof WorkAfter55Route
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRouteTypes {
@@ -135,11 +162,14 @@ export interface FileRouteTypes {
     | '/demo'
     | '/for-you'
     | '/help'
+    | '/learn'
     | '/neighborhood'
     | '/onboarding'
+    | '/opportunities'
     | '/partners'
     | '/privacy'
     | '/story'
+    | '/work-after-55'
     | '/resource/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -149,11 +179,14 @@ export interface FileRouteTypes {
     | '/demo'
     | '/for-you'
     | '/help'
+    | '/learn'
     | '/neighborhood'
     | '/onboarding'
+    | '/opportunities'
     | '/partners'
     | '/privacy'
     | '/story'
+    | '/work-after-55'
     | '/resource/$id'
   id:
     | '__root__'
@@ -163,11 +196,14 @@ export interface FileRouteTypes {
     | '/demo'
     | '/for-you'
     | '/help'
+    | '/learn'
     | '/neighborhood'
     | '/onboarding'
+    | '/opportunities'
     | '/partners'
     | '/privacy'
     | '/story'
+    | '/work-after-55'
     | '/resource/$id'
   fileRoutesById: FileRoutesById
 }
@@ -178,11 +214,14 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   ForYouRoute: typeof ForYouRoute
   HelpRoute: typeof HelpRoute
+  LearnRoute: typeof LearnRoute
   NeighborhoodRoute: typeof NeighborhoodRoute
   OnboardingRoute: typeof OnboardingRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
   StoryRoute: typeof StoryRoute
+  WorkAfter55Route: typeof WorkAfter55Route
   ResourceIdRoute: typeof ResourceIdRoute
 }
 
@@ -230,6 +269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learn': {
+      id: '/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof LearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/neighborhood': {
       id: '/neighborhood'
       path: '/neighborhood'
@@ -242,6 +288,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -265,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work-after-55': {
+      id: '/work-after-55'
+      path: '/work-after-55'
+      fullPath: '/work-after-55'
+      preLoaderRoute: typeof WorkAfter55RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resource/$id': {
       id: '/resource/$id'
       path: '/resource/$id'
@@ -282,11 +342,14 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   ForYouRoute: ForYouRoute,
   HelpRoute: HelpRoute,
+  LearnRoute: LearnRoute,
   NeighborhoodRoute: NeighborhoodRoute,
   OnboardingRoute: OnboardingRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
   StoryRoute: StoryRoute,
+  WorkAfter55Route: WorkAfter55Route,
   ResourceIdRoute: ResourceIdRoute,
 }
 export const routeTree = rootRouteImport

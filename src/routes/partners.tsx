@@ -17,18 +17,35 @@ export const Route = createFileRoute("/partners")({
   component: Partners,
 });
 
-const FUNNEL = [
-  { label: "Matched", n: 318, note: "Residents whose profile fit" },
-  { label: "Viewed", n: 126, note: "Opened the details" },
-  { label: "Interested", n: 54, note: "Saved or tapped I'm Interested" },
-  { label: "Accessed", n: 31, note: "Requested directions or a ride" },
-  { label: "Participated", n: 22, note: "Checked in with I'm Here" },
+const PROGRAMS = [
+  {
+    name: "Senior Wellness Program",
+    funnel: [
+      { label: "Matched", n: 318, note: "Residents whose profile fit" },
+      { label: "Viewed", n: 126, note: "Opened the details" },
+      { label: "Interested", n: 54, note: "Saved or tapped I'm Interested" },
+      { label: "Accessed", n: 31, note: "Requested directions or a ride" },
+      { label: "Participated", n: 22, note: "Checked in with I'm Here" },
+    ],
+  },
+  {
+    name: "Youth Technology Workshop",
+    funnel: [
+      { label: "Matched", n: 275, note: "Residents whose profile fit" },
+      { label: "Viewed", n: 112, note: "Opened the details" },
+      { label: "Interested", n: 63, note: "Saved or tapped I'm Interested" },
+      { label: "Accessed", n: 21, note: "Requested transportation" },
+      { label: "Participated", n: 36, note: "Checked in with I'm Here" },
+    ],
+  },
 ];
 
 const TABS = ["Impact", "Business model", "Roadmap"] as const;
 
 function Partners() {
   const [tab, setTab] = useState<(typeof TABS)[number]>("Impact");
+  const [program, setProgram] = useState(0);
+  const FUNNEL = PROGRAMS[program]!.funnel;
   const max = FUNNEL[0]!.n;
 
   return (
@@ -47,8 +64,21 @@ function Partners() {
         <div className="mt-6 grid gap-5 lg:grid-cols-5">
           <div className="card-pop p-6 lg:col-span-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h2 className="font-display text-xl font-bold">Free Community Health Screening</h2>
+              <h2 className="font-display text-xl font-bold">{PROGRAMS[program]!.name}</h2>
               <span className="chip chip-sun text-[11px] uppercase tracking-wide">Buildathon demonstration data</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {PROGRAMS.map((p, i) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  onClick={() => setProgram(i)}
+                  aria-pressed={program === i}
+                  className={`chip min-h-11 cursor-pointer px-4 ${program === i ? "bg-brand text-brand-foreground" : ""}`}
+                >
+                  {p.name}
+                </button>
+              ))}
             </div>
             <ol className="mt-5 space-y-3">
               {FUNNEL.map((f, i) => (

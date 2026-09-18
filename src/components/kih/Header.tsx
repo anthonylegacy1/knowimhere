@@ -7,6 +7,9 @@ import mark from "@/assets/kih-mark.png";
 const NAV = [
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
+  { to: "/opportunities", label: "Youth" },
+  { to: "/work-after-55", label: "Work After 55" },
+  { to: "/learn", label: "Learn" },
   { to: "/neighborhood", label: "Neighborhood" },
   { to: "/story", label: "Our Story" },
   { to: "/partners", label: "Partners" },

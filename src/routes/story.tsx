@@ -32,7 +32,7 @@ const CARDS = [
     name: "Everyday Connect",
     theme: "Digital Confidence",
     tone: "bg-sky/15",
-    text: "A prototype focused on helping everyday residents feel comfortable using simple digital tools — plain language, big buttons, no jargon.",
+    text: "Digital confidence for everyday life — not a seniors-only program. Older adults, working adults, parents and students all build the practical skills to use the technology they already own.",
     link: { href: EXTERNAL_LINKS.everydayConnect, label: "View the Everyday Connect prototype" },
   },
   {
@@ -101,7 +101,12 @@ function Story() {
       </section>
 
       <p className="mt-12 text-center font-display text-xl font-semibold text-foreground/80">
-        Fast Freddy created the trust. Everyday Connect created the confidence. <span className="text-brand">Know I&apos;m Here creates the connection.</span>
+        Fast Freddy showed us the power of trusted community engagement. Everyday Connect helps people build the digital confidence to
+        participate. <span className="text-brand">Know I&apos;m Here uses that confidence to connect residents with the resources and opportunities around them.</span>
+      </p>
+      <p className="mt-6 text-center font-display text-lg font-bold">
+        Senior or student. Job or health resource. Community event or career opportunity. The question is the same:{" "}
+        <span className="text-brand">what does Detroit have for me?</span>
       </p>
     </div>
   );
