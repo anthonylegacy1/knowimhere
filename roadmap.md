@@ -40,3 +40,9 @@
 - [x] Replace the Senior Support image with the uploaded guided digital-learning photo.
 - [x] Add the image caption and both requested support cards.
 - [x] Verify the crop, text fit, and carousel controls at desktop and phone widths.
+
+## I’m Here card visual
+
+- [x] Add a warm phone-in-hand visual to the orange private-participation card.
+- [x] Show the Know I’m Here interface with an unmistakable ON and private state.
+- [x] Verify card balance, text readability, image crop, and action visibility on desktop and mobile.
