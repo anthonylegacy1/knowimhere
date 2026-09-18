@@ -161,7 +161,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       cycleTextSize,
       resetAll,
     }),
-    [state, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, resetAll],
+    [state, setImHere, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, resetAll],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
