@@ -117,7 +117,7 @@ function Index() {
         <div className="mt-7"><ImHerePanel /></div>
       </div></section>
 
-      <section className="container-kih py-14">
+      <section className="container-kih py-14"><div>
         <SectionHeading eyebrow="One Detroit. Different needs." title="One connection layer." text="A 68-year-old, a 16-year-old and a working parent ask different questions. The same system can guide all three." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {PERSONAS.map((persona) => <article key={persona.id} className="card-flat flex flex-col p-6"><div className="flex items-center gap-3"><span className="grid size-12 place-items-center rounded-full bg-sun font-bold">{persona.initial}</span><div><h3 className="text-xl font-bold">{persona.name}, {persona.age}</h3><p className="text-sm text-foreground/60">{persona.tagline}</p></div></div><p className="mt-4 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-cream">“{persona.query}”</p><ul className="mt-3 flex flex-wrap gap-1.5">{persona.needs.slice(0, 4).map((need) => <li key={need} className="chip bg-card text-xs text-foreground/70">{need}</li>)}</ul><Button asChild variant="outline" className="mt-5 self-start"><Link to="/demo">See {persona.name}&apos;s demo</Link></Button></article>)}
