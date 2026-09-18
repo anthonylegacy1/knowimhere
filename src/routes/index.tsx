@@ -105,12 +105,18 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-card pb-16 text-center">
+      <section className="bg-card pb-12 pt-2 text-center">
         <div className="container-kih">
-          <p className="mx-auto max-w-3xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl">Detroit has resources.<span className="mt-2 block text-xl font-medium text-foreground/65 sm:text-2xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
-          <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-5">
-            {["Discover", "Connect", "Get There", "Check In", "Stay Connected"].map((step, index) => <div key={step} className={`flex min-h-24 flex-col items-center justify-center rounded-lg border border-border bg-background p-3 ${index === 4 ? "col-span-2 sm:col-span-1" : ""}`}><span className="text-xs font-extrabold text-sky">0{index + 1}</span><span className="mt-1 font-bold text-ink">{step}</span></div>)}
-          </div>
+          <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
+          <p aria-label="Discover, Connect, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
+            {["Discover", "Connect", "Get There", "Check In", "Stay Connected"].map((step, index) => (
+              <span key={step} className="flex items-center gap-2">
+                {index > 0 && <ArrowRight className="size-4 shrink-0 text-sky" aria-hidden />}
+                <span className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-bold text-ink sm:text-base">{step}</span>
+              </span>
+            ))}
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
         </div>
       </section>
 
