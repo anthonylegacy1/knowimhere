@@ -40,7 +40,7 @@ import imHerePhoneVisual from "@/assets/im-here-private-phone.jpg";
 import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
-import { ImHerePanel, ImHereStatus, NearMeButton } from "@/components/kih/ImHere";
+import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
@@ -168,7 +168,7 @@ function Index() {
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
-        <div className="mt-6"><ImHereStatus /></div>
+        <div className="mt-6"><ImHereControl /></div>
         <div className="mt-7 flex flex-wrap gap-2.5">
           {NEED_CATEGORIES.map((id) => { const category = CATEGORIES[id]; return <Link key={id} to="/ask" search={{ q: `Show me ${category.label.toLowerCase()} near me.` }} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{category.emoji}</span> {category.label}</Link>; })}
         </div>
@@ -185,11 +185,6 @@ function Index() {
           </article>
         </div>
       </section>
-
-      <section className="border-y border-border bg-card"><div className="container-kih py-14">
-        <SectionHeading eyebrow="Simple control" title="Turn On Know I'm Here." text="On when you want it. Off when you don't." />
-        <div className="mt-7"><ImHerePanel /></div>
-      </div></section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Opportunities for every stage" title="More than one kind of next step." text="Explore learning, work, youth opportunity, health, recreation and everyday digital confidence." />

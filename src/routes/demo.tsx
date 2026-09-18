@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AskKIH } from "@/components/kih/AskKIH";
 import { ResourceCard } from "@/components/kih/ResourceCard";
-import { ImHerePanel } from "@/components/kih/ImHere";
+import { ImHereControl } from "@/components/kih/ImHere";
 import { GetThere } from "@/components/kih/GetThere";
 import { CheckIn } from "@/components/kih/CheckIn";
 import { IssueFlow } from "@/components/kih/IssueFlow";
@@ -144,7 +144,7 @@ function Demo() {
             <div>
               <h2 className="font-display text-2xl font-bold">{persona.name} turns on Know I&apos;m Here</h2>
               <p className="mt-1 text-foreground/65">On when you want it. Off when you don&apos;t. Once it is on, recommendations become local.</p>
-              <div className="mt-4"><ImHerePanel /></div>
+              <div className="mt-4"><ImHereControl /></div>
             </div>
           )}
 
