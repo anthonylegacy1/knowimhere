@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useApp } from "@/lib/app-store";
 import mark from "@/assets/kih-mark.png";
 import { Button } from "@/components/ui/button";
+import { AccessibilityPanel } from "@/components/kih/AccessibilityPanel";
 
 const NAV = [
   { to: "/story", label: "Vision" },
@@ -21,7 +21,6 @@ const MORE_NAV = [
 ] as const;
 
 export function Header() {
-  const { cycleTextSize, textSize } = useApp();
   const [open, setOpen] = useState(false);
 
   return (
@@ -49,17 +48,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            onClick={cycleTextSize}
-            aria-label="Increase text size"
-            aria-pressed={textSize > 0}
-            variant="outline"
-            size="icon"
-            className="size-11 rounded-full text-xs font-extrabold"
-          >
-            A+{textSize > 0 && <span className="sr-only">{textSize === 1 ? "115%" : "130%"}</span>}
-          </Button>
+          <AccessibilityPanel />
           <Link to="/demo" className="btn-base btn-ink btn-sm hidden sm:inline-flex">
             View Demo
           </Link>

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/help")({
 });
 
 function Help() {
-  const { cycleTextSize, textSize } = useApp();
+  const { setTextSize, textSize } = useApp();
   return (
     <div className="container-kih py-8 sm:py-12">
       <SectionHeading eyebrow="Video guidance" title="Need Help? Watch Instead." text="Short, plain-language videos. Each one is under three minutes." />
@@ -42,10 +42,20 @@ function Help() {
 
       <section className="card-flat mt-10 p-6">
         <h2 className="font-display text-2xl font-bold">Make it easier to read</h2>
-        <p className="mt-1 text-foreground/70">Tap to cycle text size. It stays on for every page.</p>
-        <button type="button" onClick={cycleTextSize} className="btn-base btn-ink mt-4">
-          A+ Increase Text {textSize === 0 ? "(normal)" : textSize === 1 ? "(larger)" : "(largest)"}
-        </button>
+        <p className="mt-1 text-foreground/70">Choose a text size. It stays on for every page.</p>
+        <div className="mt-4 flex flex-wrap gap-2" aria-label="Text size">
+          {(["Standard", "Large", "Extra Large"] as const).map((label, index) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => setTextSize(index as 0 | 1 | 2)}
+              className={`btn-base ${textSize === index ? "btn-brand" : "btn-outline"}`}
+              aria-pressed={textSize === index}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </section>
     </div>
   );

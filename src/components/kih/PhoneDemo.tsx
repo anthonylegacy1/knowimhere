@@ -20,6 +20,7 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useApp } from "@/lib/app-store";
 import transportImage from "@/assets/carousel-transport-detroit.jpg";
 import opportunityImage from "@/assets/carousel-opportunity-detroit.jpg";
 import healthImage from "@/assets/carousel-health-detroit.jpg";
@@ -194,14 +195,15 @@ function InfoCard({ icon: Icon, title, meta }: { icon: typeof Search; title: str
 }
 
 export function PhoneDemo() {
+  const { accessibilityPreferences } = useApp();
   const [active, setActive] = useState(0);
   const touchStart = useRef<number | null>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (accessibilityPreferences.reduceMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = window.setInterval(() => setActive((current) => (current + 1) % slides.length), 5000);
     return () => window.clearInterval(interval);
-  }, []);
+  }, [accessibilityPreferences.reduceMotion]);
 
   const goTo = (next: number) => setActive((next + slides.length) % slides.length);
   const slide = slides[active];
@@ -273,7 +275,7 @@ export function PhoneDemo() {
       </div>
       <div className="phone-caption">
         <span className="inline-flex items-center gap-1.5"><span className="size-1.5 rounded-full bg-mint" /> Live product walkthrough</span>
-        <span className="inline-flex items-center gap-1"><Clock3 className="size-3" /> Auto-rotates · Swipe to explore</span>
+        <span className="inline-flex items-center gap-1"><Clock3 className="size-3" /> {accessibilityPreferences.reduceMotion ? "Auto-rotation paused · Swipe to explore" : "Auto-rotates · Swipe to explore"}</span>
       </div>
     </div>
   );
