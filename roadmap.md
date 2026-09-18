@@ -66,4 +66,4 @@
 
 - [x] Feature Ford Field, Hart Plaza, and Detroit Riverwalk first with distinct categories and tags.
 - [x] Keep every other Detroit location in one accessible expanding area.
-- [ ] Verify expansion, collapse, imagery, desktop layout, and mobile layout.
+- [x] Verify expansion, collapse, imagery, desktop layout, and mobile layout.

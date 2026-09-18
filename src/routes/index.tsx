@@ -300,7 +300,7 @@ function DetroitPlaceCard({ place, featured = false, interactive = true }: { pla
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
       <div className="relative aspect-[16/10] overflow-hidden">
-        <img src={place.image} alt={`${place.title} in Detroit`} className="size-full object-cover transition-transform duration-300 hover:scale-[1.02] motion-reduce:transition-none" loading="lazy" width={640} height={400} />
+        <img src={place.image} alt={`${place.title} in Detroit`} className="size-full object-cover transition-transform duration-300 hover:scale-[1.02] motion-reduce:transition-none" loading={featured ? "eager" : "lazy"} width={640} height={400} />
         <span className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-ink/85 px-3 py-1.5 text-[10px] font-extrabold uppercase leading-tight text-cream backdrop-blur">{place.type}</span>
       </div>
       <div className={featured ? "p-5" : "p-4"}>
