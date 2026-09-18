@@ -139,6 +139,42 @@ html.text-plus {
 html.text-plus-plus {
   font-size: 130%;
 }
+html.high-contrast {
+  --background: var(--paper);
+  --foreground: oklch(0.12 0.02 265);
+  --card-foreground: oklch(0.12 0.02 265);
+  --muted-foreground: oklch(0.32 0.02 265);
+  --border: oklch(0.12 0.02 265 / 42%);
+  --input: oklch(0.12 0.02 265 / 55%);
+  --brand-deep: oklch(0.48 0.2 36);
+  --sky: oklch(0.46 0.14 235);
+}
+html.simplified-view {
+  --shadow-pop: none;
+  --shadow-pop-brand: none;
+  --shadow-pop-ink: none;
+}
+html.simplified-view .home-hero::after,
+html.simplified-view .phone-side,
+html.simplified-view .phone-caption {
+  display: none;
+}
+html.simplified-view .card-pop,
+html.simplified-view .phone-shell,
+html.simplified-view [class*="shadow-"] {
+  box-shadow: none;
+}
+html.reduce-motion {
+  scroll-behavior: auto;
+}
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+}
 
 @layer base {
   * {

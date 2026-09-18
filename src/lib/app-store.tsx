@@ -25,6 +25,12 @@ export interface CheckIn {
 
 export type TextSize = 0 | 1 | 2;
 
+export interface AccessibilityPreferences {
+  highContrast: boolean;
+  simplifiedView: boolean;
+  reduceMotion: boolean;
+}
+
 export interface ImHere {
   on: boolean;
   radiusMiles: number;
@@ -38,6 +44,7 @@ interface AppState {
   checkIns: CheckIn[];
   followed: string[];
   textSize: TextSize;
+  accessibilityPreferences: AccessibilityPreferences;
   imHere: ImHere;
   hydrated: boolean;
 }
@@ -51,6 +58,9 @@ interface AppStore extends AppState {
   addCheckIn: (c: CheckIn) => void;
   toggleFollow: (org: string) => void;
   cycleTextSize: () => void;
+  setTextSize: (size: TextSize) => void;
+  setAccessibilityPreference: <K extends keyof AccessibilityPreferences>(key: K, value: AccessibilityPreferences[K]) => void;
+  resetAccessibility: () => void;
   resetAll: () => void;
 }
 
@@ -74,6 +84,7 @@ const initialState: AppState = {
   checkIns: [],
   followed: [],
   textSize: 0,
+  accessibilityPreferences: { highContrast: false, simplifiedView: false, reduceMotion: false },
   imHere: { on: false, radiusMiles: 3 },
   hydrated: false,
 };
@@ -89,7 +100,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const raw = window.localStorage.getItem(KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<AppState>;
-        setState({ ...initialState, ...parsed, hydrated: true });
+        setState({
+          ...initialState,
+          ...parsed,
+          accessibilityPreferences: {
+            ...initialState.accessibilityPreferences,
+            ...parsed.accessibilityPreferences,
+          },
+          hydrated: true,
+        });
       } else {
         setState((s) => ({ ...s, hydrated: true }));
       }
@@ -106,6 +125,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     root.classList.toggle("text-plus", state.textSize === 1);
     root.classList.toggle("text-plus-plus", state.textSize === 2);
+    root.classList.toggle("high-contrast", state.accessibilityPreferences.highContrast);
+    root.classList.toggle("simplified-view", state.accessibilityPreferences.simplifiedView);
+    root.classList.toggle("reduce-motion", state.accessibilityPreferences.reduceMotion);
   }, [state]);
 
   const setProfile = useCallback(
@@ -142,6 +164,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     () => setState((s) => ({ ...s, textSize: ((s.textSize + 1) % 3) as TextSize })),
     [],
   );
+  const setTextSize = useCallback((textSize: TextSize) => setState((s) => ({ ...s, textSize })), []);
+  const setAccessibilityPreference = useCallback(
+    <K extends keyof AccessibilityPreferences,>(key: K, value: AccessibilityPreferences[K]) =>
+      setState((s) => ({
+        ...s,
+        accessibilityPreferences: { ...s.accessibilityPreferences, [key]: value },
+      })),
+    [],
+  );
+  const resetAccessibility = useCallback(
+    () => setState((s) => ({ ...s, textSize: 0, accessibilityPreferences: initialState.accessibilityPreferences })),
+    [],
+  );
   const setImHere = useCallback(
     (v: Partial<ImHere>) => setState((s) => ({ ...s, imHere: { ...s.imHere, ...v } })),
     [],
@@ -159,9 +194,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
       addCheckIn,
       toggleFollow,
       cycleTextSize,
+      setTextSize,
+      setAccessibilityPreference,
+      resetAccessibility,
       resetAll,
     }),
-    [state, setImHere, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, resetAll],
+    [state, setImHere, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, setTextSize, setAccessibilityPreference, resetAccessibility, resetAll],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

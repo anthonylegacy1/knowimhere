@@ -54,3 +54,10 @@
 - [x] Replace generated Discover Detroit artwork with the original Spirit of Detroit photo.
 - [x] Keep Welcome, Transportation, Opportunity, Health, and Safer Neighborhoods in the walkthrough.
 - [x] Verify all slides, exact titles, controls, image crops, and desktop/mobile rendering.
+
+## Accessibility control
+
+- [x] Open a clear accessibility panel from the existing A+ header button.
+- [x] Add saved text size, high contrast, simplified view, and reduced motion preferences.
+- [x] Add a dedicated reset action without clearing profile or saved activity.
+- [x] Verify keyboard use, persistence, desktop/mobile presentation, and carousel motion behavior.
