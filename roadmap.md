@@ -39,4 +39,4 @@
 
 - [x] Replace the Senior Support image with the uploaded guided digital-learning photo.
 - [x] Add the image caption and both requested support cards.
-- [ ] Verify the crop, text fit, and carousel controls at desktop and phone widths.
+- [x] Verify the crop, text fit, and carousel controls at desktop and phone widths.
