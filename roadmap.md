@@ -25,3 +25,12 @@
 - [x] Replace the Everyday Connect chapter thumbnail with the uploaded guided smartphone-learning photo.
 - [x] Add the uploaded Detroit father-and-daughter phone photo to the Know I'm Here chapter card.
 - [x] Preserve consistent card proportions and verify meaningful crops on desktop and mobile.
+
+## Turn On Know I'm Here
+
+- [x] Big on/off control with plain-language copy and "On when you want it. Off when you don't."
+- [x] Homepage status strip plus full panel section.
+- [x] Full panel in the For You profile area.
+- [x] "Turn On / Not Now" prompt before Find What's Near Me (never forced).
+- [x] ZIP code / neighborhood fallback and Everyday Connect help callout.
+- [x] New early Demo Mode step showing activation before recommendations.
