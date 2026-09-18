@@ -85,6 +85,7 @@ const FF_PILLARS = [
 
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
+  const [showResidents, setShowResidents] = useState(false);
 
   return (
     <div>
@@ -103,8 +104,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="product-demo-band relative z-20 -mt-28 pb-16"><div className="container-kih"><PhoneDemo /></div></section>
-
       <section className="bg-card pb-16 text-center">
         <div className="container-kih">
           <p className="mx-auto max-w-3xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl">Detroit has resources.<span className="mt-2 block text-xl font-medium text-foreground/65 sm:text-2xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
@@ -113,6 +112,44 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <section className="border-y border-border bg-card">
+        <div className="container-kih py-14">
+          <div className="grid gap-5 lg:grid-cols-3">
+            <article className="overflow-hidden rounded-lg border border-border bg-background">
+              <img src={neighborhoodAsset.url} alt="Detroit residents connecting across generations in their neighborhood" className="aspect-[16/9] w-full object-cover" loading="eager" />
+              <div className="p-6"><p className="text-xs font-extrabold uppercase text-sky">My Neighborhood</p><h2 className="mt-2 text-2xl font-bold">Know what&apos;s happening around you.</h2><p className="mt-2 text-foreground/65">See community meetings, recreation updates, cooling centers, road closures and official City notices—calmly filtered to your neighborhood.</p><Button asChild variant="outline" className="mt-5 min-h-12"><Link to="/neighborhood">See my neighborhood <ArrowRight /></Link></Button></div>
+            </article>
+            <article className="card-flat flex flex-col justify-between bg-ink p-7 text-cream">
+              <div><span className="grid size-12 place-items-center rounded-lg bg-aqua text-ink"><Smartphone /></span><p className="mt-6 text-xs font-extrabold uppercase text-aqua">Interactive demonstration</p><h2 className="mt-2 text-3xl font-extrabold">Try Know I&apos;m Here.</h2><p className="mt-3 text-cream/75">Follow a Detroit resident from discovery to transportation help, participation and private check-in.</p></div>
+              <div className="mt-6"><div className="flex flex-wrap gap-2 text-xs font-bold text-cream/75"><span>Discover</span><span aria-hidden>→</span><span>Get There</span><span aria-hidden>→</span><span>Check In</span></div><Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/demo">View Demo Experience <ArrowRight /></Link></Button></div>
+            </article>
+            <article className="flex flex-col rounded-lg bg-brand p-7 text-brand-foreground"><div><span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span><p className="mt-6 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p><h2 className="mt-2 text-4xl font-extrabold">I&apos;M HERE ✓</h2><p className="mt-3 text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p></div><div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg"><img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" /></div><Button asChild className="mt-5 min-h-12 self-start bg-card text-brand hover:bg-card/90"><Link to="/demo">See it in the demo</Link></Button></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-kih py-14">
+        <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
+        </div>
+        <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
+          <div className="overflow-hidden">
+            <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
+            </div>
+          </div>
+        </div>
+        <div className="mt-7 flex justify-center">
+          <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
+            {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
+          </Button>
+        </div>
+        <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
+      </section>
+
+      <section className="product-demo-band relative z-20 -mt-28 pb-16"><div className="container-kih"><PhoneDemo /></div></section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
@@ -139,14 +176,6 @@ function Index() {
         <div className="mt-7"><ImHerePanel /></div>
       </div></section>
 
-      <section className="container-kih py-14"><div>
-        <SectionHeading eyebrow="One Detroit. Different needs." title="One connection layer." text="A 68-year-old, a 16-year-old and a working parent ask different questions. The same system can guide all three." />
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {PERSONAS.map((persona) => <article key={persona.id} className="card-flat flex flex-col p-6"><div className="flex items-center gap-3"><span className="grid size-12 place-items-center rounded-full bg-sun font-bold">{persona.initial}</span><div><h3 className="text-xl font-bold">{persona.name}, {persona.age}</h3><p className="text-sm text-foreground/60">{persona.tagline}</p></div></div><p className="mt-4 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-cream">“{persona.query}”</p><ul className="mt-3 flex flex-wrap gap-1.5">{persona.needs.slice(0, 4).map((need) => <li key={need} className="chip bg-card text-xs text-foreground/70">{need}</li>)}</ul><Button asChild variant="outline" className="mt-5 self-start"><Link to="/demo">See {persona.name}&apos;s demo</Link></Button></article>)}
-        </div>
-        <p className="mt-6 text-center text-xs text-muted-foreground">Dorothy, Marcus and Tasha are fictional residents created for the Buildathon demonstration.</p>
-      </div></section>
-
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Opportunities for every stage" title="More than one kind of next step." text="Explore learning, work, youth opportunity, health, recreation and everyday digital confidence." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -164,11 +193,6 @@ function Index() {
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-2">
         <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div></div>
         <article className="card-flat p-6"><p className="text-xs font-extrabold uppercase text-sky">Example route</p><h3 className="mt-2 text-xl font-bold">Patton Recreation Center</h3><p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p><div className="mt-5 grid grid-cols-2 gap-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div></article>
-      </div></section>
-
-      <section className="border-y border-border bg-card"><div className="container-kih grid gap-5 py-14 lg:grid-cols-2">
-        <article className="overflow-hidden rounded-lg border border-border bg-background"><img src={neighborhoodAsset.url} alt="Detroit residents connecting across generations in their neighborhood" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-extrabold uppercase text-sky">My Neighborhood</p><h3 className="mt-2 text-2xl font-bold">Know what&apos;s happening around you.</h3><p className="mt-2 text-foreground/65">See community meetings, recreation updates, cooling centers, road closures and official City notices—calmly filtered to your neighborhood.</p><Button asChild variant="outline" className="mt-5"><Link to="/neighborhood">See my neighborhood <ArrowRight /></Link></Button></div></article>
-        <article className="flex flex-col rounded-lg bg-brand p-7 text-brand-foreground"><div><span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span><p className="mt-6 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p><h3 className="mt-2 text-4xl font-extrabold">I&apos;M HERE ✓</h3><p className="mt-3 text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p></div><div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg"><img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="lazy" /></div><Button asChild className="mt-5 self-start bg-card text-brand hover:bg-card/90"><Link to="/demo">See it in the demo</Link></Button></article>
       </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -245,6 +269,24 @@ function Index() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-card">
+        <div className="container-kih py-14">
+          <SectionHeading eyebrow="One Detroit. Different needs." title="One connection layer." text="A 68-year-old, a 16-year-old and a working parent ask different questions. The same system can guide all three." />
+          <div className="mt-7 grid gap-3 md:grid-cols-3" aria-label="Resident examples">
+            {[{ initial: "D", name: "Dorothy, 68", role: "Older Adult" }, { initial: "M", name: "Marcus, 16", role: "Student" }, { initial: "W", name: "Working Parent", role: "Family + Everyday Needs" }].map((resident) => <div key={resident.name} className="flex min-h-20 items-center gap-3 rounded-lg border border-border bg-background p-4"><span className="grid size-11 shrink-0 place-items-center rounded-full bg-sun font-bold text-ink">{resident.initial}</span><div><p className="font-bold text-ink">{resident.name}</p><p className="text-sm text-foreground/60">{resident.role}</p></div></div>)}
+          </div>
+          <div id="resident-details" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showResidents ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showResidents}>
+            <div className="overflow-hidden">
+              <div className="grid gap-4 pt-6 md:grid-cols-3">
+                {PERSONAS.map((persona) => <article key={persona.id} className="card-flat flex flex-col p-6"><div className="flex items-center gap-3"><span className="grid size-12 place-items-center rounded-full bg-sun font-bold">{persona.initial}</span><div><h3 className="text-xl font-bold">{persona.name}, {persona.age}</h3><p className="text-sm text-foreground/60">{persona.tagline}</p></div></div><p className="mt-4 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-cream">“{persona.query}”</p><ul className="mt-3 flex flex-wrap gap-1.5">{persona.needs.slice(0, 4).map((need) => <li key={need} className="chip bg-card text-xs text-foreground/70">{need}</li>)}</ul><Button asChild variant="outline" className="mt-5 self-start"><Link to="/demo" tabIndex={showResidents ? undefined : -1}>See {persona.name}&apos;s demo</Link></Button></article>)}
+              </div>
+              <p className="mt-6 text-center text-xs text-muted-foreground">Dorothy, Marcus and Tasha are fictional residents created for the Buildathon demonstration.</p>
+            </div>
+          </div>
+          <div className="mt-7 flex justify-center"><Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-background px-6 font-bold text-ink shadow-sm" aria-expanded={showResidents} aria-controls="resident-details" onClick={() => setShowResidents((current) => !current)}>{showResidents ? <>Show Less <ChevronUp /></> : <>See How KIH Works for Different Residents <ChevronDown /></>}</Button></div>
+        </div>
+      </section>
+
       <section className="container-kih py-14"><SectionHeading eyebrow="Buildathon demonstration data" title="See connection—not surveillance." text="Partners can learn what residents are finding and using through aggregate patterns, while individual check-ins remain private." />
         <div className="mt-8 grid gap-4 sm:grid-cols-3"><Metric icon={<Eye />} value="1,240" label="Resource views" /><Metric icon={<Navigation />} value="386" label="Get-there plans" /><Metric icon={<Check />} value="214" label="Private check-ins" /></div>
         <div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/partners"><BarChart3 /> View partner impact</Link></Button><Button asChild variant="outline"><Link to="/privacy"><ShieldCheck /> Read privacy commitments</Link></Button></div>
@@ -252,26 +294,6 @@ function Index() {
       </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
-
-      <section className="container-kih py-14">
-        <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
-        </div>
-        <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
-          <div className="overflow-hidden">
-            <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
-            </div>
-          </div>
-        </div>
-        <div className="mt-7 flex justify-center">
-          <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
-            {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
-          </Button>
-        </div>
-        <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
-      </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
