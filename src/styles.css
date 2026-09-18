@@ -66,6 +66,8 @@
   --color-mint: var(--mint);
   --color-sky: var(--sky);
   --color-plum: var(--plum);
+  --color-aqua: var(--aqua);
+  --color-aqua-soft: var(--aqua-soft);
 }
 
 :root {
@@ -81,6 +83,8 @@
   --mint: oklch(0.7 0.15 165);
   --sky: oklch(0.65 0.14 235);
   --plum: oklch(0.5 0.15 295);
+  --aqua: oklch(0.72 0.12 195);
+  --aqua-soft: oklch(0.95 0.035 195);
 
   --background: var(--cream);
   --foreground: var(--ink);
@@ -310,4 +314,89 @@ html.text-plus-plus {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Homepage product-demo composition */
+.home-hero {
+  min-height: 43rem;
+  background-color: var(--ink);
+  background-position: center;
+  background-size: cover;
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, oklch(0.12 0.035 250 / 34%) 0%, oklch(0.12 0.035 250 / 58%) 62%, oklch(0.12 0.035 250 / 92%) 100%);
+}
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, oklch(0.1 0.03 255 / 22%), oklch(0.1 0.03 255 / 58%) 62%, oklch(0.1 0.03 255 / 94%)),
+    linear-gradient(90deg, oklch(0.1 0.03 255 / 22%), transparent 45%, oklch(0.1 0.03 255 / 16%));
+}
+.product-demo-band { background: linear-gradient(180deg, transparent 0 7rem, var(--paper) 7rem); }
+.phone-demo-wrap {
+  width: min(100%, 23rem);
+  margin-inline: auto;
+}
+.phone-shell {
+  position: relative;
+  border: 0.55rem solid oklch(0.14 0.02 255);
+  border-radius: 3rem;
+  background: oklch(0.14 0.02 255);
+  padding: 0.25rem;
+  box-shadow: 0 2rem 4rem oklch(0.08 0.03 255 / 42%), inset 0 0 0 1px oklch(1 0 0 / 18%);
+}
+.phone-screen {
+  position: relative;
+  min-height: 39rem;
+  overflow: hidden;
+  border-radius: 2.3rem;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+.phone-side {
+  position: absolute;
+  width: 0.2rem;
+  border-radius: 999px;
+  background: oklch(0.3 0.02 255);
+}
+.phone-side-left { left: -0.7rem; top: 7rem; height: 5rem; }
+.phone-side-right { right: -0.7rem; top: 9rem; height: 6rem; }
+.phone-status {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.65rem 1.15rem 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+.phone-status > :last-child { text-align: right; }
+.phone-island { width: 5.5rem; height: 1.45rem; border-radius: 999px; background: var(--ink); }
+.phone-appbar { display: flex; align-items: center; gap: 0.55rem; border-bottom: 1px solid var(--border); padding: 0.65rem 1rem; }
+.phone-slide {
+  flex: 1;
+  padding: 1.4rem 1.15rem 1rem;
+  background: linear-gradient(180deg, var(--aqua-soft), var(--paper) 40%);
+  animation: phone-slide-in 350ms ease both;
+  touch-action: pan-y;
+}
+.phone-slide-icon { display: grid; width: 2.7rem; height: 2.7rem; place-items: center; border-radius: 0.75rem; background: var(--ink); color: var(--aqua); }
+.phone-eyebrow { margin-top: 1rem; color: var(--sky); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.phone-chip { display: inline-flex; align-items: center; border-radius: 999px; background: var(--aqua-soft); color: var(--ink); border: 1px solid var(--border); padding: 0.3rem 0.55rem; font-size: 0.65rem; font-weight: 800; }
+.phone-note { font-size: 0.65rem; font-weight: 700; color: var(--muted-foreground); }
+.phone-checkin { display: grid; justify-items: center; gap: 0.85rem; border: 1px solid var(--border); border-radius: 0.9rem; background: var(--paper); padding: 1.25rem; text-align: center; box-shadow: 0 0.75rem 2rem oklch(0.24 0.03 265 / 8%); }
+.phone-controls { display: flex; min-height: 3.75rem; align-items: center; justify-content: space-between; padding-inline: 0.75rem; }
+.phone-caption { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; margin-top: 1rem; color: var(--muted-foreground); font-size: 0.7rem; font-weight: 700; }
+@keyframes phone-slide-in { from { opacity: 0; transform: translateX(0.75rem); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .phone-slide { animation: none; } }
+@media (max-width: 47.99rem) {
+  .home-hero { min-height: 46rem; background-position: 58% center; }
+  .phone-demo-wrap { width: min(100%, 21rem); }
+  .phone-screen { min-height: 36rem; }
 }

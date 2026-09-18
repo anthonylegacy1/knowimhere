@@ -3,16 +3,21 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useApp } from "@/lib/app-store";
 import mark from "@/assets/kih-mark.png";
+import { Button } from "@/components/ui/button";
 
 const NAV = [
+  { to: "/story", label: "Vision" },
+  { to: "/demo", label: "Pitch Mode" },
+] as const;
+
+const MORE_NAV = [
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
-  { to: "/opportunities", label: "Youth" },
+  { to: "/opportunities", label: "Education & Youth" },
   { to: "/work-after-55", label: "Work After 55" },
-  { to: "/learn", label: "Learn" },
-  { to: "/neighborhood", label: "Neighborhood" },
-  { to: "/story", label: "Our Story" },
-  { to: "/partners", label: "Partners" },
+  { to: "/learn", label: "Everyday Connect Learning" },
+  { to: "/neighborhood", label: "My Neighborhood" },
+  { to: "/partners", label: "Partner Impact" },
 ] as const;
 
 export function Header() {
@@ -20,7 +25,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-border bg-cream/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
       <div className="container-kih flex items-center justify-between gap-3 py-3">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Know I'm Here home" onClick={() => setOpen(false)}>
           <img src={mark} alt="" width={44} height={44} className="size-11" />
@@ -30,13 +35,13 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 text-sm font-semibold lg:flex" aria-label="Main">
+        <nav className="ml-auto hidden items-center gap-1 text-sm font-semibold md:flex" aria-label="Main">
           {NAV.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="rounded-full px-3 py-2 text-foreground/70 hover:bg-foreground/5"
-              activeProps={{ className: "rounded-full px-3 py-2 bg-foreground/5 text-foreground" }}
+              className="rounded-md px-3 py-2 text-foreground/70 hover:bg-secondary"
+              activeProps={{ className: "rounded-md px-3 py-2 bg-secondary text-foreground" }}
             >
               {n.label}
             </Link>
@@ -44,39 +49,43 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
+          <Button
             type="button"
             onClick={cycleTextSize}
             aria-label="Increase text size"
             aria-pressed={textSize > 0}
-            className="inline-flex min-h-11 items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-2 text-xs font-extrabold"
+            variant="outline"
+            size="icon"
+            className="size-11 rounded-full text-xs font-extrabold"
           >
-            A+{textSize > 0 && <span className="text-brand">{textSize === 1 ? "115%" : "130%"}</span>}
-          </button>
+            A+{textSize > 0 && <span className="sr-only">{textSize === 1 ? "115%" : "130%"}</span>}
+          </Button>
           <Link to="/demo" className="btn-base btn-ink btn-sm hidden sm:inline-flex">
             View Demo
           </Link>
-          <button
+          <Button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full border-2 border-border bg-card lg:hidden"
+            variant="outline"
+            size="icon"
+            className="size-11 rounded-full md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          </Button>
         </div>
       </div>
 
       {open && (
-        <nav className="border-t-2 border-border bg-card lg:hidden" aria-label="Mobile">
+        <nav className="border-t border-border bg-card md:hidden" aria-label="Mobile">
           <div className="container-kih flex flex-col gap-1 py-3">
-            {NAV.map((n) => (
+            {[...NAV, ...MORE_NAV].map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className="rounded-2xl px-4 py-3.5 text-lg font-bold text-foreground hover:bg-cream"
+                className="rounded-md px-4 py-3 text-base font-bold text-foreground hover:bg-secondary"
               >
                 {n.label}
               </Link>
