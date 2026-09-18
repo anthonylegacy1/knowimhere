@@ -6,7 +6,7 @@ const TITLE = "Ask KIH — Your Detroit Community Guide | Know I'm Here";
 const DESC = "Ask in plain language and get personalized Detroit resources, programs and activities with transportation options.";
 
 export const Route = createFileRoute("/ask")({
-  validateSearch: (s: Record<string, unknown>) => ({ q: typeof s["q"] === "string" ? s["q"] : undefined }),
+  validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s["q"] === "string" ? { q: s["q"] } : {}),
   head: () => ({
     meta: [
       { title: TITLE },
