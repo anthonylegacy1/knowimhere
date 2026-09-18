@@ -25,6 +25,11 @@ export interface CheckIn {
 
 export type TextSize = 0 | 1 | 2;
 
+export interface ImHere {
+  on: boolean;
+  radiusMiles: number;
+}
+
 interface AppState {
   profile: Profile;
   saved: string[];
@@ -33,10 +38,12 @@ interface AppState {
   checkIns: CheckIn[];
   followed: string[];
   textSize: TextSize;
+  imHere: ImHere;
   hydrated: boolean;
 }
 
 interface AppStore extends AppState {
+  setImHere: (v: Partial<ImHere>) => void;
   setProfile: (p: Partial<Profile>) => void;
   toggleSaved: (id: string) => void;
   markInterested: (id: string) => void;
