@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
+import { ImHerePanel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
 import { scoreResources } from "@/lib/recommend";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
