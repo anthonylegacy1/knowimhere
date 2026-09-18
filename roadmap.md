@@ -61,3 +61,9 @@
 - [x] Add saved text size, high contrast, simplified view, and reduced motion preferences.
 - [x] Add a dedicated reset action without clearing profile or saved activity.
 - [x] Verify keyboard use, persistence, desktop/mobile presentation, and carousel motion behavior.
+
+## Discover Detroit featured cards
+
+- [x] Feature Ford Field, Hart Plaza, and Detroit Riverwalk first with distinct categories and tags.
+- [x] Keep every other Detroit location in one accessible expanding area.
+- [ ] Verify expansion, collapse, imagery, desktop layout, and mobile layout.
