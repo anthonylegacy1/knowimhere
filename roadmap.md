@@ -46,3 +46,11 @@
 - [x] Add a warm phone-in-hand visual to the orange private-participation card.
 - [x] Show the Know I’m Here interface with an unmistakable ON and private state.
 - [x] Verify card balance, text readability, image crop, and action visibility on desktop and mobile.
+
+## Detroit phone carousel
+
+- [x] Preserve the Wellness Near You / Detroit Riverwalk slide exactly as-is.
+- [x] Add Community Events and Recreational Activities slides with approved Fast Freddy photography.
+- [x] Replace generated Discover Detroit artwork with the original Spirit of Detroit photo.
+- [x] Keep Welcome, Transportation, Opportunity, Health, and Safer Neighborhoods in the walkthrough.
+- [ ] Verify all slides, exact titles, controls, image crops, and desktop/mobile rendering.

@@ -3,25 +3,30 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   BusFront,
-  Check,
+  CalendarDays,
   ChevronLeft,
   ChevronRight,
   Clock3,
   HeartHandshake,
+  HeartPulse,
+  Landmark,
   MapPin,
-  MessageCircle,
   Navigation,
   Route,
   Search,
+  ShieldCheck,
+  Store,
   Sparkles,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
-import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
-import supportAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
+import communityClassAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
+import communityEventAsset from "@/assets/fast-freddy-community-event.jpeg.asset.json";
+import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
 import seniorSupportAsset from "@/assets/senior-support-digital-learning.png.asset.json";
+import spiritAsset from "@/assets/spirit-of-detroit-original.jpeg.asset.json";
 
 type Slide = {
   id: string;
@@ -38,80 +43,21 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    id: "discover",
-    label: "Live · City discovery",
-    title: "Explore Detroit Resources",
-    subtext: "Around you now",
-    footer: "Detroit resources near you",
+    id: "welcome",
+    label: "Detroit · Prototype",
+    title: "Welcome to Know I’m Here",
+    subtext: "Real People. Real Resources. A Stronger Detroit.",
+    footer: "People. Places. Possibilities.",
     icon: Search,
     image: { src: skylineAsset.url, alt: "Detroit skyline at sunset" },
-    tags: ["Nearby", "Personalized"],
-    body: <InfoCard icon={MapPin} title="Your city, personalized" meta="Based on your location" />,
-  },
-  {
-    id: "support",
-    label: "Live · Senior support",
-    title: "Senior Support Resource",
-    subtext: "Open now",
-    footer: "Detroit support resource · Prototype",
-    icon: HeartHandshake,
-    image: {
-      src: seniorSupportAsset.url,
-      alt: "A digital skills instructor helping older adults use phones and a tablet together",
-      position: "center center",
-      caption: "Learning today. More opportunities tomorrow.",
-    },
-    tags: ["Senior Resource", "Caregiver Support"],
-    body: (
-      <div className="grid gap-2">
-        <InfoCard icon={HeartHandshake} title="Meals, rides, and caregiver support" meta="Available now · Verify with provider" />
-        <InfoCard icon={Users} title="Local senior programs" meta="Classes, activities and social events" />
-      </div>
-    ),
-  },
-  {
-    id: "wellness",
-    label: "Live · Wellness + recreation",
-    title: "Wellness Near You",
-    subtext: "Detroit Riverwalk",
-    footer: "Matched to your interests",
-    icon: Route,
-    image: { src: riverwalkAsset.url, alt: "People enjoying the Detroit Riverwalk" },
-    tags: ["Recreation", "Nearby"],
-    body: <InfoCard icon={Users} title="Fresh air, movement, and community" meta="Walking group · Today at 4 PM" />,
-  },
-  {
-    id: "opportunity",
-    label: "Live · Opportunity",
-    title: "New Opportunity Near You",
-    subtext: "Job & training session",
-    footer: "Career support nearby · Prototype",
-    icon: BriefcaseBusiness,
-    tags: ["Career Opportunity", "Recommended"],
-    body: (
-      <div className="grid gap-2">
-        <InfoCard icon={BriefcaseBusiness} title="Resume and career support" meta="Seats available" />
-        <InfoCard icon={Sparkles} title="Skilled trades information session" meta="Free · Thursday" />
-      </div>
-    ),
-  },
-  {
-    id: "fast-freddy",
-    label: "Real Detroit example",
-    secondaryLabel: "Live · Community movement",
-    title: "Fast Freddy Hustle Class",
-    subtext: "Sheffield Bridge Center",
-    footer: "Detroit community activity",
-    icon: Users,
-    image: { src: communityAsset.url, alt: "Fast Freddy leading a Detroit community movement class" },
-    tags: ["Real Detroit Example", "Community Activity"],
-    body: <InfoCard icon={HeartHandshake} title="Music, movement, and social connection" meta="Today · 11:00 AM" />,
+    tags: ["Health", "Community", "Opportunities", "Events"],
+    body: <InfoCard icon={MapPin} title="Discover what’s around you" meta="Personalized for your needs and interests" />,
   },
   {
     id: "transport",
     label: "Live · Access support",
     title: "Transportation Help Available",
-    subtext: "Rides nearby",
+    subtext: "Rides nearby. Get where you need to go.",
     footer: "Support available near you · Prototype",
     icon: Navigation,
     tags: ["Access Support", "Transportation"],
@@ -130,28 +76,108 @@ const slides: Slide[] = [
     ),
   },
   {
-    id: "checkin",
-    label: "Live · Participation",
-    title: "I’m Here ✓",
-    subtext: "You’re connected to your community",
-    footer: "Private by default",
-    icon: Check,
-    image: { src: supportAsset.url, alt: "Detroit residents connecting across generations" },
-    tags: ["Checked In", "Private"],
-    body: <InfoCard icon={Check} title="Community Wellness Day" meta="September 18 · Southwest Detroit" />,
-  },
-  {
-    id: "ask",
-    label: "Live · Ask KIH",
-    title: "Ask in Your Own Words",
-    subtext: "Get a relevant next step",
-    footer: "Prototype recommendation logic",
-    icon: MessageCircle,
-    tags: ["Personalized", "Clear Next Step"],
+    id: "opportunity",
+    label: "Live · Opportunity",
+    title: "New Opportunity Near You",
+    subtext: "Job & training session",
+    footer: "Career support nearby · Prototype",
+    icon: BriefcaseBusiness,
+    tags: ["Career Opportunity", "Recommended"],
     body: (
       <div className="grid gap-2">
-        <div className="rounded-lg bg-ink p-3 text-sm font-semibold text-cream">“What can I do near me today?”</div>
-        <InfoCard icon={MapPin} title="Detroit Riverwalk activities" meta="Open now · 1.2 mi" />
+        <InfoCard icon={BriefcaseBusiness} title="Resume and career support" meta="Seats available" />
+        <InfoCard icon={Sparkles} title="Skilled trades information session" meta="Free · Thursday" />
+      </div>
+    ),
+  },
+  {
+    id: "health",
+    label: "Live · Health & wellness",
+    title: "Health Resources Near You",
+    subtext: "Clinics, screenings and more.",
+    footer: "Healthier Detroit · Prototype",
+    icon: HeartPulse,
+    image: { src: seniorSupportAsset.url, alt: "Detroit residents receiving friendly health and technology guidance", position: "center center" },
+    tags: ["Healthcare", "Wellness"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={HeartPulse} title="Find nearby clinics and services" meta="Locations nearby" />
+        <InfoCard icon={CalendarDays} title="Vaccination & wellness events" meta="This week" />
+      </div>
+    ),
+  },
+  {
+    id: "wellness",
+    label: "Live · Wellness + recreation",
+    title: "Wellness Near You",
+    subtext: "Detroit Riverwalk",
+    footer: "Matched to your interests",
+    icon: Route,
+    image: { src: riverwalkAsset.url, alt: "People enjoying the Detroit Riverwalk" },
+    tags: ["Recreation", "Nearby"],
+    body: <InfoCard icon={Users} title="Fresh air, movement, and community" meta="Walking group · Today at 4 PM" />,
+  },
+  {
+    id: "community-events",
+    label: "Live · Community",
+    title: "Community Events Near You",
+    subtext: "Music. Culture. Food. Connection.",
+    footer: "Stronger together · Prototype",
+    icon: Users,
+    image: { src: communityEventAsset.url, alt: "Fast Freddy and performers gathered for a Detroit community event", position: "center 38%" },
+    tags: ["Events", "Community"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={CalendarDays} title="Events this week" meta="Music, food, community & more" />
+        <InfoCard icon={Users} title="Senior activities and classes" meta="Join in the fun" />
+      </div>
+    ),
+  },
+  {
+    id: "community-activities",
+    label: "Live · Community",
+    title: "Recreational Activities & Hustle Classes Near You",
+    subtext: "Stay active. Stay connected.",
+    footer: "Active people. Stronger Detroit. · Prototype",
+    icon: Users,
+    image: { src: communityClassAsset.url, alt: "Fast Freddy in a green outfit and hat leading a Detroit hustle class", position: "center center" },
+    tags: ["Activities", "Senior Programs"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={Users} title="Dance & movement sessions" meta="All fitness levels" />
+        <InfoCard icon={HeartHandshake} title="Weekly wellness classes" meta="Healthier, happier people" />
+      </div>
+    ),
+  },
+  {
+    id: "neighborhoods",
+    label: "Live · Safety",
+    title: "Safer Neighborhoods. Stronger Communities.",
+    subtext: "Stay informed. Get connected.",
+    footer: "Together for a stronger Detroit · Prototype",
+    icon: ShieldCheck,
+    image: { src: neighborhoodAsset.url, alt: "Detroit neighbors connecting across generations", position: "center center" },
+    tags: ["Safety", "Neighborhoods"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={ShieldCheck} title="Neighborhood updates & alerts" meta="Official local information" />
+        <InfoCard icon={Users} title="Community resources & support" meta="Get involved" />
+      </div>
+    ),
+  },
+  {
+    id: "discover-detroit",
+    label: "Live · Detroit",
+    title: "Discover Detroit",
+    subtext: "People. Places. Possibilities.",
+    footer: "Same city. More opportunities.",
+    icon: Landmark,
+    image: { src: spiritAsset.url, alt: "The original Spirit of Detroit statue photograph", position: "center center" },
+    tags: ["Local Business", "Explore"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={MapPin} title="Explore local landmarks" meta="Parks, culture & more" />
+        <InfoCard icon={Store} title="Support local businesses" meta="Shop. Dine. Discover." />
       </div>
     ),
   },
