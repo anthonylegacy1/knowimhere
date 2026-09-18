@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight, MapPin, MessageCircle } from "lucide-react";
-import hero from "@/assets/detroit-skyline-hero.jpg";
 import social from "@/assets/community-social.jpg";
+import heroAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
+import spiritAsset from "@/assets/spirit-of-detroit.jpeg.asset.json";
+import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
+import hartPlazaAsset from "@/assets/hart-plaza.jpeg.asset.json";
+import renaissanceAsset from "@/assets/renaissance-center.jpeg.asset.json";
+import fordFieldAsset from "@/assets/ford-field.jpeg.asset.json";
+import littleCaesarsAsset from "@/assets/little-caesars-arena.jpeg.asset.json";
+import comericaAsset from "@/assets/comerica-park.png.asset.json";
+import communityAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
@@ -31,10 +39,10 @@ function Index() {
       {/* IMMERSIVE DETROIT HERO */}
       <section className="home-hero relative overflow-hidden">
         <img
-          src={hero}
-          alt="Detroit skyline and Renaissance Center seen from the Riverwalk at blue hour"
-          width={1920}
-          height={1080}
+          src={heroAsset.url}
+          alt="Detroit skyline and Renaissance Center glowing at sunset across the river"
+          width={1672}
+          height={941}
           className="absolute inset-0 size-full object-cover"
         />
         <div className="container-kih relative z-10 flex min-h-[43rem] flex-col items-center px-5 pb-36 pt-16 text-center text-cream sm:pt-20">
@@ -66,6 +74,43 @@ function Index() {
       <section className="product-demo-band relative z-20 -mt-28 pb-16">
         <div className="container-kih">
           <PhoneDemo />
+        </div>
+      </section>
+
+      {/* DISCOVER DETROIT */}
+      <section className="bg-card py-14">
+        <div className="container-kih">
+          <SectionHeading
+            eyebrow="Detroit around you"
+            title="Discover Detroit"
+            text="Landmarks, gathering places and everyday spaces where residents connect — and where Know I'm Here helps surface what is nearby."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Spirit of Detroit", type: "Civic", image: spiritAsset.url, text: "City services, public information and downtown resources." },
+              { title: "Detroit Riverwalk", type: "Recreation", image: riverwalkAsset.url, text: "Walking, wellness, waterfront activity and community programs." },
+              { title: "Hart Plaza", type: "Downtown", image: hartPlazaAsset.url, text: "Events, culture and gathering in the heart of Detroit." },
+              { title: "Renaissance Center", type: "Landmark", image: renaissanceAsset.url, text: "A familiar skyline landmark connected to downtown discovery." },
+              { title: "Ford Field", type: "Sports", image: fordFieldAsset.url, text: "Sports, major events and nearby community activity." },
+              { title: "Little Caesars Arena", type: "Entertainment", image: littleCaesarsAsset.url, text: "Entertainment, employment and activity in The District Detroit." },
+              { title: "Comerica Park", type: "Sports", image: comericaAsset.url, text: "Baseball, downtown experiences and seasonal events." },
+            ].map((place) => (
+              <article key={place.title} className="overflow-hidden rounded-lg border border-border bg-background">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img src={place.image} alt={place.title} className="size-full object-cover transition-transform duration-300 hover:scale-[1.02]" loading="lazy" />
+                  <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2.5 py-1 text-[10px] font-extrabold uppercase text-cream backdrop-blur">{place.type}</span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-sans text-lg font-bold">{place.title}</h3>
+                  <p className="mt-1 text-sm text-foreground/65">{place.text}</p>
+                  <Link to="/ask" search={{ q: `What's around ${place.title}?` }} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-bold text-sky">
+                    Explore nearby <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Resource availability shown in this prototype should be verified with the official provider.</p>
         </div>
       </section>
 
@@ -412,13 +457,15 @@ function Index() {
               href={EXTERNAL_LINKS.fastFreddy}
               target="_blank"
               rel="noreferrer"
-              className="rounded-3xl border-2 border-cream/10 bg-cream/5 p-6 transition-colors hover:bg-cream/10"
+              className="overflow-hidden rounded-lg border-2 border-cream/10 bg-cream/5 transition-colors hover:bg-cream/10"
             >
-              <span className="text-2xl" aria-hidden>🎷</span>
-              <p className="mt-2 text-xs font-bold uppercase tracking-wide text-sun">Trust + Community</p>
-              <h3 className="mt-1 font-display text-xl font-bold">Fast Freddy Experience</h3>
-              <p className="mt-2 text-sm text-cream/65">Culture, movement and senior programming that built real in-person trust.</p>
-              <p className="mt-3 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p>
+              <img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" />
+              <div className="p-6">
+                <p className="text-xs font-bold uppercase tracking-wide text-sun">Trust + Community</p>
+                <h3 className="mt-1 font-display text-xl font-bold">Fast Freddy Experience</h3>
+                <p className="mt-2 text-sm text-cream/65">Culture, movement and senior programming that built real in-person trust.</p>
+                <p className="mt-3 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p>
+              </div>
             </a>
             <a
               href={EXTERNAL_LINKS.everydayConnect}

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EXTERNAL_LINKS } from "@/data/resources";
+import communityAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
 
 const TITLE = "Our Story — How We Got Here | Know I'm Here";
 const DESC = "Fast Freddy created the trust. Everyday Connect created the confidence. Know I'm Here creates the connection. The story behind a Detroit-built community-access platform.";
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/story")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Story,
@@ -53,7 +56,9 @@ function Story() {
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         {CARDS.map((c) => (
-          <article key={c.step} className={`card-pop p-6 ${c.tone}`}>
+          <article key={c.step} className={`card-pop overflow-hidden ${c.tone}`}>
+            {c.step === "01" && <img src={communityAsset.url} alt="Fast Freddy leading a community movement class in Detroit" className="aspect-[16/9] w-full object-cover" />}
+            <div className="p-6">
             <p className="font-display text-sm font-bold text-foreground/50">{c.step}</p>
             <h2 className="mt-1 font-display text-2xl font-bold">{c.name}</h2>
             <p className="chip mt-2 bg-card">{c.theme}</p>
@@ -63,6 +68,7 @@ function Story() {
                 {c.link.label} ↗
               </a>
             )}
+            </div>
           </article>
         ))}
       </div>
@@ -75,16 +81,19 @@ function Story() {
         <span className="text-brand">CONNECTION</span>
       </div>
 
-      <section className="card-flat mt-12 p-6 sm:p-8">
-        <h2 className="font-display text-2xl font-bold">Fast Freddy as a pilot ground</h2>
-        <p className="mt-2 text-foreground/75">
+      <section className="card-flat mt-12 overflow-hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+        <img src={communityAsset.url} alt="Community members participating in a Fast Freddy movement and wellness class" className="h-full min-h-64 w-full object-cover" />
+        <div className="p-6 sm:p-8">
+          <h2 className="font-display text-2xl font-bold">Fast Freddy as a pilot ground</h2>
+          <p className="mt-2 text-foreground/75">
           Community experiences are a natural place to test the Know I&apos;m Here loop before scaling it citywide: QR-code entry, on-site recommendations, saved information, transportation help, and aggregate (never individual) engagement insight for organizers.
-        </p>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-5">
+          </p>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
           {["QR entry", "Recommendations", "Saved info", "Transportation", "Aggregate engagement"].map((i) => (
             <li key={i} className="chip justify-center bg-card py-2">{i}</li>
           ))}
-        </ul>
+          </ul>
+        </div>
       </section>
 
       <section className="mt-8">
@@ -93,6 +102,7 @@ function Story() {
         </button>
         {open && (
           <div className="card-flat mt-3 p-6">
+            <img src={communityAsset.url} alt="Fast Freddy Experience community activity in Detroit" className="mb-5 aspect-[16/7] w-full rounded-lg object-cover" />
             <p className="text-foreground/75">
               Fast Freddy Experience is one real-world example of the kind of community organization Know I&apos;m Here is built to connect residents with — alongside recreation centers, health clinics, block clubs, workforce programs, libraries and faith communities across Detroit. Know I&apos;m Here remains the primary, scalable brand; partner spotlights rotate.
             </p>

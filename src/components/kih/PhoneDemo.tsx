@@ -12,11 +12,16 @@ import {
   MapPin,
   MessageCircle,
   Navigation,
+  Route,
   Search,
   Sparkles,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
+import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
+import communityAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
+import fordFieldAsset from "@/assets/ford-field.jpeg.asset.json";
 
 const slides = [
   {
@@ -27,8 +32,9 @@ const slides = [
     icon: Search,
     content: (
       <div className="grid gap-2">
+        <PhotoPanel src={skylineAsset.url} alt="Detroit skyline at sunset" label="Detroit around you" />
         <DemoCard icon={HeartHandshake} title="Community Wellness Day" meta="0.8 mi · Free · Today" />
-        <DemoCard icon={Users} title="Neighborhood Activities" meta="1.2 mi · All ages" />
+        <DemoCard icon={MapPin} title="Detroit Riverwalk" meta="1.2 mi · Open today" thumbnail={riverwalkAsset.url} />
         <div className="flex flex-wrap gap-1.5 pt-1">
           {['Nearby', 'Personalized', 'Community resource'].map((item) => <span className="phone-chip" key={item}>{item}</span>)}
         </div>
@@ -38,12 +44,13 @@ const slides = [
   {
     id: "caregiver",
     eyebrow: "Senior + caregiver support",
-    title: "Caregiver Support",
-    description: "Practical help for older adults and the people who support them.",
+    title: "Community Wellness",
+    description: "Movement, connection and practical support for older adults and caregivers.",
     icon: HeartHandshake,
     content: (
       <div className="grid gap-2">
-        <DemoCard icon={Users} title="Caregiver Coffee Hour" meta="Available nearby · Free" />
+        <PhotoPanel src={communityAsset.url} alt="Older adults taking part in a Detroit community movement class" label="Community connection" />
+        <DemoCard icon={Users} title="Fast Freddy Hustle Class" meta="Today · Community wellness" />
         <DemoCard icon={BusFront} title="Transportation Help" meta="Accessible rides · Request ahead" />
         <p className="phone-note">Senior-specific resource · Prototype listing</p>
       </div>
@@ -57,6 +64,7 @@ const slides = [
     icon: Sparkles,
     content: (
       <div className="grid gap-2">
+        <PhotoPanel src={fordFieldAsset.url} alt="Ford Field in downtown Detroit" label="Youth opportunities across Detroit" />
         <DemoCard icon={Sparkles} title="Free Coding Workshop" meta="Saturday · Ages 13–19" />
         <DemoCard icon={BriefcaseBusiness} title="Summer Youth Employment" meta="Registration open" />
         <div className="flex gap-1.5"><span className="phone-chip">Technology</span><span className="phone-chip">Career pathway</span></div>
@@ -72,9 +80,17 @@ const slides = [
     content: (
       <div className="grid grid-cols-2 gap-2">
         <TransportTile icon={BusFront} label="Bus route" />
+        <TransportTile icon={Route} label="Walking" />
         <TransportTile icon={Navigation} label="Ride assistance" />
-        <TransportTile icon={Users} label="Community ride" note="Potential" />
-        <TransportTile icon={Accessibility} label="Accessible option" />
+        <TransportTile icon={Users} label="Rideshare" note="Potential" />
+        <div className="phone-route-map col-span-2" aria-label="Example route from home to Patton Recreation Center">
+          <span className="phone-route-point" />
+          <span className="phone-route-line" />
+          <BusFront className="size-5 text-sky" />
+          <span className="phone-route-line" />
+          <MapPin className="size-5 text-brand" />
+          <span className="text-[10px] font-bold text-muted-foreground">18 min · 1 transfer</span>
+        </div>
       </div>
     ),
   },
@@ -86,6 +102,7 @@ const slides = [
     icon: Check,
     content: (
       <div className="phone-checkin">
+        <img src={communityAsset.url} alt="Detroit community wellness gathering" className="h-20 w-full rounded-lg object-cover" />
         <span className="grid size-12 place-items-center rounded-full bg-mint text-card"><Check className="size-6" /></span>
         <div>
           <p className="font-bold">Community Wellness Day</p>
@@ -103,18 +120,28 @@ const slides = [
     icon: MessageCircle,
     content: (
       <div className="grid gap-2">
-        <div className="rounded-lg bg-ink p-3 text-sm font-semibold text-cream">“What can my teenager do after school?”</div>
-        <DemoCard icon={Sparkles} title="3 opportunities nearby" meta="Matched by age · interests · distance" />
+        <div className="rounded-lg bg-ink p-3 text-sm font-semibold text-cream">“What can I do near me today?”</div>
+        <DemoCard icon={HeartHandshake} title="Community Wellness Day" meta="Free · 0.8 mi · Today" thumbnail={communityAsset.url} />
+        <DemoCard icon={MapPin} title="Detroit Riverwalk activities" meta="Open now · 1.2 mi" thumbnail={riverwalkAsset.url} />
         <p className="phone-note">Prototype recommendation logic</p>
       </div>
     ),
   },
 ] as const;
 
-function DemoCard({ icon: Icon, title, meta }: { icon: typeof Search; title: string; meta: string }) {
+function PhotoPanel({ src, alt, label }: { src: string; alt: string; label: string }) {
+  return (
+    <div className="relative h-24 overflow-hidden rounded-lg">
+      <img src={src} alt={alt} className="size-full object-cover" />
+      <span className="absolute inset-x-0 bottom-0 bg-ink/75 px-2.5 py-1.5 text-[10px] font-bold text-cream">{label}</span>
+    </div>
+  );
+}
+
+function DemoCard({ icon: Icon, title, meta, thumbnail }: { icon: typeof Search; title: string; meta: string; thumbnail?: string }) {
   return (
     <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 shadow-sm">
-      <span className="grid size-9 shrink-0 place-items-center rounded-md bg-sky/15 text-sky"><Icon className="size-4" /></span>
+      {thumbnail ? <img src={thumbnail} alt="" className="size-10 shrink-0 rounded-md object-cover" /> : <span className="grid size-9 shrink-0 place-items-center rounded-md bg-sky/15 text-sky"><Icon className="size-4" /></span>}
       <div className="min-w-0">
         <p className="truncate text-sm font-bold text-foreground">{title}</p>
         <p className="text-xs text-muted-foreground">{meta}</p>
