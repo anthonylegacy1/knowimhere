@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
 import communityClassAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
-import communityEventAsset from "@/assets/fast-freddy-community-event.jpeg.asset.json";
+import communityEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
 import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
 import seniorSupportAsset from "@/assets/senior-support-digital-learning.png.asset.json";
 import spiritAsset from "@/assets/spirit-of-detroit-original.jpeg.asset.json";
@@ -121,10 +121,10 @@ const slides: Slide[] = [
     id: "community-events",
     label: "Live · Community",
     title: "Community Events Near You",
-    subtext: "Music. Culture. Food. Connection.",
+    subtext: "Music. Culture. Food. Connections.",
     footer: "Stronger together · Prototype",
     icon: Users,
-    image: { src: communityEventAsset.url, alt: "Fast Freddy and performers gathered for a Detroit community event", position: "center 38%" },
+    image: { src: communityEventAsset.url, alt: "Fast Freddy in white leading a large indoor Detroit community event", position: "center 58%" },
     tags: ["Events", "Community"],
     body: (
       <div className="grid gap-2">
@@ -136,7 +136,7 @@ const slides: Slide[] = [
   {
     id: "community-activities",
     label: "Live · Community",
-    title: "Recreational Activities & Hustle Classes Near You",
+    title: "Recreational & Hustle Classes Near You",
     subtext: "Stay active. Stay connected.",
     footer: "Active people. Stronger Detroit. · Prototype",
     icon: Users,
