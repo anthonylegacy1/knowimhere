@@ -18,7 +18,7 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-display: "Fredoka", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
@@ -71,7 +71,7 @@
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.75rem;
 
   --brand: oklch(0.68 0.21 38);
   --brand-deep: oklch(0.6 0.21 36);
@@ -119,9 +119,9 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--brand);
 
-  --shadow-pop: 0 6px 0 0 oklch(0.24 0.03 265 / 6%);
-  --shadow-pop-brand: 0 5px 0 0 var(--brand-deep);
-  --shadow-pop-ink: 0 4px 0 0 oklch(0 0 0 / 25%);
+  --shadow-pop: 0 12px 32px -22px oklch(0.24 0.03 265 / 35%);
+  --shadow-pop-brand: 0 10px 24px -16px var(--brand-deep);
+  --shadow-pop-ink: 0 10px 24px -16px oklch(0 0 0 / 55%);
 }
 
 .dark {
@@ -173,7 +173,7 @@ html.text-plus-plus {
   gap: 0.5rem;
   font-family: var(--font-display);
   font-weight: 700;
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-md);
   min-height: 3.25rem;
   padding: 0.85rem 1.5rem;
   font-size: 1.05rem;
@@ -184,10 +184,7 @@ html.text-plus-plus {
     background-color 150ms ease;
   cursor: pointer;
   text-align: center;
-  &:active {
-    transform: translateY(3px);
-    box-shadow: none;
-  }
+  &:active { transform: translateY(1px); }
   &:disabled {
     opacity: 0.55;
     cursor: not-allowed;
@@ -226,18 +223,18 @@ html.text-plus-plus {
   min-height: 2.75rem;
   padding: 0.6rem 1rem;
   font-size: 0.95rem;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-sm);
 }
 @utility card-pop {
   background-color: var(--paper);
   border: 2px solid oklch(0.24 0.03 265 / 10%);
-  border-radius: var(--radius-3xl);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-pop);
 }
 @utility card-flat {
   background-color: var(--cream);
   border: 2px solid oklch(0.24 0.03 265 / 10%);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-lg);
 }
 @utility chip {
   display: inline-flex;
@@ -318,7 +315,7 @@ html.text-plus-plus {
 
 /* Homepage product-demo composition */
 .home-hero {
-  min-height: 43rem;
+  min-height: 39rem;
   background-color: var(--ink);
   background-position: center;
   background-size: cover;
@@ -327,15 +324,15 @@ html.text-plus-plus {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, oklch(0.12 0.035 250 / 34%) 0%, oklch(0.12 0.035 250 / 58%) 62%, oklch(0.12 0.035 250 / 92%) 100%);
+  background: linear-gradient(180deg, oklch(0.12 0.035 250 / 22%) 0%, oklch(0.12 0.035 250 / 48%) 62%, oklch(0.12 0.035 250 / 84%) 100%);
 }
 .home-hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, oklch(0.1 0.03 255 / 22%), oklch(0.1 0.03 255 / 58%) 62%, oklch(0.1 0.03 255 / 94%)),
-    linear-gradient(90deg, oklch(0.1 0.03 255 / 22%), transparent 45%, oklch(0.1 0.03 255 / 16%));
+    linear-gradient(180deg, oklch(0.1 0.03 255 / 12%), oklch(0.1 0.03 255 / 34%) 62%, oklch(0.1 0.03 255 / 86%)),
+    linear-gradient(90deg, oklch(0.1 0.03 255 / 14%), transparent 50%, oklch(0.1 0.03 255 / 10%));
 }
 .product-demo-band { background: linear-gradient(180deg, transparent 0 7rem, var(--paper) 7rem); }
 .phone-demo-wrap {
@@ -381,15 +378,17 @@ html.text-plus-plus {
 .phone-appbar { display: flex; align-items: center; gap: 0.55rem; border-bottom: 1px solid var(--border); padding: 0.65rem 1rem; }
 .phone-slide {
   flex: 1;
-  padding: 1.4rem 1.15rem 1rem;
+  padding: 1rem 1.15rem 0.75rem;
   background: linear-gradient(180deg, var(--aqua-soft), var(--paper) 40%);
   animation: phone-slide-in 350ms ease both;
   touch-action: pan-y;
 }
-.phone-slide-icon { display: grid; width: 2.7rem; height: 2.7rem; place-items: center; border-radius: 0.75rem; background: var(--ink); color: var(--aqua); }
-.phone-eyebrow { margin-top: 1rem; color: var(--sky); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.phone-slide-icon { display: grid; width: 2.35rem; height: 2.35rem; place-items: center; border-radius: 0.6rem; background: var(--ink); color: var(--aqua); }
+.phone-eyebrow { color: var(--sky); font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
 .phone-chip { display: inline-flex; align-items: center; border-radius: 999px; background: var(--aqua-soft); color: var(--ink); border: 1px solid var(--border); padding: 0.3rem 0.55rem; font-size: 0.65rem; font-weight: 800; }
 .phone-note { font-size: 0.65rem; font-weight: 700; color: var(--muted-foreground); }
+.phone-photo { height: 8.5rem; overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--aqua-soft); }
+.phone-slide-footer { margin-top: 0.75rem; border-top: 1px solid var(--border); padding-top: 0.65rem; font-size: 0.62rem; font-weight: 700; color: var(--muted-foreground); }
 .phone-checkin { display: grid; justify-items: center; gap: 0.85rem; border: 1px solid var(--border); border-radius: 0.9rem; background: var(--paper); padding: 1.25rem; text-align: center; box-shadow: 0 0.75rem 2rem oklch(0.24 0.03 265 / 8%); }
 .phone-route-map { display: flex; min-height: 3.5rem; align-items: center; gap: 0.4rem; border: 1px solid var(--border); border-radius: 0.75rem; background: var(--aqua-soft); padding: 0.65rem; }
 .phone-route-point { width: 0.6rem; height: 0.6rem; flex: none; border-radius: 999px; background: var(--ink); }
@@ -399,7 +398,7 @@ html.text-plus-plus {
 @keyframes phone-slide-in { from { opacity: 0; transform: translateX(0.75rem); } to { opacity: 1; transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .phone-slide { animation: none; } }
 @media (max-width: 47.99rem) {
-  .home-hero { min-height: 46rem; background-position: 58% center; }
+  .home-hero { min-height: 43rem; background-position: 64% center; }
   .phone-demo-wrap { width: min(100%, 21rem); }
   .phone-screen { min-height: 36rem; }
 }
