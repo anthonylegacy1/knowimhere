@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AskRouteImport } from './routes/ask'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as ForYouRouteImport } from './routes/for-you'
+import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as ResourceIdRouteImport } from './routes/resource.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AskRoute = AskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForYouRoute = ForYouRouteImport.update({
+  id: '/for-you',
+  path: '/for-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NeighborhoodRoute = NeighborhoodRouteImport.update({
+  id: '/neighborhood',
+  path: '/neighborhood',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourceIdRoute = ResourceIdRouteImport.update({
+  id: '/resource/$id',
+  path: '/resource/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/demo': typeof DemoRoute
+  '/for-you': typeof ForYouRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/onboarding': typeof OnboardingRoute
+  '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/demo': typeof DemoRoute
+  '/for-you': typeof ForYouRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/onboarding': typeof OnboardingRoute
+  '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/demo': typeof DemoRoute
+  '/for-you': typeof ForYouRoute
+  '/neighborhood': typeof NeighborhoodRoute
+  '/onboarding': typeof OnboardingRoute
+  '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ask'
+    | '/demo'
+    | '/for-you'
+    | '/neighborhood'
+    | '/onboarding'
+    | '/resource/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ask'
+    | '/demo'
+    | '/for-you'
+    | '/neighborhood'
+    | '/onboarding'
+    | '/resource/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/ask'
+    | '/demo'
+    | '/for-you'
+    | '/neighborhood'
+    | '/onboarding'
+    | '/resource/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AskRoute: typeof AskRoute
+  DemoRoute: typeof DemoRoute
+  ForYouRoute: typeof ForYouRoute
+  NeighborhoodRoute: typeof NeighborhoodRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ResourceIdRoute: typeof ResourceIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ask': {
+      id: '/ask'
+      path: '/ask'
+      fullPath: '/ask'
+      preLoaderRoute: typeof AskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-you': {
+      id: '/for-you'
+      path: '/for-you'
+      fullPath: '/for-you'
+      preLoaderRoute: typeof ForYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neighborhood': {
+      id: '/neighborhood'
+      path: '/neighborhood'
+      fullPath: '/neighborhood'
+      preLoaderRoute: typeof NeighborhoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resource/$id': {
+      id: '/resource/$id'
+      path: '/resource/$id'
+      fullPath: '/resource/$id'
+      preLoaderRoute: typeof ResourceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AskRoute: AskRoute,
+  DemoRoute: DemoRoute,
+  ForYouRoute: ForYouRoute,
+  NeighborhoodRoute: NeighborhoodRoute,
+  OnboardingRoute: OnboardingRoute,
+  ResourceIdRoute: ResourceIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
