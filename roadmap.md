@@ -53,4 +53,4 @@
 - [x] Add Community Events and Recreational Activities slides with approved Fast Freddy photography.
 - [x] Replace generated Discover Detroit artwork with the original Spirit of Detroit photo.
 - [x] Keep Welcome, Transportation, Opportunity, Health, and Safer Neighborhoods in the walkthrough.
-- [ ] Verify all slides, exact titles, controls, image crops, and desktop/mobile rendering.
+- [x] Verify all slides, exact titles, controls, image crops, and desktop/mobile rendering.
