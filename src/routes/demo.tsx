@@ -25,7 +25,7 @@ export const Route = createFileRoute("/demo")({
   component: Demo,
 });
 
-const STEPS = ["Meet them", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
+const STEPS = ["Meet them", "Turn On I'm Here", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
 
 function toProfile(p: Persona): Profile {
   return {
