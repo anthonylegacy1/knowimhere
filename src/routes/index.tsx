@@ -16,6 +16,7 @@ import {
   Music,
   Navigation,
   PersonStanding,
+  Search,
   ShieldCheck,
   Smartphone,
   Sparkles,
@@ -115,16 +116,30 @@ function Index() {
 
       <section className="border-y border-border bg-card">
         <div className="container-kih py-14">
-          <div className="grid gap-5 lg:grid-cols-3">
+          <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
             <article className="overflow-hidden rounded-lg border border-border bg-background">
               <img src={neighborhoodAsset.url} alt="Detroit residents connecting across generations in their neighborhood" className="aspect-[16/9] w-full object-cover" loading="eager" />
               <div className="p-6"><p className="text-xs font-extrabold uppercase text-sky">My Neighborhood</p><h2 className="mt-2 text-2xl font-bold">Know what&apos;s happening around you.</h2><p className="mt-2 text-foreground/65">See community meetings, recreation updates, cooling centers, road closures and official City notices—calmly filtered to your neighborhood.</p><Button asChild variant="outline" className="mt-5 min-h-12"><Link to="/neighborhood">See my neighborhood <ArrowRight /></Link></Button></div>
             </article>
-            <article className="card-flat flex flex-col justify-between bg-ink p-7 text-cream">
-              <div><span className="grid size-12 place-items-center rounded-lg bg-aqua text-ink"><Smartphone /></span><p className="mt-6 text-xs font-extrabold uppercase text-aqua">Interactive demonstration</p><h2 className="mt-2 text-3xl font-extrabold">Try Know I&apos;m Here.</h2><p className="mt-3 text-cream/75">Follow a Detroit resident from discovery to transportation help, participation and private check-in.</p></div>
-              <div className="mt-6"><div className="flex flex-wrap gap-2 text-xs font-bold text-cream/75"><span>Discover</span><span aria-hidden>→</span><span>Get There</span><span aria-hidden>→</span><span>Check In</span></div><Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/demo">View Demo Experience <ArrowRight /></Link></Button></div>
+            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
+              <div>
+                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
+                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
+                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
+                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
+              </div>
+              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
+                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
+              </div>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+              </ol>
+              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See it in the demo <ArrowRight /></Link></Button>
             </article>
-            <article className="flex flex-col rounded-lg bg-brand p-7 text-brand-foreground"><div><span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span><p className="mt-6 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p><h2 className="mt-2 text-4xl font-extrabold">I&apos;M HERE ✓</h2><p className="mt-3 text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p></div><div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg"><img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" /></div><Button asChild className="mt-5 min-h-12 self-start bg-card text-brand hover:bg-card/90"><Link to="/demo">See it in the demo</Link></Button></article>
           </div>
         </div>
       </section>
@@ -297,7 +312,7 @@ function Index() {
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 text-center"><p className="mx-auto max-w-2xl text-xl font-bold leading-snug">Senior or student. Job or health resource. Community event or career opportunity.<br /><span className="text-brand">The question is the same: what does Detroit have for me?</span></p><p className="mt-10 text-2xl font-bold text-brand">KNOW I&apos;M HERE</p><h2 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">The right resource. The right opportunity.<br />For the right Detroit resident.<br /><span className="text-sky">At the right moment.</span></h2><p className="mt-4 font-medium text-foreground/60">Different generations. Different needs. One connection layer.</p><div className="mt-7 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button><Button asChild className="bg-ink text-cream hover:bg-ink/90"><Link to="/demo">View Demo Experience</Link></Button></div></section>
+      <section className="mx-auto max-w-4xl px-5 py-16 text-center"><p className="mx-auto max-w-2xl text-xl font-bold leading-snug">Senior or student. Job or health resource. Community event or career opportunity.<br /><span className="text-brand">The question is the same: what does Detroit have for me?</span></p><p className="mt-10 text-2xl font-bold text-brand">KNOW I&apos;M HERE</p><h2 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">The right resource. The right opportunity.<br />For the right Detroit resident.<br /><span className="text-sky">At the right moment.</span></h2><p className="mt-4 font-medium text-foreground/60">Different generations. Different needs. One connection layer.</p><div className="mt-7 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div></section>
     </div>
   );
 }
@@ -312,6 +327,18 @@ function Metric({ icon, value, label }: { icon: ReactNode; value: string; label:
 
 function Promise({ icon, title }: { icon: ReactNode; title: string }) {
   return <div className="card-flat flex min-h-32 flex-col justify-between p-5"><span className="text-sky">{icon}</span><p className="mt-4 font-bold">{title}</p></div>;
+}
+
+function DemoJourneyStep({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
+  return (
+    <li className="flex min-h-24 items-center gap-3 rounded-lg border border-brand-foreground/20 bg-brand-foreground/10 p-3 sm:min-h-32 sm:flex-col sm:items-start sm:justify-center">
+      <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-card text-brand" aria-hidden>{icon}</span>
+      <span>
+        <span className="block text-sm font-extrabold uppercase">{title}</span>
+        <span className="mt-1 block text-sm leading-snug text-brand-foreground/85">{text}</span>
+      </span>
+    </li>
+  );
 }
 
 type DetroitPlace = { title: string; type: string; image: string; text: string; tags: string[] };
