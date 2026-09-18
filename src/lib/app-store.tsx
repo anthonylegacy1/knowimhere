@@ -142,11 +142,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     () => setState((s) => ({ ...s, textSize: ((s.textSize + 1) % 3) as TextSize })),
     [],
   );
+  const setImHere = useCallback(
+    (v: Partial<ImHere>) => setState((s) => ({ ...s, imHere: { ...s.imHere, ...v } })),
+    [],
+  );
   const resetAll = useCallback(() => setState({ ...initialState, hydrated: true }), []);
 
   const value = useMemo<AppStore>(
     () => ({
       ...state,
+      setImHere,
       setProfile,
       toggleSaved,
       markInterested,
