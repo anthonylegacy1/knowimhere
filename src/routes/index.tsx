@@ -36,7 +36,6 @@ import everydayAsset from "@/assets/everyday-connect-multigenerational.png.asset
 import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
 import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 import imHerePhoneVisual from "@/assets/im-here-private-phone.jpg";
-import ffClassAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
 import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
@@ -206,8 +205,7 @@ function Index() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-3">
-          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffClassAsset.url} alt="Fast Freddy engaging older adults in a Detroit movement class" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover" loading="lazy" /><figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption></figure>
         </div>
