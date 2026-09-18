@@ -19,3 +19,9 @@
 - [x] Unify typography, palette, buttons, cards, spacing, and mobile/desktop presentation.
 - [x] Confirm every Fast Freddy link uses https://fastfreddyexperience.com.
 - [x] Verify desktop and mobile rendering, carousel controls, links, and console/network health.
+
+## Story card imagery
+
+- [x] Replace the Everyday Connect chapter thumbnail with the uploaded guided smartphone-learning photo.
+- [x] Add the uploaded Detroit father-and-daughter phone photo to the Know I'm Here chapter card.
+- [x] Preserve consistent card proportions and verify meaningful crops on desktop and mobile.
