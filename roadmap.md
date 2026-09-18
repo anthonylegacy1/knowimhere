@@ -10,12 +10,12 @@
 
 ## Homepage visual and content refinement
 
-- [ ] Preserve current routes, functionality, demo mode, Ask KIH, resources, transportation, neighborhood, check-in, partner, and privacy features.
-- [ ] Refine hero proportions and responsive Detroit skyline framing.
-- [ ] Rebuild phone storytelling with content-specific imagery, labels, cards, chips, and preserved carousel behavior.
-- [ ] Add uploaded Everyday Connect and authentic Fast Freddy imagery in the requested sections.
-- [ ] Reorder homepage flow and move Discover Detroit near the bottom.
-- [ ] Add concise homepage previews for personalized discovery, Ask KIH, partner impact, and privacy where needed.
-- [ ] Unify typography, palette, buttons, cards, spacing, and mobile/desktop presentation.
-- [ ] Confirm every Fast Freddy link uses https://fastfreddyexperience.com.
+- [x] Preserve current routes, functionality, demo mode, Ask KIH, resources, transportation, neighborhood, check-in, partner, and privacy features.
+- [x] Refine hero proportions and responsive Detroit skyline framing.
+- [x] Rebuild phone storytelling with content-specific imagery, labels, cards, chips, and preserved carousel behavior.
+- [x] Add uploaded Everyday Connect and authentic Fast Freddy imagery in the requested sections.
+- [x] Reorder homepage flow and move Discover Detroit near the bottom.
+- [x] Add concise homepage previews for personalized discovery, Ask KIH, partner impact, and privacy where needed.
+- [x] Unify typography, palette, buttons, cards, spacing, and mobile/desktop presentation.
+- [x] Confirm every Fast Freddy link uses https://fastfreddyexperience.com.
 - [ ] Verify desktop and mobile rendering, carousel controls, links, and console/network health.

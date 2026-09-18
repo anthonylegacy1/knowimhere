@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EXTERNAL_LINKS } from "@/data/resources";
-import communityAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
+import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
+import everydayAsset from "@/assets/everyday-connect-six-screens.jpeg.asset.json";
 
 const TITLE = "Our Story — How We Got Here | Know I'm Here";
 const DESC = "Fast Freddy created the trust. Everyday Connect created the confidence. Know I'm Here creates the connection. The story behind a Detroit-built community-access platform.";
@@ -58,6 +59,7 @@ function Story() {
         {CARDS.map((c) => (
           <article key={c.step} className={`card-pop overflow-hidden ${c.tone}`}>
             {c.step === "01" && <img src={communityAsset.url} alt="Fast Freddy leading a community movement class in Detroit" className="aspect-[16/9] w-full object-cover" />}
+            {c.step === "02" && <img src={everydayAsset.url} alt="Everyday Connect accessible digital learning screens" className="aspect-[16/9] w-full object-cover" />}
             <div className="p-6">
             <p className="font-display text-sm font-bold text-foreground/50">{c.step}</p>
             <h2 className="mt-1 font-display text-2xl font-bold">{c.name}</h2>
