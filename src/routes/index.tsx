@@ -11,8 +11,11 @@ import {
   LockKeyhole,
   MapPin,
   MessageCircle,
+  Music,
   Navigation,
+  PersonStanding,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -31,6 +34,9 @@ import everydayAsset from "@/assets/everyday-connect-multigenerational.png.asset
 import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
 import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 import imHerePhoneVisual from "@/assets/im-here-private-phone.jpg";
+import ffClassAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
+import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
+import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHerePanel, ImHereStatus, NearMeButton } from "@/components/kih/ImHere";
 import { SectionHeading } from "@/components/kih/SectionHeading";
