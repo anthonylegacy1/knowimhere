@@ -58,7 +58,7 @@ export function Header() {
             size="icon"
             className="size-11 rounded-full text-xs font-extrabold"
           >
-            A+{textSize > 0 && <span className="text-brand">{textSize === 1 ? "115%" : "130%"}</span>}
+            A+{textSize > 0 && <span className="sr-only">{textSize === 1 ? "115%" : "130%"}</span>}
           </Button>
           <Link to="/demo" className="btn-base btn-ink btn-sm hidden sm:inline-flex">
             View Demo

@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-import hero from "@/assets/hero-riverwalk.jpg";
+import { ArrowDown, ArrowRight, MapPin, MessageCircle } from "lucide-react";
+import hero from "@/assets/detroit-skyline-hero.jpg";
 import social from "@/assets/community-social.jpg";
-import { AskKIH } from "@/components/kih/AskKIH";
+import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { Button } from "@/components/ui/button";
 import { PRIORITIES, EXTERNAL_LINKS, VIDEOS, PERSONAS, NEED_CATEGORIES, FRONT_DOOR, CATEGORIES } from "@/data/resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
@@ -25,81 +26,68 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div>
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute -right-16 -top-16 size-72 rounded-full bg-sun/40" aria-hidden />
-        <div className="absolute -left-24 top-40 size-64 rounded-full bg-sky/25" aria-hidden />
-        <div className="container-kih relative pb-14 pt-8 sm:pt-12">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
-            <div>
-              <span className="eyebrow">
-                <span className="size-2 rounded-full bg-mint" /> The Last-Mile Connection Gap
-              </span>
-              <h1 className="mt-5 font-display text-[2.6rem] font-bold leading-[1.02] tracking-tight sm:text-6xl">
-                Know what&apos;s <span className="text-brand">around you.</span>
-                <br />
-                Know what&apos;s <span className="text-sky">for you.</span>
-                <br />
-                Know how to <span className="text-mint">get there.</span>
-              </h1>
-              <p className="mt-5 max-w-xl text-lg text-foreground/70">
-                Detroit has resources. Finding the right one shouldn&apos;t be the hard part. Know I&apos;m Here uses AI,
-                location and your preferences to connect you with what&apos;s nearby.
-              </p>
-
-              <div className="mt-6 max-w-xl">
-                <AskKIH compact />
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link to="/onboarding" className="btn-base btn-brand">
-                  Find What I Need
-                </Link>
-                <Link to="/for-you" className="btn-base btn-outline">
-                  Explore Around Me
-                </Link>
-                <Link to="/demo" className="btn-base btn-ink">
-                  View Demo Experience
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative">
-              <img
-                src={hero}
-                alt="Detroit residents walking along the Riverwalk at golden hour with the skyline behind them"
-                width={1024}
-                height={1280}
-                className="aspect-[4/5] w-full rounded-[2rem] object-cover outline-1 -outline-offset-1 outline-foreground/5"
-              />
-              <div className="card-pop absolute -bottom-5 -left-2 px-4 py-3 sm:-left-4">
-                <p className="text-xs font-bold text-muted-foreground">I&apos;M HERE ✓</p>
-                <p className="font-display font-bold">Connected to your community</p>
-              </div>
-            </div>
+      {/* IMMERSIVE DETROIT HERO */}
+      <section className="home-hero relative overflow-hidden">
+        <img
+          src={hero}
+          alt="Detroit skyline and Renaissance Center seen from the Riverwalk at blue hour"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="container-kih relative z-10 flex min-h-[43rem] flex-col items-center px-5 pb-36 pt-16 text-center text-cream sm:pt-20">
+          <span className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-ink/55 px-4 py-2 text-xs font-extrabold uppercase tracking-wider backdrop-blur">
+            <MapPin className="size-3.5 text-aqua" /> Venture 313 Buildathon Prototype · Detroit
+          </span>
+          <h1 className="mt-6 max-w-4xl font-sans text-5xl font-extrabold leading-[1.04] sm:text-7xl">
+            Your Detroit. Connected to You.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-cream/85 sm:text-lg">
+            Know I&apos;m Here helps Detroit residents discover nearby resources, services, activities, programs and opportunities based on where they are, what they need and what matters to them.
+          </p>
+          <div className="mt-7 grid w-full max-w-sm gap-3">
+            <Button asChild size="lg" className="min-h-14 rounded-md bg-aqua text-ink shadow-lg hover:bg-aqua/90">
+              <Link to="/onboarding"><MapPin /> Find What&apos;s Near Me</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="min-h-14 rounded-md border-cream/40 bg-ink/65 text-cream backdrop-blur hover:bg-ink hover:text-cream">
+              <Link to="/ask"><MessageCircle /> Ask Know I&apos;m Here</Link>
+            </Button>
+            <Button asChild variant="link" className="text-cream hover:text-aqua">
+              <Link to="/for-you">Explore Detroit Resources <ArrowRight /></Link>
+            </Button>
           </div>
+          <ArrowDown className="mt-6 size-5 text-aqua" aria-hidden />
         </div>
       </section>
 
-      {/* JOURNEY STRIP */}
-      <section className="bg-ink text-cream">
-        <div className="container-kih py-6">
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-display text-base font-semibold sm:text-lg">
-            <span className="text-sun">Discover</span>
-            <span className="text-cream/40">→</span>
-            <span className="text-sky">Connect</span>
-            <span className="text-cream/40">→</span>
-            <span className="text-mint">Get There</span>
-            <span className="text-cream/40">→</span>
-            <span className="text-brand">Check In</span>
-            <span className="text-cream/40">→</span>
-            <span className="text-plum">Stay Connected</span>
+      {/* PHONE PRODUCT DEMO */}
+      <section className="relative z-20 -mt-28 bg-card pb-16">
+        <div className="container-kih">
+          <PhoneDemo />
+        </div>
+      </section>
+
+      {/* CONNECTION STATEMENT + JOURNEY */}
+      <section className="bg-card pb-16 text-center">
+        <div className="container-kih">
+          <p className="mx-auto max-w-3xl font-sans text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
+            Detroit has resources.
+            <span className="mt-2 block font-medium text-foreground/65">The challenge is connecting the right resource to the right resident at the right time.</span>
+          </p>
+          <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-5">
+            {["Discover", "Connect", "Get There", "Check In", "Stay Connected"].map((step, index) => (
+              <div key={step} className={`flex min-h-24 flex-col items-center justify-center rounded-md border border-border p-3 ${index === 4 ? "col-span-2 sm:col-span-1" : ""}`}>
+                <span className="text-xs font-extrabold text-sky">0{index + 1}</span>
+                <span className="mt-1 font-sans font-bold text-ink">{step}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CONNECTION GAP */}
-      <section className="container-kih py-14">
+      <section className="bg-background py-14">
+        <div className="container-kih">
         <SectionHeading
           eyebrow="The Detroit Connection Gap"
           title="Different resources. One place to understand what matters to you."
@@ -157,6 +145,7 @@ function Index() {
           WHO YOU ARE + WHAT YOU NEED + WHERE YOU ARE + WHAT IS AVAILABLE ={" "}
           <span className="text-brand">PERSONALIZED NEXT ACTION</span>
         </p>
+        </div>
       </section>
 
       {/* ONE DETROIT — PERSONAS */}

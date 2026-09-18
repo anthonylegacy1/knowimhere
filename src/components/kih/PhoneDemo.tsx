@@ -146,6 +146,7 @@ export function PhoneDemo() {
 
   const goTo = (next: number) => setActive((next + slides.length) % slides.length);
   const slide = slides[active];
+  if (!slide) return null;
   const Icon = slide.icon;
 
   return (
