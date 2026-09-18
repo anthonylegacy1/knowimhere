@@ -34,3 +34,9 @@
 - [x] "Turn On / Not Now" prompt before Find What's Near Me (never forced).
 - [x] ZIP code / neighborhood fallback and Everyday Connect help callout.
 - [x] New early Demo Mode step showing activation before recommendations.
+
+## Senior Support phone slide
+
+- [x] Replace the Senior Support image with the uploaded guided digital-learning photo.
+- [x] Add the image caption and both requested support cards.
+- [ ] Verify the crop, text fit, and carousel controls at desktop and phone widths.
