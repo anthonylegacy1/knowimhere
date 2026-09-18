@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AskKIH } from "@/components/kih/AskKIH";
 import { ResourceCard } from "@/components/kih/ResourceCard";
+import { ImHerePanel } from "@/components/kih/ImHere";
 import { GetThere } from "@/components/kih/GetThere";
 import { CheckIn } from "@/components/kih/CheckIn";
 import { IssueFlow } from "@/components/kih/IssueFlow";
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/demo")({
   component: Demo,
 });
 
-const STEPS = ["Meet them", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
+const STEPS = ["Meet them", "Turn On I'm Here", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
 
 function toProfile(p: Persona): Profile {
   return {
@@ -141,6 +142,14 @@ function Demo() {
 
           {step === 1 && (
             <div>
+              <h2 className="font-display text-2xl font-bold">{persona.name} turns on Know I&apos;m Here</h2>
+              <p className="mt-1 text-foreground/65">On when you want it. Off when you don&apos;t. Once it is on, recommendations become local.</p>
+              <div className="mt-4"><ImHerePanel /></div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div>
               <p className="font-display text-lg font-semibold text-brand">{greeting(persona.name)}</p>
               <h2 className="font-display text-3xl font-bold">
                 {persona.id === "dorothy" ? "Here's what Detroit has for you today." : "Opportunities picked for you."}
@@ -154,7 +163,7 @@ function Demo() {
                     compact
                     onGetThere={(r) => {
                       setPicked(r);
-                      setStep(4);
+                      setStep(5);
                     }}
                   />
                 ))}
@@ -162,7 +171,7 @@ function Demo() {
             </div>
           )}
 
-          {step === 2 && (
+          {step === 3 && (
             <div>
               <h2 className="font-display text-2xl font-bold">{persona.name} asks:</h2>
               <div className="mt-3">
@@ -173,14 +182,14 @@ function Demo() {
                   compact
                   onGetThere={(r) => {
                     setPicked(r);
-                    setStep(4);
+                    setStep(5);
                   }}
                 />
               </div>
             </div>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <div>
               <h2 className="font-display text-2xl font-bold">And when something is wrong on the block:</h2>
               <div className="mt-3 flex items-start gap-3">
@@ -197,7 +206,7 @@ function Demo() {
             </div>
           )}
 
-          {step === 4 && (
+          {step === 5 && (
             <div className="card-pop p-6 sm:p-8">
               <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{persona.name} picked something</p>
               <h2 className="font-display text-2xl font-bold">Help Me Get There</h2>
@@ -212,7 +221,7 @@ function Demo() {
             </div>
           )}
 
-          {step === 5 && (
+          {step === 6 && (
             <div>
               <h2 className="mb-3 font-display text-2xl font-bold">
                 {persona.name} arrives at {picked.name}
@@ -221,7 +230,7 @@ function Demo() {
             </div>
           )}
 
-          {step === 6 && (
+          {step === 7 && (
             <div className="card-pop p-6 text-center sm:p-8">
               <p className="font-display text-2xl font-bold text-brand">That&apos;s the whole loop.</p>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-display font-semibold">

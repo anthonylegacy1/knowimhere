@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
+import { ImHerePanel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
 import { scoreResources } from "@/lib/recommend";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
@@ -63,6 +64,11 @@ function ForYou() {
         </div>
         <span className="chip chip-sun text-[11px] uppercase tracking-wide">Prototype recommendation logic</span>
       </div>
+
+      <div className="mt-6">
+        <ImHerePanel />
+      </div>
+
 
       <div className="mt-6 -mx-5 overflow-x-auto px-5 pb-1">
         <div className="flex w-max gap-2">

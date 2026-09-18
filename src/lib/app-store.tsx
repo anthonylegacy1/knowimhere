@@ -25,6 +25,11 @@ export interface CheckIn {
 
 export type TextSize = 0 | 1 | 2;
 
+export interface ImHere {
+  on: boolean;
+  radiusMiles: number;
+}
+
 interface AppState {
   profile: Profile;
   saved: string[];
@@ -33,10 +38,12 @@ interface AppState {
   checkIns: CheckIn[];
   followed: string[];
   textSize: TextSize;
+  imHere: ImHere;
   hydrated: boolean;
 }
 
 interface AppStore extends AppState {
+  setImHere: (v: Partial<ImHere>) => void;
   setProfile: (p: Partial<Profile>) => void;
   toggleSaved: (id: string) => void;
   markInterested: (id: string) => void;
@@ -67,6 +74,7 @@ const initialState: AppState = {
   checkIns: [],
   followed: [],
   textSize: 0,
+  imHere: { on: false, radiusMiles: 3 },
   hydrated: false,
 };
 
@@ -134,11 +142,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     () => setState((s) => ({ ...s, textSize: ((s.textSize + 1) % 3) as TextSize })),
     [],
   );
+  const setImHere = useCallback(
+    (v: Partial<ImHere>) => setState((s) => ({ ...s, imHere: { ...s.imHere, ...v } })),
+    [],
+  );
   const resetAll = useCallback(() => setState({ ...initialState, hydrated: true }), []);
 
   const value = useMemo<AppStore>(
     () => ({
       ...state,
+      setImHere,
       setProfile,
       toggleSaved,
       markInterested,
@@ -148,7 +161,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       cycleTextSize,
       resetAll,
     }),
-    [state, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, resetAll],
+    [state, setImHere, setProfile, toggleSaved, markInterested, dismiss, addCheckIn, toggleFollow, cycleTextSize, resetAll],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

@@ -31,6 +31,7 @@ import everydayAsset from "@/assets/everyday-connect-six-screens.jpeg.asset.json
 import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
 import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
+import { ImHerePanel, ImHereStatus, NearMeButton } from "@/components/kih/ImHere";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
@@ -72,7 +73,7 @@ function Index() {
           <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-[1.04] sm:text-7xl">Your Detroit. Connected to You.</h1>
           <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-cream/90 sm:text-lg">Know I&apos;m Here helps Detroit residents discover nearby resources, services, activities, programs and opportunities based on where they are, what they need and what matters to them.</p>
           <div className="mt-7 grid w-full max-w-sm gap-3">
-            <Button asChild size="lg" className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90"><Link to="/onboarding"><MapPin /> Find What&apos;s Near Me</Link></Button>
+            <NearMeButton className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90" />
             <Button asChild size="lg" variant="outline" className="min-h-14 border-cream/40 bg-ink/65 text-cream backdrop-blur hover:bg-ink hover:text-cream"><Link to="/ask"><MessageCircle /> Ask Know I&apos;m Here</Link></Button>
             <Button asChild variant="link" className="text-cream hover:text-aqua"><Link to="/for-you">Explore Detroit Resources <ArrowRight /></Link></Button>
           </div>
@@ -93,6 +94,7 @@ function Index() {
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
+        <div className="mt-6"><ImHereStatus /></div>
         <div className="mt-7 flex flex-wrap gap-2.5">
           {NEED_CATEGORIES.map((id) => { const category = CATEGORIES[id]; return <Link key={id} to="/ask" search={{ q: `Show me ${category.label.toLowerCase()} near me.` }} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{category.emoji}</span> {category.label}</Link>; })}
         </div>
@@ -111,6 +113,11 @@ function Index() {
       </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14">
+        <SectionHeading eyebrow="Simple control" title="Turn On Know I'm Here." text="On when you want it. Off when you don't." />
+        <div className="mt-7"><ImHerePanel /></div>
+      </div></section>
+
+      <section className="container-kih py-14"><div>
         <SectionHeading eyebrow="One Detroit. Different needs." title="One connection layer." text="A 68-year-old, a 16-year-old and a working parent ask different questions. The same system can guide all three." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {PERSONAS.map((persona) => <article key={persona.id} className="card-flat flex flex-col p-6"><div className="flex items-center gap-3"><span className="grid size-12 place-items-center rounded-full bg-sun font-bold">{persona.initial}</span><div><h3 className="text-xl font-bold">{persona.name}, {persona.age}</h3><p className="text-sm text-foreground/60">{persona.tagline}</p></div></div><p className="mt-4 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-cream">“{persona.query}”</p><ul className="mt-3 flex flex-wrap gap-1.5">{persona.needs.slice(0, 4).map((need) => <li key={need} className="chip bg-card text-xs text-foreground/70">{need}</li>)}</ul><Button asChild variant="outline" className="mt-5 self-start"><Link to="/demo">See {persona.name}&apos;s demo</Link></Button></article>)}
