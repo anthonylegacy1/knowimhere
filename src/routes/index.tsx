@@ -18,6 +18,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -61,7 +63,7 @@ function Index() {
       </section>
 
       {/* PHONE PRODUCT DEMO */}
-      <section className="relative z-20 -mt-28 bg-card pb-16">
+      <section className="product-demo-band relative z-20 -mt-28 pb-16">
         <div className="container-kih">
           <PhoneDemo />
         </div>
