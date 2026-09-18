@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { AccessPref, CategoryId, TransportMode } from "@/data/resources";
+import type { AccessPref, CategoryId, LifeStage, TransportMode } from "@/data/resources";
 
 export interface Profile {
   name: string;
   neighborhood: string;
   ageRange: string;
+  lifeStage: LifeStage | "";
   interests: CategoryId[];
   transportation: TransportMode[];
   accessibility: AccessPref[];
@@ -50,6 +51,7 @@ export const EMPTY_PROFILE: Profile = {
   name: "",
   neighborhood: "",
   ageRange: "",
+  lifeStage: "",
   interests: [],
   transportation: [],
   accessibility: [],

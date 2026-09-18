@@ -5,6 +5,7 @@ import {
   ACCESS_OPTIONS,
   AGE_RANGES,
   CATEGORIES,
+  LIFE_STAGES,
   NEIGHBORHOODS,
   TRANSPORT_OPTIONS,
   type AccessPref,
@@ -107,6 +108,19 @@ function Onboarding() {
               <div className="mt-2 flex flex-wrap gap-2">
                 {AGE_RANGES.map((a) => (
                   <Toggle key={a} on={draft.ageRange === a} label={a} onClick={() => setDraft({ ...draft, ageRange: draft.ageRange === a ? "" : a })} />
+                ))}
+              </div>
+            </fieldset>
+            <fieldset className="mt-5">
+              <legend className="font-bold">Life stage (optional)</legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {LIFE_STAGES.map((l) => (
+                  <Toggle
+                    key={l.id}
+                    on={draft.lifeStage === l.id}
+                    label={`${l.emoji} ${l.label}`}
+                    onClick={() => setDraft({ ...draft, lifeStage: draft.lifeStage === l.id ? "" : l.id })}
+                  />
                 ))}
               </div>
             </fieldset>

@@ -5,12 +5,13 @@ import { ResourceCard } from "@/components/kih/ResourceCard";
 import { GetThere } from "@/components/kih/GetThere";
 import { CheckIn } from "@/components/kih/CheckIn";
 import { IssueFlow } from "@/components/kih/IssueFlow";
-import { DEMO_PROFILE, getResource, type Resource } from "@/data/resources";
-import { greeting, useApp } from "@/lib/app-store";
+import { PERSONAS, getResource, type Persona, type Resource } from "@/data/resources";
+import { greeting, useApp, type Profile } from "@/lib/app-store";
 import { scoreResources } from "@/lib/recommend";
 
-const TITLE = "Demo Experience — Meet Dorothy | Know I'm Here";
-const DESC = "A 90-second walkthrough of Know I'm Here: discover, connect, get there, check in and stay connected — through the eyes of a Detroit resident.";
+const TITLE = "Demo Experience — Dorothy, Marcus & Tasha | Know I'm Here";
+const DESC =
+  "A 90-second walkthrough of Know I'm Here across generations: discover, connect, get there, check in and stay connected — as an older adult, a teenager and a working parent.";
 
 export const Route = createFileRoute("/demo")({
   head: () => ({
@@ -24,19 +25,51 @@ export const Route = createFileRoute("/demo")({
   component: Demo,
 });
 
-const STEPS = ["Meet Dorothy", "For You Today", "Ask: no car", "Ask: dumping", "Get There", "I'm Here", "Stay Connected"];
+const STEPS = ["Meet them", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
+
+function toProfile(p: Persona): Profile {
+  return {
+    name: p.name,
+    neighborhood: p.neighborhood,
+    ageRange: p.ageRange,
+    lifeStage: p.lifeStage,
+    interests: p.interests,
+    transportation: p.transportation,
+    accessibility: p.accessibility,
+    lowCost: p.lowCost,
+    onboarded: true,
+    isDemo: true,
+  };
+}
+
+const FALLBACK: Record<Persona["id"], string> = {
+  dorothy: "community-social",
+  marcus: "coding-workshop",
+  tasha: "daytime-training",
+};
 
 function Demo() {
   const { profile, setProfile, hydrated, dismissed } = useApp();
+  const [personaId, setPersonaId] = useState<Persona["id"]>("dorothy");
+  const persona = PERSONAS.find((p) => p.id === personaId)!;
   const [step, setStep] = useState(0);
   const [picked, setPicked] = useState<Resource>(getResource("community-social")!);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (hydrated && !profile.isDemo) setProfile({ ...DEMO_PROFILE, onboarded: true, isDemo: true });
-  }, [hydrated, profile.isDemo, setProfile]);
+    if (!hydrated) return;
+    if (!profile.isDemo || profile.name !== persona.name) setProfile(toProfile(persona));
+  }, [hydrated, persona, profile.isDemo, profile.name, setProfile]);
 
-  const feed = useMemo(() => scoreResources({ ...DEMO_PROFILE, onboarded: true }, undefined, dismissed).slice(0, 5), [dismissed]);
+  useEffect(() => {
+    setPicked(getResource(FALLBACK[personaId])!);
+    setChecked(false);
+  }, [personaId]);
+
+  const feed = useMemo(
+    () => scoreResources(toProfile(persona), undefined, dismissed).slice(0, 4),
+    [persona, dismissed],
+  );
 
   const next = () => setStep((s) => Math.min(s + 1, STEPS.length - 1));
   const back = () => setStep((s) => Math.max(s - 1, 0));
@@ -45,9 +78,29 @@ function Demo() {
     <div className="container-kih py-6 sm:py-10">
       <div className="mx-auto max-w-3xl">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="eyebrow">Buildathon Demo Mode · fictional resident</span>
-          <span className="text-xs font-bold text-muted-foreground">Step {step + 1} of {STEPS.length} · {STEPS[step]}</span>
+          <span className="eyebrow">Buildathon Demo Mode · fictional residents</span>
+          <span className="text-xs font-bold text-muted-foreground">
+            Step {step + 1} of {STEPS.length} · {STEPS[step]}
+          </span>
         </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {PERSONAS.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => {
+                setPersonaId(p.id);
+                setStep(0);
+              }}
+              aria-pressed={personaId === p.id}
+              className={`chip min-h-12 cursor-pointer px-4 text-base ${personaId === p.id ? "bg-brand text-brand-foreground" : ""}`}
+            >
+              {p.name}, {p.age}
+            </button>
+          ))}
+        </div>
+
         <div className="mt-3 flex gap-1" aria-hidden>
           {STEPS.map((s, i) => (
             <span key={s} className={`h-2 flex-1 rounded-full ${i <= step ? "bg-brand" : "bg-foreground/10"}`} />
@@ -58,38 +111,52 @@ function Demo() {
           {step === 0 && (
             <div className="card-pop p-6 sm:p-8">
               <div className="flex items-center gap-4">
-                <span className="grid size-16 place-items-center rounded-full bg-sun font-display text-3xl font-bold">D</span>
+                <span className="grid size-16 place-items-center rounded-full bg-sun font-display text-3xl font-bold">
+                  {persona.initial}
+                </span>
                 <div>
-                  <h1 className="font-display text-3xl font-bold">Meet Dorothy</h1>
-                  <p className="text-foreground/65">Age 68 · Southwest Detroit</p>
+                  <h1 className="font-display text-3xl font-bold">Meet {persona.name}</h1>
+                  <p className="text-foreground/65">Age {persona.age} · {persona.tagline}</p>
                 </div>
               </div>
               <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                {[
-                  ["Interests", "Health, music, community"],
-                  ["Transportation", "Does not regularly drive"],
-                  ["Preference", "Free / low-cost opportunities"],
-                  ["Accessibility", "Simple navigation preferred"],
-                ].map(([k, v]) => (
+                {persona.facts.map(([k, v]) => (
                   <li key={k} className="card-flat p-3">
                     <p className="text-[11px] font-extrabold uppercase tracking-wide text-muted-foreground">{k}</p>
                     <p className="font-semibold">{v}</p>
                   </li>
                 ))}
               </ul>
+              <p className="mt-4 flex flex-wrap gap-1.5">
+                {persona.needs.map((n) => (
+                  <span key={n} className="chip bg-card text-xs">{n}</span>
+                ))}
+              </p>
               <p className="mt-5 text-foreground/70">
-                In about 90 seconds you&apos;ll see the full loop: <span className="font-bold">Discover → Connect → Get There → Check In → Stay Connected</span>.
+                Same intelligence layer, different generation. In about 90 seconds you&apos;ll see{" "}
+                <span className="font-bold">Discover → Connect → Get There → Check In → Stay Connected</span>.
               </p>
             </div>
           )}
 
           {step === 1 && (
             <div>
-              <p className="font-display text-lg font-semibold text-brand">{greeting("Dorothy")}</p>
-              <h2 className="font-display text-3xl font-bold">Here&apos;s what Detroit has for you today.</h2>
+              <p className="font-display text-lg font-semibold text-brand">{greeting(persona.name)}</p>
+              <h2 className="font-display text-3xl font-bold">
+                {persona.id === "dorothy" ? "Here's what Detroit has for you today." : "Opportunities picked for you."}
+              </h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {feed.map((s) => (
-                  <ResourceCard key={s.resource.id} resource={s.resource} reasons={s.reasons} compact onGetThere={(r) => { setPicked(r); setStep(4); }} />
+                  <ResourceCard
+                    key={s.resource.id}
+                    resource={s.resource}
+                    reasons={s.reasons}
+                    compact
+                    onGetThere={(r) => {
+                      setPicked(r);
+                      setStep(4);
+                    }}
+                  />
                 ))}
               </div>
             </div>
@@ -97,38 +164,59 @@ function Demo() {
 
           {step === 2 && (
             <div>
-              <h2 className="font-display text-2xl font-bold">Query 1 — Dorothy asks:</h2>
+              <h2 className="font-display text-2xl font-bold">{persona.name} asks:</h2>
               <div className="mt-3">
-                <AskKIH initialQuestion="What can I do tomorrow if I don't have a car?" autoRun compact onGetThere={(r) => { setPicked(r); setStep(4); }} />
+                <AskKIH
+                  key={persona.id}
+                  initialQuestion={persona.query}
+                  autoRun
+                  compact
+                  onGetThere={(r) => {
+                    setPicked(r);
+                    setStep(4);
+                  }}
+                />
               </div>
             </div>
           )}
 
           {step === 3 && (
             <div>
-              <h2 className="font-display text-2xl font-bold">Query 2 — Dorothy asks:</h2>
+              <h2 className="font-display text-2xl font-bold">And when something is wrong on the block:</h2>
               <div className="mt-3 flex items-start gap-3">
-                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-ink font-display font-bold text-cream">D</span>
-                <p className="rounded-2xl rounded-tl-sm bg-ink px-4 py-2.5 font-semibold text-cream">There is dumping happening near my house.</p>
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-ink font-display font-bold text-cream">
+                  {persona.initial}
+                </span>
+                <p className="rounded-2xl rounded-tl-sm bg-ink px-4 py-2.5 font-semibold text-cream">
+                  There is dumping happening near my house.
+                </p>
               </div>
               <div className="mt-4">
-                <IssueFlow text="dumping near my house" neighborhood="Southwest Detroit" />
+                <IssueFlow text="dumping near my house" neighborhood={persona.neighborhood} />
               </div>
             </div>
           )}
 
           {step === 4 && (
             <div className="card-pop p-6 sm:p-8">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Dorothy picked an activity</p>
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{persona.name} picked something</p>
               <h2 className="font-display text-2xl font-bold">Help Me Get There</h2>
-              <p className="mb-5 text-foreground/65">Dorothy doesn&apos;t drive, so transit and ride options come first.</p>
+              <p className="mb-5 text-foreground/65">
+                {persona.id === "dorothy"
+                  ? "Dorothy doesn't drive, so transit and ride options come first."
+                  : persona.id === "marcus"
+                    ? "Marcus takes the bus or walks, so those options come first."
+                    : "Tasha drives some days and takes the bus on others."}
+              </p>
               <GetThere resource={picked} onDone={next} />
             </div>
           )}
 
           {step === 5 && (
             <div>
-              <h2 className="mb-3 font-display text-2xl font-bold">Dorothy arrives at {picked.name}</h2>
+              <h2 className="mb-3 font-display text-2xl font-bold">
+                {persona.name} arrives at {picked.name}
+              </h2>
               <CheckIn resource={picked} onChecked={() => setChecked(true)} />
             </div>
           )}
@@ -137,11 +225,17 @@ function Demo() {
             <div className="card-pop p-6 text-center sm:p-8">
               <p className="font-display text-2xl font-bold text-brand">That&apos;s the whole loop.</p>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-display font-semibold">
-                <span className="text-sun">Discover</span>→<span className="text-sky">Connect</span>→<span className="text-mint">Get There</span>→<span className="text-brand">Check In</span>→<span className="text-plum">Stay Connected</span>
+                <span className="text-sun">Discover</span>→<span className="text-sky">Connect</span>→
+                <span className="text-mint">Get There</span>→<span className="text-brand">Check In</span>→
+                <span className="text-plum">Stay Connected</span>
               </div>
               <p className="mt-4 text-foreground/70">
-                Dorothy found something relevant, learned how to get there, showed up, and stayed connected. Her organization now has a measurable participant — not just an impression.
+                {persona.name} found something relevant, learned how to get there, showed up and stayed connected. The organization now
+                has a measurable participant — not just an impression.
                 {checked ? "" : " (You can go back and tap I'm Here to complete the check-in.)"}
+              </p>
+              <p className="mt-3 font-display font-bold">
+                Same system. {PERSONAS.map((p) => `${p.name} (${p.age})`).join(" · ")}.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-2">
                 <Link to="/partners" className="btn-base btn-brand">See partner impact</Link>
@@ -159,7 +253,9 @@ function Demo() {
             <button type="button" onClick={() => setStep(0)} className="btn-base btn-ink">Restart demo</button>
           )}
         </div>
-        <p className="mt-6 text-center text-xs text-muted-foreground">Dorothy is a fictional resident. All listings and metrics are Buildathon demonstration data.</p>
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          Dorothy, Marcus and Tasha are fictional residents. All listings and metrics are Buildathon demonstration data.
+        </p>
       </div>
     </div>
   );
