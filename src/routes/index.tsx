@@ -70,6 +70,15 @@ const landmarks = [
   { title: "Comerica Park", type: "Sports", image: comericaAsset.url, text: "Baseball, downtown experiences and seasonal events." },
 ];
 
+const FF_PILLARS = [
+  { icon: <PersonStanding />, label: "Move", text: "Seated movement, Detroit hustle, dance and active recreation." },
+  { icon: <Users />, label: "Connect", text: "Social experiences that build friendship, belonging and recurring engagement." },
+  { icon: <MapPin />, label: "Experience", text: "Senior-friendly excursions, group outings and memorable experiences." },
+  { icon: <Music />, label: "Celebrate", text: "Detroit music, fashion, dance, storytelling and cultural history." },
+  { icon: <HeartHandshake />, label: "Generations", text: "Experiences connecting older adults, youth and families through technology, culture and storytelling." },
+  { icon: <Smartphone />, label: "Digital", text: "Technology Made Simple + Everyday Connect help build smartphone confidence and practical digital skills." },
+];
+
 function Index() {
   return (
     <div>
@@ -169,6 +178,67 @@ function Index() {
           <Link to="/story" className="overflow-hidden rounded-lg border border-brand-deep bg-brand text-brand-foreground"><img src={kihConnectionAsset.url} alt="A daughter helps her father use a phone beside the Detroit riverfront and skyline" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-brand-foreground/75">Connection</p><h3 className="mt-1 text-xl font-bold">Know I&apos;m Here</h3><p className="mt-2 text-sm text-brand-foreground/85">Use that confidence to connect with nearby people, resources and opportunities.</p><p className="mt-4 text-sm font-bold">Read our story →</p></div></Link>
         </div>
       </div></section>
+
+      <section className="container-kih py-14">
+        <SectionHeading eyebrow="The experience behind the pilot" title="More Than Entertainment. A Platform for Active, Connected Living." />
+        <div className="mx-auto mt-4 max-w-3xl space-y-3 text-center text-foreground/70">
+          <p>Fast Freddy Experience helps older adults stay active, connected, confident and engaged through culturally relevant experiences built around movement, music, Detroit culture, technology, social connection and shared experiences.</p>
+          <p>Powered by the legacy of Detroit dance and fashion icon Frederick “Fast Freddy” Anderson, the model brings trusted in-person experiences together with modern tools that can extend participation beyond the room.</p>
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl rounded-lg border border-sun/40 bg-sun/10 px-5 py-4 text-center text-lg font-extrabold text-ink">Creating Joy. Building Community. Celebrating Every Generation.</p>
+
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {FF_PILLARS.map((pillar) => (
+            <article key={pillar.label} className="card-flat flex items-start gap-3 p-4">
+              <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-sky/15 text-sky">{pillar.icon}</span>
+              <div>
+                <h3 className="text-sm font-extrabold uppercase tracking-wide text-ink">{pillar.label}</h3>
+                <p className="mt-1 text-sm text-foreground/65">{pillar.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-3 sm:grid-cols-3">
+          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffClassAsset.url} alt="Fast Freddy engaging older adults in a Detroit movement class" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
+          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
+          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover" loading="lazy" /><figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption></figure>
+        </div>
+
+        <div className="mt-10 rounded-lg border border-border bg-card p-6 sm:p-8">
+          <h3 className="text-2xl font-extrabold text-ink">From Community Experience to Community Infrastructure</h3>
+          <p className="mt-3 max-w-3xl text-foreground/70">Fast Freddy Experience creates the reason to participate. Everyday Connect helps build the digital confidence to participate. Know I&apos;m Here helps residents discover what is available, decide what fits their needs and connect with the opportunity.</p>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {["Discover", "Get There", "Participate", "Check In", "Stay Connected"].map((step, index) => (
+              <span key={step} className="flex items-center gap-2">
+                <span className={`rounded-full border border-border bg-background px-3 py-1.5 text-sm font-bold text-ink ${index === 2 ? "border-brand bg-brand text-brand-foreground" : ""}`}>{step}</span>
+                {index < 4 && <ArrowRight className="size-4 text-muted-foreground" aria-hidden />}
+              </span>
+            ))}
+          </div>
+          <p className="mt-5 max-w-3xl text-sm text-foreground/65">A Fast Freddy program can become a real-world testing ground for the Know I&apos;m Here loop — from discovering an activity and getting transportation help to privately checking in and receiving relevant opportunities afterward.</p>
+        </div>
+
+        <div className="mt-8">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Proposed pilot capabilities · Prototype concepts</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {["QR Entry", "Personalized Recommendations", "Saved Information", "Transportation Support", "Private “I’m Here” Check-In", "Aggregate Engagement Insights"].map((capability) => <span key={capability} className="chip bg-card text-sm">{capability}</span>)}
+          </div>
+          <p className="mt-3 text-sm text-foreground/60">Measure participation patterns without making an individual resident&apos;s check-in public. These capabilities are proposed for the prototype and are not currently operational services.</p>
+        </div>
+
+        <details className="group mt-8 rounded-lg border border-border bg-card p-5">
+          <summary className="cursor-pointer list-none text-sm font-extrabold uppercase tracking-wider text-ink">
+            What the Fast Freddy Experience Can Include <span className="ml-2 text-sky group-open:hidden">+</span><span className="ml-2 hidden text-sky group-open:inline">–</span>
+          </summary>
+          <p className="mt-3 text-sm text-foreground/70">Get Down While Sitting Down · Detroit Hustle Basics · Fast Freddy Social Club · Technology Made Simple · Senior Adventures · Detroit Through the Decades · Generations Exchange · Everyday Connect</p>
+        </details>
+
+        <div className="mt-8 rounded-lg border border-brand/25 bg-brand/5 p-6">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">The opportunity</p>
+          <p className="mt-2 max-w-4xl text-foreground/75">Senior-serving organizations need programming that people want to attend — while residents may also face isolation, transportation barriers and difficulty navigating technology. Fast Freddy Experience addresses the human experience; Everyday Connect builds digital confidence; Know I&apos;m Here can help close the last mile between residents and opportunities.</p>
+        </div>
+      </section>
 
       <section className="container-kih py-14"><SectionHeading eyebrow="Buildathon demonstration data" title="See connection—not surveillance." text="Partners can learn what residents are finding and using through aggregate patterns, while individual check-ins remain private." />
         <div className="mt-8 grid gap-4 sm:grid-cols-3"><Metric icon={<Eye />} value="1,240" label="Resource views" /><Metric icon={<Navigation />} value="386" label="Get-there plans" /><Metric icon={<Check />} value="214" label="Private check-ins" /></div>
