@@ -61,6 +61,7 @@ function Onboarding() {
   }, [hydrated, profile]);
 
   const toggleIn = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
+  const moreSelected = MORE_CATEGORIES.filter((c) => draft.interests.includes(c)).length;
 
   function finish() {
     setProfile({ ...draft, onboarded: true, isDemo: false });
