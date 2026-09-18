@@ -45,4 +45,4 @@
 
 - [x] Add a warm phone-in-hand visual to the orange private-participation card.
 - [x] Show the Know I’m Here interface with an unmistakable ON and private state.
-- [ ] Verify card balance, text readability, image crop, and action visibility on desktop and mobile.
+- [x] Verify card balance, text readability, image crop, and action visibility on desktop and mobile.
