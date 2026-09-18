@@ -21,6 +21,7 @@ import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
 import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
 import supportAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
+import seniorSupportAsset from "@/assets/senior-support-digital-learning.png.asset.json";
 
 type Slide = {
   id: string;
@@ -30,7 +31,7 @@ type Slide = {
   subtext: string;
   footer: string;
   icon: typeof Search;
-  image?: { src: string; alt: string; position?: string };
+  image?: { src: string; alt: string; position?: string; caption?: string };
   tags: string[];
   body: ReactNode;
 };
@@ -54,9 +55,19 @@ const slides: Slide[] = [
     subtext: "Open now",
     footer: "Detroit support resource · Prototype",
     icon: HeartHandshake,
-    image: { src: supportAsset.url, alt: "A multigenerational Detroit community gathering" },
+    image: {
+      src: seniorSupportAsset.url,
+      alt: "A digital skills instructor helping older adults use phones and a tablet together",
+      position: "center center",
+      caption: "Learning today. More opportunities tomorrow.",
+    },
     tags: ["Senior Resource", "Caregiver Support"],
-    body: <InfoCard icon={HeartHandshake} title="Meals, rides, and caregiver support" meta="Available now · Verify with provider" />,
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={HeartHandshake} title="Meals, rides, and caregiver support" meta="Available now · Verify with provider" />
+        <InfoCard icon={Users} title="Local senior programs" meta="Classes, activities and social events" />
+      </div>
+    ),
   },
   {
     id: "wellness",
@@ -212,7 +223,8 @@ export function PhoneDemo() {
             <p className="mt-1 text-sm font-semibold text-foreground/60">{slide.subtext}</p>
             {slide.image && (
               <div className="phone-photo mt-3">
-                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" />
+                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" style={{ objectPosition: slide.image.position }} />
+                {slide.image.caption && <p className="phone-photo-caption">{slide.image.caption}</p>}
               </div>
             )}
             <div className="mt-3">{slide.body}</div>
