@@ -91,7 +91,10 @@ function Story() {
       </div>
 
       <section className="card-flat mt-12 overflow-hidden sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-        <img src={mayorPhotoAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="h-full min-h-64 w-full object-cover" />
+        <div className="flex h-full min-h-64 flex-col">
+          <img src={mayorPhotoAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="w-full flex-1 object-cover" />
+          <p className="px-4 py-3 text-sm text-foreground/60">Fast Freddy with Detroit Mayor Mary Sheffield</p>
+        </div>
         <div className="p-6 sm:p-8">
           <h2 className="font-display text-2xl font-bold">Fast Freddy as a pilot ground</h2>
           <p className="mt-2 text-foreground/75">
