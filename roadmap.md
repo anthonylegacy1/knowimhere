@@ -81,3 +81,8 @@
 - [x] Add the Discover → Get There → Check In journey to the orange private-participation card.
 - [x] Keep the orange card linked to the existing interactive demo.
 - [x] Verify the single demo entry, demo flow, and mobile presentation.
+
+## Simplify "Detroit has resources" section
+- [x] Replace five large numbered cards (Discover/Connect/Get There/Check In/Stay Connected) with compact inline DISCOVER → CONNECT → GET THERE → CHECK IN → STAY CONNECTED flow (wraps on mobile, no horizontal scroll)
+- [x] Keep headline "Detroit has resources." + supporting statement; add sentence "From finding the right opportunity to getting there and staying connected, Know I'm Here helps close the loop."
+- [x] Verify compact height, no overflow at 430, no console errors

@@ -30,6 +30,9 @@ export const Route = createFileRoute("/onboarding")({
 
 const STEPS = ["About you", "Interests", "Getting around", "Accessibility"];
 
+const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
+const MORE_CATEGORIES: CategoryId[] = ["food", "transportation", "housing", "recreation", "technology", "arts", "education", "events"];
+
 function Toggle({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (
     <button
@@ -51,12 +54,14 @@ function Onboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState<Profile>(EMPTY_PROFILE);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     if (hydrated) setDraft({ ...profile, isDemo: false });
   }, [hydrated, profile]);
 
   const toggleIn = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
+  const moreSelected = MORE_CATEGORIES.filter((c) => draft.interests.includes(c)).length;
 
   function finish() {
     setProfile({ ...draft, onboarded: true, isDemo: false });
@@ -131,8 +136,8 @@ function Onboarding() {
           <section className="mt-6">
             <h1 className="font-display text-3xl font-bold sm:text-4xl">What are you interested in?</h1>
             <p className="mt-2 text-lg text-foreground/70">Pick as many as you like.</p>
-            <div className="mt-6 grid grid-cols-2 gap-2">
-              {(Object.keys(CATEGORIES) as CategoryId[]).map((c) => (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {CORE_CATEGORIES.map((c) => (
                 <Toggle
                   key={c}
                   on={draft.interests.includes(c)}
@@ -141,7 +146,46 @@ function Onboarding() {
                 />
               ))}
             </div>
-            <Toggle on={draft.lowCost} label="Prefer free / low-cost opportunities" onClick={() => setDraft({ ...draft, lowCost: !draft.lowCost })} />
+            <div
+              id="more-categories"
+              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                showMore ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"
+              }`}
+              aria-hidden={!showMore}
+              inert={!showMore}
+            >
+              <div className="overflow-hidden">
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {MORE_CATEGORIES.map((c) => (
+                    <Toggle
+                      key={c}
+                      on={draft.interests.includes(c)}
+                      label={`${CATEGORIES[c].emoji} ${CATEGORIES[c].label}`}
+                      onClick={() => setDraft({ ...draft, interests: toggleIn(draft.interests, c) })}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="mt-3 flex flex-col items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => setShowMore(!showMore)}
+                aria-expanded={showMore}
+                aria-controls="more-categories"
+                className="btn-base btn-outline min-h-12 cursor-pointer px-6"
+              >
+                {showMore ? "Show Less ↑" : "More Categories ↓"}
+              </button>
+              {!showMore && moreSelected > 0 && (
+                <p role="status" className="text-sm font-semibold text-brand">
+                  {moreSelected} additional categor{moreSelected === 1 ? "y" : "ies"} selected
+                </p>
+              )}
+            </div>
+            <div className="mt-5">
+              <Toggle on={draft.lowCost} label="Prefer free / low-cost opportunities" onClick={() => setDraft({ ...draft, lowCost: !draft.lowCost })} />
+            </div>
           </section>
         )}
 
