@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
-  Accessibility,
   ArrowRight,
   BriefcaseBusiness,
   BusFront,
@@ -20,143 +19,142 @@ import {
 import { Button } from "@/components/ui/button";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
-import communityAsset from "@/assets/fast-freddy-community-class.jpeg.asset.json";
-import fordFieldAsset from "@/assets/ford-field.jpeg.asset.json";
+import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
+import supportAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
 
-const slides = [
+type Slide = {
+  id: string;
+  label: string;
+  secondaryLabel?: string;
+  title: string;
+  subtext: string;
+  footer: string;
+  icon: typeof Search;
+  image?: { src: string; alt: string; position?: string };
+  tags: string[];
+  body: ReactNode;
+};
+
+const slides: Slide[] = [
   {
     id: "discover",
-    eyebrow: "Community discovery",
+    label: "Live · City discovery",
     title: "Explore Detroit Resources",
-    description: "Around you now, based on your location and what matters to you.",
+    subtext: "Around you now",
+    footer: "Detroit resources near you",
     icon: Search,
-    content: (
-      <div className="grid gap-2">
-        <PhotoPanel src={skylineAsset.url} alt="Detroit skyline at sunset" label="Detroit around you" />
-        <DemoCard icon={HeartHandshake} title="Community Wellness Day" meta="0.8 mi · Free · Today" />
-        <DemoCard icon={MapPin} title="Detroit Riverwalk" meta="1.2 mi · Open today" thumbnail={riverwalkAsset.url} />
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          {['Nearby', 'Personalized', 'Community resource'].map((item) => <span className="phone-chip" key={item}>{item}</span>)}
-        </div>
-      </div>
-    ),
+    image: { src: skylineAsset.url, alt: "Detroit skyline at sunset" },
+    tags: ["Nearby", "Personalized"],
+    body: <InfoCard icon={MapPin} title="Your city, personalized" meta="Based on your location" />,
   },
   {
-    id: "caregiver",
-    eyebrow: "Senior + caregiver support",
-    title: "Community Wellness",
-    description: "Movement, connection and practical support for older adults and caregivers.",
+    id: "support",
+    label: "Live · Senior support",
+    title: "Senior Support Resource",
+    subtext: "Open now",
+    footer: "Detroit support resource · Prototype",
     icon: HeartHandshake,
-    content: (
+    image: { src: supportAsset.url, alt: "A multigenerational Detroit community gathering" },
+    tags: ["Senior Resource", "Caregiver Support"],
+    body: <InfoCard icon={HeartHandshake} title="Meals, rides, and caregiver support" meta="Available now · Verify with provider" />,
+  },
+  {
+    id: "wellness",
+    label: "Live · Wellness + recreation",
+    title: "Wellness Near You",
+    subtext: "Detroit Riverwalk",
+    footer: "Matched to your interests",
+    icon: Route,
+    image: { src: riverwalkAsset.url, alt: "People enjoying the Detroit Riverwalk" },
+    tags: ["Recreation", "Nearby"],
+    body: <InfoCard icon={Users} title="Fresh air, movement, and community" meta="Walking group · Today at 4 PM" />,
+  },
+  {
+    id: "opportunity",
+    label: "Live · Opportunity",
+    title: "New Opportunity Near You",
+    subtext: "Job & training session",
+    footer: "Career support nearby · Prototype",
+    icon: BriefcaseBusiness,
+    tags: ["Career Opportunity", "Recommended"],
+    body: (
       <div className="grid gap-2">
-        <PhotoPanel src={communityAsset.url} alt="Older adults taking part in a Detroit community movement class" label="Community connection" />
-        <DemoCard icon={Users} title="Fast Freddy Hustle Class" meta="Today · Community wellness" />
-        <DemoCard icon={BusFront} title="Transportation Help" meta="Accessible rides · Request ahead" />
-        <p className="phone-note">Senior-specific resource · Prototype listing</p>
+        <InfoCard icon={BriefcaseBusiness} title="Resume and career support" meta="Seats available" />
+        <InfoCard icon={Sparkles} title="Skilled trades information session" meta="Free · Thursday" />
       </div>
     ),
   },
   {
-    id: "youth",
-    eyebrow: "Youth + student opportunity",
-    title: "After School, Near You",
-    description: "Programs matched to age, interests, distance and schedule.",
-    icon: Sparkles,
-    content: (
-      <div className="grid gap-2">
-        <PhotoPanel src={fordFieldAsset.url} alt="Ford Field in downtown Detroit" label="Youth opportunities across Detroit" />
-        <DemoCard icon={Sparkles} title="Free Coding Workshop" meta="Saturday · Ages 13–19" />
-        <DemoCard icon={BriefcaseBusiness} title="Summer Youth Employment" meta="Registration open" />
-        <div className="flex gap-1.5"><span className="phone-chip">Technology</span><span className="phone-chip">Career pathway</span></div>
-      </div>
-    ),
+    id: "fast-freddy",
+    label: "Real Detroit example",
+    secondaryLabel: "Live · Community movement",
+    title: "Fast Freddy Hustle Class",
+    subtext: "Sheffield Bridge Center",
+    footer: "Detroit community activity",
+    icon: Users,
+    image: { src: communityAsset.url, alt: "Fast Freddy leading a Detroit community movement class" },
+    tags: ["Real Detroit Example", "Community Activity"],
+    body: <InfoCard icon={HeartHandshake} title="Music, movement, and social connection" meta="Today · 11:00 AM" />,
   },
   {
     id: "transport",
-    eyebrow: "Transportation + access",
-    title: "Help Me Get There",
-    description: "Choose an option that fits how you move through Detroit.",
+    label: "Live · Access support",
+    title: "Transportation Help Available",
+    subtext: "Rides nearby",
+    footer: "Support available near you · Prototype",
     icon: Navigation,
-    content: (
-      <div className="grid grid-cols-2 gap-2">
-        <TransportTile icon={BusFront} label="Bus route" />
-        <TransportTile icon={Route} label="Walking" />
-        <TransportTile icon={Navigation} label="Ride assistance" />
-        <TransportTile icon={Users} label="Rideshare" note="Potential" />
-        <div className="phone-route-map col-span-2" aria-label="Example route from home to Patton Recreation Center">
+    tags: ["Access Support", "Transportation"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={Navigation} title="Help getting to appointments" meta="Resource matched" />
+        <div className="phone-route-map" aria-label="Example transportation route">
           <span className="phone-route-point" />
           <span className="phone-route-line" />
           <BusFront className="size-5 text-sky" />
           <span className="phone-route-line" />
           <MapPin className="size-5 text-brand" />
-          <span className="text-[10px] font-bold text-muted-foreground">18 min · 1 transfer</span>
+          <span className="text-[10px] font-bold text-muted-foreground">18 min</span>
         </div>
       </div>
     ),
   },
   {
     id: "checkin",
-    eyebrow: "Participation",
-    title: "I’M HERE ✓",
-    description: "Thanks for checking in. You’re connected to your community.",
+    label: "Live · Participation",
+    title: "I’m Here ✓",
+    subtext: "You’re connected to your community",
+    footer: "Private by default",
     icon: Check,
-    content: (
-      <div className="phone-checkin">
-        <img src={communityAsset.url} alt="Detroit community wellness gathering" className="h-20 w-full rounded-lg object-cover" />
-        <span className="grid size-12 place-items-center rounded-full bg-mint text-card"><Check className="size-6" /></span>
-        <div>
-          <p className="font-bold">Community Wellness Day</p>
-          <p className="text-xs text-muted-foreground">September 18 · Southwest Detroit</p>
-        </div>
-        <span className="phone-chip">Private</span>
-      </div>
-    ),
+    image: { src: supportAsset.url, alt: "Detroit residents connecting across generations" },
+    tags: ["Checked In", "Private"],
+    body: <InfoCard icon={Check} title="Community Wellness Day" meta="September 18 · Southwest Detroit" />,
   },
   {
     id: "ask",
-    eyebrow: "AI community guide",
-    title: "Ask KIH",
-    description: "Ask a question in your own words. Get a relevant next step.",
+    label: "Live · Ask KIH",
+    title: "Ask in Your Own Words",
+    subtext: "Get a relevant next step",
+    footer: "Prototype recommendation logic",
     icon: MessageCircle,
-    content: (
+    tags: ["Personalized", "Clear Next Step"],
+    body: (
       <div className="grid gap-2">
         <div className="rounded-lg bg-ink p-3 text-sm font-semibold text-cream">“What can I do near me today?”</div>
-        <DemoCard icon={HeartHandshake} title="Community Wellness Day" meta="Free · 0.8 mi · Today" thumbnail={communityAsset.url} />
-        <DemoCard icon={MapPin} title="Detroit Riverwalk activities" meta="Open now · 1.2 mi" thumbnail={riverwalkAsset.url} />
-        <p className="phone-note">Prototype recommendation logic</p>
+        <InfoCard icon={MapPin} title="Detroit Riverwalk activities" meta="Open now · 1.2 mi" />
       </div>
     ),
   },
-] as const;
+];
 
-function PhotoPanel({ src, alt, label }: { src: string; alt: string; label: string }) {
-  return (
-    <div className="relative h-24 overflow-hidden rounded-lg">
-      <img src={src} alt={alt} className="size-full object-cover" />
-      <span className="absolute inset-x-0 bottom-0 bg-ink/75 px-2.5 py-1.5 text-[10px] font-bold text-cream">{label}</span>
-    </div>
-  );
-}
-
-function DemoCard({ icon: Icon, title, meta, thumbnail }: { icon: typeof Search; title: string; meta: string; thumbnail?: string }) {
+function InfoCard({ icon: Icon, title, meta }: { icon: typeof Search; title: string; meta: string }) {
   return (
     <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 shadow-sm">
-      {thumbnail ? <img src={thumbnail} alt="" className="size-10 shrink-0 rounded-md object-cover" /> : <span className="grid size-9 shrink-0 place-items-center rounded-md bg-sky/15 text-sky"><Icon className="size-4" /></span>}
+      <span className="grid size-9 shrink-0 place-items-center rounded-md bg-aqua-soft text-sky"><Icon className="size-4" /></span>
       <div className="min-w-0">
-        <p className="truncate text-sm font-bold text-foreground">{title}</p>
-        <p className="text-xs text-muted-foreground">{meta}</p>
+        <p className="text-sm font-bold leading-tight text-foreground">{title}</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">{meta}</p>
       </div>
       <ArrowRight className="ml-auto size-4 shrink-0 text-sky" />
-    </div>
-  );
-}
-
-function TransportTile({ icon: Icon, label, note }: { icon: typeof BusFront; label: string; note?: string }) {
-  return (
-    <div className="rounded-lg border border-border bg-card p-3">
-      <Icon className="size-5 text-sky" />
-      <p className="mt-2 text-xs font-bold text-foreground">{label}</p>
-      {note && <p className="mt-1 text-[10px] font-bold uppercase text-muted-foreground">{note}</p>}
     </div>
   );
 }
@@ -188,7 +186,7 @@ export function PhoneDemo() {
           <div className="phone-appbar">
             <span className="grid size-8 place-items-center rounded-full bg-brand text-xs font-extrabold text-brand-foreground">KIH</span>
             <div><p className="text-xs font-extrabold text-foreground">Know I’m Here</p><p className="text-[10px] text-muted-foreground">Detroit · Prototype</p></div>
-            <MapPin className="ml-auto size-4 text-sky" />
+            <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-mint/15 px-2 py-1 text-[10px] font-extrabold text-foreground"><span className="size-1.5 rounded-full bg-mint" /> I’m Here · On</span>
           </div>
 
           <div
@@ -203,28 +201,33 @@ export function PhoneDemo() {
               touchStart.current = null;
             }}
           >
-            <div className="phone-slide-icon"><Icon className="size-5" /></div>
-            <p className="phone-eyebrow">{slide.eyebrow}</p>
-            <h2 className="mt-2 text-[1.55rem] font-extrabold leading-tight text-foreground">{slide.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/65">{slide.description}</p>
-            <div className="mt-5">{slide.content}</div>
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <p className="phone-eyebrow">{slide.label}</p>
+                {slide.secondaryLabel && <p className="mt-1 text-[9px] font-extrabold uppercase text-brand">{slide.secondaryLabel}</p>}
+              </div>
+              <div className="phone-slide-icon"><Icon className="size-4" /></div>
+            </div>
+            <h2 className="mt-2 text-[1.45rem] font-extrabold leading-tight text-foreground">{slide.title}</h2>
+            <p className="mt-1 text-sm font-semibold text-foreground/60">{slide.subtext}</p>
+            {slide.image && (
+              <div className="phone-photo mt-3">
+                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" style={{ objectPosition: slide.image.position }} />
+              </div>
+            )}
+            <div className="mt-3">{slide.body}</div>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {slide.tags.map((tag) => <span className="phone-chip" key={tag}>{tag}</span>)}
+            </div>
+            <p className="phone-slide-footer">{slide.footer}</p>
           </div>
 
           <div className="phone-controls">
             <Button variant="ghost" size="icon" onClick={() => goTo(active - 1)} aria-label="Previous phone demo slide"><ChevronLeft /></Button>
-            <div className="flex gap-1.5" role="tablist" aria-label="Phone demo slides">
+            <div className="flex gap-1" role="tablist" aria-label="Phone demo slides">
               {slides.map((item, index) => (
-                <Button
-                  key={item.id}
-                  variant="ghost"
-                  size="icon"
-                  role="tab"
-                  aria-label={`Show ${item.eyebrow}`}
-                  aria-selected={index === active}
-                  onClick={() => goTo(index)}
-                  className="size-6 p-0"
-                >
-                  <span className={`block h-1.5 rounded-full transition-all ${index === active ? "w-5 bg-sky" : "w-1.5 bg-border"}`} />
+                <Button key={item.id} variant="ghost" size="icon" role="tab" aria-label={`Show ${item.label}`} aria-selected={index === active} onClick={() => goTo(index)} className="size-6 p-0">
+                  <span className={`block h-1.5 rounded-full transition-all ${index === active ? "w-4 bg-sky" : "w-1.5 bg-border"}`} />
                 </Button>
               ))}
             </div>
