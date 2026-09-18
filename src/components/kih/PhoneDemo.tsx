@@ -212,7 +212,7 @@ export function PhoneDemo() {
             <p className="mt-1 text-sm font-semibold text-foreground/60">{slide.subtext}</p>
             {slide.image && (
               <div className="phone-photo mt-3">
-                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" style={{ objectPosition: slide.image.position }} />
+                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" />
               </div>
             )}
             <div className="mt-3">{slide.body}</div>

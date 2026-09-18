@@ -16,6 +16,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import heroAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import spiritAsset from "@/assets/spirit-of-detroit.jpeg.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
@@ -145,7 +146,7 @@ function Index() {
       </div></section>
 
       <section className="bg-ink text-cream"><div className="container-kih py-14">
-        <SectionHeading eyebrow="How we got here" title="Trust → Confidence → Connection" text="Know I'm Here grew from real Detroit community engagement—not a theoretical technology idea." light />
+        <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           <a href={EXTERNAL_LINKS.fastFreddy} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-sun">Trust + Community</p><h3 className="mt-1 text-xl font-bold">Fast Freddy Experience</h3><p className="mt-2 text-sm text-cream/70">One real Detroit example of culture, movement and welcoming in-person community engagement.</p><p className="mt-4 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p></div></a>
           <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={everydayAsset.url} alt="Everyday Connect accessible learning screens" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-aqua">Digital confidence</p><h3 className="mt-1 text-xl font-bold">Everyday Connect</h3><p className="mt-2 text-sm text-cream/70">Build confidence with everyday technology, healthcare tools and useful AI.</p><p className="mt-4 text-sm font-bold text-aqua">Explore Everyday Connect →</p></div></a>
@@ -170,14 +171,14 @@ function Index() {
   );
 }
 
-function HubCard({ icon, title, text, to, action }: { icon: React.ReactNode; title: string; text: string; to: "/opportunities" | "/work-after-55" | "/for-you"; action: string }) {
+function HubCard({ icon, title, text, to, action }: { icon: ReactNode; title: string; text: string; to: "/opportunities" | "/work-after-55" | "/for-you"; action: string }) {
   return <Link to={to} className="card-flat p-6 transition-transform hover:-translate-y-0.5"><span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky">{icon}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-foreground/65">{text}</p><p className="mt-4 text-sm font-bold text-brand">{action} →</p></Link>;
 }
 
-function Metric({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
+function Metric({ icon, value, label }: { icon: ReactNode; value: string; label: string }) {
   return <article className="card-flat p-5"><span className="text-sky">{icon}</span><p className="mt-3 text-3xl font-extrabold text-ink">{value}</p><p className="mt-1 text-sm font-semibold text-foreground/65">{label}</p></article>;
 }
 
-function Promise({ icon, title }: { icon: React.ReactNode; title: string }) {
+function Promise({ icon, title }: { icon: ReactNode; title: string }) {
   return <div className="card-flat flex min-h-32 flex-col justify-between p-5"><span className="text-sky">{icon}</span><p className="mt-4 font-bold">{title}</p></div>;
 }
