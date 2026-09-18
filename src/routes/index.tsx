@@ -6,6 +6,8 @@ import {
   BriefcaseBusiness,
   BusFront,
   Check,
+  ChevronDown,
+  ChevronUp,
   Eye,
   HeartHandshake,
   LockKeyhole,
@@ -19,7 +21,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import heroAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import spiritAsset from "@/assets/spirit-of-detroit.jpeg.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
@@ -60,14 +62,17 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const landmarks = [
-  { title: "Spirit of Detroit", type: "Civic", image: spiritAsset.url, text: "City services, public information and downtown resources." },
-  { title: "Detroit Riverwalk", type: "Recreation", image: riverwalkAsset.url, text: "Walking, wellness, waterfront activity and community programs." },
-  { title: "Hart Plaza", type: "Downtown", image: hartPlazaAsset.url, text: "Events, culture and gathering in the heart of Detroit." },
-  { title: "Renaissance Center", type: "Landmark", image: renaissanceAsset.url, text: "A familiar skyline landmark connected to downtown discovery." },
-  { title: "Ford Field", type: "Sports", image: fordFieldAsset.url, text: "Sports, major events and nearby community activity." },
-  { title: "Little Caesars Arena", type: "Entertainment", image: littleCaesarsAsset.url, text: "Entertainment, employment and activity in The District Detroit." },
-  { title: "Comerica Park", type: "Sports", image: comericaAsset.url, text: "Baseball, downtown experiences and seasonal events." },
+const featuredLandmarks = [
+  { title: "Ford Field", type: "Sports + Entertainment", image: fordFieldAsset.url, text: "Games, events and experiences happening in the heart of downtown Detroit.", tags: ["Sports", "Events", "Downtown"] },
+  { title: "Hart Plaza", type: "Community + Culture", image: hartPlazaAsset.url, text: "Festivals, community gatherings, music, culture and Detroit experiences.", tags: ["Community", "Culture", "Events"] },
+  { title: "Detroit Riverwalk", type: "Public Health + Recreation", image: riverwalkAsset.url, text: "Walking, recreation, wellness and accessible outdoor experiences along Detroit’s riverfront.", tags: ["Wellness", "Recreation", "Outdoors"] },
+];
+
+const additionalLandmarks = [
+  { title: "Spirit of Detroit", type: "Civic", image: spiritAsset.url, text: "City services, public information and downtown resources.", tags: ["Civic", "Downtown"] },
+  { title: "Renaissance Center", type: "Landmark", image: renaissanceAsset.url, text: "A familiar skyline landmark connected to downtown discovery.", tags: ["Landmark", "Riverfront"] },
+  { title: "Little Caesars Arena", type: "Entertainment", image: littleCaesarsAsset.url, text: "Entertainment, employment and activity in The District Detroit.", tags: ["Entertainment", "Events"] },
+  { title: "Comerica Park", type: "Sports", image: comericaAsset.url, text: "Baseball, downtown experiences and seasonal events.", tags: ["Sports", "Seasonal"] },
 ];
 
 const FF_PILLARS = [
@@ -80,6 +85,8 @@ const FF_PILLARS = [
 ];
 
 function Index() {
+  const [showAllDetroit, setShowAllDetroit] = useState(false);
+
   return (
     <div>
       <section className="home-hero relative overflow-hidden">
@@ -248,7 +255,25 @@ function Index() {
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 
-      <section className="container-kih py-14"><SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{landmarks.map((place) => <article key={place.title} className="overflow-hidden rounded-lg border border-border bg-card"><div className="relative aspect-[16/10] overflow-hidden"><img src={place.image} alt={place.title} className="size-full object-cover transition-transform duration-300 hover:scale-[1.02]" loading="lazy" /><span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2.5 py-1 text-[10px] font-extrabold uppercase text-cream backdrop-blur">{place.type}</span></div><div className="p-4"><h3 className="text-lg font-bold">{place.title}</h3><p className="mt-1 text-sm text-foreground/65">{place.text}</p><Link to="/ask" search={{ q: `What's around ${place.title}?` }} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-bold text-sky">Explore nearby <ArrowRight className="size-4" /></Link></div></article>)}</div><p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p></section>
+      <section className="container-kih py-14">
+        <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
+        </div>
+        <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
+          <div className="overflow-hidden">
+            <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} />)}
+            </div>
+          </div>
+        </div>
+        <div className="mt-7 flex justify-center">
+          <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
+            {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
+          </Button>
+        </div>
+        <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
+      </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
@@ -267,4 +292,29 @@ function Metric({ icon, value, label }: { icon: ReactNode; value: string; label:
 
 function Promise({ icon, title }: { icon: ReactNode; title: string }) {
   return <div className="card-flat flex min-h-32 flex-col justify-between p-5"><span className="text-sky">{icon}</span><p className="mt-4 font-bold">{title}</p></div>;
+}
+
+type DetroitPlace = { title: string; type: string; image: string; text: string; tags: string[] };
+
+function DetroitPlaceCard({ place, featured = false }: { place: DetroitPlace; featured?: boolean }) {
+  return (
+    <article className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <img src={place.image} alt={`${place.title} in Detroit`} className="size-full object-cover transition-transform duration-300 hover:scale-[1.02] motion-reduce:transition-none" loading="lazy" width={640} height={400} />
+        <span className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-ink/85 px-3 py-1.5 text-[10px] font-extrabold uppercase leading-tight text-cream backdrop-blur">{place.type}</span>
+      </div>
+      <div className={featured ? "p-5" : "p-4"}>
+        <h3 className={featured ? "text-xl font-extrabold" : "text-lg font-bold"}>{place.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-foreground/65">{place.text}</p>
+        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${place.title} categories`}>
+          {place.tags.map((tag) => <li key={tag} className="phone-chip bg-aqua-soft">{tag}</li>)}
+        </ul>
+        <Link to="/ask" search={{ q: `What's around ${place.title}?` }} tabIndex={featured || showElementInExpandedArea(place.title) ? undefined : -1} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-bold text-sky">Explore nearby <ArrowRight className="size-4" /></Link>
+      </div>
+    </article>
+  );
+}
+
+function showElementInExpandedArea(_title: string) {
+  return true;
 }
