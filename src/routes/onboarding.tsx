@@ -183,7 +183,9 @@ function Onboarding() {
                 </p>
               )}
             </div>
-            <Toggle on={draft.lowCost} label="Prefer free / low-cost opportunities" onClick={() => setDraft({ ...draft, lowCost: !draft.lowCost })} />
+            <div className="mt-5">
+              <Toggle on={draft.lowCost} label="Prefer free / low-cost opportunities" onClick={() => setDraft({ ...draft, lowCost: !draft.lowCost })} />
+            </div>
           </section>
         )}
 
