@@ -73,4 +73,4 @@
 - [x] Move My Neighborhood, the demo entry, and private I’m Here participation near the top.
 - [x] Move Discover Detroit ahead of supporting and ecosystem sections.
 - [x] Convert resident examples to a compact, accessible expandable preview.
-- [ ] Verify section order, demo links, expansion behavior, and desktop/mobile rendering.
+- [x] Verify section order, demo links, expansion behavior, and desktop/mobile rendering.

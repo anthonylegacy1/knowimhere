@@ -129,6 +129,8 @@ function Index() {
         </div>
       </section>
 
+      <section className="product-demo-band bg-background py-16"><div className="container-kih"><PhoneDemo /></div></section>
+
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
         <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -148,8 +150,6 @@ function Index() {
         </div>
         <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
       </section>
-
-      <section className="product-demo-band relative z-20 -mt-28 pb-16"><div className="container-kih"><PhoneDemo /></div></section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
