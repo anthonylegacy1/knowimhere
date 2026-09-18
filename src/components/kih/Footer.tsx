@@ -59,6 +59,61 @@ export function Footer() {
           </p>
           <p className="mt-2 font-semibold">Fast Freddy created the trust. Everyday Connect created the confidence. Know I&apos;m Here creates the connection.</p>
         </div>
+        <div className="mt-6 border-t border-border pt-5 text-xs text-muted-foreground">
+          <p className="font-display text-sm font-bold text-foreground">
+            Know I&apos;m Here™
+          </p>
+          <p className="mt-1">A community connectivity concept developed by Anthony Legacy Holdings LLC.</p>
+          <p className="mt-1">© 2026 Anthony Legacy Holdings LLC. All rights reserved.</p>
+          <p className="mt-1 font-semibold text-foreground/80">Venture 313 Demonstration Prototype</p>
+          <details className="group mt-4">
+            <summary className="flex w-fit cursor-pointer list-none items-center gap-1 rounded text-sm font-semibold text-foreground/80 underline decoration-border underline-offset-4 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-brand">
+              Prototype, Privacy &amp; Legal Information <span aria-hidden="true" className="transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <div className="mt-4 space-y-5 max-w-3xl leading-relaxed">
+              <section>
+                <h3 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Prototype Notice</h3>
+                <p className="mt-1">
+                  Know I&apos;m Here is currently a demonstration prototype. Features, recommendations, organizations,
+                  locations and resources may be presented for demonstration purposes. Items identified as &ldquo;Demo
+                  Example&rdquo; are illustrative. Items identified as &ldquo;Real Detroit Example&rdquo; represent actual
+                  community activities or resources as indicated.
+                </p>
+              </section>
+              <section>
+                <h3 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Organizations &amp; Partnerships</h3>
+                <p className="mt-1">
+                  References to third-party organizations, agencies, locations or resources are informational unless
+                  otherwise stated. Their inclusion does not by itself indicate a partnership, sponsorship or endorsement.
+                </p>
+              </section>
+              <section>
+                <h3 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Ownership</h3>
+                <p className="mt-1">
+                  Know I&apos;m Here™ and its original branding, written content, interface concepts and creative
+                  materials are proprietary to Anthony Legacy Holdings LLC, except for third-party names, trademarks,
+                  photographs, content or other materials owned by their respective rights holders.
+                </p>
+              </section>
+              <section>
+                <h3 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Privacy &amp; Participation</h3>
+                <p className="mt-1">
+                  Know I&apos;m Here is designed around permission-based participation. Prototype demonstrations of
+                  location, personalization, check-ins and engagement data illustrate intended functionality and should
+                  not imply that production data systems or integrations are currently active.
+                </p>
+              </section>
+              <section>
+                <h3 className="text-xs font-bold uppercase tracking-wide text-foreground/80">Information Disclaimer</h3>
+                <p className="mt-1">
+                  Information displayed by the prototype is intended for informational and demonstration purposes. Users
+                  should verify time-sensitive information, eligibility, availability, transportation and other resource
+                  details with the applicable provider.
+                </p>
+              </section>
+            </div>
+          </details>
+        </div>
       </div>
     </footer>
   );
