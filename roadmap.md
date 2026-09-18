@@ -74,3 +74,10 @@
 - [x] Move Discover Detroit ahead of supporting and ecosystem sections.
 - [x] Convert resident examples to a compact, accessible expandable preview.
 - [x] Verify section order, demo links, expansion behavior, and desktop/mobile rendering.
+
+## Homepage demo consolidation
+
+- [x] Remove the duplicate dark interactive demonstration card and its extra action.
+- [x] Add the Discover → Get There → Check In journey to the orange private-participation card.
+- [x] Keep the orange card linked to the existing interactive demo.
+- [ ] Verify the single demo entry, demo flow, and mobile presentation.
