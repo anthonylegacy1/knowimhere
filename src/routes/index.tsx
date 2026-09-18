@@ -72,7 +72,7 @@ function Index() {
           <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-[1.04] sm:text-7xl">Your Detroit. Connected to You.</h1>
           <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-cream/90 sm:text-lg">Know I&apos;m Here helps Detroit residents discover nearby resources, services, activities, programs and opportunities based on where they are, what they need and what matters to them.</p>
           <div className="mt-7 grid w-full max-w-sm gap-3">
-            <Button asChild size="lg" className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90"><Link to="/onboarding"><MapPin /> Find What&apos;s Near Me</Link></Button>
+            <NearMeButton className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90" />
             <Button asChild size="lg" variant="outline" className="min-h-14 border-cream/40 bg-ink/65 text-cream backdrop-blur hover:bg-ink hover:text-cream"><Link to="/ask"><MessageCircle /> Ask Know I&apos;m Here</Link></Button>
             <Button asChild variant="link" className="text-cream hover:text-aqua"><Link to="/for-you">Explore Detroit Resources <ArrowRight /></Link></Button>
           </div>
