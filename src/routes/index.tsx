@@ -70,6 +70,13 @@ function Index() {
         </div>
       </section>
 
+      {/* PHONE PRODUCT DEMO */}
+      <section className="product-demo-band relative z-20 -mt-28 pb-16">
+        <div className="container-kih">
+          <PhoneDemo />
+        </div>
+      </section>
+
       {/* DISCOVER DETROIT */}
       <section className="bg-card py-14">
         <div className="container-kih">
@@ -104,13 +111,6 @@ function Index() {
             ))}
           </div>
           <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Resource availability shown in this prototype should be verified with the official provider.</p>
-        </div>
-      </section>
-
-      {/* PHONE PRODUCT DEMO */}
-      <section className="product-demo-band relative z-20 -mt-28 pb-16">
-        <div className="container-kih">
-          <PhoneDemo />
         </div>
       </section>
 
