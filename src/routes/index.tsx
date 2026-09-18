@@ -260,10 +260,10 @@ function Index() {
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
         </div>
-        <div className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
+        <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
           <div className="overflow-hidden">
             <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} />)}
+              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
             </div>
           </div>
         </div>
@@ -296,7 +296,7 @@ function Promise({ icon, title }: { icon: ReactNode; title: string }) {
 
 type DetroitPlace = { title: string; type: string; image: string; text: string; tags: string[] };
 
-function DetroitPlaceCard({ place, featured = false }: { place: DetroitPlace; featured?: boolean }) {
+function DetroitPlaceCard({ place, featured = false, interactive = true }: { place: DetroitPlace; featured?: boolean; interactive?: boolean }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -309,12 +309,8 @@ function DetroitPlaceCard({ place, featured = false }: { place: DetroitPlace; fe
         <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${place.title} categories`}>
           {place.tags.map((tag) => <li key={tag} className="phone-chip bg-aqua-soft">{tag}</li>)}
         </ul>
-        <Link to="/ask" search={{ q: `What's around ${place.title}?` }} tabIndex={featured || showElementInExpandedArea(place.title) ? undefined : -1} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-bold text-sky">Explore nearby <ArrowRight className="size-4" /></Link>
+        <Link to="/ask" search={{ q: `What's around ${place.title}?` }} tabIndex={interactive ? undefined : -1} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-bold text-sky">Explore nearby <ArrowRight className="size-4" /></Link>
       </div>
     </article>
   );
-}
-
-function showElementInExpandedArea(_title: string) {
-  return true;
 }
