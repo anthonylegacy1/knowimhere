@@ -48,7 +48,7 @@ export function ResourceCard({
           </span>
         )}
         <span className="chip">
-          <Clock className="size-3.5" aria-hidden /> {resource.whenLabel.split("•")[0].trim()}
+          <Clock className="size-3.5" aria-hidden /> {(resource.whenLabel.split("•")[0] ?? "").trim()}
         </span>
         <span className="chip chip-sun">{resource.cost}</span>
         {resource.accessibility[0] && (
