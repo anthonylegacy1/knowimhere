@@ -20,12 +20,14 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import transportImage from "@/assets/carousel-transport-detroit.jpg";
+import opportunityImage from "@/assets/carousel-opportunity-detroit.jpg";
+import healthImage from "@/assets/carousel-health-detroit.jpg";
+import neighborhoodImage from "@/assets/carousel-neighborhood-detroit.jpg";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
 import communityClassAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
 import communityEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
-import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
-import seniorSupportAsset from "@/assets/senior-support-digital-learning.png.asset.json";
 import spiritAsset from "@/assets/spirit-of-detroit-original.jpeg.asset.json";
 
 type Slide = {
@@ -60,18 +62,12 @@ const slides: Slide[] = [
     subtext: "Rides nearby. Get where you need to go.",
     footer: "Support available near you · Prototype",
     icon: Navigation,
+    image: { src: transportImage, alt: "Older Detroit resident beside a city bus in downtown Detroit", position: "center 48%" },
     tags: ["Access Support", "Transportation"],
     body: (
       <div className="grid gap-2">
         <InfoCard icon={Navigation} title="Help getting to appointments" meta="Resource matched" />
-        <div className="phone-route-map" aria-label="Example transportation route">
-          <span className="phone-route-point" />
-          <span className="phone-route-line" />
-          <BusFront className="size-5 text-sky" />
-          <span className="phone-route-line" />
-          <MapPin className="size-5 text-brand" />
-          <span className="text-[10px] font-bold text-muted-foreground">18 min</span>
-        </div>
+        <InfoCard icon={BusFront} title="View transit options" meta="Bus routes & ride assistance" />
       </div>
     ),
   },
@@ -82,7 +78,8 @@ const slides: Slide[] = [
     subtext: "Job & training session",
     footer: "Career support nearby · Prototype",
     icon: BriefcaseBusiness,
-    tags: ["Career Opportunity", "Recommended"],
+    image: { src: opportunityImage, alt: "Young Detroit job seeker at a workforce and skilled trades center", position: "center 42%" },
+    tags: ["Career Opportunity", "Jobs & Training"],
     body: (
       <div className="grid gap-2">
         <InfoCard icon={BriefcaseBusiness} title="Resume and career support" meta="Seats available" />
@@ -97,7 +94,7 @@ const slides: Slide[] = [
     subtext: "Clinics, screenings and more.",
     footer: "Healthier Detroit · Prototype",
     icon: HeartPulse,
-    image: { src: seniorSupportAsset.url, alt: "Detroit residents receiving friendly health and technology guidance", position: "center center" },
+    image: { src: healthImage, alt: "Smiling older Detroit resident outside a neighborhood health center", position: "center 42%" },
     tags: ["Healthcare", "Wellness"],
     body: (
       <div className="grid gap-2">
@@ -156,7 +153,7 @@ const slides: Slide[] = [
     subtext: "Stay informed. Get connected.",
     footer: "Together for a stronger Detroit · Prototype",
     icon: ShieldCheck,
-    image: { src: neighborhoodAsset.url, alt: "Detroit neighbors connecting across generations", position: "center center" },
+    image: { src: neighborhoodImage, alt: "Detroit neighbors connecting on a cared-for residential block with a community mural", position: "center 48%" },
     tags: ["Safety", "Neighborhoods"],
     body: (
       <div className="grid gap-2">
@@ -249,7 +246,7 @@ export function PhoneDemo() {
             <p className="mt-1 text-sm font-semibold text-foreground/60">{slide.subtext}</p>
             {slide.image && (
               <div className="phone-photo mt-3">
-                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" style={{ objectPosition: slide.image.position }} />
+                <img src={slide.image.src} alt={slide.image.alt} className="size-full object-cover" style={{ objectPosition: slide.image.position }} loading="lazy" width={1280} height={720} />
                 {slide.image.caption && <p className="phone-photo-caption">{slide.image.caption}</p>}
               </div>
             )}
