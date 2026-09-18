@@ -141,6 +141,14 @@ function Demo() {
 
           {step === 1 && (
             <div>
+              <h2 className="font-display text-2xl font-bold">{persona.name} turns on Know I&apos;m Here</h2>
+              <p className="mt-1 text-foreground/65">On when you want it. Off when you don&apos;t. Once it is on, recommendations become local.</p>
+              <div className="mt-4"><ImHerePanel /></div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div>
               <p className="font-display text-lg font-semibold text-brand">{greeting(persona.name)}</p>
               <h2 className="font-display text-3xl font-bold">
                 {persona.id === "dorothy" ? "Here's what Detroit has for you today." : "Opportunities picked for you."}
