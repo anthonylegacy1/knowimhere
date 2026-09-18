@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Check, MapPin, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/lib/app-store";
 import { CATEGORIES, NEED_CATEGORIES, NEIGHBORHOODS } from "@/data/resources";
@@ -211,8 +212,8 @@ export function NearMeButton({ className = "", label = "Find What's Near Me" }: 
         <MapPin /> {label}
       </Button>
 
-      {open && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-5" role="dialog" aria-modal="true" aria-labelledby="imhere-modal-title">
+      {open && createPortal(
+        <div className="fixed inset-0 z-[100] grid place-items-center bg-ink/60 p-5" role="dialog" aria-modal="true" aria-labelledby="imhere-modal-title">
           <div className="w-full max-w-md rounded-lg bg-card p-6 text-left text-foreground shadow-lg">
             <h2 id="imhere-modal-title" className="text-2xl font-extrabold">Turn on Know I&apos;m Here to see resources around you.</h2>
             <p className="mt-2 text-foreground/70">Your location is only used when you choose to turn this on. You can turn it off anytime.</p>
@@ -236,7 +237,8 @@ export function NearMeButton({ className = "", label = "Find What's Near Me" }: 
               </Button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
