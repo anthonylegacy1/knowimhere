@@ -20,9 +20,9 @@ export function ResourceCard({
   onGetThere,
 }: {
   resource: Resource;
-  reasons?: string[];
-  compact?: boolean;
-  onGetThere?: (r: Resource) => void;
+  reasons?: string[] | undefined;
+  compact?: boolean | undefined;
+  onGetThere?: ((r: Resource) => void) | undefined;
 }) {
   const { saved, toggleSaved, markInterested, dismiss, interested } = useApp();
   const [why, setWhy] = useState(false);
