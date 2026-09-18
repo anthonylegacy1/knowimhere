@@ -205,7 +205,7 @@ function Index() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-3">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover" loading="lazy" /><figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption></figure>
         </div>
