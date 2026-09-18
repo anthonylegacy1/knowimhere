@@ -80,4 +80,4 @@
 - [x] Remove the duplicate dark interactive demonstration card and its extra action.
 - [x] Add the Discover → Get There → Check In journey to the orange private-participation card.
 - [x] Keep the orange card linked to the existing interactive demo.
-- [ ] Verify the single demo entry, demo flow, and mobile presentation.
+- [x] Verify the single demo entry, demo flow, and mobile presentation.
