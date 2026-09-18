@@ -166,7 +166,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
   const setTextSize = useCallback((textSize: TextSize) => setState((s) => ({ ...s, textSize })), []);
   const setAccessibilityPreference = useCallback(
-    <K extends keyof AccessibilityPreferences>(key: K, value: AccessibilityPreferences[K]) =>
+    <K extends keyof AccessibilityPreferences,>(key: K, value: AccessibilityPreferences[K]) =>
       setState((s) => ({
         ...s,
         accessibilityPreferences: { ...s.accessibilityPreferences, [key]: value },
