@@ -3,7 +3,8 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EXTERNAL_LINKS } from "@/data/resources";
 import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
-import everydayAsset from "@/assets/everyday-connect-six-screens.jpeg.asset.json";
+import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
+import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 
 const TITLE = "Our Story — How We Got Here | Know I'm Here";
 const DESC = "Fast Freddy created the trust. Everyday Connect created the confidence. Know I'm Here creates the connection. The story behind a Detroit-built community-access platform.";
@@ -29,6 +30,8 @@ const CARDS = [
     theme: "Trust + Community",
     tone: "bg-sun/30",
     text: "A Detroit experience brand that brought people together in real rooms. It proved something simple: residents show up when the invitation is trusted and the experience is welcoming.",
+    image: communityAsset.url,
+    imageAlt: "Fast Freddy leading a community movement class in Detroit",
     link: { href: EXTERNAL_LINKS.fastFreddy, label: "Visit the official Fast Freddy site" },
   },
   {
@@ -37,6 +40,8 @@ const CARDS = [
     theme: "Digital Confidence",
     tone: "bg-sky/15",
     text: "Digital confidence for everyday life — not a seniors-only program. Older adults, working adults, parents and students all build the practical skills to use the technology they already own.",
+    image: everydayLearningAsset.url,
+    imageAlt: "Older adults learning to use smartphones with guidance from an instructor",
     link: { href: EXTERNAL_LINKS.everydayConnect, label: "View the Everyday Connect prototype" },
   },
   {
@@ -45,6 +50,8 @@ const CARDS = [
     theme: "Connection",
     tone: "bg-brand/10",
     text: "The connection layer. Take that trust and confidence and point it at the real problem: Detroit has resources, but the last mile between a resident and the right one is still hard.",
+    image: kihConnectionAsset.url,
+    imageAlt: "A daughter helps her father use a phone beside the Detroit riverfront and skyline",
     link: null,
   },
 ];
@@ -58,8 +65,7 @@ function Story() {
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         {CARDS.map((c) => (
           <article key={c.step} className={`card-pop overflow-hidden ${c.tone}`}>
-            {c.step === "01" && <img src={communityAsset.url} alt="Fast Freddy leading a community movement class in Detroit" className="aspect-[16/9] w-full object-cover" />}
-            {c.step === "02" && <img src={everydayAsset.url} alt="Everyday Connect accessible digital learning screens" className="aspect-[16/9] w-full object-cover" />}
+            <img src={c.image} alt={c.imageAlt} className="aspect-[16/9] w-full object-cover object-center" />
             <div className="p-6">
             <p className="font-display text-sm font-bold text-foreground/50">{c.step}</p>
             <h2 className="mt-1 font-display text-2xl font-bold">{c.name}</h2>
