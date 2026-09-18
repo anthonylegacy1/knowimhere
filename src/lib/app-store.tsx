@@ -74,6 +74,7 @@ const initialState: AppState = {
   checkIns: [],
   followed: [],
   textSize: 0,
+  imHere: { on: false, radiusMiles: 3 },
   hydrated: false,
 };
 
