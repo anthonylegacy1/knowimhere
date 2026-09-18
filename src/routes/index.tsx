@@ -31,6 +31,7 @@ import everydayAsset from "@/assets/everyday-connect-six-screens.jpeg.asset.json
 import everydayLearningAsset from "@/assets/everyday-connect-group-learning.jpeg.asset.json";
 import kihConnectionAsset from "@/assets/know-im-here-detroit-connection.png.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
+import { ImHerePanel, ImHereStatus, NearMeButton } from "@/components/kih/ImHere";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
