@@ -148,6 +148,25 @@ function MapPage() {
             </button>
           ))}
         </div>
+        </div>
+        <div className="mt-4 flex gap-2" role="group" aria-label="Choose how to view results">
+          <button
+            type="button"
+            aria-pressed={view === "list"}
+            onClick={() => setView("list")}
+            className={`chip min-h-11 cursor-pointer px-4 ${view === "list" ? "bg-ink text-cream" : ""}`}
+          >
+            List
+          </button>
+          <button
+            type="button"
+            aria-pressed={view === "map"}
+            onClick={() => setView("map")}
+            className={`chip min-h-11 cursor-pointer px-4 ${view === "map" ? "bg-ink text-cream" : ""}`}
+          >
+            Map
+          </button>
+        </div>
       </div>
 
       {markers.length === 0 ? (
