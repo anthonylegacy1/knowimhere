@@ -189,7 +189,8 @@ function ErrorPanel() {
 export function ImHereSwitch({ className = "" }: { className?: string }) {
   const { on, turnOff } = useLocationState();
   const [ask, setAsk] = useState(false);
-  const { requestGps, phase } = useLocationState();
+  const { phase } = useLocationState();
+  const askLocation = useAskLocation((ok) => { if (ok) setAsk(false); });
   return (
     <>
       <button
@@ -214,8 +215,9 @@ export function ImHereSwitch({ className = "" }: { className?: string }) {
         <PrePermissionDialog
           busy={phase === "requesting"}
           onClose={() => setAsk(false)}
+          found={askLocation.found}
           onManual={() => setAsk(false)}
-          onUse={() => void requestGps().then((ok) => { if (ok) setAsk(false); })}
+          onUse={askLocation.run}
         />
       )}
     </>
