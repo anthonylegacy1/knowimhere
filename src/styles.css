@@ -370,7 +370,7 @@ html.reduce-motion *::after {
     linear-gradient(180deg, oklch(0.1 0.03 255 / 12%), oklch(0.1 0.03 255 / 34%) 62%, oklch(0.1 0.03 255 / 86%)),
     linear-gradient(90deg, oklch(0.1 0.03 255 / 14%), transparent 50%, oklch(0.1 0.03 255 / 10%));
 }
-.product-demo-band { background: linear-gradient(180deg, transparent 0 7rem, var(--paper) 7rem); }
+.product-demo-band { background: var(--paper); }
 .phone-demo-wrap {
   width: min(100%, 23rem);
   margin-inline: auto;

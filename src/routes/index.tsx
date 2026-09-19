@@ -92,7 +92,7 @@ function Index() {
     <div>
       <section className="home-hero relative overflow-hidden">
         <img src={heroAsset.url} alt="Detroit skyline and Renaissance Center glowing at sunset across the river" width={1672} height={941} className="absolute inset-0 size-full object-cover" />
-        <div className="container-kih relative z-10 flex min-h-[39rem] flex-col items-center px-5 pb-36 pt-16 text-center text-cream sm:pt-20">
+        <div className="container-kih relative z-10 flex min-h-[34rem] flex-col items-center px-5 pb-14 pt-16 text-center text-cream sm:min-h-[39rem] sm:pb-20 sm:pt-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-ink/55 px-4 py-2 text-xs font-extrabold uppercase tracking-wider backdrop-blur"><MapPin className="size-3.5 text-aqua" /> Venture 313 Buildathon Prototype · Detroit</span>
           <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-[1.04] sm:text-7xl">Your Detroit. Connected to You.</h1>
           <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-cream/90 sm:text-lg">Know I&apos;m Here helps Detroit residents discover nearby resources, services, activities, programs and opportunities based on where they are, what they need and what matters to them.</p>
@@ -105,7 +105,18 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-card pb-12 pt-2 text-center">
+      <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
+        <div className="container-kih">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-sky">See Know I&apos;m Here in action</p>
+            <h2 className="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">One connection layer. Different needs.</h2>
+            <p className="mt-3 text-foreground/65">See how Know I&apos;m Here can surface relevant opportunities, resources and support based on what matters to each resident.</p>
+          </div>
+          <div className="mt-8"><PhoneDemo /></div>
+        </div>
+      </section>
+
+      <section className="bg-card pb-12 pt-12 text-center">
         <div className="container-kih">
           <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
           <p aria-label="Discover, Connect, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
@@ -150,7 +161,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="product-demo-band bg-background py-16"><div className="container-kih"><PhoneDemo /></div></section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
