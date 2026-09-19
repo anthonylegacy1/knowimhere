@@ -34,6 +34,9 @@ function ForYou() {
         : scored.filter((s) => s.resource.tags.includes(filter));
 
   const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
+  const coreCats = CORE_CATEGORIES.filter((c) => cats.includes(c));
+  const moreCats = cats.filter((c) => !CORE_CATEGORIES.includes(c));
+  const moreSelected = filter !== "all" && filter !== "saved" && moreCats.includes(filter as CategoryId);
 
   return (
     <div className="container-kih py-8 sm:py-12">
