@@ -26,6 +26,7 @@ const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth",
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
   const [filter, setFilter] = useState<CategoryId | "all" | "saved">("all");
+  const [showMore, setShowMore] = useState(false);
 
   const scored = useMemo(() => scoreResources(profile, undefined, dismissed), [profile, dismissed]);
   const list =
