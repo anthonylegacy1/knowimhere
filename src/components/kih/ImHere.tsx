@@ -398,9 +398,28 @@ function LocationPrivacyPanel() {
                 <li>• Saved resources</li>
                 <li>• Self-reported check-ins</li>
                 <li>• Location-verified check-ins</li>
-                <li>• Category interest</li>
+                <li>• Category interest and the general topic of Ask KIH questions</li>
+                <li>• Map opens and markers selected</li>
+                <li>• Whether you used your current location or chose an area</li>
                 <li>• Aggregate neighborhood-level engagement</li>
               </ul>
+              <p>
+                Know I&apos;m Here may measure how residents use the platform — such as resources viewed, directions
+                requested, categories explored and voluntary check-ins — to understand what is useful and where
+                community needs exist.
+              </p>
+              <p className="font-bold">
+                KIH does not need to create a history of everywhere you travel to measure community engagement.
+              </p>
+              <p>
+                Your questions are never stored. Only a general topic, such as “Food Support”, is recorded. Neighborhood
+                reporting is hidden unless at least five residents contributed to it.
+              </p>
+              <p>
+                <a href="/privacy#kih-data" className="font-bold text-sky underline-offset-4 hover:underline">
+                  About KIH data ↗
+                </a>
+              </p>
               <p>
                 These measurements are intended to help understand whether community resources are being discovered and
                 used.
