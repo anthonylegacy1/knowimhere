@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { parseIntent } from "@/lib/ask.functions";
 import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
+import { parseTimeWindow, type TimeWindow } from "@/lib/schedule";
 import { CATEGORIES, EMERGENCY_KEYWORDS, RESOURCES, type Resource } from "@/data/resources";
 import { useLocationState } from "@/lib/location";
 import { distanceMap } from "@/lib/resource-distance";

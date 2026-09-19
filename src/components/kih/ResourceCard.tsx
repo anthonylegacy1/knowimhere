@@ -59,6 +59,18 @@ export function ResourceCard({
       )}
       <p className="mt-1 text-sm text-foreground/60">{resource.summary}</p>
 
+      {scheduleNote && (
+        <p className="mt-2 rounded-xl bg-sun/40 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide text-foreground">
+          {scheduleNote}
+        </p>
+      )}
+      {!scheduleNote && availabilityUnconfirmed && (
+        <p className="mt-2 text-xs font-bold text-muted-foreground">
+          Availability not confirmed — check current hours with provider.
+        </p>
+      )}
+
+
       <div className="mt-3 flex flex-wrap gap-1.5">
         {live ? (
           <span className="chip" title="Approximate distance from your area to this neighborhood">
