@@ -125,3 +125,4 @@
 - [x] Life Stage is multi-select (array), Age Range stays single-select
 
 - [x] Move existing Ask KIH card directly below I'm Here/location on homepage (no duplicate, keep sticky bar)
+- [ ] Homepage order: hero, phone, For You Today, Ask KIH, core problem
