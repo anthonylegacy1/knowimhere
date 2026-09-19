@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
-import { ImHereControl } from "@/components/kih/ImHere";
+import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
+import { useLocationState } from "@/lib/location";
+import { distanceMap } from "@/lib/resource-distance";
 import { scoreResources } from "@/lib/recommend";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
 
@@ -25,16 +27,28 @@ const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth",
 
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
+  const { on, activeCoords, areaLabel, precise, radiusMiles, setRadius } = useLocationState();
   const [filter, setFilter] = useState<CategoryId | "all" | "saved">("all");
   const [showMore, setShowMore] = useState(false);
 
-  const scored = useMemo(() => scoreResources(profile, undefined, dismissed), [profile, dismissed]);
-  const list =
+  const distances = useMemo(() => distanceMap(RESOURCES, activeCoords), [activeCoords]);
+  const scored = useMemo(
+    () => scoreResources(profile, undefined, dismissed, distances),
+    [profile, dismissed, distances],
+  );
+  const byCategory =
     filter === "all"
       ? scored
       : filter === "saved"
         ? scored.filter((s) => saved.includes(s.resource.id))
         : scored.filter((s) => s.resource.tags.includes(filter));
+  const list =
+    on && radiusMiles !== "all"
+      ? byCategory.filter((s) => {
+          const d = distances[s.resource.id];
+          return d === undefined || d <= radiusMiles;
+        })
+      : byCategory;
 
   const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
   const coreCats = CORE_CATEGORIES.filter((c) => cats.includes(c));
