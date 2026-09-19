@@ -112,7 +112,7 @@ const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
 
 const CORE_OPPORTUNITIES = [
   { emoji: "❤️", label: "Health & Wellness", q: "Health and wellness programs near me" },
-  { emoji: "🌼", label: "Senior Programs", q: "Senior programs near me" },
+  { emoji: "☀️", label: "Senior Programs", q: "Senior programs near me" },
   { emoji: "🤝", label: "Community Activities", q: "Community activities near me" },
   { emoji: "🏀", label: "Recreation", q: "Recreation near me" },
 ];

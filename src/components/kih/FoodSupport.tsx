@@ -86,7 +86,7 @@ const SUBTOPICS: { title: string; emoji: string; text: string; items: string[] }
   },
   {
     title: "Senior Services",
-    emoji: "🌼",
+    emoji: "☀️",
     text: "Programs, meals and social connection for older adults.",
     items: ["Senior centers", "Meal programs", "Benefits help", "Social activities"],
   },
