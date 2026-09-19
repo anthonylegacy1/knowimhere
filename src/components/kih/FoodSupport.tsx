@@ -186,6 +186,8 @@ export function FoodSupport() {
           </Accordion>
         </div>
 
+        <NearbyFood />
+
         <article className="card-flat mt-6 bg-ink p-6 text-cream sm:p-8">
           <div className="flex items-center gap-3">
             <span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span>
