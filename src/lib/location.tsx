@@ -1,8 +1,9 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   GeoError,
   geolocationSupported,
   getCurrentPositionOnce,
+  locateForDiscovery,
   type Coords,
   type GeoErrorKind,
   type GeoReading,
@@ -47,6 +48,10 @@ interface LocationValue {
   savedArea: SavedArea | null;
   radiusMiles: number | "all";
   error: LocationErrorState | null;
+  /** True when the active reading came from the lower-accuracy fallback. */
+  lowConfidence: boolean;
+  /** True when a refresh failed but the earlier session reading is still in use. */
+  staleReading: boolean;
   supported: boolean;
   hydrated: boolean;
   requestGps: () => Promise<boolean>;
@@ -65,9 +70,11 @@ const Ctx = createContext<LocationValue | null>(null);
 const MESSAGES: Record<GeoErrorKind, string> = {
   unsupported: "Your browser doesn't support automatic location. Enter your ZIP code or neighborhood instead.",
   denied: "Location access is off. You can still use Know I'm Here by choosing your ZIP code or neighborhood.",
-  timeout: "We couldn't get your location right now.",
-  unavailable: "Your location isn't available right now.",
+  timeout: "Getting your location is taking longer than expected.",
+  unavailable: "We couldn't determine your current location.",
 };
+
+const STALE_MESSAGE = "Couldn't refresh your location. Showing your last location from this session.";
 
 export function LocationProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<LocationMode>("off");
@@ -79,6 +86,10 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<LocationErrorState | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [supported, setSupported] = useState(true);
+  const [lowConfidence, setLowConfidence] = useState(false);
+  const [staleReading, setStaleReading] = useState(false);
+  // Guards against two GPS requests running at once (double taps, two controls).
+  const inFlight = useRef(false);
 
   useEffect(() => {
     setSupported(geolocationSupported());
@@ -105,24 +116,37 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, [hydrated, savedArea, radiusMiles]);
 
   const requestGps = useCallback(async () => {
+    // Only ever one live request: repeated taps reuse the one already running.
+    if (inFlight.current) return false;
+    inFlight.current = true;
     setError(null);
+    setStaleReading(false);
     setPhase("requesting");
     try {
-      const next = await getCurrentPositionOnce();
-      setReading(next);
-      setGpsArea(nearestAreaLabel(next.coords));
+      const fix = await locateForDiscovery();
+      setReading(fix.reading);
+      setLowConfidence(fix.confidence === "low");
+      setGpsArea(nearestAreaLabel(fix.reading.coords));
       setMode("gps");
       return true;
     } catch (e) {
       const kind = e instanceof GeoError ? e.kind : "unavailable";
+      // A failed refresh must not throw away a good reading from this session.
+      if (reading && kind !== "denied") {
+        setStaleReading(true);
+        setError({ kind, message: STALE_MESSAGE });
+        return false;
+      }
       setError({ kind, message: MESSAGES[kind] });
       setReading(null);
+      setLowConfidence(false);
       setMode((m) => (m === "gps" ? (savedArea ? "manual" : "off") : m));
       return false;
     } finally {
+      inFlight.current = false;
       setPhase("idle");
     }
-  }, [savedArea]);
+  }, [savedArea, reading]);
 
   const setManualArea = useCallback((input: string) => {
     const resolved: ResolvedArea | null = resolveArea(input);
@@ -130,6 +154,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     setSavedArea({ label: resolved.label, coords: resolved.coords, kind: resolved.kind });
     setReading(null);
     setGpsArea(null);
+    setLowConfidence(false);
+    setStaleReading(false);
     setMode("manual");
     setError(null);
     return true;
@@ -144,6 +170,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     // Clear the precise reading from active state immediately.
     setReading(null);
     setGpsArea(null);
+    setLowConfidence(false);
+    setStaleReading(false);
     setMode("off");
     setError(null);
   }, []);
@@ -164,6 +192,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       savedArea,
       radiusMiles,
       error,
+      lowConfidence: mode === "gps" && lowConfidence,
+      staleReading: mode === "gps" && staleReading,
       supported,
       hydrated,
       requestGps,
@@ -174,7 +204,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       clearError: () => setError(null),
       readFreshLocation,
     };
-  }, [mode, phase, reading, gpsArea, savedArea, radiusMiles, error, supported, hydrated, requestGps, setManualArea, clearSavedArea, turnOff, readFreshLocation]);
+  }, [mode, phase, reading, gpsArea, savedArea, radiusMiles, error, lowConfidence, staleReading, supported, hydrated, requestGps, setManualArea, clearSavedArea, turnOff, readFreshLocation]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
