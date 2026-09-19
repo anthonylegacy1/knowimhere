@@ -1075,6 +1075,7 @@ export const RESOURCES: Resource[] = [
     audience: "general",
     lifeStages: ["older-adult", "working", "parent", "young-adult", "caregiver"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: { kind: "resource", timezone: "America/Detroit" },
     nextStep: "Check the current schedule, then pick the location closest to you.",
   },
   {
@@ -1102,6 +1103,14 @@ export const RESOURCES: Resource[] = [
     audience: "general",
     lifeStages: ["older-adult", "working", "caregiver"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: {
+      kind: "event",
+      daysOfWeek: [1, 3],
+      startMinutes: 11 * 60,
+      endMinutes: 13 * 60,
+      timezone: "America/Detroit",
+      datesConfirmed: false,
+    },
     nextStep: "Confirm the day on the Fast Freddy schedule, then come ready to move.",
   },
   {
@@ -1129,6 +1138,14 @@ export const RESOURCES: Resource[] = [
     audience: "general",
     lifeStages: ["older-adult", "working", "parent"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: {
+      kind: "event",
+      daysOfWeek: [2],
+      startMinutes: 11 * 60 + 30,
+      endMinutes: 13 * 60,
+      timezone: "America/Detroit",
+      datesConfirmed: false,
+    },
     nextStep: "Confirm the day on the Fast Freddy schedule, then come ready to move.",
   },
   {
@@ -1156,6 +1173,14 @@ export const RESOURCES: Resource[] = [
     audience: "general",
     lifeStages: ["older-adult", "working", "parent"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: {
+      kind: "event",
+      daysOfWeek: [5],
+      startMinutes: 12 * 60,
+      endMinutes: 13 * 60 + 30,
+      timezone: "America/Detroit",
+      datesConfirmed: false,
+    },
     nextStep: "Confirm the day on the Fast Freddy schedule, then come ready to move.",
   },
   {
@@ -1183,6 +1208,7 @@ export const RESOURCES: Resource[] = [
     audience: "senior-specific",
     lifeStages: ["older-adult", "caregiver"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: { kind: "event", timezone: "America/Detroit", datesConfirmed: false },
     nextStep: "Check the schedule for the next Oak Street Health date before you go.",
   },
   {
@@ -1210,6 +1236,14 @@ export const RESOURCES: Resource[] = [
     audience: "general",
     lifeStages: ["older-adult", "working", "young-adult"],
     links: [{ label: "View Current Schedule", href: "https://fastfreddyexperience.com" }],
+    schedule: {
+      kind: "event",
+      daysOfWeek: [3],
+      startMinutes: 18 * 60 + 30,
+      endMinutes: 22 * 60,
+      timezone: "America/Detroit",
+      datesConfirmed: false,
+    },
     nextStep: "Confirm the date on the Fast Freddy schedule, then dress to enjoy the evening.",
   },
   {
