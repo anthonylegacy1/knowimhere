@@ -173,11 +173,11 @@ function ErrorPanel() {
       <div className="mt-3 flex flex-wrap gap-2">
         {retryable && (
           <Button type="button" variant="outline" className="min-h-12" disabled={phase === "requesting"} onClick={() => void requestGps()}>
-            {phase === "requesting" ? <><Loader2 className="size-5 animate-spin" /> Getting your location…</> : staleReading ? "Try Again" : "Try Location Again"}
+            {phase === "requesting" ? <><Loader2 className="size-5 animate-spin" /> Finding your location…</> : "Try Again"}
           </Button>
         )}
         <Button type="button" className="min-h-12" onClick={() => setManual((v) => !v)}>
-          {staleReading || !retryable ? "Choose Area Manually" : "Use My Area Instead"}
+          {trouble ? "Use ZIP / Neighborhood Instead" : staleReading || !retryable ? "Choose Area Manually" : "Use My Area Instead"}
         </Button>
       </div>
       {manual && <div className="mt-3"><AreaPicker compact onDone={() => setManual(false)} /></div>}
