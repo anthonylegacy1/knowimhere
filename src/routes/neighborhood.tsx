@@ -69,6 +69,32 @@ function Neighborhood() {
     <div className="container-kih py-8 sm:py-12">
       <SectionHeading eyebrow={`Near ${hood}`} title="Know What's Happening Around You" text="Calm, clear neighborhood information — community meetings, rec-center updates, weather notices, road closures and City services. Not a crime feed." />
 
+      <div className="mt-6">
+        <ImHereControl />
+      </div>
+
+      <section className="mt-6 card-flat p-6">
+        <h2 className="font-display text-xl font-extrabold">Based on your current area</h2>
+        <p className="mt-1 text-sm text-foreground/70">
+          {on
+            ? `${precise ? "Using your current location" : "Using the area you selected"} · ${hood}`
+            : "Choose a neighborhood or ZIP code to personalize this section."}
+        </p>
+        {on && (
+          <ul className="mt-4 grid gap-2">
+            {nearby.map(({ r, d }) => (
+              <li key={r.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card px-4 py-3">
+                <span className="font-bold">{r.name}</span>
+                <span className="text-sm text-foreground/65">{r.neighborhood} · {r.whenLabel}</span>
+                <span className="chip ml-auto text-xs">~{d!.miles.toFixed(1)} mi away</span>
+                <Link to="/resource/$id" params={{ id: r.id }} className="btn-base btn-outline btn-sm">View details</Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+
       <div className="mt-6 -mx-5 overflow-x-auto px-5 pb-1">
         <div className="flex w-max gap-2">
           {FILTERS.map((f) => (
