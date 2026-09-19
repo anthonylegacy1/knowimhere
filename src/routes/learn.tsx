@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Play } from "lucide-react";
-import { useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
-import { EXTERNAL_LINKS, LEARNING_TRACKS, VIDEOS } from "@/data/resources";
+import { EXTERNAL_LINKS } from "@/data/resources";
 
 const TITLE = "Everyday Connect Learning — Digital Confidence for Everyday Life | Know I'm Here";
 const DESC =
@@ -20,11 +18,39 @@ export const Route = createFileRoute("/learn")({
   component: Learn,
 });
 
-function Learn() {
-  const [track, setTrack] = useState(LEARNING_TRACKS[0]!.id);
-  const active = LEARNING_TRACKS.find((t) => t.id === track)!;
-  const videos = VIDEOS.filter((v) => ["ec-seniors", "ec-students", "safety", "jobs"].includes(v.id));
+const HELP_AREAS = [
+  { emoji: "📱", label: "Smartphone skills" },
+  { emoji: "♿", label: "Accessibility" },
+  { emoji: "💬", label: "Communication" },
+  { emoji: "🩺", label: "Healthcare technology" },
+  { emoji: "🔐", label: "Digital safety" },
+  { emoji: "🤖", label: "AI made simple" },
+  { emoji: "💼", label: "Career & digital skills" },
+];
 
+const PATHWAYS = [
+  {
+    emoji: "🌻",
+    title: "Everyday Connect: Older Adults",
+    text: "Practical help with smartphones, healthcare technology, accessibility, digital safety and everyday digital tools.",
+    tone: "bg-sun/10",
+  },
+  {
+    emoji: "🚀",
+    title: "Everyday Connect: Future Ready",
+    text: "Digital skills for youth including AI, creativity, career readiness, digital safety and building with technology.",
+    tone: "bg-sky/10",
+  },
+];
+
+const FLOW = [
+  { step: "Everyday Connect", label: "Learn how to use the technology", tone: "bg-sky/10 text-sky" },
+  { step: "Build digital confidence", label: "Skills you can use every day", tone: "bg-sky/10 text-sky" },
+  { step: "Know I'm Here", label: "Discover opportunities around you", tone: "bg-brand/10 text-brand" },
+  { step: "Connect + participate", label: "Resources · Programs · Events · Health · Jobs · Recreation", tone: "bg-brand/10 text-brand" },
+];
+
+function Learn() {
   return (
     <div className="container-kih py-8 sm:py-12">
       <SectionHeading
@@ -43,83 +69,75 @@ function Learn() {
           Everyday Connect teaches you how to use the technology.{" "}
           <span className="text-brand">Know I&apos;m Here helps you use that confidence to connect with opportunities around you.</span>
         </p>
+      </section>
 
-        <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { step: "Everyday Connect", label: "Learn the technology", tone: "bg-sky/10 text-sky" },
-            { step: "Build digital confidence", label: "Skills you can use every day", tone: "bg-sky/10 text-sky" },
-            { step: "Know I'm Here", label: "Discover resources and opportunities", tone: "bg-brand/10 text-brand" },
-            { step: "Connect & participate", label: "Programs · Events · Services · Health · Jobs · Recreation", tone: "bg-brand/10 text-brand" },
-          ].map((item) => (
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-bold">Who it&apos;s for</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {PATHWAYS.map((p) => (
+            <article key={p.title} className={`card-pop p-6 ${p.tone}`}>
+              <span className="text-3xl" aria-hidden>{p.emoji}</span>
+              <h3 className="mt-2 font-display text-xl font-bold">{p.title}</h3>
+              <p className="mt-2 text-foreground/70">{p.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-bold">Everyday Connect can help with</h2>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {HELP_AREAS.map((a) => (
+            <li key={a.label} className="chip min-h-12 px-5 text-base">
+              <span aria-hidden>{a.emoji}</span> {a.label}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Full lessons, videos and guided practice live on the Everyday Connect learning platform.
+        </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-bold">How Everyday Connect + Know I&apos;m Here work together</h2>
+        <div className="card-pop mt-4 p-6 sm:p-8">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">How it works</p>
+          <p className="mt-3 max-w-2xl text-foreground/75">
+            Everyday Connect helps people build the digital confidence to use technology. Know I&apos;m Here helps people use that confidence to
+            discover resources, programs, services and opportunities around them.
+          </p>
+          <p className="mt-5 inline-flex rounded-full bg-ink px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-cream">
+            Video coming soon
+          </p>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-bold">From confidence to connection</h2>
+        <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FLOW.map((item) => (
             <li key={item.step} className="card-flat flex flex-col gap-2 p-4">
-              <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${item.tone}`}>{item.step}</span>
+              <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${item.tone}`}>
+                {item.step}
+              </span>
               <span className="text-sm font-semibold text-foreground/70">{item.label}</span>
             </li>
           ))}
         </ol>
       </section>
 
-      <p className="card-pop mt-8 p-5 font-display text-lg font-semibold">
-        Everyday Connect teaches digital capability. <span className="text-brand">Know I&apos;m Here turns that capability into access to real opportunity.</span>
-      </p>
-
-      <div className="mt-8 flex flex-wrap gap-2" role="tablist">
-        {LEARNING_TRACKS.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={track === t.id}
-            onClick={() => setTrack(t.id)}
-            className={`chip min-h-12 cursor-pointer px-5 text-base ${track === t.id ? "bg-ink text-cream" : ""}`}
-          >
-            <span aria-hidden>{t.emoji}</span> {t.title}
-          </button>
-        ))}
-      </div>
-
-      <section className={`card-pop mt-4 p-6 sm:p-8 ${active.tone}`}>
-        <h2 className="font-display text-2xl font-bold">{active.title}</h2>
-        <p className="mt-1 text-foreground/70">{active.subtitle}</p>
-        <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {active.topics.map((t) => (
-            <li key={t} className="rounded-2xl bg-card px-4 py-3 font-semibold">
-              {t}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Prototype curriculum outline · lessons and videos coming soon
+      <section className="card-pop mt-10 p-6 sm:p-8">
+        <h2 className="font-display text-2xl font-bold">Ready to start learning?</h2>
+        <p className="mt-2 max-w-2xl text-foreground/70">
+          Explore step-by-step lessons, videos, guided practice, and digital confidence tools on the full Everyday Connect learning platform.
         </p>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="font-display text-2xl font-bold">Video lessons</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {videos.map((v) => (
-            <article key={v.id} className="card-flat overflow-hidden">
-              <div className="relative grid aspect-video place-items-center bg-ink text-cream">
-                <span className="text-4xl" aria-hidden>{v.emoji}</span>
-                <span className="absolute grid size-12 place-items-center rounded-full bg-brand text-cream">
-                  <Play className="size-5" fill="currentColor" />
-                </span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display font-bold">{v.title}</h3>
-                <p className="mt-1 text-xs font-semibold text-muted-foreground">Video placeholder · {v.length}</p>
-              </div>
-            </article>
-          ))}
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="btn-base btn-brand min-h-14">
+            Open Everyday Connect ↗
+          </a>
+          <Link to="/" className="btn-base btn-outline min-h-14">Back to Know I&apos;m Here</Link>
         </div>
       </section>
-
-      <div className="mt-10 flex flex-wrap gap-3">
-        <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="btn-base btn-brand">
-          Explore Everyday Connect ↗
-        </a>
-        <Link to="/opportunities" className="btn-base btn-outline">Youth opportunities</Link>
-        <Link to="/work-after-55" className="btn-base btn-outline">Work After 55</Link>
-      </div>
     </div>
   );
 }
