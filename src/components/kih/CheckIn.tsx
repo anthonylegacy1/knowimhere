@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import type { Resource } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
 import { persistCheckIn } from "@/lib/impact";
-import { resourceCoords } from "@/lib/resource-distance";
+import { canVerifyCheckIn, resourceCoords } from "@/lib/resource-distance";
 import { VERIFICATION_POLICY, formatMiles, metersToMiles, verifyArrival, type ArrivalOutcome } from "@/lib/geo";
 
 type Sharing = "private" | "family" | "caregiver";
@@ -18,7 +18,10 @@ export function CheckIn({ resource, onChecked }: { resource: Resource; onChecked
   const [checking, setChecking] = useState(false);
   const [outcome, setOutcome] = useState<ArrivalOutcome | null>(null);
   const [verified, setVerified] = useState(false);
-  const destination = resourceCoords(resource);
+  // Only resources with high-confidence address-level coordinates can back a
+  // location-verified check-in. Everything else is self-reported.
+  const canVerify = canVerifyCheckIn(resource);
+  const destination = canVerify ? resourceCoords(resource) : null;
 
   function record(status: "verified" | "self_reported", distanceMeters?: number) {
     void persistCheckIn({
@@ -106,8 +109,9 @@ export function CheckIn({ resource, onChecked }: { resource: Resource; onChecked
           </div>
         )}
         <p className="mt-3 text-xs text-brand-foreground/75">
-          Verified check-ins compare a fresh location reading with this resource&apos;s recorded area
-          (within {VERIFICATION_POLICY.proximityMeters} meters). Coordinates are not stored.
+          {canVerify
+            ? `Verified check-ins compare a fresh location reading with this resource's verified street address (within ${VERIFICATION_POLICY.proximityMeters} meters). Coordinates are not stored.`
+            : "This resource only has an approximate area on record, so your check-in is saved as self-reported rather than location-verified."}
         </p>
         <fieldset className="mt-5">
           <legend className="text-sm font-bold text-brand-foreground/85">Who can see this check-in?</legend>

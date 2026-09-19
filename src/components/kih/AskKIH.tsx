@@ -4,7 +4,9 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { parseIntent } from "@/lib/ask.functions";
 import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
-import { CATEGORIES, EMERGENCY_KEYWORDS, type Resource } from "@/data/resources";
+import { CATEGORIES, EMERGENCY_KEYWORDS, RESOURCES, type Resource } from "@/data/resources";
+import { useLocationState } from "@/lib/location";
+import { distanceMap } from "@/lib/resource-distance";
 import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
 import { matchCityResources, DETROIT_OPPORTUNITIES } from "@/data/city-resources";
 import { CityResourceCard } from "./CityResourceCard";
@@ -12,8 +14,11 @@ import { LiveSummary } from "./LiveSummary";
 import { ResourceCard } from "./ResourceCard";
 import { IssueFlow } from "./IssueFlow";
 import { EmergencyNotice } from "./EmergencyNotice";
+import { NearbyGroups, NEARBY_QUESTION_PATTERN } from "./NearbyGroups";
+import { VoiceInput } from "./VoiceInput";
 
 export const EXAMPLE_QUESTIONS = [
+  "What resources are around me right now?",
   "What can I do near me today?",
   "What's happening around me?",
   "I need transportation.",
@@ -50,6 +55,7 @@ export function AskKIH({
   compact?: boolean;
 }) {
   const { profile, dismissed } = useApp();
+  const { activeCoords } = useLocationState();
   const parse = useServerFn(parseIntent);
   const [q, setQ] = useState(initialQuestion ?? "");
   const [turns, setTurns] = useState<Turn[]>([]);
@@ -95,7 +101,7 @@ export function AskKIH({
       intent.isIssueReport = intent.isIssueReport || kw.isIssueReport;
       intent.needsTransit = intent.needsTransit || kw.needsTransit;
     }
-    const results = intent.isEmergency || intent.isIssueReport ? [] : scoreResources(profile, intent, dismissed).slice(0, 4);
+    const results = intent.isEmergency || intent.isIssueReport ? [] : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords)).slice(0, 4);
     const turn: Turn = { question: text, intent, results, source };
     setTurns((t) => [turn, ...t]);
     onResults?.(turn);
@@ -135,6 +141,9 @@ export function AskKIH({
           <button type="submit" disabled={busy} className="btn-base btn-brand btn-sm shrink-0">
             {busy ? "Thinking…" : "Ask"}
           </button>
+        </div>
+        <div className="pt-2.5">
+          <VoiceInput onTranscript={(text) => setQ(text)} />
         </div>
         {!compact && (
           <div className="flex flex-wrap gap-2 px-2 pt-2.5">
@@ -177,6 +186,12 @@ export function AskKIH({
                 <>
                   {LIVE_QUESTION_KEYWORDS.some((k) => t.question.toLowerCase().includes(k)) && (
                     <div className="mb-5"><LiveSummary /></div>
+                  )}
+                  {NEARBY_QUESTION_PATTERN.test(t.question) && (
+                    <div className="mb-5">
+                      <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Around you right now</p>
+                      <NearbyGroups />
+                    </div>
                   )}
                   <p className="text-lg">
                     {t.intent.summary ? (

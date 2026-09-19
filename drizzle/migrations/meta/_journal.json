@@ -15,6 +15,13 @@
       "when": 1789805436907,
       "tag": "0001_tighten_kih_privileges",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789806433973,
+      "tag": "0002_resource_geocoding_fields",
+      "breakpoints": true
     }
   ]
 }
