@@ -151,6 +151,23 @@ function Index() {
         </div>
       </section>
 
+      <section className="container-kih py-14">
+        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
+        <div className="mt-6"><ImHereControl /></div>
+      </section>
+
+      <section className="container-kih pb-2 pt-4">
+          <article className="card-flat mt-7 bg-ink p-6 text-cream sm:p-8">
+            <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
+            <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
+              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
+              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Where can I get resume help?”</li>
+              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Are there free activities near me?”</li>
+            </ul>
+            <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
+          </article>
+      </section>
+
       <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
         <div className="container-kih">
           <div className="mx-auto max-w-2xl text-center">
@@ -177,39 +194,12 @@ function Index() {
         </div>
       </section>
 
-      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
-        <article className="card-flat p-6 sm:p-8">
-          <span className="eyebrow">Community + public health</span>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
-          <p className="mt-2 max-w-2xl text-foreground/70">
-            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
-          </p>
-          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
-            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </article>
-      </section>
-
-      <section className="container-kih py-14">
-        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
-        <div className="mt-6"><ImHereControl /></div>
-      </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-sm text-foreground/70">Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it helps residents find the right resource and understand where to start.</p><p className="mt-3 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 
       <section className="container-kih pb-14">
         <SectionHeading eyebrow="For You Today" title="Find what fits. Then find your way there." text="Ask in your own words or explore opportunities based on the interests and location you choose. When you find something useful, Know I'm Here can help you understand your next step and how to get there." />
 
-        <article className="card-flat mt-7 bg-ink p-6 text-cream sm:p-8">
-          <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
-          <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
-            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
-            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Where can I get resume help?”</li>
-            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Are there free activities near me?”</li>
-          </ul>
-          <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
-        </article>
 
         <article className="card-flat mt-4 p-6">
           <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">Personalized for you</p><h3 className="text-xl font-extrabold">A shorter path to what fits.</h3></div></div>
@@ -251,6 +241,20 @@ function Index() {
             </div>
           </details>
         </div>
+      </section>
+
+      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
+        <article className="card-flat p-6 sm:p-8">
+          <span className="eyebrow">Community + public health</span>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
+          <p className="mt-2 max-w-2xl text-foreground/70">
+            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
+          </p>
+          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
+            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </article>
       </section>
 
       <section id="my-neighborhood" className="container-kih scroll-mt-24 py-14">
