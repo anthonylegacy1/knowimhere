@@ -72,6 +72,10 @@ function Opportunities() {
         text="After-school programs, tutoring, summer jobs, internships, trades, college help, mentoring, sports, STEM and wellness — in one place, filtered to what actually fits."
       />
 
+      <div className="mt-6">
+        <EverydayConnectTip text="Explore Future Ready digital skills through Everyday Connect." linkLabel="Visit Everyday Connect" />
+      </div>
+
       <div className="card-pop mt-6 p-4 sm:p-5">
         <p className="font-display font-bold">Try asking in your own words</p>
         <div className="mt-2">
