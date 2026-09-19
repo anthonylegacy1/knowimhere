@@ -2,8 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { IssueFlow } from "@/components/kih/IssueFlow";
 import { SectionHeading } from "@/components/kih/SectionHeading";
-import { ISSUE_TYPES, NEIGHBORHOOD_UPDATES, type UpdateKind } from "@/data/resources";
+import { ISSUE_TYPES, NEIGHBORHOOD_UPDATES, RESOURCES, type UpdateKind } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
+import { useLocationState } from "@/lib/location";
+import { distanceToResource } from "@/lib/resource-distance";
+import { ImHereControl } from "@/components/kih/ImHere";
 import { cityResource } from "@/data/city-resources";
 import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
@@ -40,10 +43,15 @@ const KIND_STYLE: Record<UpdateKind, string> = {
 
 function Neighborhood() {
   const { profile } = useApp();
+  const { on, areaLabel, precise, activeCoords } = useLocationState();
   const [filter, setFilter] = useState<Filter>("mine");
   const [issueText, setIssueText] = useState("");
   const [submitted, setSubmitted] = useState<string | null>(null);
-  const hood = profile.neighborhood || "Southwest Detroit";
+  const hood = areaLabel ?? profile.neighborhood ?? "Southwest Detroit";
+  const nearby = RESOURCES.map((r) => ({ r, d: distanceToResource(r, activeCoords) }))
+    .filter((e) => e.d !== null)
+    .sort((a, b) => a.d!.miles - b.d!.miles)
+    .slice(0, 4);
 
   const list = NEIGHBORHOOD_UPDATES.filter((u) => {
     if (filter === "mine") return true;
