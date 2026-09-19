@@ -109,9 +109,18 @@ function LivePage() {
   const [responders, setResponders] = useState(2);
   const [clear, setClear] = useState(0);
   const [alertsOn, setAlertsOn] = useState(true);
-  const [radius, setRadius] = useState(ALERT_RADIUS[1]!);
+  const [radius, setRadius] = useState<AlertRadius>(ALERT_RADIUS[1]);
+  const { activeCoords, areaLabel, on: locationOn, precise } = useLocationState();
 
-  const items = LIVE_ITEMS.filter((i) => i.scopes.includes(tab));
+  const limitMiles = ALERT_RADIUS_MILES[radius];
+  const itemsInScope = LIVE_ITEMS.filter((i) => i.scopes.includes(tab));
+  const withDistance = itemsInScope.map((i) => ({
+    item: i,
+    miles: activeCoords && i.coords ? metersToMiles(haversineMeters(activeCoords, i.coords)) : null,
+  }));
+  const items = (
+    locationOn ? withDistance.filter((e) => e.miles === null || e.miles <= limitMiles) : withDistance
+  ).sort((a, b) => (a.miles ?? Number.POSITIVE_INFINITY) - (b.miles ?? Number.POSITIVE_INFINITY));
 
   return (
     <div className="container-kih py-8 sm:py-12">
