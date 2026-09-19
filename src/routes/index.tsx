@@ -524,9 +524,6 @@ function StageCard({ n, title, text }: { n: string; title: string; text: string 
   );
 }
 
-function Metric({ icon, value, label }: { icon: ReactNode; value: string; label: string }) {
-  return <article className="card-flat p-5"><span className="text-sky">{icon}</span><p className="mt-3 text-3xl font-extrabold text-ink">{value}</p><p className="mt-1 text-sm font-semibold text-foreground/65">{label}</p></article>;
-}
 
 function Promise({ icon, title }: { icon: ReactNode; title: string }) {
   return <div className="card-flat flex min-h-32 flex-col justify-between p-5"><span className="text-sky">{icon}</span><p className="mt-4 font-bold">{title}</p></div>;
