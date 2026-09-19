@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import type { Resource } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
+import { persistCheckIn } from "@/lib/impact";
 import { resourceCoords } from "@/lib/resource-distance";
 import { VERIFICATION_POLICY, formatMiles, metersToMiles, verifyArrival, type ArrivalOutcome } from "@/lib/geo";
 
@@ -20,6 +21,13 @@ export function CheckIn({ resource, onChecked }: { resource: Resource; onChecked
   const destination = resourceCoords(resource);
 
   function record(status: "verified" | "self_reported", distanceMeters?: number) {
+    void persistCheckIn({
+      resourceSlug: resource.id,
+      category: resource.category,
+      neighborhood: resource.neighborhood,
+      status,
+      ...(distanceMeters !== undefined ? { distanceMeters } : {}),
+    });
     addCheckIn({
       resourceId: resource.id,
       resourceName: resource.name,

@@ -1,6 +1,57 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { fetchImpactTotals, type ImpactTotals } from "@/lib/impact";
+
+function LiveImpact() {
+  const [totals, setTotals] = useState<ImpactTotals | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    void fetchImpactTotals().then((t) => {
+      if (!active) return;
+      setTotals(t);
+      setLoaded(true);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  if (!loaded || !totals) return null;
+
+  const items = [
+    ["Resource views", totals.resourceViews],
+    ["Get There clicks", totals.getThereClicks],
+    ["Self-reported check-ins", totals.selfReportedCheckIns],
+    ["Location-verified check-ins", totals.verifiedCheckIns],
+  ] as const;
+
+  return (
+    <div className="card-pop mt-6 border-2 border-mint p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="font-display text-xl font-bold">Measured in this MVP</h2>
+        <span className="chip bg-mint/25 text-[11px] uppercase tracking-wide">Live MVP data</span>
+      </div>
+      <p className="mt-1 text-sm text-foreground/70">
+        Real aggregate counts from this prototype. Totals only — no individual resident, location or history is shown
+        or stored here.
+      </p>
+      <dl className="mt-4 grid gap-3 sm:grid-cols-4">
+        {items.map(([label, n]) => (
+          <div key={label} className="card-flat p-4">
+            <dd className="font-display text-3xl font-bold">{n}</dd>
+            <dt className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">{label}</dt>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-3 text-xs text-muted-foreground">
+        The funnel below is separate Buildathon demonstration data, not live usage.
+      </p>
+    </div>
+  );
+}
 
 const TITLE = "Partners & Impact — From Outreach to Measurable Participation | Know I'm Here";
 const DESC = "How Know I'm Here helps Detroit organizations move from outreach spend to measured participation, plus the business model and product roadmap.";
@@ -59,6 +110,8 @@ function Partners() {
           </button>
         ))}
       </div>
+
+      {tab === "Impact" && <LiveImpact />}
 
       {tab === "Impact" && (
         <div className="mt-6 grid gap-5 lg:grid-cols-5">

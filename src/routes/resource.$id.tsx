@@ -5,6 +5,7 @@ import { CATEGORIES, getResource } from "@/data/resources";
 import { GetThere } from "@/components/kih/GetThere";
 import { CheckIn } from "@/components/kih/CheckIn";
 import { useApp } from "@/lib/app-store";
+import { logEngagement } from "@/lib/impact";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/resource/$id")({
@@ -46,6 +47,15 @@ function ResourcePage() {
   const getThereRef = useRef<HTMLDivElement>(null);
   const checkInRef = useRef<HTMLDivElement>(null);
   const cat = CATEGORIES[resource.category];
+
+  useEffect(() => {
+    void logEngagement({
+      type: "resource_view",
+      resourceSlug: resource.id,
+      category: resource.category,
+      neighborhood: resource.neighborhood,
+    });
+  }, [resource.id, resource.category, resource.neighborhood]);
 
   useEffect(() => {
     if (stage === "get-there") getThereRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
