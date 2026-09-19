@@ -191,6 +191,7 @@ function Index() {
       <section className="container-kih pt-8 pb-4">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
+        <div className="mt-6"><NearbyMapPreview /></div>
       </section>
 
       <section className="container-kih pb-14">
