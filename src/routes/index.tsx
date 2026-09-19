@@ -322,7 +322,22 @@ function Index() {
       </div></section>
 
       <section id="fast-freddy" className="container-kih scroll-mt-24 py-14">
-        <SectionHeading eyebrow="The experience behind the pilot" title="More Than Entertainment. A Platform for Active, Connected Living." />
+        <div className="max-w-2xl">
+          <span className="eyebrow">The experience behind the pilot</span>
+          <div className="mt-3">
+            <a
+              href={EXTERNAL_LINKS.fastFreddy}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand/20"
+            >
+              Connect With the Experience
+              <ExternalLink className="size-4" aria-hidden />
+            </a>
+            <p className="mt-2 text-sm text-foreground/65">Explore the Fast Freddy Experience, upcoming programs, events and community engagement.</p>
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">More Than Entertainment. A Platform for Active, Connected Living.</h2>
+        </div>
         <figure className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-lg border border-border">
           <img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
           <figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption>
