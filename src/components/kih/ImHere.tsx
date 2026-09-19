@@ -397,8 +397,9 @@ export function ImHereControl() {
         <PrePermissionDialog
           busy={phase === "requesting"}
           onClose={() => setAsk(false)}
+          found={askLocation.found}
           onManual={() => { setAsk(false); setManual(true); }}
-          onUse={() => void requestGps().then((ok) => { if (ok) setAsk(false); })}
+          onUse={askLocation.run}
         />
       )}
     </div>
