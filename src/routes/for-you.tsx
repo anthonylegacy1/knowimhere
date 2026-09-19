@@ -75,32 +75,62 @@ function ForYou() {
       </div>
 
 
-      <div className="mt-6 -mx-5 overflow-x-auto px-5 pb-1">
-        <div className="flex w-max gap-2">
+      <div className="mt-6">
+        <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setFilter("all")}
-            className={`chip min-h-10 cursor-pointer px-4 ${filter === "all" ? "bg-ink text-cream" : ""}`}
+            className={`chip min-h-11 cursor-pointer px-4 ${filter === "all" ? "bg-ink text-cream" : ""}`}
           >
             All
           </button>
           <button
             type="button"
             onClick={() => setFilter("saved")}
-            className={`chip min-h-10 cursor-pointer px-4 ${filter === "saved" ? "bg-ink text-cream" : ""}`}
+            className={`chip min-h-11 cursor-pointer px-4 ${filter === "saved" ? "bg-ink text-cream" : ""}`}
           >
             Saved ({saved.length})
           </button>
-          {cats.map((c) => (
+          {coreCats.map((c) => (
             <button
               key={c}
               type="button"
               onClick={() => setFilter(c)}
-              className={`chip min-h-10 cursor-pointer px-4 ${filter === c ? "bg-ink text-cream" : ""}`}
+              className={`chip min-h-11 cursor-pointer px-4 ${filter === c ? "bg-ink text-cream" : ""}`}
             >
               {CATEGORIES[c].emoji} {CATEGORIES[c].label}
             </button>
           ))}
+        </div>
+
+        {showMore && (
+          <div id="more-filter-categories" className="mt-2 flex flex-wrap gap-2">
+            {moreCats.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setFilter(c)}
+                className={`chip min-h-11 cursor-pointer px-4 ${filter === c ? "bg-ink text-cream" : ""}`}
+              >
+                {CATEGORIES[c].emoji} {CATEGORIES[c].label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-3 flex flex-col items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setShowMore((v) => !v)}
+            aria-expanded={showMore}
+            aria-controls="more-filter-categories"
+            className="btn-base btn-outline min-h-12 px-5"
+          >
+            {showMore ? "Show Less ↑" : "More Categories ↓"}
+          </button>
+          {!showMore && moreSelected && (
+            <span className="text-sm font-bold text-brand">1 additional category selected</span>
+          )}
         </div>
       </div>
 
