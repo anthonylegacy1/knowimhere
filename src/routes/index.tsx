@@ -302,7 +302,7 @@ function Index() {
                 <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
                 <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
               </ol>
-              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See it in the demo <ArrowRight /></Link></Button>
+              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
             </article>
         </div>
       </section>
