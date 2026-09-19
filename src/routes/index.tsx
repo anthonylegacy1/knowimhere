@@ -49,7 +49,7 @@ import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
-import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
+import { EXTERNAL_LINKS, PERSONAS, PRIORITIES } from "@/data/resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
