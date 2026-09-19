@@ -97,6 +97,94 @@ export function getCurrentPositionOnce(options?: PositionOptions): Promise<GeoRe
   });
 }
 
+/**
+ * Discovery reads (nearby resources, For You Today, Get There origin) use these.
+ * Check-in verification keeps its own stricter policy above.
+ */
+export const DISCOVERY_PRIMARY_OPTIONS: PositionOptions = {
+  enableHighAccuracy: true,
+  timeout: 15_000,
+  maximumAge: 30_000,
+};
+
+export const DISCOVERY_FALLBACK_OPTIONS: PositionOptions = {
+  enableHighAccuracy: false,
+  timeout: 10_000,
+  maximumAge: 60_000,
+};
+
+export interface GeoDiagnostic {
+  at: number;
+  mode: "high_accuracy" | "network_fallback";
+  outcome: "success" | "error";
+  errorKind?: GeoErrorKind;
+  accuracyMeters?: number;
+  durationMs: number;
+}
+
+const diagnostics: GeoDiagnostic[] = [];
+
+/** Development diagnostics only: never records coordinates, only quality signals. */
+export function recordGeoDiagnostic(entry: GeoDiagnostic) {
+  diagnostics.push(entry);
+  if (diagnostics.length > 20) diagnostics.shift();
+  if (import.meta.env.DEV) {
+    // eslint-disable-next-line no-console
+    console.debug("[kih:geo]", entry);
+  }
+}
+
+export function geoDiagnostics(): readonly GeoDiagnostic[] {
+  return diagnostics;
+}
+
+export interface DiscoveryFix {
+  reading: GeoReading;
+  /** "low" means the reading came from the network fallback or has a wide radius. */
+  confidence: "high" | "low";
+}
+
+/**
+ * One high-accuracy attempt, then one lower-accuracy attempt if the first
+ * timed out or was temporarily unavailable. A denial or unsupported browser
+ * stops immediately — we never re-prompt residents who said no.
+ */
+export async function locateForDiscovery(): Promise<DiscoveryFix> {
+  const attempts: { mode: GeoDiagnostic["mode"]; options: PositionOptions }[] = [
+    { mode: "high_accuracy", options: DISCOVERY_PRIMARY_OPTIONS },
+    { mode: "network_fallback", options: DISCOVERY_FALLBACK_OPTIONS },
+  ];
+  let lastError: GeoError = new GeoError("unavailable", "Location unavailable.");
+  for (const attempt of attempts) {
+    const started = Date.now();
+    try {
+      const reading = await getCurrentPositionOnce(attempt.options);
+      recordGeoDiagnostic({
+        at: started,
+        mode: attempt.mode,
+        outcome: "success",
+        accuracyMeters: reading.accuracyMeters,
+        durationMs: Date.now() - started,
+      });
+      const confidence =
+        attempt.mode === "high_accuracy" && reading.accuracyMeters <= MAX_VERIFY_ACCURACY_METERS ? "high" : "low";
+      return { reading, confidence };
+    } catch (e) {
+      const err = e instanceof GeoError ? e : new GeoError("unavailable", "Location unavailable.");
+      recordGeoDiagnostic({
+        at: started,
+        mode: attempt.mode,
+        outcome: "error",
+        errorKind: err.kind,
+        durationMs: Date.now() - started,
+      });
+      lastError = err;
+      if (err.kind === "denied" || err.kind === "unsupported") throw err;
+    }
+  }
+  throw lastError;
+}
+
 export interface ProximityResult {
   distanceMeters: number;
   accuracyMeters: number;
