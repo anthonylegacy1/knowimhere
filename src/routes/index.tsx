@@ -50,6 +50,7 @@ import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { FoodSupport } from "@/components/kih/FoodSupport";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
 import { CITY_RESOURCES } from "@/data/city-resources";
