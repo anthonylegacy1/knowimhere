@@ -43,6 +43,9 @@ function MapPage() {
   const { selectedCategories, toggleCategory, clearFilters } = useCategoryFilters();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
+  // Presentation mode only. Both views render the same `sorted` dataset,
+  // the same shared location state and the same shared category filters.
+  const [view, setView] = useState<"map" | "list">("map");
 
   // Every mappable resource comes from the resource database — no invented points.
   const mapped = useMemo(
