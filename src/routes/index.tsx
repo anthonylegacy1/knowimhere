@@ -50,6 +50,7 @@ import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.ass
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
+import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
@@ -191,6 +192,7 @@ function Index() {
       <section className="container-kih pt-8 pb-4">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
+        <div className="mt-6"><NearbyMapPreview /></div>
       </section>
 
       <section className="container-kih pb-14">

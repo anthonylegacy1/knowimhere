@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Suspense, lazy, useMemo, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Bookmark, BookmarkCheck, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
@@ -9,19 +9,14 @@ import { SectionHeading } from "@/components/kih/SectionHeading";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
 import { verifiedPhone } from "@/data/resource-contacts";
 import { useApp } from "@/lib/app-store";
-import { useCategoryFilters } from "@/lib/category-filters";
-import { useLocationState } from "@/lib/location";
-import { distanceToResource, isApproximate, resourceCoords } from "@/lib/resource-distance";
-import type { MapMarkerData } from "@/components/kih/NearbyMap";
+import { distanceToResource, isApproximate } from "@/lib/resource-distance";
+import { useNearbyResults } from "@/lib/nearby-results";
 
 // The map library only downloads once the resident opens the map.
 const NearbyMap = lazy(() => import("@/components/kih/NearbyMap"));
 
 const TITLE = "Map What's Around Me — Nearby Detroit Resources | Know I'm Here";
 const DESC = "See Detroit resources, programs and opportunities on a map around the area you choose, with real distances and directions.";
-
-// Detroit center: used only when no area has been chosen yet.
-const DETROIT = { lat: 42.3314, lng: -83.0458 };
 
 export const Route = createFileRoute("/map")({
   head: () => ({
@@ -39,60 +34,32 @@ export const Route = createFileRoute("/map")({
 
 function MapPage() {
   const { saved, toggleSaved } = useApp();
-  const { on, activeCoords, areaLabel, precise, radiusMiles, setRadius } = useLocationState();
-  const { selectedCategories, toggleCategory, clearFilters } = useCategoryFilters();
+  // ONE shared pipeline: same location state, same category filters, same results.
+  const {
+    on,
+    activeCoords,
+    areaLabel,
+    precise,
+    radiusMiles,
+    setRadius,
+    selectedCategories,
+    toggleCategory,
+    clearFilters,
+    results: sorted,
+    markers,
+    center,
+    youLabel,
+    preciseCount,
+    approxCount,
+  } = useNearbyResults();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
   // Presentation mode only. Both views render the same `sorted` dataset,
   // the same shared location state and the same shared category filters.
   const [view, setView] = useState<"map" | "list">("map");
 
-  // Every mappable resource comes from the resource database — no invented points.
-  const mapped = useMemo(
-    () =>
-      RESOURCES.map((r) => ({ resource: r, coords: resourceCoords(r) })).filter(
-        (x): x is { resource: (typeof RESOURCES)[number]; coords: { lat: number; lng: number } } => x.coords !== null,
-      ),
-    [],
-  );
-
-  const filtered = useMemo(() => {
-    const byCategory =
-      selectedCategories.length === 0
-        ? mapped
-        : mapped.filter((x) => x.resource.tags.some((t) => selectedCategories.includes(t as CategoryId)));
-    if (!activeCoords || radiusMiles === "all") return byCategory;
-    return byCategory.filter((x) => {
-      const d = distanceToResource(x.resource, activeCoords);
-      return d ? d.miles <= radiusMiles : true;
-    });
-  }, [mapped, selectedCategories, activeCoords, radiusMiles]);
-
-  const sorted = useMemo(() => {
-    if (!activeCoords) return filtered;
-    return [...filtered].sort((a, b) => {
-      const da = distanceToResource(a.resource, activeCoords)?.miles ?? Infinity;
-      const db = distanceToResource(b.resource, activeCoords)?.miles ?? Infinity;
-      return da - db;
-    });
-  }, [filtered, activeCoords]);
-
-  const markers: MapMarkerData[] = sorted.map((x) => ({
-    id: x.resource.id,
-    name: x.resource.name,
-    lat: x.coords.lat,
-    lng: x.coords.lng,
-    emoji: CATEGORIES[x.resource.category].emoji,
-    approximate: isApproximate(x.resource),
-  }));
-
   const selected = sorted.find((x) => x.resource.id === selectedId) ?? null;
   const selectedDistance = selected ? distanceToResource(selected.resource, activeCoords) : null;
-  const center = activeCoords ?? DETROIT;
-  const youLabel = precise ? "You are here" : "Selected area";
-
-  const preciseCount = mapped.filter((x) => !isApproximate(x.resource)).length;
-  const approxCount = mapped.length - preciseCount;
 
   const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
 
