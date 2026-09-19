@@ -1,7 +1,7 @@
 // Regression tests for date-aware Ask KIH filtering.
 // Run: bun tests/schedule-regression.ts
 import assert from "node:assert";
-import { RESOURCES } from "../src/lib/../data/../data/resources";
+import { RESOURCES } from "../src/data/resources";
 import { getSchedule } from "../src/lib/resource-schedule";
 import { evaluateSchedule, parseTimeWindow, detroitNow, formatDateLabel } from "../src/lib/schedule";
 
