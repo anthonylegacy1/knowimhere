@@ -16,8 +16,12 @@ import { SectionHeading } from "@/components/kih/SectionHeading";
 import { LiveSummary } from "@/components/kih/LiveSummary";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/lib/app-store";
+import { useLocationState } from "@/lib/location";
+import { haversineMeters, metersToMiles } from "@/lib/geo";
 import {
   ALERT_RADIUS,
+  ALERT_RADIUS_MILES,
+  type AlertRadius,
   LIVE_ITEMS,
   LIVE_TABS,
   REPORT_TYPES,
@@ -187,10 +191,17 @@ function LivePage() {
           </div>
         </div>
 
+        <p className="mt-4 text-sm font-bold text-foreground/70">
+          {locationOn
+            ? `Showing prototype items within ${radius} of ${areaLabel ?? "your area"}${precise ? " (your current location)" : " (area you selected)"}.`
+            : "Turn on I'm Here or choose a ZIP code / neighborhood to filter these by distance."}
+        </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-          {items.map((item) => <LiveCard key={item.id} item={item} />)}
+          {items.map(({ item, miles }) => <LiveCard key={item.id} item={item} miles={miles} />)}
         </ul>
-        {items.length === 0 && <p className="mt-5 text-foreground/65">No prototype items in this view.</p>}
+        {items.length === 0 && (
+          <p className="mt-5 text-foreground/65">No prototype items within {radius} of your area. Try a wider radius.</p>
+        )}
 
         <Button className="mt-6 min-h-14 px-6 text-base" aria-expanded={reportOpen} aria-controls="report-form" onClick={() => setReportOpen((v) => !v)}>
           + Report something
@@ -426,7 +437,7 @@ function LivePage() {
   );
 }
 
-function LiveCard({ item }: { item: LiveItem }) {
+function LiveCard({ item, miles }: { item: LiveItem; miles?: number | null }) {
   return (
     <li className={`rounded-2xl border-2 p-5 ${SOURCE_STYLE[item.source]}`}>
       <div className="flex flex-wrap items-center gap-2">
@@ -437,7 +448,11 @@ function LiveCard({ item }: { item: LiveItem }) {
       <h3 className="mt-3 font-display text-xl font-bold leading-tight">{item.emoji} {item.title}</h3>
       <p className="mt-1 text-sm font-semibold text-foreground/70">
         {item.place}
-        {item.distance ? ` · ${item.distance}` : ""} · {item.ago}
+        {typeof miles === "number"
+          ? ` · about ${miles.toFixed(1)} miles from your area`
+          : item.distance
+            ? ` · ${item.distance}`
+            : ""} · {item.ago}
       </p>
       {item.sourceName && <p className="mt-1 text-sm font-bold text-ink">Source: {item.sourceName}</p>}
       {item.reports && <p className="mt-1 text-sm font-bold text-ink">{item.reports} community reports</p>}
