@@ -105,3 +105,12 @@
 - Distances via haversine from neighborhood centers (approximate by design).
 - Check-in: verified / out-of-range / low-accuracy / self-reported all exercised in browser.
 - Supabase (resources + checkins tables, RLS) NOT configured — no backend enabled on this project.
+
+## Secure data layer (Lovable Cloud) — done
+- [x] Cloud enabled; tables: resources, checkins, engagement_events, saved_locations, user_preferences, community_reports
+- [x] RLS + narrowed grants verified with the public key (checkins/events insert-only, no public reads)
+- [x] 27 resources seeded from existing verified/prototype data with neighborhood-center coordinates flagged `coordinate_precision`
+- [x] Check-ins persist with status verified/self_reported; resource views + Get There clicks logged
+- [x] Aggregate functions impact_totals() / impact_by_category(); Partner Impact shows "Live MVP data" separate from demonstration funnel
+- [ ] Street-level coordinates per resource (replace neighborhood centers as verified data becomes available)
+- [ ] Accounts / saved preferences sync (tables + policies exist; no sign-in flow yet by design)
