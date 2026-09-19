@@ -198,10 +198,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card"><div className="container-kih py-14">
-        <SectionHeading eyebrow="One intelligent front door" title="Find the right door without replacing Detroit’s trusted organizations." text="The provider delivers the service. Know I'm Here helps residents understand where to start and what to do next." />
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{FRONT_DOOR.map((item) => <div key={item.need} className="card-flat flex items-center gap-3 p-4"><span aria-hidden>{item.emoji}</span><span className="font-bold">{item.need}</span><ArrowRight className="size-4 text-muted-foreground" /><span className="text-sm font-semibold text-foreground/70">{item.route}</span></div>)}</div>
-      </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-2">
         <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div><div className="mt-5"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div></div>
