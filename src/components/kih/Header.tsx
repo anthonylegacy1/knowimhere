@@ -14,13 +14,17 @@ const MORE_NAV = [
   { to: "/community-health", label: "Community + Public Health" },
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
+  { to: "/", hash: "help-me-get-there", label: "Help Me Get There" },
+  { to: "/neighborhood", label: "My Neighborhood" },
   { to: "/live", label: "KIH Live" },
+  { to: "/", hash: "im-here", label: "I'm Here" },
   { to: "/opportunities", label: "Education & Youth" },
   { to: "/work-after-55", label: "Work After 55" },
   { to: "/learn", label: "Everyday Connect Learning" },
-  { to: "/neighborhood", label: "My Neighborhood" },
-  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
+  { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
   { to: "/partners", label: "Partner Impact" },
+  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
+  { to: "/", hash: "discover-detroit", label: "Discover Detroit" },
 ] as const;
 
 
