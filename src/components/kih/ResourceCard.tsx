@@ -22,11 +22,16 @@ export function ResourceCard({
   reasons = [],
   compact = false,
   onGetThere,
+  scheduleNote,
+  availabilityUnconfirmed = false,
 }: {
   resource: Resource;
   reasons?: string[] | undefined;
   compact?: boolean | undefined;
   onGetThere?: ((r: Resource) => void) | undefined;
+  /** Validated date/day/time for a date-specific question. */
+  scheduleNote?: string | undefined;
+  availabilityUnconfirmed?: boolean | undefined;
 }) {
   const { saved, toggleSaved, markInterested, dismiss, interested } = useApp();
   const { activeCoords } = useLocationState();
