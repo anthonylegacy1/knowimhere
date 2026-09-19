@@ -57,9 +57,6 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <AccessibilityPanel />
-          <Link to="/demo" className="btn-base btn-ink btn-sm hidden sm:inline-flex">
-            View Demo
-          </Link>
           <Button
             type="button"
             variant="outline"
@@ -89,9 +86,6 @@ export function Header() {
               </Link>
 
             ))}
-            <Link to="/demo" onClick={() => setOpen(false)} className="btn-base btn-brand mt-2">
-              View Demo Experience
-            </Link>
             <div className="mt-2 flex flex-wrap gap-3 px-4 text-sm font-semibold text-muted-foreground">
               <Link to="/help" onClick={() => setOpen(false)}>Watch &amp; Learn</Link>
               <Link to="/privacy" onClick={() => setOpen(false)}>Privacy</Link>
