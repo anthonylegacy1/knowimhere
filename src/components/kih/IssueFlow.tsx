@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { EXTERNAL_LINKS, ISSUE_TYPES, type IssueType } from "@/data/resources";
+import { ISSUE_TYPES, type IssueType } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "./CityResourceCard";
 
 export function detectIssue(text: string): IssueType {
   const s = text.toLowerCase();
