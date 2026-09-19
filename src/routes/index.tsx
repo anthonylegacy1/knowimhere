@@ -90,6 +90,13 @@ const FF_PILLARS = [
   { icon: <Smartphone />, label: "Digital", text: "Technology Made Simple + Everyday Connect help build smartphone confidence and practical digital skills." },
 ];
 
+const FF_SUMMARY = [
+  { icon: <PersonStanding />, label: "Move", text: "Movement, dance and active recreation." },
+  { icon: <Users />, label: "Connect", text: "Social experiences that build friendship and belonging." },
+  { icon: <MapPin />, label: "Experience", text: "Senior-friendly outings and community experiences." },
+  { icon: <Music />, label: "Celebrate", text: "Detroit music, fashion, dance and cultural history." },
+];
+
 const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
 
 const CORE_OPPORTUNITIES = [
