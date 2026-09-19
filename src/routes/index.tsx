@@ -574,6 +574,23 @@ function Index() {
           their need and connects them to the right next step.
         </p>
 
+        <button
+          type="button"
+          onClick={() => setShowCityResources((v) => !v)}
+          aria-expanded={showCityResources}
+          aria-controls="detroit-resources-panel"
+          className="mt-7 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+        >
+          <span>{showCityResources ? "Hide Detroit resources" : "Explore Detroit resources"}</span>
+          {showCityResources ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+        </button>
+
+        <div
+          id="detroit-resources-panel"
+          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showCityResources ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+          aria-hidden={!showCityResources}
+        >
+          <div className="overflow-hidden">
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {CITY_RESOURCES.map((r) => (
             <li key={r.id}>
@@ -631,6 +648,8 @@ function Index() {
             These are recommended resource links for the Buildathon prototype. Know I&apos;m Here does not operate these services and no technical
             integration, partnership or endorsement is implied.
           </p>
+        </div>
+          </div>
         </div>
       </section>
 
