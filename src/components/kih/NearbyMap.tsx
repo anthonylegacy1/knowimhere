@@ -51,14 +51,14 @@ export default function NearbyMap({
 
   useEffect(() => {
     if (!hostRef.current || mapRef.current) return;
-    const map = new maplibregl.Map({
+    const map = new MapLibreMap({
       container: hostRef.current,
       style: STYLE_URL,
       center: [center.lng, center.lat],
       zoom: 12.5,
       attributionControl: { compact: true },
     });
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
     mapRef.current = map;
     return () => {
       map.remove();
@@ -92,7 +92,7 @@ export default function NearbyMap({
     el.className = "kih-you-dot";
     el.setAttribute("aria-label", youLabel);
     el.title = youLabel;
-    youRef.current = new maplibregl.Marker({ element: el }).setLngLat([you.lng, you.lat]).addTo(map);
+    youRef.current = new MapLibreMarker({ element: el }).setLngLat([you.lng, you.lat]).addTo(map);
   }, [you, youLabel]);
 
   // Resource markers.
@@ -114,7 +114,7 @@ export default function NearbyMap({
       });
       markerRefs.current.set(
         data.id,
-        new maplibregl.Marker({ element: el }).setLngLat([data.lng, data.lat]).addTo(map),
+        new MapLibreMarker({ element: el }).setLngLat([data.lng, data.lat]).addTo(map),
       );
     }
   }, [markers]);
