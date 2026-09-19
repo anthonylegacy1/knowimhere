@@ -131,6 +131,7 @@ function Index() {
           <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
         </div>
       </section>
+
       <section className="border-y border-border bg-card">
         <div className="container-kih py-14">
           <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
