@@ -354,12 +354,22 @@ export function ImHereControl() {
 }
 
 /** "Find What's Near Me" entry point that asks first when I'm Here is off. */
-export function NearMeButton({ className = "", label = "Find What's Near Me" }: { className?: string; label?: string }) {
+export function NearMeButton({
+  className = "",
+  label = "Find What's Near Me",
+  stayHere = false,
+}: {
+  className?: string;
+  label?: string;
+  /** Keep the resident on the current page instead of sending them to For You Today. */
+  stayHere?: boolean;
+}) {
   const { on, requestGps, phase } = useLocationState();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   function go() {
+    if (stayHere) return;
     void navigate({ to: "/for-you" });
   }
 

@@ -161,21 +161,30 @@ export type Database = {
           accessibility_information: string | null
           active: boolean
           address: string | null
+          address_verified: boolean
           category: string
           city: string | null
+          coordinate_accuracy: string | null
           coordinate_precision: string
+          coordinate_source: string | null
           created_at: string
           description: string | null
           eligibility: string | null
+          fallback_latitude: number | null
+          fallback_longitude: number | null
           hours: string | null
           id: string
           is_official: boolean
+          last_geocoded_at: string | null
           last_verified_at: string | null
           latitude: number | null
           longitude: number | null
+          manual_review_status: string
           name: string
           neighborhood: string | null
           phone: string | null
+          routable_latitude: number | null
+          routable_longitude: number | null
           slug: string | null
           source_name: string | null
           source_type: string | null
@@ -191,21 +200,30 @@ export type Database = {
           accessibility_information?: string | null
           active?: boolean
           address?: string | null
+          address_verified?: boolean
           category: string
           city?: string | null
+          coordinate_accuracy?: string | null
           coordinate_precision?: string
+          coordinate_source?: string | null
           created_at?: string
           description?: string | null
           eligibility?: string | null
+          fallback_latitude?: number | null
+          fallback_longitude?: number | null
           hours?: string | null
           id?: string
           is_official?: boolean
+          last_geocoded_at?: string | null
           last_verified_at?: string | null
           latitude?: number | null
           longitude?: number | null
+          manual_review_status?: string
           name: string
           neighborhood?: string | null
           phone?: string | null
+          routable_latitude?: number | null
+          routable_longitude?: number | null
           slug?: string | null
           source_name?: string | null
           source_type?: string | null
@@ -221,21 +239,30 @@ export type Database = {
           accessibility_information?: string | null
           active?: boolean
           address?: string | null
+          address_verified?: boolean
           category?: string
           city?: string | null
+          coordinate_accuracy?: string | null
           coordinate_precision?: string
+          coordinate_source?: string | null
           created_at?: string
           description?: string | null
           eligibility?: string | null
+          fallback_latitude?: number | null
+          fallback_longitude?: number | null
           hours?: string | null
           id?: string
           is_official?: boolean
+          last_geocoded_at?: string | null
           last_verified_at?: string | null
           latitude?: number | null
           longitude?: number | null
+          manual_review_status?: string
           name?: string
           neighborhood?: string | null
           phone?: string | null
+          routable_latitude?: number | null
+          routable_longitude?: number | null
           slug?: string | null
           source_name?: string | null
           source_type?: string | null

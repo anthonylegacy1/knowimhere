@@ -153,13 +153,19 @@ function NearbyFood() {
           <li key={r.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card px-4 py-3">
             <span className="font-bold">{r.name}</span>
             <span className="text-sm text-foreground/65">{r.neighborhood} · {r.whenLabel}</span>
-            {d && <span className="chip ml-auto text-xs">~{d.miles.toFixed(1)} mi away</span>}
+            {d && (
+              <span className="chip ml-auto text-xs">
+                {d.approximate ? "~" : ""}
+                {d.miles.toFixed(1)} mi away{d.approximate ? " (approximate)" : ""}
+              </span>
+            )}
             <Link to="/resource/$id" params={{ id: r.id }} className="btn-base btn-outline btn-sm">View details</Link>
           </li>
         ))}
       </ul>
       <p className="mt-3 text-xs text-muted-foreground">
-        Distances are calculated from the neighborhood recorded for each prototype resource, so they are approximate.
+        Distances to resources with a verified street address are exact; anything marked approximate is measured
+        from the neighborhood recorded for that prototype resource.
       </p>
     </article>
   );
