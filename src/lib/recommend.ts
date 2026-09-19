@@ -35,7 +35,13 @@ export interface Scored {
   reasons: string[];
 }
 
-export function scoreResources(profile: Profile, intent: Intent = EMPTY_INTENT, exclude: string[] = []): Scored[] {
+export function scoreResources(
+  profile: Profile,
+  intent: Intent = EMPTY_INTENT,
+  exclude: string[] = [],
+  /** Real calculated distances (miles) by resource id, when location is active. */
+  distances: Record<string, number> = {},
+): Scored[] {
   const out: Scored[] = [];
   for (const r of RESOURCES) {
     if (exclude.includes(r.id)) continue;
@@ -55,7 +61,18 @@ export function scoreResources(profile: Profile, intent: Intent = EMPTY_INTENT, 
     } else if (intent.categories.length > 0) {
       score -= 4;
     }
-    if (r.distanceMiles <= 1.5) {
+    const realDistance = distances[r.id];
+    if (realDistance !== undefined) {
+      if (realDistance <= 1) {
+        score += 2.5;
+        reasons.push("Near your current area");
+      } else if (realDistance <= 3) {
+        score += 1.5;
+        reasons.push("Near your current area");
+      } else if (realDistance > 8) {
+        score -= 1;
+      }
+    } else if (r.distanceMiles <= 1.5) {
       score += 2;
       reasons.push("Near your location");
     }
