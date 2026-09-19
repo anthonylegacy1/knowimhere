@@ -117,7 +117,7 @@ function Onboarding() {
               </div>
             </fieldset>
             <fieldset className="mt-5">
-              <legend className="font-bold">Life stage (optional)</legend>
+              <legend className="font-bold">Life stage (optional) — pick all that apply</legend>
               <div className="mt-2 flex flex-wrap gap-2">
                 {LIFE_STAGES.map((l) => (
                   <Toggle
