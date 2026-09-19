@@ -3,7 +3,12 @@ import {
   ArrowDown,
   ArrowRight,
   BarChart3,
+  Building2,
   BriefcaseBusiness,
+  LineChart,
+  Network,
+  Store,
+  TrendingUp,
   BusFront,
   Check,
   ChevronDown,
@@ -324,6 +329,83 @@ function Index() {
         <p className="mt-4 text-xs text-muted-foreground">Fictional Buildathon demonstration data. No paying partners, integrations or measured outcomes are claimed.</p>
       </section>
 
+      <section className="border-y border-border bg-card">
+        <div className="container-kih py-14">
+          <SectionHeading
+            eyebrow="Detroit economic impact"
+            title="More connection. More impact. Better use of city resources."
+            text="Know I'm Here helps Detroit get more value from the resources it already invests in."
+          />
+          <p className="mt-4 max-w-3xl text-foreground/70">
+            Detroit and its community partners already invest in health programs, recreation, transportation, workforce
+            development, senior services, youth programs, neighborhood initiatives, events and other resources. The
+            opportunity is making sure residents can find them, reach them and use them.
+          </p>
+
+          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <ImpactStep icon={<Search />} title="Discover" text="Residents find what is nearby." />
+            <ImpactStep icon={<BusFront />} title="Get There" text="Directions or ride assistance." />
+            <ImpactStep icon={<Check />} title="Check In" text="Private, opt-in participation." />
+            <ImpactStep icon={<BarChart3 />} title="Measure Impact" text="Aggregate insight closes the loop." accent />
+          </ol>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ValueCard icon={<TrendingUp />} title="Maximize existing investment" text="Increase awareness and participation in programs and services that are already funded." />
+            <ValueCard icon={<Network />} title="Reduce fragmented outreach" text="One connected discovery layer that can complement flyers, individual websites, social campaigns and manual outreach." />
+            <ValueCard icon={<LineChart />} title="Turn participation into insight" text="Privacy-conscious, aggregated engagement patterns show what residents are discovering and where more outreach may be needed." />
+            <ValueCard icon={<Store />} title="Strengthen the local economy" text="Connect residents with local businesses, employment, training, events and neighborhood organizations so activity circulates in Detroit." />
+            <ValueCard icon={<Building2 />} title="Improve future investment decisions" text="Give participating organizations better information to evaluate outreach, program utilization and community demand." />
+            <div className="card-flat flex flex-col justify-center bg-aqua-soft/60 p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Privacy first</p>
+              <p className="mt-2 text-sm font-semibold text-foreground/75">
+                Insights are aggregated and opt-in. Know I&apos;m Here does not sell individual resident information and
+                does not track residents automatically.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 rounded-xl bg-ink p-8 text-center text-cream sm:p-12">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-sun">The goal isn&apos;t simply to spend more.</p>
+            <p className="mx-auto mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
+              It&apos;s to get more impact from what Detroit is <span className="text-sun">already investing</span>.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
+            <div>
+              <h3 className="text-2xl font-extrabold">A model that keeps residents free.</h3>
+              <p className="mt-3 text-foreground/70">
+                As Know I&apos;m Here grows, the platform is designed to support a sustainable model where residents
+                access the core experience for free, while municipalities, institutions, community partners, sponsors and
+                participating businesses can help fund the infrastructure.
+              </p>
+            </div>
+            <div className="space-y-2 text-center">
+              <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-brand">Residents</p><p className="text-sm text-foreground/70">Free core access</p></div>
+              <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5" aria-hidden /></div>
+              <div className="rounded-lg bg-brand p-4 text-brand-foreground"><p className="text-sm font-extrabold uppercase">Know I&apos;m Here</p><p className="text-sm">Community connection infrastructure</p></div>
+              <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5 rotate-180" aria-hidden /></div>
+              <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-sky">Cities · Institutions · Community partners · Sponsors · Businesses</p><p className="text-sm text-foreground/70">Support the ecosystem</p></div>
+            </div>
+          </div>
+
+          <ol className="mt-10 grid gap-4 sm:grid-cols-3">
+            <StageCard n="1" title="Detroit pilot" text="Measure discovery, transportation engagement, resource interactions and check-ins." />
+            <StageCard n="2" title="Prove impact" text="Evaluate participation, utilization, repeat engagement and community demand." />
+            <StageCard n="3" title="Scale" text="Expand successful use cases across Detroit and eventually into additional communities." />
+          </ol>
+
+          <p className="mt-8 max-w-3xl text-lg font-bold">
+            Detroit already has resources. Know I&apos;m Here helps more residents find them, reach them, use them — and
+            helps community partners measure the impact.
+          </p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Prototype concept. No guaranteed savings, revenue, pricing or measured outcomes are claimed.
+          </p>
+        </div>
+      </section>
+
+
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
@@ -335,6 +417,38 @@ function Index() {
 
 function HubCard({ icon, title, text, to, action }: { icon: ReactNode; title: string; text: string; to: "/opportunities" | "/work-after-55" | "/for-you"; action: string }) {
   return <Link to={to} className="card-flat p-6 transition-transform hover:-translate-y-0.5"><span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky">{icon}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-foreground/65">{text}</p><p className="mt-4 text-sm font-bold text-brand">{action} →</p></Link>;
+}
+
+function ImpactStep({ icon, title, text, accent = false }: { icon: ReactNode; title: string; text: string; accent?: boolean }) {
+  return (
+    <li className={`flex min-h-24 items-center gap-3 rounded-lg border p-4 ${accent ? "border-brand/30 bg-brand/10" : "border-border bg-background"}`}>
+      <span className={`grid size-11 shrink-0 place-items-center rounded-lg ${accent ? "bg-brand text-brand-foreground" : "bg-aqua-soft text-sky"}`} aria-hidden>{icon}</span>
+      <span>
+        <span className="block text-sm font-extrabold uppercase">{title}</span>
+        <span className="mt-1 block text-sm leading-snug text-foreground/65">{text}</span>
+      </span>
+    </li>
+  );
+}
+
+function ValueCard({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
+  return (
+    <article className="card-flat p-6 transition-transform hover:-translate-y-0.5 motion-reduce:transition-none">
+      <span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky" aria-hidden>{icon}</span>
+      <h3 className="mt-4 text-lg font-extrabold uppercase leading-snug">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/65">{text}</p>
+    </article>
+  );
+}
+
+function StageCard({ n, title, text }: { n: string; title: string; text: string }) {
+  return (
+    <li className="card-flat p-5">
+      <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Stage {n}</p>
+      <h3 className="mt-1 text-xl font-extrabold">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/65">{text}</p>
+    </li>
+  );
 }
 
 function Metric({ icon, value, label }: { icon: ReactNode; value: string; label: string }) {
