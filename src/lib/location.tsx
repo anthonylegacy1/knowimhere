@@ -70,9 +70,11 @@ const Ctx = createContext<LocationValue | null>(null);
 const MESSAGES: Record<GeoErrorKind, string> = {
   unsupported: "Your browser doesn't support automatic location. Enter your ZIP code or neighborhood instead.",
   denied: "Location access is off. You can still use Know I'm Here by choosing your ZIP code or neighborhood.",
-  timeout: "We couldn't get your location right now.",
-  unavailable: "Your location isn't available right now.",
+  timeout: "Getting your location is taking longer than expected.",
+  unavailable: "We couldn't determine your current location.",
 };
+
+const STALE_MESSAGE = "Couldn't refresh your location. Showing your last location from this session.";
 
 export function LocationProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<LocationMode>("off");
