@@ -135,6 +135,11 @@ export function CheckIn({ resource, onChecked }: { resource: Resource; onChecked
         <span className="mx-auto grid size-16 place-items-center rounded-full bg-mint text-3xl text-card">✓</span>
         <p className="mt-3 font-display text-2xl font-bold">Thanks for checking in.</p>
         <p className="text-lg text-foreground/70">You&apos;re connected to your community.</p>
+        <p className="mt-2">
+          <span className={`chip text-xs font-extrabold uppercase ${verified ? "bg-mint/20" : ""}`}>
+            {verified ? "Location-verified check-in" : "Self-reported check-in"}
+          </span>
+        </p>
         <p className="mt-1 text-xs font-semibold text-muted-foreground">
           Recorded: {resource.category} · {resource.neighborhood} · {sharing === "private" ? "Private" : `Shared with ${sharing}`}
         </p>
