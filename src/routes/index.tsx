@@ -440,9 +440,6 @@ function Index() {
   );
 }
 
-function HubCard({ icon, title, text, to, action }: { icon: ReactNode; title: string; text: string; to: "/opportunities" | "/work-after-55" | "/for-you"; action: string }) {
-  return <Link to={to} className="card-flat p-6 transition-transform hover:-translate-y-0.5"><span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky">{icon}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-foreground/65">{text}</p><p className="mt-4 text-sm font-bold text-brand">{action} →</p></Link>;
-}
 
 function ImpactStep({ icon, title, text, accent = false }: { icon: ReactNode; title: string; text: string; accent?: boolean }) {
   return (
