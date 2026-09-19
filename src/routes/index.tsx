@@ -132,44 +132,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-14">
-        <SectionHeading
-          eyebrow="Optional support"
-          title="Need help using the technology first?"
-          text="Having access to a smartphone or the internet does not always mean someone feels confident using it. Everyday Connect provides simple, step-by-step digital confidence training for older adults, youth, families, caregivers, and community members."
-        />
-        <p className="card-flat mt-6 p-5 text-lg font-semibold">
-          Everyday Connect teaches you how to use the technology.{" "}
-          <span className="text-brand">Know I&apos;m Here helps you use that confidence to connect with opportunities around you.</span>
-        </p>
-
-        <ol className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {[
-            { step: "Learn", label: "Everyday Connect", tone: "bg-sky/10 text-sky" },
-            { step: "Build digital confidence", label: "Skills you can use every day", tone: "bg-sky/10 text-sky" },
-            { step: "Discover", label: "Know I'm Here", tone: "bg-brand/10 text-brand" },
-            { step: "Connect", label: "Programs · Resources · Events · Services · Opportunities", tone: "bg-brand/10 text-brand" },
-            { step: "Participate", label: "Community · Health · Education · Employment · Recreation", tone: "bg-brand/10 text-brand" },
-          ].map((item, index) => (
-            <li key={item.step} className="card-flat flex flex-col gap-2 p-4">
-              <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${item.tone}`}>
-                {index + 1}. {item.step}
-              </span>
-              <span className="text-sm font-semibold text-foreground/70">{item.label}</span>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-8 flex flex-col items-start gap-3">
-          <Button asChild variant="outline" className="min-h-12">
-            <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer">Explore Everyday Connect ↗</a>
-          </Button>
-          <p className="max-w-2xl text-sm text-foreground/65">
-            Need help with smartphones, apps, digital safety, healthcare technology, or AI? Start with Everyday Connect. It is optional—if you are already comfortable, keep exploring Know I&apos;m Here.
-          </p>
-        </div>
-      </section>
-
       <section className="border-y border-border bg-card">
         <div className="container-kih py-14">
           <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">

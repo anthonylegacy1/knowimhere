@@ -33,7 +33,33 @@ function Learn() {
         text="Everyday Connect is not a seniors-only program. It helps anyone build the confidence and practical skills to use the technology they already own — so they can reach the opportunities around them."
       />
 
-      <p className="card-pop mt-6 p-5 font-display text-lg font-semibold">
+      <section className="mt-8">
+        <h2 className="font-display text-2xl font-bold">Need help using the technology first?</h2>
+        <p className="mt-3 max-w-3xl text-foreground/70">
+          Having access to a smartphone or the internet does not always mean someone feels confident using it. Everyday Connect provides simple,
+          step-by-step digital confidence training for older adults, youth, families, caregivers, working adults, and community members.
+        </p>
+        <p className="card-pop mt-5 p-5 font-display text-lg font-semibold">
+          Everyday Connect teaches you how to use the technology.{" "}
+          <span className="text-brand">Know I&apos;m Here helps you use that confidence to connect with opportunities around you.</span>
+        </p>
+
+        <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { step: "Everyday Connect", label: "Learn the technology", tone: "bg-sky/10 text-sky" },
+            { step: "Build digital confidence", label: "Skills you can use every day", tone: "bg-sky/10 text-sky" },
+            { step: "Know I'm Here", label: "Discover resources and opportunities", tone: "bg-brand/10 text-brand" },
+            { step: "Connect & participate", label: "Programs · Events · Services · Health · Jobs · Recreation", tone: "bg-brand/10 text-brand" },
+          ].map((item) => (
+            <li key={item.step} className="card-flat flex flex-col gap-2 p-4">
+              <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${item.tone}`}>{item.step}</span>
+              <span className="text-sm font-semibold text-foreground/70">{item.label}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <p className="card-pop mt-8 p-5 font-display text-lg font-semibold">
         Everyday Connect teaches digital capability. <span className="text-brand">Know I&apos;m Here turns that capability into access to real opportunity.</span>
       </p>
 
