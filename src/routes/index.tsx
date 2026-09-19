@@ -489,10 +489,14 @@ function Index() {
             <Button asChild size="lg" className="min-h-14 px-7 text-base font-extrabold">
               <Link to="/partners"><BarChart3 /> View Partner Impact <ArrowRight /></Link>
             </Button>
+            <Button asChild size="lg" variant="outline" className="min-h-14 border-cream/40 bg-transparent px-7 text-base font-extrabold text-cream hover:bg-cream/10 hover:text-cream">
+              <Link to="/sponsorship">Partners + Sponsorship <ArrowRight /></Link>
+            </Button>
             <Button asChild variant="ghost" className="min-h-12 text-cream underline underline-offset-4 hover:bg-cream/10 hover:text-cream">
               <Link to="/privacy"><ShieldCheck /> Read Privacy Commitments</Link>
             </Button>
           </div>
+          <p className="mt-3 text-sm text-cream/70">Explore potential partner alignment and sponsorship opportunities.</p>
         </div>
 
         <p className="mt-4 text-xs text-muted-foreground">Prototype concept. No paying partners, integrations or measured outcomes are claimed. Demonstration metrics appear inside the Partner Impact experience.</p>
