@@ -90,3 +90,18 @@
 ## Mobile section accordions
 
 - [x] Collapse Detroit existing resources, sustainability model, KIH impact loop and Detroit economic impact cards behind accordions.
+
+## Location MVP (in progress)
+- Real geolocation permission flow, manual ZIP/neighborhood fallback, session-only precise coords (done)
+- Distance calc + radius filters on For You (done)
+- Check-in proximity verification with centralized policy (threshold + max accuracy + retry) in src/lib/geo.ts
+- Get There uses current location as origin
+- KIH Live radius filtering
+- Supabase persistence for checkins/resources: NOT implemented (backend not enabled)
+- Final audit must cite evidence per acceptance criterion
+
+## Location MVP status (verified in browser)
+- Real geolocation behind explicit consent; manual ZIP/neighborhood fallback; turn off clears precise state.
+- Distances via haversine from neighborhood centers (approximate by design).
+- Check-in: verified / out-of-range / low-accuracy / self-reported all exercised in browser.
+- Supabase (resources + checkins tables, RLS) NOT configured — no backend enabled on this project.

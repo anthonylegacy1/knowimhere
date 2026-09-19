@@ -2,8 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { IssueFlow } from "@/components/kih/IssueFlow";
 import { SectionHeading } from "@/components/kih/SectionHeading";
-import { ISSUE_TYPES, NEIGHBORHOOD_UPDATES, type UpdateKind } from "@/data/resources";
+import { ISSUE_TYPES, NEIGHBORHOOD_UPDATES, RESOURCES, type UpdateKind } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
+import { useLocationState } from "@/lib/location";
+import { distanceToResource } from "@/lib/resource-distance";
+import { ImHereControl } from "@/components/kih/ImHere";
 import { cityResource } from "@/data/city-resources";
 import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
@@ -40,10 +43,15 @@ const KIND_STYLE: Record<UpdateKind, string> = {
 
 function Neighborhood() {
   const { profile } = useApp();
+  const { on, areaLabel, precise, activeCoords } = useLocationState();
   const [filter, setFilter] = useState<Filter>("mine");
   const [issueText, setIssueText] = useState("");
   const [submitted, setSubmitted] = useState<string | null>(null);
-  const hood = profile.neighborhood || "Southwest Detroit";
+  const hood = areaLabel ?? profile.neighborhood ?? "Southwest Detroit";
+  const nearby = RESOURCES.map((r) => ({ r, d: distanceToResource(r, activeCoords) }))
+    .filter((e) => e.d !== null)
+    .sort((a, b) => a.d!.miles - b.d!.miles)
+    .slice(0, 4);
 
   const list = NEIGHBORHOOD_UPDATES.filter((u) => {
     if (filter === "mine") return true;
@@ -60,6 +68,32 @@ function Neighborhood() {
   return (
     <div className="container-kih py-8 sm:py-12">
       <SectionHeading eyebrow={`Near ${hood}`} title="Know What's Happening Around You" text="Calm, clear neighborhood information — community meetings, rec-center updates, weather notices, road closures and City services. Not a crime feed." />
+
+      <div className="mt-6">
+        <ImHereControl />
+      </div>
+
+      <section className="mt-6 card-flat p-6">
+        <h2 className="font-display text-xl font-extrabold">Based on your current area</h2>
+        <p className="mt-1 text-sm text-foreground/70">
+          {on
+            ? `${precise ? "Using your current location" : "Using the area you selected"} · ${hood}`
+            : "Choose a neighborhood or ZIP code to personalize this section."}
+        </p>
+        {on && (
+          <ul className="mt-4 grid gap-2">
+            {nearby.map(({ r, d }) => (
+              <li key={r.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card px-4 py-3">
+                <span className="font-bold">{r.name}</span>
+                <span className="text-sm text-foreground/65">{r.neighborhood} · {r.whenLabel}</span>
+                <span className="chip ml-auto text-xs">~{d!.miles.toFixed(1)} mi away</span>
+                <Link to="/resource/$id" params={{ id: r.id }} className="btn-base btn-outline btn-sm">View details</Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
 
       <div className="mt-6 -mx-5 overflow-x-auto px-5 pb-1">
         <div className="flex w-max gap-2">

@@ -21,6 +21,11 @@ export interface CheckIn {
   neighborhood: string;
   date: string;
   sharing: "private" | "family" | "caregiver";
+  /** How this check-in was confirmed. Never inferred without resident action. */
+  status?: "verified" | "self_reported";
+  verificationMethod?: "geolocation" | "resident_confirmation";
+  /** Distance in meters at the moment of a verified check-in. No coordinates stored. */
+  distanceAtCheckin?: number;
 }
 
 export type TextSize = 0 | 1 | 2;

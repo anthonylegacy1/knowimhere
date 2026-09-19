@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppProvider } from "@/lib/app-store";
+import { LocationProvider } from "@/lib/location";
 import { Header } from "@/components/kih/Header";
 import { Footer } from "@/components/kih/Footer";
 import { AskBar } from "@/components/kih/AskBar";
@@ -111,6 +112,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
+        <LocationProvider>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-brand focus:px-4 focus:py-2 focus:text-brand-foreground"
@@ -125,6 +127,7 @@ function RootComponent() {
         <Footer />
         <AskBar />
         <Toaster position="top-center" />
+        </LocationProvider>
       </AppProvider>
     </QueryClientProvider>
   );

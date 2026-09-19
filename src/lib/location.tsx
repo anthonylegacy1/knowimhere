@@ -1,0 +1,186 @@
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  GeoError,
+  geolocationSupported,
+  getCurrentPositionOnce,
+  type Coords,
+  type GeoErrorKind,
+  type GeoReading,
+} from "./geo";
+import { nearestAreaLabel, resolveArea, type ResolvedArea } from "@/data/geo-areas";
+
+/**
+ * Know I'm Here location state.
+ *
+ * Privacy rules enforced here:
+ * - Precise GPS coordinates live in memory for this session only. They are never
+ *   written to storage and never restored automatically on a later visit.
+ * - Only a resident-chosen area (ZIP / neighborhood) and the alert radius persist.
+ * - There is no watchPosition / background tracking anywhere in the app.
+ */
+
+export type LocationMode = "off" | "gps" | "manual";
+export type LocationPhase = "idle" | "requesting";
+
+export interface SavedArea {
+  label: string;
+  coords: Coords;
+  kind: "zip" | "neighborhood";
+}
+
+export interface LocationErrorState {
+  kind: GeoErrorKind | "accuracy";
+  message: string;
+}
+
+interface LocationValue {
+  mode: LocationMode;
+  phase: LocationPhase;
+  on: boolean;
+  /** Precise reading for this session only; null unless GPS is active. */
+  reading: GeoReading | null;
+  /** Coordinates currently used for distance work (precise or approximate area center). */
+  activeCoords: Coords | null;
+  /** True only when activeCoords came from the device. */
+  precise: boolean;
+  areaLabel: string | null;
+  savedArea: SavedArea | null;
+  radiusMiles: number | "all";
+  error: LocationErrorState | null;
+  supported: boolean;
+  hydrated: boolean;
+  requestGps: () => Promise<boolean>;
+  setManualArea: (input: string) => boolean;
+  clearSavedArea: () => void;
+  turnOff: () => void;
+  setRadius: (r: number | "all") => void;
+  clearError: () => void;
+  /** Fresh one-shot reading for check-in verification. Does not change app state. */
+  readFreshLocation: () => Promise<GeoReading>;
+}
+
+const KEY = "kih:location:v1";
+const Ctx = createContext<LocationValue | null>(null);
+
+const MESSAGES: Record<GeoErrorKind, string> = {
+  unsupported: "Your browser doesn't support automatic location. Enter your ZIP code or neighborhood instead.",
+  denied: "Location access is off. You can still use Know I'm Here by choosing your ZIP code or neighborhood.",
+  timeout: "We couldn't get your location right now.",
+  unavailable: "Your location isn't available right now.",
+};
+
+export function LocationProvider({ children }: { children: ReactNode }) {
+  const [mode, setMode] = useState<LocationMode>("off");
+  const [phase, setPhase] = useState<LocationPhase>("idle");
+  const [reading, setReading] = useState<GeoReading | null>(null);
+  const [gpsArea, setGpsArea] = useState<string | null>(null);
+  const [savedArea, setSavedArea] = useState<SavedArea | null>(null);
+  const [radiusMiles, setRadiusMiles] = useState<number | "all">(3);
+  const [error, setError] = useState<LocationErrorState | null>(null);
+  const [hydrated, setHydrated] = useState(false);
+  const [supported, setSupported] = useState(true);
+
+  useEffect(() => {
+    setSupported(geolocationSupported());
+    try {
+      const raw = window.localStorage.getItem(KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { savedArea?: SavedArea; radiusMiles?: number | "all" };
+        if (parsed.savedArea?.coords) {
+          setSavedArea(parsed.savedArea);
+          // A resident-chosen area may resume; precise GPS never resumes on its own.
+          setMode("manual");
+        }
+        if (parsed.radiusMiles) setRadiusMiles(parsed.radiusMiles);
+      }
+    } catch {
+      /* ignore unreadable storage */
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    window.localStorage.setItem(KEY, JSON.stringify({ savedArea, radiusMiles }));
+  }, [hydrated, savedArea, radiusMiles]);
+
+  const requestGps = useCallback(async () => {
+    setError(null);
+    setPhase("requesting");
+    try {
+      const next = await getCurrentPositionOnce();
+      setReading(next);
+      setGpsArea(nearestAreaLabel(next.coords));
+      setMode("gps");
+      return true;
+    } catch (e) {
+      const kind = e instanceof GeoError ? e.kind : "unavailable";
+      setError({ kind, message: MESSAGES[kind] });
+      setReading(null);
+      setMode((m) => (m === "gps" ? (savedArea ? "manual" : "off") : m));
+      return false;
+    } finally {
+      setPhase("idle");
+    }
+  }, [savedArea]);
+
+  const setManualArea = useCallback((input: string) => {
+    const resolved: ResolvedArea | null = resolveArea(input);
+    if (!resolved) return false;
+    setSavedArea({ label: resolved.label, coords: resolved.coords, kind: resolved.kind });
+    setReading(null);
+    setGpsArea(null);
+    setMode("manual");
+    setError(null);
+    return true;
+  }, []);
+
+  const clearSavedArea = useCallback(() => {
+    setSavedArea(null);
+    setMode((m) => (m === "manual" ? "off" : m));
+  }, []);
+
+  const turnOff = useCallback(() => {
+    // Clear the precise reading from active state immediately.
+    setReading(null);
+    setGpsArea(null);
+    setMode("off");
+    setError(null);
+  }, []);
+
+  const readFreshLocation = useCallback(() => getCurrentPositionOnce(), []);
+
+  const value = useMemo<LocationValue>(() => {
+    const activeCoords = mode === "gps" && reading ? reading.coords : mode === "manual" && savedArea ? savedArea.coords : null;
+    const areaLabel = mode === "gps" ? gpsArea : mode === "manual" ? (savedArea?.label ?? null) : null;
+    return {
+      mode,
+      phase,
+      on: mode !== "off" && activeCoords !== null,
+      reading: mode === "gps" ? reading : null,
+      activeCoords,
+      precise: mode === "gps" && reading !== null,
+      areaLabel,
+      savedArea,
+      radiusMiles,
+      error,
+      supported,
+      hydrated,
+      requestGps,
+      setManualArea,
+      clearSavedArea,
+      turnOff,
+      setRadius: setRadiusMiles,
+      clearError: () => setError(null),
+      readFreshLocation,
+    };
+  }, [mode, phase, reading, gpsArea, savedArea, radiusMiles, error, supported, hydrated, requestGps, setManualArea, clearSavedArea, turnOff, readFreshLocation]);
+
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}
+
+export function useLocationState() {
+  const ctx = useContext(Ctx);
+  if (!ctx) throw new Error("useLocationState must be used within LocationProvider");
+  return ctx;
+}
