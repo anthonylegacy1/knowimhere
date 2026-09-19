@@ -180,7 +180,7 @@ function MapPage() {
             </a>
           </div>
         </div>
-      ) : (
+      ) : view === "map" ? (
         <div className="mt-6">
           <Suspense
             fallback={
