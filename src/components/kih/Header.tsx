@@ -13,6 +13,7 @@ const NAV = [
 const MORE_NAV = [
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
+  { to: "/live", label: "KIH Live" },
   { to: "/opportunities", label: "Education & Youth" },
   { to: "/work-after-55", label: "Work After 55" },
   { to: "/learn", label: "Everyday Connect Learning" },
