@@ -56,7 +56,12 @@ function PrePermissionDialog({
           <Button type="button" className="min-h-14 text-lg" disabled={busy} onClick={onUse} aria-label="Turn on location personalization">
             {busy ? <><Loader2 className="size-5 animate-spin" /> Getting your location…</> : "Use My Location"}
           </Button>
-          <Button type="button" variant="outline" className="min-h-12" onClick={onClose}>Not Now</Button>
+          {busy && (
+            <p className="text-center text-sm font-semibold text-foreground/70" role="status" aria-live="polite">
+              This may take a few seconds, especially indoors.
+            </p>
+          )}
+          <Button type="button" variant="outline" className="min-h-12" disabled={busy} onClick={onClose}>Not Now</Button>
           <Button type="button" variant="link" onClick={onManual} aria-label="Choose neighborhood manually">
             Choose my area manually instead
           </Button>
@@ -125,21 +130,27 @@ export function AreaPicker({ onDone, compact = false }: { onDone?: () => void; c
 }
 
 function ErrorPanel() {
-  const { error, requestGps, phase } = useLocationState();
+  const { error, requestGps, phase, staleReading } = useLocationState();
   const [manual, setManual] = useState(false);
   if (!error) return null;
   const retryable = error.kind !== "unsupported";
+  const trouble = error.kind === "timeout" || error.kind === "unavailable";
   return (
-    <div className="mt-4 rounded-lg border-2 border-sun bg-sun/15 p-4">
+    <div className="mt-4 rounded-lg border-2 border-sun bg-sun/15 p-4" role="status" aria-live="polite">
       <p className="font-bold">{error.message}</p>
+      {trouble && !staleReading && (
+        <p className="mt-1 text-sm font-semibold text-foreground/70">
+          We&apos;re having trouble getting a precise location right now.
+        </p>
+      )}
       <div className="mt-3 flex flex-wrap gap-2">
         {retryable && (
           <Button type="button" variant="outline" className="min-h-12" disabled={phase === "requesting"} onClick={() => void requestGps()}>
-            Try Location Again
+            {phase === "requesting" ? <><Loader2 className="size-5 animate-spin" /> Getting your location…</> : staleReading ? "Try Again" : "Try Location Again"}
           </Button>
         )}
         <Button type="button" className="min-h-12" onClick={() => setManual((v) => !v)}>
-          Choose Area Manually
+          {staleReading || !retryable ? "Choose Area Manually" : "Use My Area Instead"}
         </Button>
       </div>
       {manual && <div className="mt-3"><AreaPicker compact onDone={() => setManual(false)} /></div>}
