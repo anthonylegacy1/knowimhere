@@ -165,6 +165,15 @@ function Index() {
       <section className="container-kih pb-14">
         <SectionHeading eyebrow="For You Today" title="Find what fits. Then find your way there." text="Ask in your own words or explore opportunities based on the interests and location you choose. When you find something useful, Know I'm Here can help you understand your next step and how to get there." />
 
+        <article className="card-flat mt-6 bg-ink p-6 text-cream sm:p-8">
+          <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
+          <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Where can I get resume help?”</li>
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Are there free activities near me?”</li>
+          </ul>
+          <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
+        </article>
 
         <article className="card-flat mt-4 p-6">
           <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">Personalized for you</p><h3 className="text-xl font-extrabold">A shorter path to what fits.</h3></div></div>
@@ -208,17 +217,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih pb-2 pt-6">
-          <article className="card-flat bg-ink p-6 text-cream sm:p-8">
-            <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
-            <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
-              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
-              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Where can I get resume help?”</li>
-              <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Are there free activities near me?”</li>
-            </ul>
-            <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
-          </article>
-      </section>
 
       <section className="bg-card pb-12 pt-12 text-center">
         <div className="container-kih">
