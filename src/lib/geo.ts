@@ -195,6 +195,37 @@ export async function locateForDiscovery(): Promise<DiscoveryFix> {
   throw lastError;
 }
 
+/**
+ * Quiet accuracy upgrade after discovery is already running. Runs on the same
+ * granted permission (no second prompt) and never blocks the resident.
+ */
+export async function refineDiscoveryLocation(): Promise<DiscoveryFix | null> {
+  const started = Date.now();
+  try {
+    const reading = await getCurrentPositionOnce(PRECISION_UPGRADE_OPTIONS);
+    recordGeoDiagnostic({
+      at: started,
+      mode: "precision_upgrade",
+      outcome: "success",
+      accuracyMeters: reading.accuracyMeters,
+      durationMs: Date.now() - started,
+    });
+    return {
+      reading,
+      confidence: reading.accuracyMeters <= MAX_VERIFY_ACCURACY_METERS ? "high" : "low",
+    };
+  } catch (e) {
+    recordGeoDiagnostic({
+      at: started,
+      mode: "precision_upgrade",
+      outcome: "error",
+      errorKind: e instanceof GeoError ? e.kind : "unavailable",
+      durationMs: Date.now() - started,
+    });
+    return null;
+  }
+}
+
 export interface ProximityResult {
   distanceMeters: number;
   accuracyMeters: number;
