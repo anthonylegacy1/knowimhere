@@ -177,57 +177,17 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card">
-        <div className="container-kih py-14">
-          <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-            <article className="overflow-hidden rounded-lg border border-border bg-background">
-              <img src={neighborhoodAsset.url} alt="Detroit residents connecting across generations in their neighborhood" className="aspect-[16/9] w-full object-cover" loading="eager" />
-              <div className="p-6"><p className="text-xs font-extrabold uppercase text-sky">My Neighborhood</p><h2 className="mt-2 text-2xl font-bold">Know what&apos;s happening around you.</h2><p className="mt-2 text-foreground/65">See community meetings, recreation updates, cooling centers, road closures and official City notices—calmly filtered to your neighborhood.</p><Button asChild variant="outline" className="mt-5 min-h-12"><Link to="/neighborhood">See my neighborhood <ArrowRight /></Link></Button></div>
-            </article>
-            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
-              <div>
-                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
-                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
-                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
-                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
-              </div>
-              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
-                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
-              </div>
-              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
-                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
-              </ol>
-              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See it in the demo <ArrowRight /></Link></Button>
-            </article>
-          </div>
-        </div>
-      </section>
-
-
-
-      <section className="container-kih pt-14">
-        <article className="rounded-lg border-2 border-sun bg-sun/15 p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-lg bg-ink text-cream"><Radio /></span>
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-wider text-ink">KIH Live</p>
-              <h2 className="text-2xl font-extrabold">Know what&apos;s happening around you.</h2>
-            </div>
-            <span className="chip ml-auto bg-ink text-[10px] uppercase tracking-wide text-cream">Buildathon demonstration data</span>
-          </div>
-          <p className="mt-3 max-w-3xl text-foreground/70">Community reports, neighborhood updates, transportation information and local information—all connected to the area you choose.</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {["Community reports", "Verified alerts", "Local news", "Transportation"].map((chip) => (
-              <span key={chip} className="chip bg-background text-xs font-bold text-ink">{chip}</span>
-            ))}
-          </div>
-          <Button asChild className="mt-5 min-h-12"><Link to="/live">Explore KIH Live <ArrowRight /></Link></Button>
+      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
+        <article className="card-flat p-6 sm:p-8">
+          <span className="eyebrow">Community + public health</span>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
+          <p className="mt-2 max-w-2xl text-foreground/70">
+            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
+          </p>
+          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
+            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
+          </Link>
         </article>
       </section>
 
@@ -274,7 +234,8 @@ function Index() {
           </Button>
         </div>
 
-        <div className="mt-8 rounded-lg border border-border bg-card p-6">
+        <p className="mt-10 text-sm font-bold uppercase tracking-wider text-sky">Finding the resource is only the first step.</p>
+        <div id="help-me-get-there" className="mt-8 scroll-mt-24 rounded-lg border border-border bg-card p-6">
           <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Help me get there</p>
           <h3 className="mt-2 text-xl font-extrabold">Found something useful? See how to get there.</h3>
           <div className="mt-4 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-background text-foreground/60">Community Ride · Coming Soon</span></div>
@@ -292,20 +253,59 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-10">
-        <article className="card-flat p-6 sm:p-8">
-          <span className="eyebrow">Community + public health</span>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
-          <p className="mt-2 max-w-2xl text-foreground/70">
-            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
-          </p>
-          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
-            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
-          </Link>
+      <section id="my-neighborhood" className="container-kih scroll-mt-24 py-14">
+        <p className="text-sm font-bold uppercase tracking-wider text-sky">Connection also means knowing what&apos;s happening around you.</p>
+        <div className="mt-5 grid items-start gap-5 lg:grid-cols-2">
+            <article className="overflow-hidden rounded-lg border border-border bg-background">
+              <img src={neighborhoodAsset.url} alt="Detroit residents connecting across generations in their neighborhood" className="aspect-[16/9] w-full object-cover" loading="eager" />
+              <div className="p-6"><p className="text-xs font-extrabold uppercase text-sky">My Neighborhood</p><h2 className="mt-2 text-2xl font-bold">Know what&apos;s happening around you.</h2><p className="mt-2 text-foreground/65">See community meetings, recreation updates, cooling centers, road closures and official City notices—calmly filtered to your neighborhood.</p><Button asChild variant="outline" className="mt-5 min-h-12"><Link to="/neighborhood">See my neighborhood <ArrowRight /></Link></Button></div>
+            </article>
+          <article className="rounded-lg border-2 border-sun bg-sun/15 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="grid size-11 place-items-center rounded-lg bg-ink text-cream"><Radio /></span>
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-wider text-ink">KIH Live</p>
+              <h2 className="text-2xl font-extrabold">Know what&apos;s happening around you.</h2>
+            </div>
+            <span className="chip ml-auto bg-ink text-[10px] uppercase tracking-wide text-cream">Buildathon demonstration data</span>
+          </div>
+          <p className="mt-3 max-w-3xl text-foreground/70">Community reports, neighborhood updates, transportation information and local information—all connected to the area you choose.</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {["Community reports", "Verified alerts", "Local news", "Transportation"].map((chip) => (
+              <span key={chip} className="chip bg-background text-xs font-bold text-ink">{chip}</span>
+            ))}
+          </div>
+          <Button asChild className="mt-5 min-h-12"><Link to="/live">Explore KIH Live <ArrowRight /></Link></Button>
         </article>
+        </div>
       </section>
 
-
+      <section id="im-here" className="border-y border-border bg-card scroll-mt-24">
+        <div className="container-kih py-14">
+          <p className="mb-5 text-sm font-bold uppercase tracking-wider text-brand">When the resident arrives, participation can become measurable&mdash;without making it public.</p>
+            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
+              <div>
+                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
+                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
+                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
+                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
+              </div>
+              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
+                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
+              </div>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+              </ol>
+              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See it in the demo <ArrowRight /></Link></Button>
+            </article>
+        </div>
+      </section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
