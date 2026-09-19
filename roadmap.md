@@ -134,3 +134,5 @@
 - [ ] Private /admin/analytics dashboard (passphrase-protected, server-side) with overview, funnel, Ask KIH topics, category demand, resource performance, neighborhood insights (min 5 residents), resource gaps, location + map usage, partner summary builder with CSV/print.
 - [ ] Privacy copy: what KIH measures + About KIH data.
 - [ ] Admin dashboard sections menu: Overview, Resident Funnel, Ask KIH Insights, Category Demand, Resource Performance, Neighborhood Insights, Resource Gap Analysis, Location Usage, Map Engagement, Partner Report Builder.
+
+- [x] Admin nav includes Resource Gap Analysis (anchor scroll) + report exact live URL
