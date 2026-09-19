@@ -124,6 +124,43 @@ function Accordion({ title, children, defaultOpen = false }: { title: string; ch
   );
 }
 
+/** Food resources ordered by real distance from the resident's shared location state. */
+function NearbyFood() {
+  const { on, areaLabel, precise } = useLocationState();
+  const { activeCoords } = useLocationState();
+  const nearby = RESOURCES.filter((r) => r.tags.includes("food") || r.category === "food")
+    .map((r) => ({ r, d: distanceToResource(r, activeCoords) }))
+    .sort((a, b) => (a.d?.miles ?? Number.POSITIVE_INFINITY) - (b.d?.miles ?? Number.POSITIVE_INFINITY))
+    .slice(0, 4);
+
+  return (
+    <article className="card-flat mt-6 p-6">
+      <h2 className="font-display text-xl font-extrabold">Food support near you</h2>
+      <p className="mt-1 text-sm text-foreground/70">
+        {on
+          ? `Ordered by distance from ${areaLabel ?? "your area"}${precise ? " (your current location)" : " (area you selected)"}.`
+          : "Turn on I'm Here, or choose a ZIP code or neighborhood, to order these by distance."}
+      </p>
+      <div className="mt-4">
+        <ImHereControl />
+      </div>
+      <ul className="mt-4 grid gap-2">
+        {nearby.map(({ r, d }) => (
+          <li key={r.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card px-4 py-3">
+            <span className="font-bold">{r.name}</span>
+            <span className="text-sm text-foreground/65">{r.neighborhood} · {r.whenLabel}</span>
+            {d && <span className="chip ml-auto text-xs">~{d.miles.toFixed(1)} mi away</span>}
+            <Link to="/resource/$id" params={{ id: r.id }} className="btn-base btn-outline btn-sm">View details</Link>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-muted-foreground">
+        Distances are calculated from the neighborhood recorded for each prototype resource, so they are approximate.
+      </p>
+    </article>
+  );
+}
+
 export function FoodSupport() {
   return (
     <section id="food-support" className="scroll-mt-24">
