@@ -92,7 +92,6 @@ const FF_PILLARS = [
 
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
-  const [showResidents, setShowResidents] = useState(false);
 
   return (
     <div>
