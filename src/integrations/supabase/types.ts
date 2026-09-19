@@ -183,6 +183,9 @@ export type Database = {
           name: string
           neighborhood: string | null
           phone: string | null
+          phone_source: string | null
+          phone_verified: boolean
+          phone_verified_at: string | null
           routable_latitude: number | null
           routable_longitude: number | null
           slug: string | null
@@ -222,6 +225,9 @@ export type Database = {
           name: string
           neighborhood?: string | null
           phone?: string | null
+          phone_source?: string | null
+          phone_verified?: boolean
+          phone_verified_at?: string | null
           routable_latitude?: number | null
           routable_longitude?: number | null
           slug?: string | null
@@ -261,6 +267,9 @@ export type Database = {
           name?: string
           neighborhood?: string | null
           phone?: string | null
+          phone_source?: string | null
+          phone_verified?: boolean
+          phone_verified_at?: string | null
           routable_latitude?: number | null
           routable_longitude?: number | null
           slug?: string | null
