@@ -16,6 +16,7 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ForYouRouteImport } from './routes/for-you'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as LearnRouteImport } from './routes/learn'
+import { Route as LiveRouteImport } from './routes/live'
 import { Route as NeighborhoodRouteImport } from './routes/neighborhood'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
@@ -58,6 +59,11 @@ const HelpRoute = HelpRouteImport.update({
 const LearnRoute = LearnRouteImport.update({
   id: '/learn',
   path: '/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NeighborhoodRoute = NeighborhoodRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
   '/learn': typeof LearnRoute
+  '/live': typeof LiveRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
   '/learn': typeof LearnRoute
+  '/live': typeof LiveRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
   '/learn': typeof LearnRoute
+  '/live': typeof LiveRoute
   '/neighborhood': typeof NeighborhoodRoute
   '/onboarding': typeof OnboardingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/for-you'
     | '/help'
     | '/learn'
+    | '/live'
     | '/neighborhood'
     | '/onboarding'
     | '/opportunities'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/for-you'
     | '/help'
     | '/learn'
+    | '/live'
     | '/neighborhood'
     | '/onboarding'
     | '/opportunities'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/for-you'
     | '/help'
     | '/learn'
+    | '/live'
     | '/neighborhood'
     | '/onboarding'
     | '/opportunities'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   ForYouRoute: typeof ForYouRoute
   HelpRoute: typeof HelpRoute
   LearnRoute: typeof LearnRoute
+  LiveRoute: typeof LiveRoute
   NeighborhoodRoute: typeof NeighborhoodRoute
   OnboardingRoute: typeof OnboardingRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/learn'
       fullPath: '/learn'
       preLoaderRoute: typeof LearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/neighborhood': {
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForYouRoute: ForYouRoute,
   HelpRoute: HelpRoute,
   LearnRoute: LearnRoute,
+  LiveRoute: LiveRoute,
   NeighborhoodRoute: NeighborhoodRoute,
   OnboardingRoute: OnboardingRoute,
   OpportunitiesRoute: OpportunitiesRoute,

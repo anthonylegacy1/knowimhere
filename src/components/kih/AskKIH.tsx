@@ -5,12 +5,15 @@ import { parseIntent } from "@/lib/ask.functions";
 import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
 import { CATEGORIES, EMERGENCY_KEYWORDS, type Resource } from "@/data/resources";
+import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
+import { LiveSummary } from "./LiveSummary";
 import { ResourceCard } from "./ResourceCard";
 import { IssueFlow } from "./IssueFlow";
 import { EmergencyNotice } from "./EmergencyNotice";
 
 export const EXAMPLE_QUESTIONS = [
   "What can I do near me today?",
+  "What's happening around me?",
   "I need transportation.",
   "Find free senior activities.",
   "What programs are available for my teenager?",
@@ -166,6 +169,9 @@ export function AskKIH({
                 <IssueFlow text={t.question} neighborhood={profile.neighborhood} />
               ) : (
                 <>
+                  {LIVE_QUESTION_KEYWORDS.some((k) => t.question.toLowerCase().includes(k)) && (
+                    <div className="mb-5"><LiveSummary /></div>
+                  )}
                   <p className="text-lg">
                     {t.intent.summary ? (
                       <>

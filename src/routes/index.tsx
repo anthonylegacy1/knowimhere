@@ -21,6 +21,7 @@ import {
   Music,
   Navigation,
   PersonStanding,
+  Radio,
   Search,
   ShieldCheck,
   Smartphone,
@@ -151,8 +152,8 @@ function Index() {
       <section className="bg-card pb-12 pt-12 text-center">
         <div className="container-kih">
           <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
-          <p aria-label="Discover, Connect, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
-            {["Discover", "Connect", "Get There", "Check In", "Stay Connected"].map((step, index) => (
+          <p aria-label="Discover, Know, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
+            {["Discover", "Know", "Get There", "Check In", "Stay Connected"].map((step, index) => (
               <span key={step} className="flex items-center gap-2">
                 {index > 0 && <ArrowRight className="size-4 shrink-0 text-sky" aria-hidden />}
                 <span className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-bold text-ink sm:text-base">{step}</span>
@@ -180,8 +181,10 @@ function Index() {
               <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
                 <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
               </div>
-              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
                 <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
                 <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
                 <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
                 <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
@@ -194,6 +197,26 @@ function Index() {
       </section>
 
 
+
+      <section className="container-kih pt-14">
+        <article className="rounded-lg border-2 border-sun bg-sun/15 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="grid size-11 place-items-center rounded-lg bg-ink text-cream"><Radio /></span>
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-wider text-ink">KIH Live</p>
+              <h2 className="text-2xl font-extrabold">Know what&apos;s happening around you.</h2>
+            </div>
+            <span className="chip ml-auto bg-ink text-[10px] uppercase tracking-wide text-cream">Buildathon demonstration data</span>
+          </div>
+          <p className="mt-3 max-w-3xl text-foreground/70">Community reports, neighborhood updates, transportation information and local information—all connected to the area you choose.</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {["Community reports", "Verified alerts", "Local news", "Transportation"].map((chip) => (
+              <span key={chip} className="chip bg-background text-xs font-bold text-ink">{chip}</span>
+            ))}
+          </div>
+          <Button asChild className="mt-5 min-h-12"><Link to="/live">Explore KIH Live <ArrowRight /></Link></Button>
+        </article>
+      </section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
@@ -426,6 +449,14 @@ function Index() {
             <ValueCard icon={<LineChart />} title="Turn participation into insight" text="Privacy-conscious, aggregated engagement patterns show what residents are discovering and where more outreach may be needed." />
             <ValueCard icon={<Store />} title="Strengthen the local economy" text="Connect residents with local businesses, employment, training, events and neighborhood organizations so activity circulates in Detroit." />
             <ValueCard icon={<Building2 />} title="Improve future investment decisions" text="Give participating organizations better information to evaluate outreach, program utilization and community demand." />
+            <div className="card-flat flex flex-col justify-center bg-card p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Neighborhood awareness</p>
+              <p className="mt-2 text-sm font-semibold text-foreground/75">
+                Aggregated, privacy-conscious patterns could help participating organizations better understand where
+                residents are encountering barriers, seeking information or reporting community concerns.
+              </p>
+              <p className="mt-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">Buildathon demonstration data</p>
+            </div>
             <div className="card-flat flex flex-col justify-center bg-aqua-soft/60 p-6">
               <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Privacy first</p>
               <p className="mt-2 text-sm font-semibold text-foreground/75">
