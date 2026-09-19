@@ -116,24 +116,37 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, [hydrated, savedArea, radiusMiles]);
 
   const requestGps = useCallback(async () => {
+    // Only ever one live request: repeated taps reuse the one already running.
+    if (inFlight.current) return false;
+    inFlight.current = true;
     setError(null);
+    setStaleReading(false);
     setPhase("requesting");
     try {
-      const next = await getCurrentPositionOnce();
-      setReading(next);
-      setGpsArea(nearestAreaLabel(next.coords));
+      const fix = await locateForDiscovery();
+      setReading(fix.reading);
+      setLowConfidence(fix.confidence === "low");
+      setGpsArea(nearestAreaLabel(fix.reading.coords));
       setMode("gps");
       return true;
     } catch (e) {
       const kind = e instanceof GeoError ? e.kind : "unavailable";
+      // A failed refresh must not throw away a good reading from this session.
+      if (reading && kind !== "denied") {
+        setStaleReading(true);
+        setError({ kind, message: STALE_MESSAGE });
+        return false;
+      }
       setError({ kind, message: MESSAGES[kind] });
       setReading(null);
+      setLowConfidence(false);
       setMode((m) => (m === "gps" ? (savedArea ? "manual" : "off") : m));
       return false;
     } finally {
+      inFlight.current = false;
       setPhase("idle");
     }
-  }, [savedArea]);
+  }, [savedArea, reading]);
 
   const setManualArea = useCallback((input: string) => {
     const resolved: ResolvedArea | null = resolveArea(input);
