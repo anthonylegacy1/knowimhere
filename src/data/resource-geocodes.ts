@@ -46,6 +46,11 @@ export const RESOURCE_GEOCODES: Record<string, ResourceGeocode> = {
   "helping-hands-training": { lat: 42.3491623, lon: -83.0528105, routableLat: 42.349308101505, routableLon: -83.053165699793, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
   "selden-courtyard": { lat: 42.3472796, lon: -83.0651594, routableLat: 42.34726525707, routableLon: -83.065109147341, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
   "redmond-park": { lat: 42.347421823057, lon: -83.064415580107, routableLat: 42.347421823057, routableLon: -83.064415580107, accuracy: "interpolated", source: "us_census_geocoder (street intersection)", reviewStatus: "review_recommended" },
+  "ff-adams-butzel": { lat: 42.3952241, lon: -83.1639995, routableLat: 42.395199478301, routableLon: -83.163919047086, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
+  "ff-sheffield-bridge": { lat: 42.369326, lon: -83.140212, routableLat: 42.369323490945, routableLon: -83.140270260787, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
+  "ff-chandler-park": { lat: 42.3944863, lon: -82.9771997, routableLat: 42.394508689064, routableLon: -82.97722154359, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
+  "ff-oak-street-jefferson": { lat: 42.3664658, lon: -82.9714995, routableLat: 42.366495390876, routableLon: -82.971499693553, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
+  "ff-the-office": { lat: 42.4417561, lon: -83.1419696, routableLat: 42.441708743783, routableLon: -83.141933701347, accuracy: "point_address", source: "osm_nominatim (point address), cross-checked with us_census_geocoder", reviewStatus: "reviewed_ok" },
 };
 
 /** Street-verified coordinates are precise enough for location-verified check-in. */

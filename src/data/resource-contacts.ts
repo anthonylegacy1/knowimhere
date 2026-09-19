@@ -5,10 +5,10 @@
 // resource with no entry here shows no calling option at all.
 
 export interface VerifiedContact {
-  /** Dial string for the tel: link, E.164. */
-  tel: string;
+  /** Dial string for the tel: link, E.164. Absent when only a website is verified. */
+  tel?: string;
   /** Human-readable number shown on screen and to screen readers. */
-  display: string;
+  display?: string;
   /** Where the number was verified. */
   source: string;
   /** ISO date the number was checked. */
@@ -48,11 +48,39 @@ export const RESOURCE_CONTACTS: Record<string, VerifiedContact> = {
   },
 };
 
+// Fast Freddy Experience: number and website read from fastfreddyexperience.com
+// on 2026-09-19. The same contact serves every Fast Freddy class location.
+const FAST_FREDDY: VerifiedContact = {
+  tel: "+15862123018",
+  display: "(586) 212-3018",
+  source: "fastfreddyexperience.com",
+  verifiedAt: "2026-09-19",
+  website: "https://fastfreddyexperience.com",
+};
+
+for (const slug of [
+  "fast-freddy-experience",
+  "ff-sheffield-bridge",
+  "ff-adams-butzel",
+  "ff-chandler-park",
+  "ff-oak-street-jefferson",
+  "ff-the-office",
+]) {
+  RESOURCE_CONTACTS[slug] = FAST_FREDDY;
+}
+
+// Everyday Connect is a digital resource — website only, no phone line.
+RESOURCE_CONTACTS["everyday-connect"] = {
+  source: "everydayconnect.lovable.app",
+  verifiedAt: "2026-09-19",
+  website: "https://everydayconnect.lovable.app/",
+};
+
 export function verifiedContact(slug: string): VerifiedContact | null {
   return RESOURCE_CONTACTS[slug] ?? null;
 }
 
-export function verifiedPhone(slug: string): VerifiedContact | null {
+export function verifiedPhone(slug: string): (VerifiedContact & { tel: string; display: string }) | null {
   const c = RESOURCE_CONTACTS[slug];
-  return c?.tel ? c : null;
+  return c?.tel && c.display ? (c as VerifiedContact & { tel: string; display: string }) : null;
 }

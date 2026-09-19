@@ -4,10 +4,10 @@ import { useState } from "react";
 import { CATEGORIES, type Resource } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
 import { useLocationState } from "@/lib/location";
-import { distanceToResource } from "@/lib/resource-distance";
+import { distanceToResource, resourceCoords } from "@/lib/resource-distance";
 import { toast } from "sonner";
 import { CallButton } from "@/components/kih/CallButton";
-import { verifiedPhone } from "@/data/resource-contacts";
+import { verifiedContact, verifiedPhone } from "@/data/resource-contacts";
 
 const TONE: Record<string, string> = {
   mint: "bg-mint/15 text-mint",
@@ -35,7 +35,10 @@ export function ResourceCard({
   const cat = CATEGORIES[resource.category];
   const isSaved = saved.includes(resource.id);
   const isInterested = interested.includes(resource.id);
-  const contact = verifiedPhone(resource.id);
+  const phone = verifiedPhone(resource.id);
+  const contact = verifiedContact(resource.id);
+  // An online-only resource has nowhere to travel to, so no Get There action.
+  const hasPlace = resourceCoords(resource) !== null;
 
   return (
     <article className="card-pop flex flex-col p-5 transition-transform hover:-translate-y-0.5">
@@ -46,6 +49,9 @@ export function ResourceCard({
         <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${TONE[cat.tone]}`}>{cat.label}</span>
       </div>
       <h3 className="mt-3 font-display text-xl font-bold leading-tight">{resource.name}</h3>
+      {resource.sourceLabel && (
+        <p className="mt-1 text-[11px] font-extrabold uppercase tracking-wide text-mint">{resource.sourceLabel}</p>
+      )}
       <p className="mt-1 text-sm text-foreground/60">{resource.summary}</p>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
@@ -110,11 +116,15 @@ export function ResourceCard({
       )}
 
       <div className="mt-4 grid grid-cols-2 gap-2">
-        {contact && <CallButton slug={resource.id} name={resource.name} size="sm" className="col-span-2" />}
-        <Link to="/resource/$id" params={{ id: resource.id }} className="btn-base btn-ink btn-sm">
+        {phone && <CallButton slug={resource.id} name={resource.name} size="sm" className="col-span-2" />}
+        <Link
+          to="/resource/$id"
+          params={{ id: resource.id }}
+          className={`btn-base btn-ink btn-sm${hasPlace ? "" : " col-span-2"}`}
+        >
           View Details
         </Link>
-        {onGetThere ? (
+        {!hasPlace ? null : onGetThere ? (
           <button type="button" onClick={() => onGetThere(resource)} className="btn-base btn-brand btn-sm">
             Get There
           </button>
@@ -124,7 +134,18 @@ export function ResourceCard({
           </Link>
         )}
       </div>
-      {contact?.website && (
+      {resource.links?.map((l) => (
+        <a
+          key={l.href}
+          href={l.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-sky underline-offset-4 hover:underline"
+        >
+          {l.label} ↗
+        </a>
+      ))}
+      {contact?.website && !resource.links?.length && (
         <a
           href={contact.website}
           target="_blank"
