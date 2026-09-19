@@ -327,11 +327,51 @@ function Index() {
 
 
 
-      <section className="container-kih py-14"><SectionHeading eyebrow="Buildathon demonstration data" title="See connection—not surveillance." text="Partners can learn what residents are finding and using through aggregate patterns, while individual check-ins remain private." />
-        <div className="mt-8 grid gap-4 sm:grid-cols-3"><Metric icon={<Eye />} value="1,240" label="Resource views" /><Metric icon={<Navigation />} value="386" label="Get-there plans" /><Metric icon={<Check />} value="214" label="Private check-ins" /></div>
-        <div className="mt-6 flex flex-wrap gap-3"><Button asChild><Link to="/partners"><BarChart3 /> View partner impact</Link></Button><Button asChild variant="outline"><Link to="/privacy"><ShieldCheck /> Read privacy commitments</Link></Button></div>
-        <p className="mt-4 text-xs text-muted-foreground">Fictional Buildathon demonstration data. No paying partners, integrations or measured outcomes are claimed.</p>
+      <section className="container-kih py-14">
+        <SectionHeading
+          eyebrow="For organizations and partners"
+          title="From outreach to measurable participation."
+          text="Flyers tell you how many you printed. Know I'm Here helps participating organizations understand how discovery can move toward real participation."
+        />
+
+        <ol className="mt-8 flex flex-wrap items-stretch gap-3">
+          {[
+            { label: "Matched", text: "A resident sees a relevant opportunity." },
+            { label: "Showed interest", text: "They save it or open the details." },
+            { label: "Get there", text: "They plan directions or ride help." },
+            { label: "Participated", text: "They check in privately on arrival." },
+          ].map((stage, index, all) => (
+            <li key={stage.label} className="flex flex-1 basis-56 items-center gap-3">
+              <div className="card-flat h-full w-full p-5">
+                <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Step {index + 1}</p>
+                <p className="mt-1 text-lg font-extrabold uppercase leading-snug">{stage.label}</p>
+                <p className="mt-2 text-sm text-foreground/65">{stage.text}</p>
+              </div>
+              {index < all.length - 1 && <ArrowRight className="hidden size-5 shrink-0 text-foreground/35 lg:block" aria-hidden />}
+            </li>
+          ))}
+        </ol>
+        <p className="mt-4 max-w-2xl font-semibold text-foreground/75">Understand how residents move from discovering an opportunity to participating in it.</p>
+
+        <div className="mt-8 rounded-xl bg-ink p-8 text-cream sm:p-10">
+          <p className="text-xs font-extrabold uppercase tracking-widest text-sun">See connection — not surveillance</p>
+          <p className="mt-3 max-w-3xl text-lg font-semibold text-cream/85">
+            Partners can learn from privacy-conscious, aggregated engagement patterns while individual resident activity
+            remains protected according to the platform&apos;s privacy controls.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button asChild size="lg" className="min-h-14 px-7 text-base font-extrabold">
+              <Link to="/partners"><BarChart3 /> View Partner Impact <ArrowRight /></Link>
+            </Button>
+            <Button asChild variant="ghost" className="min-h-12 text-cream underline underline-offset-4 hover:bg-cream/10 hover:text-cream">
+              <Link to="/privacy"><ShieldCheck /> Read Privacy Commitments</Link>
+            </Button>
+          </div>
+        </div>
+
+        <p className="mt-4 text-xs text-muted-foreground">Prototype concept. No paying partners, integrations or measured outcomes are claimed. Demonstration metrics appear inside the Partner Impact experience.</p>
       </section>
+
 
       <section className="border-y border-border bg-card">
         <div className="container-kih py-14">
