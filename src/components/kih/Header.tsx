@@ -7,7 +7,7 @@ import { AccessibilityPanel } from "@/components/kih/AccessibilityPanel";
 
 const NAV = [
   { to: "/story", label: "Vision" },
-  { to: "/demo", label: "Pitch Mode" },
+  { to: "/demo", label: "KIH Resident Funnel" },
 ] as const;
 
 const MORE_NAV = [
