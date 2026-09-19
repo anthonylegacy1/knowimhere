@@ -19,7 +19,7 @@ export type CategoryId =
 
 export const CATEGORIES: Record<CategoryId, { label: string; emoji: string; tone: string }> = {
   health: { label: "Health & Wellness", emoji: "❤️", tone: "mint" },
-  senior: { label: "Senior Programs", emoji: "🌼", tone: "sun" },
+  senior: { label: "Senior Programs", emoji: "☀️", tone: "sun" },
   community: { label: "Community Activities", emoji: "🤝", tone: "brand" },
   recreation: { label: "Recreation", emoji: "🏀", tone: "sky" },
   food: { label: "Food Resources", emoji: "🥬", tone: "mint" },
@@ -72,7 +72,7 @@ export const LIFE_STAGES: { id: LifeStage; label: string; emoji: string }[] = [
   { id: "young-adult", label: "Young Adult", emoji: "🚀" },
   { id: "parent", label: "Parent / Family", emoji: "👨‍👩‍👧" },
   { id: "working", label: "Working Adult", emoji: "💼" },
-  { id: "older-adult", label: "Older Adult", emoji: "🌼" },
+  { id: "older-adult", label: "Older Adult", emoji: "☀️" },
   { id: "caregiver", label: "Caregiver", emoji: "💗" },
 ];
 
@@ -1433,7 +1433,7 @@ export const VIDEOS = [
   { id: "recs", title: "How AI Recommendations Work", length: "1:45", emoji: "✨" },
   { id: "transport", title: "How Transportation Works", length: "2:10", emoji: "🚌" },
   { id: "checkin", title: "How to Check In", length: "1:20", emoji: "✅" },
-  { id: "ec-seniors", title: "Everyday Connect for Seniors", length: "2:20", emoji: "🌼" },
+  { id: "ec-seniors", title: "Everyday Connect for Seniors", length: "2:20", emoji: "☀️" },
   { id: "ec-students", title: "Everyday Connect for Students", length: "2:15", emoji: "🚀" },
   { id: "jobs", title: "Finding Jobs & Training", length: "2:05", emoji: "💼" },
   { id: "safety", title: "Staying Safe Online", length: "1:55", emoji: "🔒" },
@@ -1579,7 +1579,7 @@ export const LEARNING_TRACKS = [
     id: "older-adults",
     title: "Everyday Connect: Older Adults",
     subtitle: "Phone confidence for everyday life",
-    emoji: "🌼",
+    emoji: "☀️",
     tone: "bg-sun/25",
     topics: [
       "Phone basics & settings",
