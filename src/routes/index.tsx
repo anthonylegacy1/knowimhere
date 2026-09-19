@@ -309,7 +309,12 @@ function Index() {
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
-        <div><p className="text-xs font-extrabold uppercase text-sky">Digital confidence</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Everyday Connect</h2><p className="mt-4 text-foreground/70">Practical digital confidence for older adults, working adults, parents, students and youth—from smartphone basics and accessibility to healthcare technology and useful AI.</p><div className="mt-5 flex flex-wrap gap-2"><span className="chip">Easy to use</span><span className="chip">Safe & secure</span><span className="chip">Everyday support</span></div><Button asChild variant="outline" className="mt-6"><Link to="/learn">Start learning <ArrowRight /></Link></Button></div>
+        <div><p className="text-xs font-extrabold uppercase text-sky">Digital confidence</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Everyday Connect</h2><p className="mt-4 text-foreground/70">Practical digital confidence for older adults, working adults, parents, students and youth—from smartphone basics and accessibility to healthcare technology and useful AI.</p><div className="mt-5 flex flex-wrap gap-2"><span className="chip">Easy to use</span><span className="chip">Safe & secure</span><span className="chip">Everyday support</span></div>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button asChild className="min-h-14"><Link to="/learn">Start learning <ArrowRight /></Link></Button>
+            <Button asChild variant="outline" className="min-h-14"><a href="https://everydayconnect.lovable.app/" target="_blank" rel="noopener noreferrer">Start connecting <ExternalLink /></a></Button>
+          </div>
+        </div>
       </div></section>
 
       <section className="bg-ink text-cream"><div className="container-kih py-14">
