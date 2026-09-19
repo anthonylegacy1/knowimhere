@@ -109,6 +109,11 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // One anonymous session marker per browser tab. No identity, no location.
+  useEffect(() => {
+    startSession();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
