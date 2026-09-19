@@ -150,7 +150,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="product-demo-band bg-background py-16"><div className="container-kih"><PhoneDemo /></div></section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
