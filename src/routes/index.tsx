@@ -19,6 +19,8 @@ import {
   LockKeyhole,
   MapPin,
   MessageCircle,
+  Minus,
+  Plus,
   Music,
   Navigation,
   PersonStanding,
@@ -133,6 +135,10 @@ const MORE_OPPORTUNITIES = [
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
   const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
+  const [showCityResources, setShowCityResources] = useState(false);
+  const [showModel, setShowModel] = useState(false);
+  const [showLoop, setShowLoop] = useState(false);
+  const [showCityValue, setShowCityValue] = useState(false);
 
   return (
     <div>
@@ -467,14 +473,60 @@ function Index() {
             opportunity is making sure residents can find them, reach them and use them.
           </p>
 
-          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <ImpactStep icon={<Search />} title="Discover" text="Residents find what is nearby." />
-            <ImpactStep icon={<BusFront />} title="Get There" text="Directions or ride assistance." />
-            <ImpactStep icon={<Check />} title="Check In" text="Private, opt-in participation." />
-            <ImpactStep icon={<BarChart3 />} title="Measure Impact" text="Aggregate insight closes the loop." accent />
-          </ol>
+          <p className="mt-8 text-sm font-extrabold uppercase tracking-wide text-foreground/70">
+            Discover <span className="text-brand">→</span> Get There <span className="text-brand">→</span> Check In <span className="text-brand">→</span> Measure Impact
+          </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <button
+            type="button"
+            onClick={() => setShowLoop((v) => !v)}
+            aria-expanded={showLoop}
+            aria-controls="impact-loop-panel"
+            className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+          >
+            <span>{showLoop ? "Hide the KIH impact loop" : "Explore the KIH impact loop"}</span>
+            {showLoop ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+          </button>
+
+          <div
+            id="impact-loop-panel"
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showLoop ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+            aria-hidden={!showLoop}
+          >
+            <div className="overflow-hidden">
+              <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <ImpactStep icon={<Search />} title="Discover" text="Residents find what is nearby." />
+                <ImpactStep icon={<BusFront />} title="Get There" text="Directions or ride assistance." />
+                <ImpactStep icon={<Check />} title="Check In" text="Private, opt-in participation." />
+                <ImpactStep icon={<BarChart3 />} title="Measure Impact" text="Aggregate insight closes the loop." accent />
+              </ol>
+            </div>
+          </div>
+
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {["Better resource use", "More participation", "Measurable impact", "Privacy-conscious insight"].map((c) => (
+              <li key={c} className="chip">{c}</li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => setShowCityValue((v) => !v)}
+            aria-expanded={showCityValue}
+            aria-controls="detroit-impact-panel"
+            className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+          >
+            <span>{showCityValue ? "Hide Detroit impact" : "Explore Detroit impact"}</span>
+            {showCityValue ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+          </button>
+
+          <div
+            id="detroit-impact-panel"
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showCityValue ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+            aria-hidden={!showCityValue}
+          >
+            <div className="overflow-hidden">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <ValueCard icon={<TrendingUp />} title="Maximize existing investment" text="Increase awareness and participation in programs and services that are already funded." />
             <ValueCard icon={<Network />} title="Reduce fragmented outreach" text="One connected discovery layer that can complement flyers, individual websites, social campaigns and manual outreach." />
             <ValueCard icon={<LineChart />} title="Turn participation into insight" text="Privacy-conscious, aggregated engagement patterns show what residents are discovering and where more outreach may be needed." />
@@ -496,6 +548,9 @@ function Index() {
               </p>
             </div>
           </div>
+            </div>
+          </div>
+
 
           <div className="mt-10 rounded-xl bg-ink p-8 text-center text-cream sm:p-12">
             <p className="text-xs font-extrabold uppercase tracking-widest text-sun">The goal isn&apos;t simply to spend more.</p>
@@ -504,29 +559,50 @@ function Index() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
-            <div>
-              <h3 className="text-2xl font-extrabold">A model that keeps residents free.</h3>
-              <p className="mt-3 text-foreground/70">
-                As Know I&apos;m Here grows, the platform is designed to support a sustainable model where residents
-                access the core experience for free, while municipalities, institutions, community partners, sponsors and
-                participating businesses can help fund the infrastructure.
-              </p>
-            </div>
-            <div className="space-y-2 text-center">
-              <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-brand">Residents</p><p className="text-sm text-foreground/70">Free core access</p></div>
-              <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5" aria-hidden /></div>
-              <div className="rounded-lg bg-brand p-4 text-brand-foreground"><p className="text-sm font-extrabold uppercase">Know I&apos;m Here</p><p className="text-sm">Community connection infrastructure</p></div>
-              <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5 rotate-180" aria-hidden /></div>
-              <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-sky">Cities · Institutions · Community partners · Sponsors · Businesses</p><p className="text-sm text-foreground/70">Support the ecosystem</p></div>
+          <div className="mt-10">
+            <h3 className="text-2xl font-extrabold">A model that keeps residents free.</h3>
+            <p className="mt-3 max-w-3xl text-foreground/70">
+              As Know I&apos;m Here grows, the platform is designed to support a sustainable model where residents
+              access the core experience for free, while municipalities, institutions, community partners, sponsors and
+              participating businesses can help fund the infrastructure.
+            </p>
+            <p className="mt-4 inline-flex rounded-full bg-cream px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-brand">
+              Residents: free core access
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setShowModel((v) => !v)}
+              aria-expanded={showModel}
+              aria-controls="sustainability-model-panel"
+              className="mt-5 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+            >
+              <span>{showModel ? "Hide sustainability model" : "View sustainability model"}</span>
+              {showModel ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+            </button>
+
+            <div
+              id="sustainability-model-panel"
+              className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showModel ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+              aria-hidden={!showModel}
+            >
+              <div className="overflow-hidden">
+                <div className="mx-auto mt-6 max-w-lg space-y-2 text-center">
+                  <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-brand">Residents</p><p className="text-sm text-foreground/70">Free core access</p></div>
+                  <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5" aria-hidden /></div>
+                  <div className="rounded-lg bg-brand p-4 text-brand-foreground"><p className="text-sm font-extrabold uppercase">Know I&apos;m Here</p><p className="text-sm">Community connection infrastructure</p></div>
+                  <div className="flex justify-center text-foreground/40"><ArrowDown className="size-5 rotate-180" aria-hidden /></div>
+                  <div className="card-flat p-4"><p className="text-sm font-extrabold uppercase text-sky">Cities · Institutions · Community partners · Sponsors · Businesses</p><p className="text-sm text-foreground/70">Support the ecosystem</p></div>
+                </div>
+
+                <ol className="mt-8 grid gap-4 sm:grid-cols-3">
+                  <StageCard n="1" title="Detroit pilot" text="Measure discovery, transportation engagement, resource interactions and check-ins." />
+                  <StageCard n="2" title="Prove impact" text="Evaluate participation, utilization, repeat engagement and community demand." />
+                  <StageCard n="3" title="Scale" text="Expand successful use cases across Detroit and eventually into additional communities." />
+                </ol>
+              </div>
             </div>
           </div>
-
-          <ol className="mt-10 grid gap-4 sm:grid-cols-3">
-            <StageCard n="1" title="Detroit pilot" text="Measure discovery, transportation engagement, resource interactions and check-ins." />
-            <StageCard n="2" title="Prove impact" text="Evaluate participation, utilization, repeat engagement and community demand." />
-            <StageCard n="3" title="Scale" text="Expand successful use cases across Detroit and eventually into additional communities." />
-          </ol>
 
           <p className="mt-8 max-w-3xl text-lg font-bold">
             Detroit already has resources. Know I&apos;m Here helps more residents find them, reach them, use them — and
@@ -574,6 +650,23 @@ function Index() {
           their need and connects them to the right next step.
         </p>
 
+        <button
+          type="button"
+          onClick={() => setShowCityResources((v) => !v)}
+          aria-expanded={showCityResources}
+          aria-controls="detroit-resources-panel"
+          className="mt-7 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+        >
+          <span>{showCityResources ? "Hide Detroit resources" : "Explore Detroit resources"}</span>
+          {showCityResources ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+        </button>
+
+        <div
+          id="detroit-resources-panel"
+          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showCityResources ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+          aria-hidden={!showCityResources}
+        >
+          <div className="overflow-hidden">
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {CITY_RESOURCES.map((r) => (
             <li key={r.id}>
@@ -631,6 +724,8 @@ function Index() {
             These are recommended resource links for the Buildathon prototype. Know I&apos;m Here does not operate these services and no technical
             integration, partnership or endorsement is implied.
           </p>
+        </div>
+          </div>
         </div>
       </section>
 
