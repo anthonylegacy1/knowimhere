@@ -148,7 +148,6 @@ function MapPage() {
             </button>
           ))}
         </div>
-        </div>
         <div className="mt-4 flex gap-2" role="group" aria-label="Choose how to view results">
           <button
             type="button"
