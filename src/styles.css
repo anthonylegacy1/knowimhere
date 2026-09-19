@@ -439,3 +439,9 @@ html.reduce-motion *::after {
   .phone-demo-wrap { width: min(100%, 21rem); }
   .phone-screen { min-height: 36rem; }
 }
+
+/* Nearby resource map markers (MapLibre). */
+.kih-marker { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border-radius: 999px; border: 2px solid var(--ink); background: var(--card); font-size: 1rem; line-height: 1; cursor: pointer; box-shadow: 0 0.25rem 0.75rem oklch(0.24 0.03 265 / 22%); }
+.kih-marker-approx { border-style: dashed; opacity: 0.85; }
+.kih-marker-active { border-color: var(--brand); background: var(--brand); transform: scale(1.15); }
+.kih-you-dot { width: 1.1rem; height: 1.1rem; border-radius: 999px; background: var(--sky); border: 3px solid var(--card); box-shadow: 0 0 0 0.35rem oklch(0.6 0.13 240 / 25%); }

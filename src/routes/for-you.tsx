@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
 import { useLocationState } from "@/lib/location";
+import { useCategoryFilters } from "@/lib/category-filters";
 import { distanceMap } from "@/lib/resource-distance";
 import { scoreResources } from "@/lib/recommend";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
@@ -24,39 +25,13 @@ export const Route = createFileRoute("/for-you")({
 });
 
 const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
-const FILTER_KEY = "kih:for-you:filters:v1";
 
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
   const { on, activeCoords, areaLabel, precise, radiusMiles, setRadius } = useLocationState();
-  // Interest categories are a true multi-select set; "saved" is a separate view.
-  const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>([]);
-  const [savedOnly, setSavedOnly] = useState(false);
+  // One shared multi-select category state, also used by the nearby map.
+  const { selectedCategories, savedOnly, toggleCategory, setSavedOnly, clearFilters } = useCategoryFilters();
   const [showMore, setShowMore] = useState(false);
-
-  // Restore the resident's selections for this device.
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(FILTER_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as { categories?: CategoryId[]; savedOnly?: boolean };
-        if (Array.isArray(parsed.categories)) setSelectedCategories(parsed.categories);
-        if (parsed.savedOnly) setSavedOnly(true);
-      }
-    } catch {
-      /* ignore unreadable stored filters */
-    }
-  }, []);
-  useEffect(() => {
-    try {
-      localStorage.setItem(FILTER_KEY, JSON.stringify({ categories: selectedCategories, savedOnly }));
-    } catch {
-      /* storage unavailable — filters simply do not persist */
-    }
-  }, [selectedCategories, savedOnly]);
-
-  const toggleCategory = (c: CategoryId) =>
-    setSelectedCategories((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
   const showingAll = selectedCategories.length === 0 && !savedOnly;
 
   const distances = useMemo(() => distanceMap(RESOURCES, activeCoords), [activeCoords]);
@@ -117,6 +92,18 @@ function ForYou() {
         <ImHereControl />
       </div>
 
+      <div className="card-flat mt-6 flex flex-wrap items-center justify-between gap-3 p-5">
+        <div>
+          <p className="eyebrow">Map what&apos;s around me</p>
+          <p className="mt-1 font-display text-lg font-bold">
+            See resources, programs and opportunities around the area you choose.
+          </p>
+        </div>
+        <Link to="/map" className="btn-base btn-brand min-h-12 px-5">
+          View Map
+        </Link>
+      </div>
+
       {on && (
         <div className="mt-6 rounded-lg border border-border bg-card p-4">
           <p className="text-sm font-bold">
@@ -147,10 +134,7 @@ function ForYou() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => {
-              setSelectedCategories([]);
-              setSavedOnly(false);
-            }}
+            onClick={clearFilters}
             aria-pressed={showingAll}
             className={`chip min-h-11 cursor-pointer px-4 ${showingAll ? "bg-ink text-cream" : ""}`}
           >
@@ -158,7 +142,7 @@ function ForYou() {
           </button>
           <button
             type="button"
-            onClick={() => setSavedOnly((v) => !v)}
+            onClick={() => setSavedOnly(!savedOnly)}
             aria-pressed={savedOnly}
             className={`chip min-h-11 cursor-pointer px-4 ${savedOnly ? "bg-ink text-cream" : ""}`}
           >
