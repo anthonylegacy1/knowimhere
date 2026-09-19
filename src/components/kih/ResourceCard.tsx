@@ -8,6 +8,7 @@ import { distanceToResource, resourceCoords } from "@/lib/resource-distance";
 import { toast } from "sonner";
 import { CallButton } from "@/components/kih/CallButton";
 import { verifiedContact, verifiedPhone } from "@/data/resource-contacts";
+import { track } from "@/lib/analytics";
 
 const TONE: Record<string, string> = {
   mint: "bg-mint/15 text-mint",
@@ -157,6 +158,14 @@ export function ResourceCard({
           href={l.href}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            void track("external_resource_opened", {
+              resourceSlug: resource.id,
+              category: resource.category,
+              neighborhood: resource.neighborhood,
+              subcategory: l.label,
+            })
+          }
           className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-sky underline-offset-4 hover:underline"
         >
           {l.label} ↗
@@ -167,6 +176,14 @@ export function ResourceCard({
           href={contact.website}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            void track("external_resource_opened", {
+              resourceSlug: resource.id,
+              category: resource.category,
+              neighborhood: resource.neighborhood,
+              subcategory: "Website",
+            })
+          }
           className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-sky underline-offset-4 hover:underline"
         >
           Visit Website ↗
@@ -178,6 +195,13 @@ export function ResourceCard({
             type="button"
             onClick={() => {
               toggleSaved(resource.id);
+              if (!isSaved)
+                void track("resource_saved", {
+                  resourceSlug: resource.id,
+                  category: resource.category,
+                  neighborhood: resource.neighborhood,
+                  ...(live ? { distanceMiles: live.miles } : {}),
+                });
               toast(isSaved ? "Removed from saved" : "Saved for later");
             }}
             className="inline-flex min-h-10 items-center gap-1 rounded-full px-3 text-foreground/70 hover:bg-foreground/5"
@@ -190,6 +214,11 @@ export function ResourceCard({
             type="button"
             onClick={() => {
               markInterested(resource.id);
+              void track("resource_interested", {
+                resourceSlug: resource.id,
+                category: resource.category,
+                neighborhood: resource.neighborhood,
+              });
               toast.success("Great — we'll show you more like this.");
             }}
             className={`inline-flex min-h-10 items-center rounded-full px-3 hover:bg-foreground/5 ${isInterested ? "text-mint" : "text-foreground/70"}`}

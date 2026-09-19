@@ -6,6 +6,7 @@ import type { Resource } from "@/data/resources";
 import { cityResource } from "@/data/city-resources";
 import { useLocationState } from "@/lib/location";
 import { logEngagement } from "@/lib/impact";
+import { track } from "@/lib/analytics";
 import { distanceToResource } from "@/lib/resource-distance";
 import { CityResourceCard } from "./CityResourceCard";
 
@@ -47,6 +48,12 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
       resourceSlug: resource.id,
       category: resource.category,
       neighborhood: resource.neighborhood,
+    });
+    void track("transportation_option_viewed", {
+      resourceSlug: resource.id,
+      category: resource.category,
+      neighborhood: resource.neighborhood,
+      subcategory: o.label,
     });
     if (o.id === "drive" || o.id === "walk" || o.id === "transit") {
       const mode = o.id === "drive" ? "driving" : o.id === "walk" ? "walking" : "transit";

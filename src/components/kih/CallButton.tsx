@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { verifiedPhone } from "@/data/resource-contacts";
+import { track } from "@/lib/analytics";
 
 /**
  * Click-to-call for a resource with a VERIFIED phone number.
@@ -54,7 +55,10 @@ export function CallButton({
                   href={`tel:${contact.tel}`}
                   className="btn-base btn-brand min-h-14 text-lg"
                   aria-label={`Call ${name} at ${contact.display}`}
-                  onClick={() => setConfirm(false)}
+                  onClick={() => {
+                    void track("call_clicked", { resourceSlug: slug });
+                    setConfirm(false);
+                  }}
                 >
                   <Phone className="size-5" aria-hidden /> Call
                 </a>
@@ -77,6 +81,7 @@ export function PhoneLine({ slug, name }: { slug: string; name: string }) {
   return (
     <a
       href={`tel:${contact.tel}`}
+      onClick={() => void track("call_clicked", { resourceSlug: slug })}
       aria-label={`Call ${name} at ${contact.display}`}
       className="inline-flex min-h-11 items-center gap-1.5 text-base font-bold text-sky underline-offset-4 hover:underline"
     >
