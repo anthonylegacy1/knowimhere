@@ -5,7 +5,8 @@ export interface Profile {
   name: string;
   neighborhood: string;
   ageRange: string;
-  lifeStage: LifeStage | "";
+  /** Multi-select: a resident can be a working adult AND a parent AND a caregiver. */
+  lifeStages: LifeStage[];
   interests: CategoryId[];
   transportation: TransportMode[];
   accessibility: AccessPref[];
@@ -73,7 +74,7 @@ export const EMPTY_PROFILE: Profile = {
   name: "",
   neighborhood: "",
   ageRange: "",
-  lifeStage: "",
+  lifeStages: [],
   interests: [],
   transportation: [],
   accessibility: [],
@@ -105,9 +106,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const raw = window.localStorage.getItem(KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<AppState>;
+        // Older saves stored a single life stage. Carry it into the array.
+        const legacy = parsed.profile as (Partial<Profile> & { lifeStage?: LifeStage | "" }) | undefined;
+        const profile: Profile = {
+          ...EMPTY_PROFILE,
+          ...legacy,
+          lifeStages:
+            legacy?.lifeStages && Array.isArray(legacy.lifeStages)
+              ? legacy.lifeStages
+              : legacy?.lifeStage
+                ? [legacy.lifeStage]
+                : [],
+        };
         setState({
           ...initialState,
           ...parsed,
+          profile,
           accessibilityPreferences: {
             ...initialState.accessibilityPreferences,
             ...parsed.accessibilityPreferences,

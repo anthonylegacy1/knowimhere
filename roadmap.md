@@ -122,3 +122,4 @@
 
 - [x] Category filters must be true multi-select (array/Set + toggle, OR filtering, aria-pressed, survives Show More/Less) on home category pills, onboarding interests and For You Today
 - [x] Fast Freddy Experience (hub + 5 street-verified class locations) and Everyday Connect added as real, non-demonstration resources
+- [x] Life Stage is multi-select (array), Age Range stays single-select

@@ -119,12 +119,16 @@ export function scoreResources(
       else score -= 3;
     }
     if (intent.forSenior && !r.seniorFriendly) score -= 2;
-    if (profile.lifeStage && r.lifeStages?.includes(profile.lifeStage)) {
-      score += 2;
+    // Every selected life stage counts; one never replaces another.
+    const stageMatches = profile.lifeStages.filter((s) => r.lifeStages?.includes(s)).length;
+    if (stageMatches > 0) {
+      score += 2 + Math.min(stageMatches - 1, 2);
       reasons.push("Fits your life stage");
     }
-    if (profile.lifeStage === "youth" && r.audience === "senior-specific") score -= 4;
-    if (profile.lifeStage === "older-adult" && r.audience === "youth-specific") score -= 4;
+    const onlyYouth = profile.lifeStages.length > 0 && profile.lifeStages.every((s) => s === "youth");
+    const onlyOlder = profile.lifeStages.length > 0 && profile.lifeStages.every((s) => s === "older-adult");
+    if (onlyYouth && r.audience === "senior-specific") score -= 4;
+    if (onlyOlder && r.audience === "youth-specific") score -= 4;
 
     out.push({ resource: r, score, reasons: Array.from(new Set(reasons)) });
   }
