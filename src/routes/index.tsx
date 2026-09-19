@@ -435,7 +435,14 @@ function Index() {
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 text-center"><p className="mx-auto max-w-2xl text-xl font-bold leading-snug">Senior or student. Job or health resource. Community event or career opportunity.<br /><span className="text-brand">The question is the same: what does Detroit have for me?</span></p><p className="mt-10 text-2xl font-bold text-brand">KNOW I&apos;M HERE</p><h2 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">The right resource. The right opportunity.<br />For the right Detroit resident.<br /><span className="text-sky">At the right moment.</span></h2><p className="mt-4 font-medium text-foreground/60">Different generations. Different needs. One connection layer.</p><div className="mt-7 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div></section>
+      <section className="mx-auto max-w-4xl px-5 py-12 text-center sm:py-16">
+        <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-brand">Know I&apos;m Here</p>
+        <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
+          The right resource.<br />The right opportunity.<br />For the right Detroit resident.<br />
+          <span className="text-sky">At the right moment.</span>
+        </h2>
+        <div className="mt-8 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div>
+      </section>
     </div>
   );
 }
