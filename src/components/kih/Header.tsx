@@ -61,6 +61,17 @@ export function Header() {
           <Button
             type="button"
             variant="outline"
+            className="hidden min-h-11 gap-2 rounded-full px-4 font-bold md:inline-flex"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            Menu
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
             size="icon"
             className="size-11 rounded-full md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
