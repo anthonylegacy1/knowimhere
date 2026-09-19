@@ -9,6 +9,7 @@ import { Link } from "@tanstack/react-router";
 import { CATEGORIES, EMERGENCY_KEYWORDS, RESOURCES, type Resource } from "@/data/resources";
 import { useLocationState } from "@/lib/location";
 import { distanceMap } from "@/lib/resource-distance";
+import { queryTopic, track } from "@/lib/analytics";
 import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
 import { matchCityResources, DETROIT_OPPORTUNITIES } from "@/data/city-resources";
 import { CityResourceCard } from "./CityResourceCard";
@@ -111,6 +112,13 @@ export function AskKIH({
       intent.isEmergency || intent.isIssueReport
         ? []
         : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords), window).slice(0, 4);
+    // Analytics: the question text is never stored — only a derived topic and
+    // how many resources matched, so KIH can spot unmet demand.
+    void track("ask_kih_query", {
+      queryTopic: queryTopic(text),
+      resultCount: results.length,
+      ...(profile.neighborhood ? { neighborhood: profile.neighborhood } : {}),
+    });
     const turn: Turn = { question: text, intent, results, source, window };
     setTurns((t) => [turn, ...t]);
     onResults?.(turn);
