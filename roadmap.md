@@ -99,3 +99,9 @@
 - KIH Live radius filtering
 - Supabase persistence for checkins/resources: NOT implemented (backend not enabled)
 - Final audit must cite evidence per acceptance criterion
+
+## Location MVP status (verified in browser)
+- Real geolocation behind explicit consent; manual ZIP/neighborhood fallback; turn off clears precise state.
+- Distances via haversine from neighborhood centers (approximate by design).
+- Check-in: verified / out-of-range / low-accuracy / self-reported all exercised in browser.
+- Supabase (resources + checkins tables, RLS) NOT configured — no backend enabled on this project.
