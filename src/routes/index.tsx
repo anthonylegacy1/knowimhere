@@ -151,9 +151,15 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-14">
-        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
-        <div className="mt-6"><ImHereControl /></div>
+      <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
+        <div className="container-kih">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-sky">See Know I&apos;m Here in action</p>
+            <h2 className="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">One connection layer. Different needs.</h2>
+            <p className="mt-3 text-foreground/65">See how Know I&apos;m Here can surface relevant opportunities, resources and support based on what matters to each resident.</p>
+          </div>
+          <div className="mt-8"><PhoneDemo /></div>
+        </div>
       </section>
 
       <section className="container-kih pb-2 pt-6">
@@ -166,17 +172,6 @@ function Index() {
             </ul>
             <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
           </article>
-      </section>
-
-      <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
-        <div className="container-kih">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-sky">See Know I&apos;m Here in action</p>
-            <h2 className="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">One connection layer. Different needs.</h2>
-            <p className="mt-3 text-foreground/65">See how Know I&apos;m Here can surface relevant opportunities, resources and support based on what matters to each resident.</p>
-          </div>
-          <div className="mt-8"><PhoneDemo /></div>
-        </div>
       </section>
 
       <section className="bg-card pb-12 pt-12 text-center">
@@ -192,6 +187,25 @@ function Index() {
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
         </div>
+      </section>
+
+      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
+        <article className="card-flat p-6 sm:p-8">
+          <span className="eyebrow">Community + public health</span>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
+          <p className="mt-2 max-w-2xl text-foreground/70">
+            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
+          </p>
+          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
+            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </article>
+      </section>
+
+      <section className="container-kih py-14">
+        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
+        <div className="mt-6"><ImHereControl /></div>
       </section>
 
 
@@ -241,20 +255,6 @@ function Index() {
             </div>
           </details>
         </div>
-      </section>
-
-      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
-        <article className="card-flat p-6 sm:p-8">
-          <span className="eyebrow">Community + public health</span>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
-          <p className="mt-2 max-w-2xl text-foreground/70">
-            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
-          </p>
-          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
-            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </article>
       </section>
 
       <section id="my-neighborhood" className="container-kih scroll-mt-24 py-14">
