@@ -7,6 +7,8 @@ import { CheckIn } from "@/components/kih/CheckIn";
 import { useApp } from "@/lib/app-store";
 import { logEngagement } from "@/lib/impact";
 import { toast } from "sonner";
+import { CallButton, PhoneLine } from "@/components/kih/CallButton";
+import { verifiedPhone } from "@/data/resource-contacts";
 
 export const Route = createFileRoute("/resource/$id")({
   validateSearch: (s: Record<string, unknown>): { step?: "get-there" | "check-in" } =>
@@ -47,6 +49,9 @@ function ResourcePage() {
   const getThereRef = useRef<HTMLDivElement>(null);
   const checkInRef = useRef<HTMLDivElement>(null);
   const cat = CATEGORIES[resource.category];
+  const contact = verifiedPhone(resource.id);
+  // Getting there stays the lead action when the next step is about travelling there.
+  const travelFirst = resource.category === "transportation" || /ride|bus|transit|pick ?up/i.test(resource.nextStep);
 
   useEffect(() => {
     void logEngagement({
@@ -113,8 +118,25 @@ function ResourcePage() {
 
           <p className="mt-5 rounded-2xl bg-sun/30 px-4 py-3 font-semibold">➡️ Next step: {resource.nextStep}</p>
 
+          {contact && (
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <CallButton slug={resource.id} name={resource.name} className={travelFirst ? "btn-outline" : ""} />
+              <PhoneLine slug={resource.id} name={resource.name} />
+            </div>
+          )}
+          {contact?.website && (
+            <a
+              href={contact.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex min-h-11 items-center gap-1 font-bold text-sky underline-offset-4 hover:underline"
+            >
+              Visit Website ↗
+            </a>
+          )}
+
           <div className="mt-5 grid gap-2 sm:grid-cols-3">
-            <button type="button" onClick={() => setStage("get-there")} className="btn-base btn-brand">
+            <button type="button" onClick={() => setStage("get-there")} className={`btn-base ${contact && !travelFirst ? "btn-outline" : "btn-brand"}`}>
               Help Me Get There
             </button>
             <button
