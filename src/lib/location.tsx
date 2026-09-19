@@ -4,6 +4,7 @@ import {
   geolocationSupported,
   getCurrentPositionOnce,
   locateForDiscovery,
+  refineDiscoveryLocation,
   type Coords,
   type GeoErrorKind,
   type GeoReading,
@@ -70,7 +71,7 @@ const Ctx = createContext<LocationValue | null>(null);
 const MESSAGES: Record<GeoErrorKind, string> = {
   unsupported: "Your browser doesn't support automatic location. Enter your ZIP code or neighborhood instead.",
   denied: "Location access is off. You can still use Know I'm Here by choosing your ZIP code or neighborhood.",
-  timeout: "Getting your location is taking longer than expected.",
+  timeout: "Location is taking longer than expected.",
   unavailable: "We couldn't determine your current location.",
 };
 
@@ -90,6 +91,9 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [staleReading, setStaleReading] = useState(false);
   // Guards against two GPS requests running at once (double taps, two controls).
   const inFlight = useRef(false);
+  // Bumped whenever the active location changes, so a late background upgrade
+  // from an older session is discarded instead of overwriting newer state.
+  const sessionToken = useRef(0);
 
   useEffect(() => {
     setSupported(geolocationSupported());
@@ -123,11 +127,24 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     setStaleReading(false);
     setPhase("requesting");
     try {
+      // Fast usable fix first: discovery starts as soon as this returns.
       const fix = await locateForDiscovery();
+      const session = ++sessionToken.current;
       setReading(fix.reading);
       setLowConfidence(fix.confidence === "low");
       setGpsArea(nearestAreaLabel(fix.reading.coords));
       setMode("gps");
+      if (fix.confidence === "low") {
+        // Quiet accuracy upgrade on the already-granted permission. Never awaited.
+        void refineDiscoveryLocation().then((better) => {
+          // Discarded if the resident turned location off or changed it meanwhile.
+          if (!better || sessionToken.current !== session) return;
+          if (better.reading.accuracyMeters >= fix.reading.accuracyMeters) return;
+          setReading(better.reading);
+          setLowConfidence(better.confidence === "low");
+          setGpsArea(nearestAreaLabel(better.reading.coords));
+        });
+      }
       return true;
     } catch (e) {
       const kind = e instanceof GeoError ? e.kind : "unavailable";
@@ -149,6 +166,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, [savedArea, reading]);
 
   const setManualArea = useCallback((input: string) => {
+    sessionToken.current += 1;
     const resolved: ResolvedArea | null = resolveArea(input);
     if (!resolved) return false;
     setSavedArea({ label: resolved.label, coords: resolved.coords, kind: resolved.kind });
@@ -167,6 +185,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const turnOff = useCallback(() => {
+    sessionToken.current += 1;
     // Clear the precise reading from active state immediately.
     setReading(null);
     setGpsArea(null);

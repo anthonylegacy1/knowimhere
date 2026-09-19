@@ -98,24 +98,33 @@ export function getCurrentPositionOnce(options?: PositionOptions): Promise<GeoRe
 }
 
 /**
- * Discovery reads (nearby resources, For You Today, Get There origin) use these.
+ * Discovery reads (nearby resources, For You Today, Get There origin) go for a
+ * usable position FAST. A wide-radius fix is fine for sorting and distances.
  * Check-in verification keeps its own stricter policy above.
  */
+export const DISCOVERY_FAST_OPTIONS: PositionOptions = {
+  enableHighAccuracy: false,
+  timeout: 5_000,
+  maximumAge: 60_000,
+};
+
+/** Used only if the fast read fails — never as the first thing a resident waits on. */
 export const DISCOVERY_PRIMARY_OPTIONS: PositionOptions = {
   enableHighAccuracy: true,
-  timeout: 15_000,
+  timeout: 12_000,
   maximumAge: 30_000,
 };
 
-export const DISCOVERY_FALLBACK_OPTIONS: PositionOptions = {
-  enableHighAccuracy: false,
-  timeout: 10_000,
-  maximumAge: 60_000,
+/** Optional quiet upgrade after discovery is already working. */
+export const PRECISION_UPGRADE_OPTIONS: PositionOptions = {
+  enableHighAccuracy: true,
+  timeout: 12_000,
+  maximumAge: 30_000,
 };
 
 export interface GeoDiagnostic {
   at: number;
-  mode: "high_accuracy" | "network_fallback";
+  mode: "fast" | "high_accuracy" | "precision_upgrade";
   outcome: "success" | "error";
   errorKind?: GeoErrorKind;
   accuracyMeters?: number;
@@ -145,14 +154,15 @@ export interface DiscoveryFix {
 }
 
 /**
- * One high-accuracy attempt, then one lower-accuracy attempt if the first
- * timed out or was temporarily unavailable. A denial or unsupported browser
- * stops immediately — we never re-prompt residents who said no.
+ * One fast, low-power attempt so discovery can start within seconds, then one
+ * high-accuracy attempt only if the fast read timed out or was unavailable.
+ * A denial or unsupported browser stops immediately — we never re-prompt
+ * residents who said no.
  */
 export async function locateForDiscovery(): Promise<DiscoveryFix> {
   const attempts: { mode: GeoDiagnostic["mode"]; options: PositionOptions }[] = [
+    { mode: "fast", options: DISCOVERY_FAST_OPTIONS },
     { mode: "high_accuracy", options: DISCOVERY_PRIMARY_OPTIONS },
-    { mode: "network_fallback", options: DISCOVERY_FALLBACK_OPTIONS },
   ];
   let lastError: GeoError = new GeoError("unavailable", "Location unavailable.");
   for (const attempt of attempts) {
@@ -183,6 +193,37 @@ export async function locateForDiscovery(): Promise<DiscoveryFix> {
     }
   }
   throw lastError;
+}
+
+/**
+ * Quiet accuracy upgrade after discovery is already running. Runs on the same
+ * granted permission (no second prompt) and never blocks the resident.
+ */
+export async function refineDiscoveryLocation(): Promise<DiscoveryFix | null> {
+  const started = Date.now();
+  try {
+    const reading = await getCurrentPositionOnce(PRECISION_UPGRADE_OPTIONS);
+    recordGeoDiagnostic({
+      at: started,
+      mode: "precision_upgrade",
+      outcome: "success",
+      accuracyMeters: reading.accuracyMeters,
+      durationMs: Date.now() - started,
+    });
+    return {
+      reading,
+      confidence: reading.accuracyMeters <= MAX_VERIFY_ACCURACY_METERS ? "high" : "low",
+    };
+  } catch (e) {
+    recordGeoDiagnostic({
+      at: started,
+      mode: "precision_upgrade",
+      outcome: "error",
+      errorKind: e instanceof GeoError ? e.kind : "unavailable",
+      durationMs: Date.now() - started,
+    });
+    return null;
+  }
 }
 
 export interface ProximityResult {
