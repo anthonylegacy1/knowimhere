@@ -321,7 +321,7 @@ function Index() {
         </div>
       </div></section>
 
-      <section className="container-kih py-14">
+      <section id="fast-freddy" className="container-kih scroll-mt-24 py-14">
         <SectionHeading eyebrow="The experience behind the pilot" title="More Than Entertainment. A Platform for Active, Connected Living." />
         <figure className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-lg border border-border">
           <img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
@@ -405,7 +405,8 @@ function Index() {
 
 
 
-      <section className="container-kih py-14">
+      <section id="partner-impact" className="container-kih scroll-mt-24 py-14">
+        <p className="mb-4 text-sm font-bold uppercase tracking-wider text-sky">When residents connect, organizations can better understand participation.</p>
         <SectionHeading
           eyebrow="For organizations and partners"
           title="From outreach to measurable participation."
@@ -454,6 +455,7 @@ function Index() {
       <section id="detroit-economic-impact" className="scroll-mt-24 border-y border-border bg-card">
 
         <div className="container-kih py-14">
+          <p className="mb-4 text-sm font-bold uppercase tracking-wider text-sun">When organizations connect, the city can get more value from the resources it already supports.</p>
           <SectionHeading
             eyebrow="Detroit economic impact"
             title="More connection. More impact. Better use of city resources."
@@ -536,7 +538,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-14">
+      <section id="discover-detroit" className="container-kih scroll-mt-24 py-14">
         <SectionHeading
           eyebrow="Detroit around you"
           title="Discover Detroit"
