@@ -73,13 +73,15 @@ export function Header() {
           <div className="container-kih flex flex-col gap-1 py-3">
             {[...NAV, ...MORE_NAV].map((n) => (
               <Link
-                key={n.to}
+                key={n.label}
                 to={n.to}
+                hash={"hash" in n ? n.hash : undefined}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-4 py-3 text-base font-bold text-foreground hover:bg-secondary"
               >
                 {n.label}
               </Link>
+
             ))}
             <Link to="/demo" onClick={() => setOpen(false)} className="btn-base btn-brand mt-2">
               View Demo Experience
