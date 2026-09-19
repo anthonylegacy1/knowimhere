@@ -43,6 +43,9 @@ function MapPage() {
   const { selectedCategories, toggleCategory, clearFilters } = useCategoryFilters();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
+  // Presentation mode only. Both views render the same `sorted` dataset,
+  // the same shared location state and the same shared category filters.
+  const [view, setView] = useState<"map" | "list">("map");
 
   // Every mappable resource comes from the resource database — no invented points.
   const mapped = useMemo(
@@ -145,6 +148,24 @@ function MapPage() {
             </button>
           ))}
         </div>
+        <div className="mt-4 flex gap-2" role="group" aria-label="Choose how to view results">
+          <button
+            type="button"
+            aria-pressed={view === "list"}
+            onClick={() => setView("list")}
+            className={`chip min-h-11 cursor-pointer px-4 ${view === "list" ? "bg-ink text-cream" : ""}`}
+          >
+            List
+          </button>
+          <button
+            type="button"
+            aria-pressed={view === "map"}
+            onClick={() => setView("map")}
+            className={`chip min-h-11 cursor-pointer px-4 ${view === "map" ? "bg-ink text-cream" : ""}`}
+          >
+            Map
+          </button>
+        </div>
       </div>
 
       {markers.length === 0 ? (
@@ -159,7 +180,7 @@ function MapPage() {
             </a>
           </div>
         </div>
-      ) : (
+      ) : view === "map" ? (
         <div className="mt-6">
           <Suspense
             fallback={
@@ -188,7 +209,7 @@ function MapPage() {
             </button>
           </div>
         </div>
-      )}
+      ) : null}
 
       {selected && (
         <div className="card-pop mt-4 p-5">
@@ -234,7 +255,11 @@ function MapPage() {
       {markers.length > 0 && (
         <div className="mt-8">
           <h2 className="font-display text-2xl font-bold">Nearby results</h2>
-          <p className="mt-1 text-sm text-foreground/70">Tap a card to highlight it on the map.</p>
+          <p className="mt-1 text-sm text-foreground/70">
+            {view === "map"
+              ? "Tap a card to highlight it on the map."
+              : "Same nearby results, shown as a list. Switch to Map to see them placed around your area."}
+          </p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {sorted.slice(0, 24).map((x) => (
               <button
