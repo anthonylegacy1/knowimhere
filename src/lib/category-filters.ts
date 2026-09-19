@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import type { CategoryId } from "@/data/resources";
+import { track } from "@/lib/analytics";
 
 /**
  * ONE category filter state shared by For You Today and the nearby map.
@@ -74,13 +75,15 @@ export function useCategoryFilters() {
   return {
     selectedCategories: snapshot.categories,
     savedOnly: snapshot.savedOnly,
-    toggleCategory: (c: CategoryId) =>
-      set({
+    toggleCategory: (c: CategoryId) => {
+      if (!state.categories.includes(c)) void track("category_selected", { category: c });
+      return set({
         ...state,
         categories: state.categories.includes(c)
           ? state.categories.filter((x) => x !== c)
           : [...state.categories, c],
-      }),
+      });
+    },
     setSavedOnly: (v: boolean) => set({ ...state, savedOnly: v }),
     clearFilters: () => set({ categories: [], savedOnly: false }),
   };
