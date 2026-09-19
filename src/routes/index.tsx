@@ -49,7 +49,7 @@ import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
-import { EXTERNAL_LINKS, PERSONAS, PRIORITIES } from "@/data/resources";
+import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
@@ -92,7 +92,6 @@ const FF_PILLARS = [
 
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
-  const [showResidents, setShowResidents] = useState(false);
 
   return (
     <div>
@@ -300,23 +299,6 @@ function Index() {
         <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
       </section>
 
-      <section className="border-y border-border bg-card">
-        <div className="container-kih py-14">
-          <SectionHeading eyebrow="One Detroit. Different needs." title="One connection layer." text="A 68-year-old, a 16-year-old and a working parent ask different questions. The same system can guide all three." />
-          <div className="mt-7 grid gap-3 md:grid-cols-3" aria-label="Resident examples">
-            {[{ initial: "D", name: "Dorothy, 68", role: "Older Adult" }, { initial: "M", name: "Marcus, 16", role: "Student" }, { initial: "W", name: "Working Parent", role: "Family + Everyday Needs" }].map((resident) => <div key={resident.name} className="flex min-h-20 items-center gap-3 rounded-lg border border-border bg-background p-4"><span className="grid size-11 shrink-0 place-items-center rounded-full bg-sun font-bold text-ink">{resident.initial}</span><div><p className="font-bold text-ink">{resident.name}</p><p className="text-sm text-foreground/60">{resident.role}</p></div></div>)}
-          </div>
-          <div id="resident-details" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showResidents ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showResidents}>
-            <div className="overflow-hidden">
-              <div className="grid gap-4 pt-6 md:grid-cols-3">
-                {PERSONAS.map((persona) => <article key={persona.id} className="card-flat flex flex-col p-6"><div className="flex items-center gap-3"><span className="grid size-12 place-items-center rounded-full bg-sun font-bold">{persona.initial}</span><div><h3 className="text-xl font-bold">{persona.name}, {persona.age}</h3><p className="text-sm text-foreground/60">{persona.tagline}</p></div></div><p className="mt-4 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-cream">“{persona.query}”</p><ul className="mt-3 flex flex-wrap gap-1.5">{persona.needs.slice(0, 4).map((need) => <li key={need} className="chip bg-card text-xs text-foreground/70">{need}</li>)}</ul><Button asChild variant="outline" className="mt-5 self-start"><Link to="/demo" tabIndex={showResidents ? undefined : -1}>See {persona.name}&apos;s demo</Link></Button></article>)}
-              </div>
-              <p className="mt-6 text-center text-xs text-muted-foreground">Dorothy, Marcus and Tasha are fictional residents created for the Buildathon demonstration.</p>
-            </div>
-          </div>
-          <div className="mt-7 flex justify-center"><Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-background px-6 font-bold text-ink shadow-sm" aria-expanded={showResidents} aria-controls="resident-details" onClick={() => setShowResidents((current) => !current)}>{showResidents ? <>Show Less <ChevronUp /></> : <>See How KIH Works for Different Residents <ChevronDown /></>}</Button></div>
-        </div>
-      </section>
 
       <section className="container-kih py-14"><SectionHeading eyebrow="Buildathon demonstration data" title="See connection—not surveillance." text="Partners can learn what residents are finding and using through aggregate patterns, while individual check-ins remain private." />
         <div className="mt-8 grid gap-4 sm:grid-cols-3"><Metric icon={<Eye />} value="1,240" label="Resource views" /><Metric icon={<Navigation />} value="386" label="Get-there plans" /><Metric icon={<Check />} value="214" label="Private check-ins" /></div>

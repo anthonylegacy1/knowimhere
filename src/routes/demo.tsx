@@ -26,7 +26,7 @@ export const Route = createFileRoute("/demo")({
   component: Demo,
 });
 
-const STEPS = ["Meet them", "Turn On I'm Here", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
+const STEPS = ["Choose a Resident", "Turn On I'm Here", "For You Today", "Ask KIH", "Neighborhood", "Get There", "I'm Here", "Stay Connected"];
 
 function toProfile(p: Persona): Profile {
   return {
@@ -78,6 +78,11 @@ function Demo() {
   return (
     <div className="container-kih py-6 sm:py-10">
       <div className="mx-auto max-w-3xl">
+        <div className="mb-6">
+          <h1 className="font-display text-3xl font-bold leading-tight sm:text-4xl">Know I&apos;m Here Resident Funnel</h1>
+          <p className="mt-3 text-foreground/70">Three residents. Three different needs. One platform designed to help each find the right opportunity, resource and next step.</p>
+        </div>
+
         <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="eyebrow">Buildathon Demo Mode · fictional residents</span>
           <span className="text-xs font-bold text-muted-foreground">
@@ -116,7 +121,7 @@ function Demo() {
                   {persona.initial}
                 </span>
                 <div>
-                  <h1 className="font-display text-3xl font-bold">Meet {persona.name}</h1>
+                  <h2 className="font-display text-3xl font-bold">Meet {persona.name}</h2>
                   <p className="text-foreground/65">Age {persona.age} · {persona.tagline}</p>
                 </div>
               </div>
