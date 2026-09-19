@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BellRing,
   Check,
+  ExternalLink,
   Eye,
   MapPin,
   Radio,
@@ -58,6 +59,33 @@ const BADGE_STYLE: Record<LiveSource, string> = {
   news: "bg-background text-foreground/70",
   kih: "bg-brand/20 text-brand",
 };
+
+const SAFETY_RESOURCES = [
+  {
+    name: "Detroit Alerts 365",
+    badge: "Official city resource",
+    badgeClass: "bg-sky/20 text-sky",
+    text: "Receive official Detroit-specific emergency notifications and important alerts.",
+    cta: "Sign up for official alerts",
+    href: "https://detroitmi.gov/departments/homeland-security-emergency-management/detroit-alerts-365",
+  },
+  {
+    name: "Project Green Light Detroit",
+    badge: "Detroit public safety",
+    badgeClass: "bg-sky/20 text-sky",
+    text: "Learn about Detroit's public-private real-time public-safety camera program.",
+    cta: "Learn about Project Green Light",
+    href: "https://detroitmi.gov/departments/police-department/project-green-light-detroit",
+  },
+  {
+    name: "Citizen",
+    badge: "External safety resource",
+    badgeClass: "bg-background text-foreground/70",
+    text: "View community safety and incident information available through the Citizen platform.",
+    cta: "Open Citizen",
+    href: "https://citizen.com",
+  },
+];
 
 function PrototypeBadge({ className = "" }: { className?: string }) {
   return (
@@ -333,6 +361,36 @@ function LivePage() {
             Optional, event-based and resident-controlled. No continuous family tracking.
           </p>
         </div>
+      </section>
+
+      {/* TRUSTED SAFETY RESOURCES */}
+      <section className="mt-12" aria-labelledby="trusted-safety">
+        <SectionHeading
+          eyebrow="Trusted safety resources"
+          title="Connect directly to existing Detroit and community safety tools."
+        />
+        <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+          {SAFETY_RESOURCES.map((r) => (
+            <li key={r.name} className="card-flat flex flex-col p-5">
+              <span className={`chip w-fit text-[10px] uppercase tracking-wide ${r.badgeClass}`}>{r.badge}</span>
+              <h3 className="mt-3 font-display text-xl font-bold leading-tight">{r.name}</h3>
+              <p className="mt-2 text-sm text-foreground/70">{r.text}</p>
+              <a
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-base btn-ink mt-4 min-h-12 self-start px-5 text-sm"
+              >
+                {r.cta} <ExternalLink className="size-4" aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 text-sm text-foreground/70">
+          Know I&apos;m Here does not replace these services. KIH Live is designed as a connection layer that can help
+          residents discover and navigate relevant community information and trusted resources in one experience.
+        </p>
       </section>
 
       {/* PRINCIPLES */}
