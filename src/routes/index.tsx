@@ -41,6 +41,7 @@ import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.ass
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
+import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
@@ -131,6 +132,44 @@ function Index() {
         </div>
       </section>
 
+      <section className="container-kih py-14">
+        <SectionHeading
+          eyebrow="Optional support"
+          title="Need help using the technology first?"
+          text="Having access to a smartphone or the internet does not always mean someone feels confident using it. Everyday Connect provides simple, step-by-step digital confidence training for older adults, youth, families, caregivers, and community members."
+        />
+        <p className="card-flat mt-6 p-5 text-lg font-semibold">
+          Everyday Connect teaches you how to use the technology.{" "}
+          <span className="text-brand">Know I&apos;m Here helps you use that confidence to connect with opportunities around you.</span>
+        </p>
+
+        <ol className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {[
+            { step: "Learn", label: "Everyday Connect", tone: "bg-sky/10 text-sky" },
+            { step: "Build digital confidence", label: "Skills you can use every day", tone: "bg-sky/10 text-sky" },
+            { step: "Discover", label: "Know I'm Here", tone: "bg-brand/10 text-brand" },
+            { step: "Connect", label: "Programs · Resources · Events · Services · Opportunities", tone: "bg-brand/10 text-brand" },
+            { step: "Participate", label: "Community · Health · Education · Employment · Recreation", tone: "bg-brand/10 text-brand" },
+          ].map((item, index) => (
+            <li key={item.step} className="card-flat flex flex-col gap-2 p-4">
+              <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${item.tone}`}>
+                {index + 1}. {item.step}
+              </span>
+              <span className="text-sm font-semibold text-foreground/70">{item.label}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-8 flex flex-col items-start gap-3">
+          <Button asChild variant="outline" className="min-h-12">
+            <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer">Explore Everyday Connect ↗</a>
+          </Button>
+          <p className="max-w-2xl text-sm text-foreground/65">
+            Need help with smartphones, apps, digital safety, healthcare technology, or AI? Start with Everyday Connect. It is optional—if you are already comfortable, keep exploring Know I&apos;m Here.
+          </p>
+        </div>
+      </section>
+
       <section className="border-y border-border bg-card">
         <div className="container-kih py-14">
           <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
@@ -198,7 +237,7 @@ function Index() {
       </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-2">
-        <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div></div>
+        <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div><div className="mt-5"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div></div>
         <article className="card-flat p-6"><p className="text-xs font-extrabold uppercase text-sky">Example route</p><h3 className="mt-2 text-xl font-bold">Patton Recreation Center</h3><p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p><div className="mt-5 grid grid-cols-2 gap-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div></article>
       </div></section>
 

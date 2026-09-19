@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { RESOURCES } from "@/data/resources";
 
 const TITLE = "Work After 55 — Senior Employment Resources in Detroit | Know I'm Here";
@@ -41,6 +42,10 @@ function WorkAfter55() {
         title="Work After 55"
         text="Some people want the income. Some want the routine and the people. Either way, Know I'm Here helps you find the next step — and how to get there."
       />
+
+      <div className="mt-6">
+        <EverydayConnectTip text="Need help with email, applications, or online job tools?" linkLabel="Visit Everyday Connect" />
+      </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {PATHS.map((p) => (
