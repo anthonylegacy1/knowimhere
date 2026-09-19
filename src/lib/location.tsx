@@ -4,6 +4,7 @@ import {
   geolocationSupported,
   getCurrentPositionOnce,
   locateForDiscovery,
+  refineDiscoveryLocation,
   type Coords,
   type GeoErrorKind,
   type GeoReading,
@@ -90,6 +91,9 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [staleReading, setStaleReading] = useState(false);
   // Guards against two GPS requests running at once (double taps, two controls).
   const inFlight = useRef(false);
+  // Bumped whenever the active location changes, so a late background upgrade
+  // from an older session is discarded instead of overwriting newer state.
+  const sessionToken = useRef(0);
 
   useEffect(() => {
     setSupported(geolocationSupported());
