@@ -1,6 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ImHereControl } from "@/components/kih/ImHere";
+import { useLocationState } from "@/lib/location";
+import { distanceToResource } from "@/lib/resource-distance";
+import { RESOURCES } from "@/data/resources";
 
 type FoodResource = { name: string; badge: string; blurb: string; cta: string; href: string };
 
