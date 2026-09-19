@@ -121,7 +121,7 @@ function Demo() {
                   {persona.initial}
                 </span>
                 <div>
-                  <h1 className="font-display text-3xl font-bold">Meet {persona.name}</h1>
+                  <h2 className="font-display text-3xl font-bold">Meet {persona.name}</h2>
                   <p className="text-foreground/65">Age {persona.age} · {persona.tagline}</p>
                 </div>
               </div>
