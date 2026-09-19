@@ -162,25 +162,6 @@ function Index() {
       </section>
 
 
-      <section className="container-kih py-14">
-        <SectionHeading eyebrow="Detroit around you" title="Discover Detroit" text="Landmarks, gathering places and everyday spaces where residents connect—and where Know I'm Here helps surface what is nearby." />
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
-        </div>
-        <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
-          <div className="overflow-hidden">
-            <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
-            </div>
-          </div>
-        </div>
-        <div className="mt-7 flex justify-center">
-          <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
-            {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
-          </Button>
-        </div>
-        <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
-      </section>
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
