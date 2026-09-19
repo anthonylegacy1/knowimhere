@@ -12,6 +12,11 @@ const NAV = [
 
 const MORE_NAV = [
   { to: "/community-health", label: "Community + Public Health" },
+  { to: "/partners", label: "Partner Impact" },
+  { to: "/sponsorship", label: "Partners + Sponsorship" },
+  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
+  { to: "/learn", label: "Everyday Connect Learning" },
+  { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
   { to: "/", hash: "help-me-get-there", label: "Help Me Get There" },
@@ -20,11 +25,6 @@ const MORE_NAV = [
   { to: "/", hash: "im-here", label: "I'm Here" },
   { to: "/opportunities", label: "Education & Youth" },
   { to: "/work-after-55", label: "Work After 55" },
-  { to: "/learn", label: "Everyday Connect Learning" },
-  { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
-  { to: "/partners", label: "Partner Impact" },
-  { to: "/sponsorship", label: "Partners + Sponsorship" },
-  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
   { to: "/", hash: "discover-detroit", label: "Discover Detroit" },
 ] as const;
 
