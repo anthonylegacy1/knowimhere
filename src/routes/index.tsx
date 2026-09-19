@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronUp,
   Eye,
+  ExternalLink,
   HeartHandshake,
   LockKeyhole,
   MapPin,
