@@ -43,7 +43,7 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
   function choose(o: Option) {
     if (o.id === "drive" || o.id === "walk" || o.id === "transit") {
       const mode = o.id === "drive" ? "driving" : o.id === "walk" ? "walking" : "transit";
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=${mode}`, "_blank", "noopener");
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}${originParam}&travelmode=${mode}`, "_blank", "noopener");
       toast.success("Directions opened. Tap “I'm Here” when you arrive.");
     } else if (o.id === "family") {
       const text = `${resource.name} — ${resource.whenLabel} at ${resource.location}`;
@@ -65,10 +65,20 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
         <div>
           <p className="font-display text-xl font-bold">{resource.name}</p>
           <p className="text-sm text-foreground/60">
-            {resource.distanceMiles > 0 ? `${resource.distanceMiles} miles away • ` : ""}
+            {live ? `${live.label} • ` : resource.distanceMiles > 0 ? `${resource.distanceMiles} miles away • ` : ""}
             {resource.whenLabel}
           </p>
           <p className="text-sm text-foreground/60">{resource.location}</p>
+          <p className="mt-1 text-xs font-semibold text-muted-foreground">
+            {precise
+              ? "Directions start from your current location."
+              : areaLabel
+                ? `Directions start from ${areaLabel}. Turn on I'm Here to start from your current location.`
+                : "Turn on I'm Here to start directions from your current location."}
+          </p>
+          {resource.accessibility.length > 0 && (
+            <p className="mt-1 text-xs text-foreground/60">Access: {resource.accessibility.join(" · ")}</p>
+          )}
         </div>
       </div>
       <div className="mt-5 rounded-2xl border-2 border-sun bg-sun/15 p-4">
