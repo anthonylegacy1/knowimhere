@@ -1,6 +1,8 @@
 // Realistic Detroit demonstration data. All organizations, times and distances
 // are prototype data created for the Venture 313 Buildathon unless noted.
 
+import type { ResourceSchedule } from "@/lib/schedule";
+
 export type CategoryId =
   | "health"
   | "senior"
@@ -127,6 +129,11 @@ export interface Resource {
   /** Whether a listing is built for an age group or simply useful to them. */
   audience?: "senior-specific" | "youth-specific" | "general";
   lifeStages?: LifeStage[];
+  /**
+   * Structured schedule used for date filtering. When absent, the schedule is
+   * inferred from whenLabel (see src/lib/resource-schedule.ts).
+   */
+  schedule?: ResourceSchedule;
   nextStep: string;
 }
 
