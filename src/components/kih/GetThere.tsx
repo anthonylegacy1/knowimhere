@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import type { Resource } from "@/data/resources";
 import { cityResource } from "@/data/city-resources";
 import { useLocationState } from "@/lib/location";
+import { logEngagement } from "@/lib/impact";
 import { distanceToResource } from "@/lib/resource-distance";
 import { CityResourceCard } from "./CityResourceCard";
 
@@ -41,6 +42,12 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
   ];
 
   function choose(o: Option) {
+    void logEngagement({
+      type: "get_there",
+      resourceSlug: resource.id,
+      category: resource.category,
+      neighborhood: resource.neighborhood,
+    });
     if (o.id === "drive" || o.id === "walk" || o.id === "transit") {
       const mode = o.id === "drive" ? "driving" : o.id === "walk" ? "walking" : "transit";
       window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}${originParam}&travelmode=${mode}`, "_blank", "noopener");
