@@ -24,10 +24,23 @@ export class GeoError extends Error {
   }
 }
 
-/** Proximity threshold used for a verified check-in. Configured in one place only. */
-export const CHECKIN_PROXIMITY_METERS = 150;
-/** Readings less precise than this cannot be used to verify a check-in. */
-export const MAX_VERIFY_ACCURACY_METERS = 120;
+/**
+ * THE single check-in verification policy. Nothing else in the app may
+ * hard-code a proximity threshold, an accuracy limit or retry behaviour.
+ */
+export const VERIFICATION_POLICY = {
+  /** Distance from the destination that still counts as "here", in meters. */
+  proximityMeters: 150,
+  /** Readings with a wider accuracy radius than this can never verify a check-in. */
+  maxAccuracyMeters: 120,
+  /** Automatic re-reads attempted before asking the resident what to do. */
+  maxRetries: 1,
+  /** Per-attempt timeout for a verification reading, in ms. */
+  readTimeoutMs: 15_000,
+} as const;
+
+export const CHECKIN_PROXIMITY_METERS = VERIFICATION_POLICY.proximityMeters;
+export const MAX_VERIFY_ACCURACY_METERS = VERIFICATION_POLICY.maxAccuracyMeters;
 
 export const EARTH_RADIUS_METERS = 6_371_000;
 
