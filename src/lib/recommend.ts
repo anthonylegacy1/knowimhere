@@ -1,5 +1,12 @@
 import { RESOURCES, type CategoryId, type Resource, type When } from "@/data/resources";
 import type { Profile } from "./app-store";
+import { getSchedule } from "./resource-schedule";
+import {
+  evaluateSchedule,
+  occurrenceLabel,
+  UNCONFIRMED_LABEL,
+  type TimeWindow,
+} from "./schedule";
 
 // Prototype recommendation logic — transparent rules, not machine learning.
 
@@ -33,6 +40,10 @@ export interface Scored {
   resource: Resource;
   score: number;
   reasons: string[];
+  /** e.g. "SATURDAY, SEPTEMBER 19 · 2:00 PM–4:00 PM" when the date is validated. */
+  scheduleLabel?: string;
+  /** True when KIH cannot confirm availability for the requested date. */
+  availabilityUnconfirmed?: boolean;
 }
 
 export function scoreResources(
@@ -41,13 +52,34 @@ export function scoreResources(
   exclude: string[] = [],
   /** Real calculated distances (miles) by resource id, when location is active. */
   distances: Record<string, number> = {},
+  /**
+   * Requested date/time window. Scheduled events are filtered against it
+   * BEFORE any relevance ranking happens.
+   */
+  window?: TimeWindow,
 ): Scored[] {
   const out: Scored[] = [];
+  const dateFiltered = window !== undefined && window.kind === "dates";
   for (const r of RESOURCES) {
     if (exclude.includes(r.id)) continue;
     if (r.id === "neighborhood-reporting" && !intent.isIssueReport && intent.categories.length > 0) continue;
+
+    // ---- Step 1: hard date filter, before scoring ----
+    const schedule = getSchedule(r);
+    let scheduleLabel: string | null = null;
+    let unconfirmed = false;
+    if (dateFiltered) {
+      const verdict = evaluateSchedule(schedule, window);
+      // A scheduled event only survives when the requested date is validated.
+      if (verdict === "miss") continue;
+      if (verdict === "unknown" && schedule.kind === "event") continue;
+      if (verdict === "match" && schedule.kind === "event") scheduleLabel = occurrenceLabel(schedule, window);
+      if (verdict === "unknown") unconfirmed = true;
+    }
+
     let score = 0;
     const reasons: string[] = [];
+
 
     const interestHit = r.tags.some((t) => profile.interests.includes(t));
     if (interestHit) {
@@ -88,9 +120,14 @@ export function scoreResources(
     } else if (intent.freeOnly) {
       score -= 3;
     }
-    if (r.when === "today") {
+    if (scheduleLabel) {
+      score += 2;
+      reasons.push(`Confirmed for ${window?.label ?? "the date you asked about"}: ${scheduleLabel}`);
+    } else if (unconfirmed) {
+      reasons.push(UNCONFIRMED_LABEL);
+    } else if (!dateFiltered && r.when === "today") {
       score += 1;
-      reasons.push("Available today");
+      reasons.push("Listed as available today");
     }
     if (intent.when !== "any") {
       if (r.when === intent.when || r.when === "ongoing") score += 2;
@@ -130,7 +167,13 @@ export function scoreResources(
     if (onlyYouth && r.audience === "senior-specific") score -= 4;
     if (onlyOlder && r.audience === "youth-specific") score -= 4;
 
-    out.push({ resource: r, score, reasons: Array.from(new Set(reasons)) });
+    out.push({
+      resource: r,
+      score,
+      reasons: Array.from(new Set(reasons)),
+      ...(scheduleLabel ? { scheduleLabel } : {}),
+      ...(unconfirmed ? { availabilityUnconfirmed: true } : {}),
+    });
   }
   return out.sort((a, b) => b.score - a.score);
 }

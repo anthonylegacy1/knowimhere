@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { parseIntent } from "@/lib/ask.functions";
 import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
+import { formatDateLabel, parseTimeWindow, type TimeWindow } from "@/lib/schedule";
+import { Link } from "@tanstack/react-router";
 import { CATEGORIES, EMERGENCY_KEYWORDS, RESOURCES, type Resource } from "@/data/resources";
 import { useLocationState } from "@/lib/location";
 import { distanceMap } from "@/lib/resource-distance";
@@ -39,6 +41,7 @@ interface Turn {
   intent: Intent;
   results: Scored[];
   source: "ai" | "rules";
+  window: TimeWindow;
 }
 
 export function AskKIH({
@@ -101,8 +104,14 @@ export function AskKIH({
       intent.isIssueReport = intent.isIssueReport || kw.isIssueReport;
       intent.needsTransit = intent.needsTransit || kw.needsTransit;
     }
-    const results = intent.isEmergency || intent.isIssueReport ? [] : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords)).slice(0, 4);
-    const turn: Turn = { question: text, intent, results, source };
+    // Resolve the requested Detroit-local date window, then filter by date
+    // inside scoreResources before anything is ranked.
+    const window = parseTimeWindow(text, intent.when);
+    const results =
+      intent.isEmergency || intent.isIssueReport
+        ? []
+        : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords), window).slice(0, 4);
+    const turn: Turn = { question: text, intent, results, source, window };
     setTurns((t) => [turn, ...t]);
     onResults?.(turn);
     setBusy(false);
@@ -193,6 +202,12 @@ export function AskKIH({
                       <NearbyGroups />
                     </div>
                   )}
+                  {t.window.kind === "dates" && (
+                    <p className="mb-2 text-xs font-extrabold uppercase tracking-wide text-brand">
+                      {t.window.label} · {formatDateLabel(t.window.dates[0] ?? "")}
+                      {t.window.dates.length > 1 ? ` – ${formatDateLabel(t.window.dates[t.window.dates.length - 1] ?? "")}` : ""}
+                    </p>
+                  )}
                   <p className="text-lg">
                     {t.intent.summary ? (
                       <>
@@ -203,14 +218,47 @@ export function AskKIH({
                     {t.intent.needsTransit ? " — each one is reachable without a car." : "."}
                   </p>
                   {t.results.length === 0 ? (
-                    <p className="card-flat mt-3 p-4 text-foreground/70">
-                      I couldn&apos;t find a close match yet. Try asking another way, or browse{" "}
-                      <span className="font-bold">For You Today</span>.
-                    </p>
+                    <div className="card-flat mt-3 p-4 text-foreground/70">
+                      {t.window.kind === "dates" ? (
+                        <>
+                          <p className="font-semibold text-foreground">
+                            Nothing in the current KIH event data is confirmed for {t.window.label} yet.
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            <Link to="/live" className="btn-base btn-ink btn-sm">
+                              See Upcoming Events
+                            </Link>
+                            <Link to="/for-you" className="btn-base btn-ghost btn-sm">
+                              Explore Nearby Resources
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => void ask("What's happening this weekend?")}
+                              className="btn-base btn-ghost btn-sm"
+                            >
+                              Ask About This Weekend
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <p>
+                          I couldn&apos;t find a close match yet. Try asking another way, or browse{" "}
+                          <span className="font-bold">For You Today</span>.
+                        </p>
+                      )}
+                    </div>
                   ) : (
                     <div className="mt-4 grid gap-4 sm:grid-cols-2">
                       {t.results.map((s) => (
-                        <ResourceCard key={s.resource.id} resource={s.resource} reasons={s.reasons} compact onGetThere={onGetThere} />
+                        <ResourceCard
+                          key={s.resource.id}
+                          resource={s.resource}
+                          reasons={s.reasons}
+                          compact
+                          onGetThere={onGetThere}
+                          scheduleNote={s.scheduleLabel}
+                          availabilityUnconfirmed={s.availabilityUnconfirmed ?? false}
+                        />
                       ))}
                     </div>
                   )}

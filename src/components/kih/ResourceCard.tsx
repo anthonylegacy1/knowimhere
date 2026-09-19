@@ -22,11 +22,16 @@ export function ResourceCard({
   reasons = [],
   compact = false,
   onGetThere,
+  scheduleNote,
+  availabilityUnconfirmed = false,
 }: {
   resource: Resource;
   reasons?: string[] | undefined;
   compact?: boolean | undefined;
   onGetThere?: ((r: Resource) => void) | undefined;
+  /** Validated date/day/time for a date-specific question. */
+  scheduleNote?: string | undefined;
+  availabilityUnconfirmed?: boolean | undefined;
 }) {
   const { saved, toggleSaved, markInterested, dismiss, interested } = useApp();
   const { activeCoords } = useLocationState();
@@ -53,6 +58,18 @@ export function ResourceCard({
         <p className="mt-1 text-[11px] font-extrabold uppercase tracking-wide text-mint">{resource.sourceLabel}</p>
       )}
       <p className="mt-1 text-sm text-foreground/60">{resource.summary}</p>
+
+      {scheduleNote && (
+        <p className="mt-2 rounded-xl bg-sun/40 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide text-foreground">
+          {scheduleNote}
+        </p>
+      )}
+      {!scheduleNote && availabilityUnconfirmed && (
+        <p className="mt-2 text-xs font-bold text-muted-foreground">
+          Availability not confirmed — check current hours with provider.
+        </p>
+      )}
+
 
       <div className="mt-3 flex flex-wrap gap-1.5">
         {live ? (
