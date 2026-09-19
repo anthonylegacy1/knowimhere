@@ -1,17 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
-import { fetchImpactTotals, type ImpactTotals } from "@/lib/impact";
+import { fetchCategoryDemand, fetchImpactTotals, type CategoryDemand, type ImpactTotals } from "@/lib/impact";
+import { CATEGORIES, type CategoryId } from "@/data/resources";
 
 function LiveImpact() {
   const [totals, setTotals] = useState<ImpactTotals | null>(null);
+  const [demand, setDemand] = useState<CategoryDemand[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let active = true;
-    void fetchImpactTotals().then((t) => {
+    void Promise.all([fetchImpactTotals(), fetchCategoryDemand()]).then(([t, d]) => {
       if (!active) return;
       setTotals(t);
+      setDemand(d);
       setLoaded(true);
     });
     return () => {
@@ -22,8 +25,14 @@ function LiveImpact() {
   if (!loaded || !totals) return null;
 
   const items = [
+    ["Resident sessions", totals.residentSessions],
+    ["Return visits", totals.returnSessions],
     ["Resource views", totals.resourceViews],
-    ["Get There clicks", totals.getThereClicks],
+    ["Ask KIH questions", totals.askKihQuestions],
+    ["Map views", totals.mapViews],
+    ["Resources saved", totals.resourcesSaved],
+    ["Get There actions", totals.getThereClicks],
+    ["Calls initiated", totals.callsInitiated],
     ["Self-reported check-ins", totals.selfReportedCheckIns],
     ["Location-verified check-ins", totals.verifiedCheckIns],
   ] as const;
@@ -35,10 +44,10 @@ function LiveImpact() {
         <span className="chip bg-mint/25 text-[11px] uppercase tracking-wide">Live MVP data</span>
       </div>
       <p className="mt-1 text-sm text-foreground/70">
-        Real aggregate counts from this prototype. Totals only — no individual resident, location or history is shown
-        or stored here.
+        Real aggregate counts from this prototype. Totals only — no individual resident, question, location or history
+        is shown or stored here.
       </p>
-      <dl className="mt-4 grid gap-3 sm:grid-cols-4">
+      <dl className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {items.map(([label, n]) => (
           <div key={label} className="card-flat p-4">
             <dd className="font-display text-3xl font-bold">{n}</dd>
@@ -46,6 +55,20 @@ function LiveImpact() {
           </div>
         ))}
       </dl>
+
+      <h3 className="mt-6 font-display text-lg font-bold">Most explored categories</h3>
+      {demand.length === 0 ? (
+        <p className="mt-2 text-sm font-bold uppercase tracking-wide text-muted-foreground">No data yet</p>
+      ) : (
+        <ul className="mt-2 space-y-1.5">
+          {demand.slice(0, 6).map((d) => (
+            <li key={d.category} className="flex items-baseline justify-between text-sm">
+              <span className="font-bold">{CATEGORIES[d.category as CategoryId]?.label ?? d.category}</span>
+              <span className="font-display text-lg font-bold">{d.share}%</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <p className="mt-3 text-xs text-muted-foreground">
         The funnel below is separate Buildathon demonstration data, not live usage.
       </p>

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Bookmark, BookmarkCheck, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
@@ -11,6 +11,7 @@ import { verifiedPhone } from "@/data/resource-contacts";
 import { useApp } from "@/lib/app-store";
 import { distanceToResource, isApproximate } from "@/lib/resource-distance";
 import { useNearbyResults } from "@/lib/nearby-results";
+import { track } from "@/lib/analytics";
 
 // The map library only downloads once the resident opens the map.
 const NearbyMap = lazy(() => import("@/components/kih/NearbyMap"));
@@ -57,6 +58,22 @@ function MapPage() {
   // Presentation mode only. Both views render the same `sorted` dataset,
   // the same shared location state and the same shared category filters.
   const [view, setView] = useState<"map" | "list">("map");
+
+  // Map opens and marker selections are recorded as plain counts.
+  useEffect(() => {
+    if (view === "map") void track("map_opened", { searchRadius: typeof radiusMiles === "number" ? radiusMiles : undefined });
+  }, [view, radiusMiles]);
+
+  function selectMarker(id: string | null) {
+    setSelectedId(id);
+    if (!id) return;
+    const hit = sorted.find((x) => x.resource.id === id);
+    void track("map_marker_selected", {
+      resourceSlug: id,
+      category: hit?.resource.category,
+      neighborhood: hit?.resource.neighborhood,
+    });
+  }
 
   const selected = sorted.find((x) => x.resource.id === selectedId) ?? null;
   const selectedDistance = selected ? distanceToResource(selected.resource, activeCoords) : null;
@@ -162,7 +179,7 @@ function MapPage() {
               you={activeCoords}
               youLabel={youLabel}
               selectedId={selectedId}
-              onSelect={setSelectedId}
+              onSelect={selectMarker}
               expanded={expanded}
             />
           </Suspense>

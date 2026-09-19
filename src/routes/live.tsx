@@ -10,13 +10,14 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { LiveSummary } from "@/components/kih/LiveSummary";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/lib/app-store";
 import { useLocationState } from "@/lib/location";
+import { track } from "@/lib/analytics";
 import { haversineMeters, metersToMiles } from "@/lib/geo";
 import {
   ALERT_RADIUS,
@@ -103,6 +104,9 @@ function LivePage() {
   const { profile } = useApp();
   const hood = profile.neighborhood || "Southwest Detroit";
   const [tab, setTab] = useState<LiveScope>("near");
+  useEffect(() => {
+    void track("kih_live_viewed");
+  }, []);
   const [reportOpen, setReportOpen] = useState(false);
   const [reportType, setReportType] = useState<string | null>(null);
   const [where, setWhere] = useState<"approx" | "manual">("approx");

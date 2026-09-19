@@ -5,7 +5,7 @@ import { CATEGORIES, getResource } from "@/data/resources";
 import { GetThere } from "@/components/kih/GetThere";
 import { CheckIn } from "@/components/kih/CheckIn";
 import { useApp } from "@/lib/app-store";
-import { logEngagement } from "@/lib/impact";
+import { trackResourceView } from "@/lib/analytics";
 import { toast } from "sonner";
 import { CallButton, PhoneLine } from "@/components/kih/CallButton";
 import { verifiedContact, verifiedPhone } from "@/data/resource-contacts";
@@ -57,9 +57,8 @@ function ResourcePage() {
   const travelFirst = resource.category === "transportation" || /ride|bus|transit|pick ?up/i.test(resource.nextStep);
 
   useEffect(() => {
-    void logEngagement({
-      type: "resource_view",
-      resourceSlug: resource.id,
+    trackResourceView({
+      slug: resource.id,
       category: resource.category,
       neighborhood: resource.neighborhood,
     });

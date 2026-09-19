@@ -70,6 +70,59 @@ function Privacy() {
           ]} />
         </section>
       </div>
+
+      <section id="kih-data" className="card-pop mt-8 scroll-mt-24 p-6" aria-labelledby="kih-data-title">
+        <span className="eyebrow">About KIH data</span>
+        <h2 id="kih-data-title" className="mt-3 font-display text-2xl font-bold">
+          What we measure, why, and what we never sell or share
+        </h2>
+        <p className="mt-3 text-foreground/80">
+          Know I&apos;m Here may measure how residents use the platform — such as resources viewed, directions
+          requested, categories explored and voluntary check-ins — to understand what is useful and where community
+          needs exist.
+        </p>
+        <p className="mt-2 font-bold">
+          KIH does not need to create a history of everywhere you travel to measure community engagement.
+        </p>
+        <div className="mt-5 grid gap-5 md:grid-cols-3">
+          <div>
+            <h3 className="font-display text-lg font-bold">What we measure</h3>
+            <List items={[
+              "Visits to the app, counted anonymously.",
+              "Resources viewed, saved, called or opened on a provider website.",
+              "Get There actions and which transportation option was chosen.",
+              "Map opens and markers selected.",
+              "Whether you used your current location or chose a ZIP / neighborhood, and your chosen distance.",
+              "The general topic of an Ask KIH question — never the question itself.",
+              "Voluntary check-ins, self-reported or location-verified.",
+            ]} />
+          </div>
+          <div>
+            <h3 className="font-display text-lg font-bold">Why we measure it</h3>
+            <List items={[
+              "To see whether residents can actually find and reach community resources.",
+              "To show organizations aggregate participation instead of flyer counts.",
+              "To spot gaps — repeated needs with too few matching resources.",
+              "To improve the parts of the experience residents struggle with.",
+            ]} />
+          </div>
+          <div>
+            <h3 className="font-display text-lg font-bold">What we do not sell or share</h3>
+            <List items={[
+              "No exact location is recorded anywhere — no coordinates, no travel history.",
+              "No individual resident identity, question history or private check-in record goes to partners.",
+              "Neighborhood reporting is hidden unless at least five residents contributed to it.",
+              "No advertising trackers and no cross-site tracking.",
+              "Your data is not sold.",
+              "Anonymous event records are kept for trend reporting and removed after 400 days.",
+            ]} />
+          </div>
+        </div>
+        <p className="mt-5 rounded-2xl bg-sun/30 px-4 py-3 text-sm font-semibold">
+          Sponsor the connection — not the resident&apos;s data. Organizations can support the infrastructure and learn
+          from aggregate engagement patterns without buying individual resident location histories or check-in records.
+        </p>
+      </section>
     </div>
   );
 }

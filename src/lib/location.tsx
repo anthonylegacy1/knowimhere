@@ -10,6 +10,7 @@ import {
   type GeoReading,
 } from "./geo";
 import { nearestAreaLabel, resolveArea, type ResolvedArea } from "@/data/geo-areas";
+import { track } from "@/lib/analytics";
 
 /**
  * Know I'm Here location state.
@@ -132,8 +133,16 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       const session = ++sessionToken.current;
       setReading(fix.reading);
       setLowConfidence(fix.confidence === "low");
-      setGpsArea(nearestAreaLabel(fix.reading.coords));
+      const label = nearestAreaLabel(fix.reading.coords);
+      setGpsArea(label);
       setMode("gps");
+      // Analytics: the fact that location was enabled, plus the neighborhood
+      // label and chosen radius. Never coordinates.
+      void track("location_enabled", {
+        areaType: "current_location",
+        neighborhood: label ?? undefined,
+        searchRadius: typeof radiusMiles === "number" ? radiusMiles : undefined,
+      });
       if (fix.confidence === "low") {
         // Quiet accuracy upgrade on the already-granted permission. Never awaited.
         void refineDiscoveryLocation().then((better) => {
@@ -163,7 +172,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       inFlight.current = false;
       setPhase("idle");
     }
-  }, [savedArea, reading]);
+  }, [savedArea, reading, radiusMiles]);
 
   const setManualArea = useCallback((input: string) => {
     sessionToken.current += 1;
@@ -176,6 +185,11 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     setStaleReading(false);
     setMode("manual");
     setError(null);
+    void track("manual_area_selected", {
+      areaType: resolved.kind === "zip" ? "manual_zip" : "manual_neighborhood",
+      neighborhood: resolved.kind === "neighborhood" ? resolved.label : undefined,
+      zip: resolved.kind === "zip" ? input.trim().slice(0, 5) : undefined,
+    });
     return true;
   }, []);
 

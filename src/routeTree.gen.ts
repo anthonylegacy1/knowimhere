@@ -27,6 +27,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as WorkAfter55RouteImport } from './routes/work-after-55'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ResourceIdRouteImport } from './routes/resource.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -119,6 +120,11 @@ const WorkAfter55Route = WorkAfter55RouteImport.update({
   path: '/work-after-55',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/admin/analytics',
+  path: '/admin/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourceIdRoute = ResourceIdRouteImport.update({
   id: '/resource/$id',
   path: '/resource/$id',
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesByTo {
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRoutesById {
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/resource/$id': typeof ResourceIdRoute
 }
 export interface FileRouteTypes {
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
+    | '/admin/analytics'
     | '/resource/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
+    | '/admin/analytics'
     | '/resource/$id'
   id:
     | '__root__'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
+    | '/admin/analytics'
     | '/resource/$id'
   fileRoutesById: FileRoutesById
 }
@@ -274,6 +286,7 @@ export interface RootRouteChildren {
   SponsorshipRoute: typeof SponsorshipRoute
   StoryRoute: typeof StoryRoute
   WorkAfter55Route: typeof WorkAfter55Route
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ResourceIdRoute: typeof ResourceIdRoute
 }
 
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkAfter55RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resource/$id': {
       id: '/resource/$id'
       path: '/resource/$id'
@@ -434,6 +454,7 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorshipRoute: SponsorshipRoute,
   StoryRoute: StoryRoute,
   WorkAfter55Route: WorkAfter55Route,
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
   ResourceIdRoute: ResourceIdRoute,
 }
 export const routeTree = rootRouteImport
