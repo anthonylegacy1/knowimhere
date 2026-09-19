@@ -1,5 +1,12 @@
 import { RESOURCES, type CategoryId, type Resource, type When } from "@/data/resources";
 import type { Profile } from "./app-store";
+import { getSchedule } from "./resource-schedule";
+import {
+  evaluateSchedule,
+  occurrenceLabel,
+  UNCONFIRMED_LABEL,
+  type TimeWindow,
+} from "./schedule";
 
 // Prototype recommendation logic — transparent rules, not machine learning.
 
