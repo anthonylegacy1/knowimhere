@@ -288,23 +288,43 @@ function SponsorshipPage() {
 
       <section className="container-kih pt-14">
         <SectionHeading
-          eyebrow="Potential partner fit"
+          eyebrow="Potential alignment"
           title="Why KIH could matter to organizations already investing in Detroit"
-          text="Each card below describes potential alignment only — not an existing sponsorship, partnership or endorsement."
+          text="Different partners can strengthen different parts of the resident journey. Know I'm Here can create value across community health, transportation, technology, economic mobility and neighborhood participation."
         />
+        <p className="mt-3 max-w-2xl text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          Each card below describes potential alignment only — not an existing sponsorship, partnership, funding or
+          endorsement.
+        </p>
         <div className="mt-6 grid gap-3">
           {ORGS.map((o) => (
             <details key={o.name} className="group card-pop p-5">
               <summary className="flex min-h-12 cursor-pointer list-none items-start justify-between gap-3">
                 <span>
                   <span className="chip chip-sun text-[10px] uppercase tracking-wide">Potential alignment</span>
+                  {o.tag && <span className="chip ml-2 text-[10px] uppercase tracking-wide">{o.tag}</span>}
                   <span className="mt-2 block font-display text-lg font-bold">{o.name}</span>
                   <span className="mt-1 block text-sm font-bold uppercase tracking-wide text-sky">{o.hook}</span>
+                  <span className="mt-2 block text-xs font-extrabold uppercase tracking-wide text-brand">
+                    <span className="group-open:hidden">Explore potential alignment +</span>
+                    <span className="hidden group-open:inline">Hide potential alignment −</span>
+                  </span>
                 </span>
                 <ChevronDown className="mt-1 size-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
               </summary>
               <div className="mt-4">
                 <p className="text-foreground/75">{o.copy}</p>
+                {o.example && <p className="mt-3 text-sm font-semibold text-foreground/80">{o.example}</p>}
+                {o.flow && (
+                  <p className="mt-3 flex flex-wrap items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-sky">
+                    {o.flow.map((step, i) => (
+                      <span key={step}>
+                        {step}
+                        {i < o.flow!.length - 1 ? " →" : ""}
+                      </span>
+                    ))}
+                  </p>
+                )}
                 <p className="mt-4 text-xs font-extrabold uppercase tracking-wide text-sky">Potential alignment</p>
                 <ul className="mt-2 flex flex-wrap gap-2">
                   {o.alignment.map((a) => (
@@ -313,8 +333,11 @@ function SponsorshipPage() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-4 rounded-lg border-2 border-brand bg-brand/10 p-3 text-sm font-semibold text-ink">
+                  {o.value}
+                </p>
                 {o.note && (
-                  <p className="mt-4 rounded-lg border-2 border-sun bg-sun/15 p-3 text-sm font-semibold text-ink">{o.note}</p>
+                  <p className="mt-3 rounded-lg border-2 border-sun bg-sun/15 p-3 text-sm font-semibold text-ink">{o.note}</p>
                 )}
                 <Button type="button" className="mt-4 min-h-12 font-bold" onClick={() => placeholder("Explore partnership fit")}>
                   Explore partnership fit
