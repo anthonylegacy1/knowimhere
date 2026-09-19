@@ -21,6 +21,7 @@ import {
   Music,
   Navigation,
   PersonStanding,
+  Radio,
   Search,
   ShieldCheck,
   Smartphone,
