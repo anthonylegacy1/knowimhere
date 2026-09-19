@@ -166,6 +166,9 @@ export function AskKIH({
                 <IssueFlow text={t.question} neighborhood={profile.neighborhood} />
               ) : (
                 <>
+                  {LIVE_QUESTION_KEYWORDS.some((k) => t.question.toLowerCase().includes(k)) && (
+                    <div className="mb-5"><LiveSummary /></div>
+                  )}
                   <p className="text-lg">
                     {t.intent.summary ? (
                       <>
