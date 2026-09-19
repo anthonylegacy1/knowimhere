@@ -86,6 +86,10 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<LocationErrorState | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [supported, setSupported] = useState(true);
+  const [lowConfidence, setLowConfidence] = useState(false);
+  const [staleReading, setStaleReading] = useState(false);
+  // Guards against two GPS requests running at once (double taps, two controls).
+  const inFlight = useRef(false);
 
   useEffect(() => {
     setSupported(geolocationSupported());
