@@ -123,11 +123,24 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     setStaleReading(false);
     setPhase("requesting");
     try {
+      // Fast usable fix first: discovery starts as soon as this returns.
       const fix = await locateForDiscovery();
+      const session = ++sessionToken.current;
       setReading(fix.reading);
       setLowConfidence(fix.confidence === "low");
       setGpsArea(nearestAreaLabel(fix.reading.coords));
       setMode("gps");
+      if (fix.confidence === "low") {
+        // Quiet accuracy upgrade on the already-granted permission. Never awaited.
+        void refineDiscoveryLocation().then((better) => {
+          // Discarded if the resident turned location off or changed it meanwhile.
+          if (!better || sessionToken.current !== session) return;
+          if (better.reading.accuracyMeters >= fix.reading.accuracyMeters) return;
+          setReading(better.reading);
+          setLowConfidence(better.confidence === "low");
+          setGpsArea(nearestAreaLabel(better.reading.coords));
+        });
+      }
       return true;
     } catch (e) {
       const kind = e instanceof GeoError ? e.kind : "unavailable";
