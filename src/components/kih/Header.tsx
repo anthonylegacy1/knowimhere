@@ -23,6 +23,7 @@ const MORE_NAV = [
   { to: "/learn", label: "Everyday Connect Learning" },
   { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
   { to: "/partners", label: "Partner Impact" },
+  { to: "/sponsorship", label: "Partners + Sponsorship" },
   { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
   { to: "/", hash: "discover-detroit", label: "Discover Detroit" },
 ] as const;
