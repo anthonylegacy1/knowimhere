@@ -33,7 +33,7 @@ function toProfile(p: Persona): Profile {
     name: p.name,
     neighborhood: p.neighborhood,
     ageRange: p.ageRange,
-    lifeStage: p.lifeStage,
+    lifeStages: p.lifeStage ? [p.lifeStage] : [],
     interests: p.interests,
     transportation: p.transportation,
     accessibility: p.accessibility,

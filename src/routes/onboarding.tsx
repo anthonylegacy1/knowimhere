@@ -122,9 +122,9 @@ function Onboarding() {
                 {LIFE_STAGES.map((l) => (
                   <Toggle
                     key={l.id}
-                    on={draft.lifeStage === l.id}
+                    on={draft.lifeStages.includes(l.id)}
                     label={`${l.emoji} ${l.label}`}
-                    onClick={() => setDraft({ ...draft, lifeStage: draft.lifeStage === l.id ? "" : l.id })}
+                    onClick={() => setDraft({ ...draft, lifeStages: toggleIn(draft.lifeStages, l.id) })}
                   />
                 ))}
               </div>
