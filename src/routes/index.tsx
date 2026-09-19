@@ -90,8 +90,28 @@ const FF_PILLARS = [
   { icon: <Smartphone />, label: "Digital", text: "Technology Made Simple + Everyday Connect help build smartphone confidence and practical digital skills." },
 ];
 
+const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
+
+const CORE_OPPORTUNITIES = [
+  { emoji: "❤️", label: "Health & Wellness", q: "Health and wellness programs near me" },
+  { emoji: "🌼", label: "Senior Programs", q: "Senior programs near me" },
+  { emoji: "🤝", label: "Community Activities", q: "Community activities near me" },
+  { emoji: "🏀", label: "Recreation", q: "Recreation near me" },
+];
+
+const MORE_OPPORTUNITIES = [
+  { emoji: "🥬", label: "Food Resources", q: "Food resources near me" },
+  { emoji: "🚌", label: "Transportation", q: "Transportation help near me" },
+  { emoji: "🏠", label: "Housing Resources", q: "Housing resources near me" },
+  { emoji: "📱", label: "Technology", q: "Technology help near me" },
+  { emoji: "🎵", label: "Arts & Culture", q: "Arts and culture near me" },
+  { emoji: "📚", label: "Education", q: "Education programs near me" },
+  { emoji: "🏘️", label: "Neighborhood Information", q: "Neighborhood information" },
+];
+
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
+  const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
 
   return (
     <div>
