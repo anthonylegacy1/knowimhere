@@ -172,9 +172,6 @@ function Index() {
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
-        <div className="mt-7 flex flex-wrap gap-2.5">
-          {NEED_CATEGORIES.map((id) => { const category = CATEGORIES[id]; return <Link key={id} to="/ask" search={{ q: `Show me ${category.label.toLowerCase()} near me.` }} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{category.emoji}</span> {category.label}</Link>; })}
-        </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           <article className="card-flat p-6 sm:p-8">
             <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">For You Today</p><h3 className="text-2xl font-extrabold">A shorter path to what fits.</h3></div></div>
