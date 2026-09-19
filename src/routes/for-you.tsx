@@ -92,6 +92,18 @@ function ForYou() {
         <ImHereControl />
       </div>
 
+      <div className="card-flat mt-6 flex flex-wrap items-center justify-between gap-3 p-5">
+        <div>
+          <p className="eyebrow">Map what&apos;s around me</p>
+          <p className="mt-1 font-display text-lg font-bold">
+            See resources, programs and opportunities around the area you choose.
+          </p>
+        </div>
+        <Link to="/map" className="btn-base btn-brand min-h-12 px-5">
+          View Map
+        </Link>
+      </div>
+
       {on && (
         <div className="mt-6 rounded-lg border border-border bg-card p-4">
           <p className="text-sm font-bold">

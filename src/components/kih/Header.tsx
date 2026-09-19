@@ -19,6 +19,7 @@ const MORE_NAV = [
   { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
+  { to: "/map", label: "Nearby Map" },
   { to: "/", hash: "help-me-get-there", label: "Help Me Get There" },
   { to: "/neighborhood", label: "My Neighborhood" },
   { to: "/live", label: "KIH Live" },
