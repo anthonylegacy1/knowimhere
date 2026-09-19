@@ -471,14 +471,60 @@ function Index() {
             opportunity is making sure residents can find them, reach them and use them.
           </p>
 
-          <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <ImpactStep icon={<Search />} title="Discover" text="Residents find what is nearby." />
-            <ImpactStep icon={<BusFront />} title="Get There" text="Directions or ride assistance." />
-            <ImpactStep icon={<Check />} title="Check In" text="Private, opt-in participation." />
-            <ImpactStep icon={<BarChart3 />} title="Measure Impact" text="Aggregate insight closes the loop." accent />
-          </ol>
+          <p className="mt-8 text-sm font-extrabold uppercase tracking-wide text-foreground/70">
+            Discover <span className="text-brand">→</span> Get There <span className="text-brand">→</span> Check In <span className="text-brand">→</span> Measure Impact
+          </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <button
+            type="button"
+            onClick={() => setShowLoop((v) => !v)}
+            aria-expanded={showLoop}
+            aria-controls="impact-loop-panel"
+            className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+          >
+            <span>{showLoop ? "Hide the KIH impact loop" : "Explore the KIH impact loop"}</span>
+            {showLoop ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+          </button>
+
+          <div
+            id="impact-loop-panel"
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showLoop ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+            aria-hidden={!showLoop}
+          >
+            <div className="overflow-hidden">
+              <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <ImpactStep icon={<Search />} title="Discover" text="Residents find what is nearby." />
+                <ImpactStep icon={<BusFront />} title="Get There" text="Directions or ride assistance." />
+                <ImpactStep icon={<Check />} title="Check In" text="Private, opt-in participation." />
+                <ImpactStep icon={<BarChart3 />} title="Measure Impact" text="Aggregate insight closes the loop." accent />
+              </ol>
+            </div>
+          </div>
+
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {["Better resource use", "More participation", "Measurable impact", "Privacy-conscious insight"].map((c) => (
+              <li key={c} className="chip">{c}</li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => setShowCityValue((v) => !v)}
+            aria-expanded={showCityValue}
+            aria-controls="detroit-impact-panel"
+            className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+          >
+            <span>{showCityValue ? "Hide Detroit impact" : "Explore Detroit impact"}</span>
+            {showCityValue ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+          </button>
+
+          <div
+            id="detroit-impact-panel"
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showCityValue ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+            aria-hidden={!showCityValue}
+          >
+            <div className="overflow-hidden">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <ValueCard icon={<TrendingUp />} title="Maximize existing investment" text="Increase awareness and participation in programs and services that are already funded." />
             <ValueCard icon={<Network />} title="Reduce fragmented outreach" text="One connected discovery layer that can complement flyers, individual websites, social campaigns and manual outreach." />
             <ValueCard icon={<LineChart />} title="Turn participation into insight" text="Privacy-conscious, aggregated engagement patterns show what residents are discovering and where more outreach may be needed." />
