@@ -79,8 +79,7 @@ function Demo() {
     <div className="container-kih py-6 sm:py-10">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6">
-          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Know I&apos;m Here Resident Funnel</p>
-          <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">Know I&apos;m Here Resident Funnel</h1>
+          <h1 className="font-display text-3xl font-bold leading-tight sm:text-4xl">Know I&apos;m Here Resident Funnel</h1>
           <p className="mt-3 text-foreground/70">Three residents. Three different needs. One platform designed to help each find the right opportunity, resource and next step.</p>
         </div>
 
