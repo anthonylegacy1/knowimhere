@@ -57,7 +57,7 @@ const FOOD_RESOURCES: FoodResource[] = [
   {
     name: "Detroit Parks & Recreation Food Programs",
     badge: "Youth + senior support",
-    blurb: "Food-access programs at Detroit recreation centers.",
+    blurb: "Food-access programs connected to Detroit recreation centers, including youth and senior meal programs.",
     cta: "Explore Food Programs",
     href: "https://detroitmi.gov/departments/detroit-parks-recreation/support-detroit-parks-and-recreation",
   },
