@@ -154,14 +154,15 @@ export interface DiscoveryFix {
 }
 
 /**
- * One high-accuracy attempt, then one lower-accuracy attempt if the first
- * timed out or was temporarily unavailable. A denial or unsupported browser
- * stops immediately — we never re-prompt residents who said no.
+ * One fast, low-power attempt so discovery can start within seconds, then one
+ * high-accuracy attempt only if the fast read timed out or was unavailable.
+ * A denial or unsupported browser stops immediately — we never re-prompt
+ * residents who said no.
  */
 export async function locateForDiscovery(): Promise<DiscoveryFix> {
   const attempts: { mode: GeoDiagnostic["mode"]; options: PositionOptions }[] = [
+    { mode: "fast", options: DISCOVERY_FAST_OPTIONS },
     { mode: "high_accuracy", options: DISCOVERY_PRIMARY_OPTIONS },
-    { mode: "network_fallback", options: DISCOVERY_FALLBACK_OPTIONS },
   ];
   let lastError: GeoError = new GeoError("unavailable", "Location unavailable.");
   for (const attempt of attempts) {
