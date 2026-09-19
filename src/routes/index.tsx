@@ -419,6 +419,38 @@ function HubCard({ icon, title, text, to, action }: { icon: ReactNode; title: st
   return <Link to={to} className="card-flat p-6 transition-transform hover:-translate-y-0.5"><span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky">{icon}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-foreground/65">{text}</p><p className="mt-4 text-sm font-bold text-brand">{action} →</p></Link>;
 }
 
+function ImpactStep({ icon, title, text, accent = false }: { icon: ReactNode; title: string; text: string; accent?: boolean }) {
+  return (
+    <li className={`flex min-h-24 items-center gap-3 rounded-lg border p-4 ${accent ? "border-brand/30 bg-brand/10" : "border-border bg-background"}`}>
+      <span className={`grid size-11 shrink-0 place-items-center rounded-lg ${accent ? "bg-brand text-brand-foreground" : "bg-aqua-soft text-sky"}`} aria-hidden>{icon}</span>
+      <span>
+        <span className="block text-sm font-extrabold uppercase">{title}</span>
+        <span className="mt-1 block text-sm leading-snug text-foreground/65">{text}</span>
+      </span>
+    </li>
+  );
+}
+
+function ValueCard({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
+  return (
+    <article className="card-flat p-6 transition-transform hover:-translate-y-0.5 motion-reduce:transition-none">
+      <span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky" aria-hidden>{icon}</span>
+      <h3 className="mt-4 text-lg font-extrabold uppercase leading-snug">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/65">{text}</p>
+    </article>
+  );
+}
+
+function StageCard({ n, title, text }: { n: string; title: string; text: string }) {
+  return (
+    <li className="card-flat p-5">
+      <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Stage {n}</p>
+      <h3 className="mt-1 text-xl font-extrabold">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/65">{text}</p>
+    </li>
+  );
+}
+
 function Metric({ icon, value, label }: { icon: ReactNode; value: string; label: string }) {
   return <article className="card-flat p-5"><span className="text-sky">{icon}</span><p className="mt-3 text-3xl font-extrabold text-ink">{value}</p><p className="mt-1 text-sm font-semibold text-foreground/65">{label}</p></article>;
 }
