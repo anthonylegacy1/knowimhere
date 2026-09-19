@@ -417,7 +417,7 @@ export function NearMeButton({
   /** Keep the resident on the current page instead of sending them to For You Today. */
   stayHere?: boolean;
 }) {
-  const { on, requestGps, phase } = useLocationState();
+  const { on, phase } = useLocationState();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -425,6 +425,9 @@ export function NearMeButton({
     if (stayHere) return;
     void navigate({ to: "/for-you" });
   }
+
+  const askLocation = useAskLocation(() => { setOpen(false); go(); });
+
 
   return (
     <>
@@ -436,8 +439,9 @@ export function NearMeButton({
         <PrePermissionDialog
           busy={phase === "requesting"}
           onClose={() => setOpen(false)}
+          found={askLocation.found}
           onManual={() => { setOpen(false); go(); }}
-          onUse={() => void requestGps().then(() => { setOpen(false); go(); })}
+          onUse={askLocation.run}
         />
       )}
     </>
