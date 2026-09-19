@@ -522,6 +522,8 @@ export function ImHereControl() {
           and you can turn this off anytime.
         </p>
 
+        <LocationPrivacyPanel />
+
         {error && <ErrorPanel />}
         {manual && <div className="mt-4"><AreaPicker onDone={() => setManual(false)} /></div>}
 
