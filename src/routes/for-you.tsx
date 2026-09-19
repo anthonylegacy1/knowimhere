@@ -21,6 +21,8 @@ export const Route = createFileRoute("/for-you")({
   component: ForYou,
 });
 
+const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
+
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
   const [filter, setFilter] = useState<CategoryId | "all" | "saved">("all");
