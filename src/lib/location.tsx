@@ -48,6 +48,10 @@ interface LocationValue {
   savedArea: SavedArea | null;
   radiusMiles: number | "all";
   error: LocationErrorState | null;
+  /** True when the active reading came from the lower-accuracy fallback. */
+  lowConfidence: boolean;
+  /** True when a refresh failed but the earlier session reading is still in use. */
+  staleReading: boolean;
   supported: boolean;
   hydrated: boolean;
   requestGps: () => Promise<boolean>;
