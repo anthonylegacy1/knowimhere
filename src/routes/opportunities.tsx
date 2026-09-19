@@ -5,6 +5,8 @@ import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { AskKIH } from "@/components/kih/AskKIH";
 import { RESOURCES, type Resource } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
 const TITLE = "Education & Youth Opportunities in Detroit | Know I'm Here";
 const DESC =
@@ -137,6 +139,11 @@ function Opportunities() {
           ))}
         </div>
       )}
+
+      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <CityResourceCard resource={cityResource("youth-education")} />
+        <CityResourceCard resource={cityResource("detroit-at-work")} />
+      </div>
 
       <div className="card-flat mt-10 p-6">
         <h2 className="font-display text-xl font-bold">Everyday Connect: Future Ready</h2>
