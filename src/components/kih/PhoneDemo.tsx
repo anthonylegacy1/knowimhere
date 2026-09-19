@@ -58,6 +58,23 @@ const slides: Slide[] = [
     body: <InfoCard icon={MapPin} title="Discover what’s around you" meta="Personalized for your needs and interests" />,
   },
   {
+    id: "food-support",
+    label: "Live · Community support",
+    secondaryLabel: "Demo example",
+    title: "Food Support in Your Area",
+    subtext: "Saturday · 11 AM",
+    footer: "Detroit community resource · Prototype",
+    icon: HeartHandshake,
+    image: { src: foodImage, alt: "Volunteers handing fresh produce to neighbors at a Detroit community food distribution", position: "center 45%" },
+    tags: ["Resource found", "Caregiver Support · Available nearby", "Senior Resource · Matched to you"],
+    body: (
+      <div className="grid gap-2">
+        <InfoCard icon={Store} title="Food Support in Your Area" meta="Saturday · 11 AM" />
+        <InfoCard icon={HeartHandshake} title="Fresh food distribution nearby" meta="Community resource" />
+      </div>
+    ),
+  },
+  {
     id: "transport",
     label: "Live · Access support",
     title: "Transportation Help Available",
@@ -102,23 +119,6 @@ const slides: Slide[] = [
       <div className="grid gap-2">
         <InfoCard icon={HeartPulse} title="Find nearby clinics and services" meta="Locations nearby" />
         <InfoCard icon={CalendarDays} title="Vaccination & wellness events" meta="This week" />
-      </div>
-    ),
-  },
-  {
-    id: "food-support",
-    label: "Live · Community support",
-    secondaryLabel: "Demo example",
-    title: "Food Support in Your Area",
-    subtext: "Saturday · 11 AM",
-    footer: "Detroit community resource · Prototype",
-    icon: HeartHandshake,
-    image: { src: foodImage, alt: "Volunteers handing fresh produce to neighbors at a Detroit community food distribution", position: "center 45%" },
-    tags: ["Resource found", "Caregiver Support · Available nearby", "Senior Resource · Matched to you"],
-    body: (
-      <div className="grid gap-2">
-        <InfoCard icon={Store} title="Food Support in Your Area" meta="Saturday · 11 AM" />
-        <InfoCard icon={HeartHandshake} title="Fresh food distribution nearby" meta="Community resource" />
       </div>
     ),
   },
