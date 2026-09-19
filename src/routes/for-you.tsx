@@ -89,6 +89,31 @@ function ForYou() {
         <ImHereControl />
       </div>
 
+      {on && (
+        <div className="mt-6 rounded-lg border border-border bg-card p-4">
+          <p className="text-sm font-bold">
+            Based on your selected interests and current area{areaLabel ? ` (${areaLabel})` : ""}.
+            <span className="ml-1 font-semibold text-foreground/60">
+              {precise ? "Distances are calculated from your current location." : "Distances are calculated from the area you selected."}
+            </span>
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {RADIUS_OPTIONS.map((r) => (
+              <button
+                key={String(r)}
+                type="button"
+                aria-pressed={radiusMiles === r}
+                onClick={() => setRadius(r)}
+                className={`chip min-h-11 cursor-pointer px-4 ${radiusMiles === r ? "bg-ink text-cream" : ""}`}
+              >
+                {radiusLabel(r)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+
 
       <div className="mt-6">
         <div className="flex flex-wrap gap-2">
