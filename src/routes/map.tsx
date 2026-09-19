@@ -255,7 +255,11 @@ function MapPage() {
       {markers.length > 0 && (
         <div className="mt-8">
           <h2 className="font-display text-2xl font-bold">Nearby results</h2>
-          <p className="mt-1 text-sm text-foreground/70">Tap a card to highlight it on the map.</p>
+          <p className="mt-1 text-sm text-foreground/70">
+            {view === "map"
+              ? "Tap a card to highlight it on the map."
+              : "Same nearby results, shown as a list. Switch to Map to see them placed around your area."}
+          </p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {sorted.slice(0, 24).map((x) => (
               <button
