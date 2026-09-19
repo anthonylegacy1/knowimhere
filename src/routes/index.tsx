@@ -156,8 +156,8 @@ function Index() {
         <div className="mt-6"><ImHereControl /></div>
       </section>
 
-      <section className="container-kih pb-2 pt-4">
-          <article className="card-flat mt-7 bg-ink p-6 text-cream sm:p-8">
+      <section className="container-kih pb-2 pt-6">
+          <article className="card-flat bg-ink p-6 text-cream sm:p-8">
             <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
             <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
               <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
