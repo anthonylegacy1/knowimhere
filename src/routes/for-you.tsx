@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
@@ -24,24 +24,52 @@ export const Route = createFileRoute("/for-you")({
 });
 
 const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
+const FILTER_KEY = "kih:for-you:filters:v1";
 
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
   const { on, activeCoords, areaLabel, precise, radiusMiles, setRadius } = useLocationState();
-  const [filter, setFilter] = useState<CategoryId | "all" | "saved">("all");
+  // Interest categories are a true multi-select set; "saved" is a separate view.
+  const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>([]);
+  const [savedOnly, setSavedOnly] = useState(false);
   const [showMore, setShowMore] = useState(false);
+
+  // Restore the resident's selections for this device.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(FILTER_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { categories?: CategoryId[]; savedOnly?: boolean };
+        if (Array.isArray(parsed.categories)) setSelectedCategories(parsed.categories);
+        if (parsed.savedOnly) setSavedOnly(true);
+      }
+    } catch {
+      /* ignore unreadable stored filters */
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      localStorage.setItem(FILTER_KEY, JSON.stringify({ categories: selectedCategories, savedOnly }));
+    } catch {
+      /* storage unavailable — filters simply do not persist */
+    }
+  }, [selectedCategories, savedOnly]);
+
+  const toggleCategory = (c: CategoryId) =>
+    setSelectedCategories((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
+  const showingAll = selectedCategories.length === 0 && !savedOnly;
 
   const distances = useMemo(() => distanceMap(RESOURCES, activeCoords), [activeCoords]);
   const scored = useMemo(
     () => scoreResources(profile, undefined, dismissed, distances),
     [profile, dismissed, distances],
   );
+  // Multiple categories match with OR: a resource only has to match one of them.
+  const bySaved = savedOnly ? scored.filter((s) => saved.includes(s.resource.id)) : scored;
   const byCategory =
-    filter === "all"
-      ? scored
-      : filter === "saved"
-        ? scored.filter((s) => saved.includes(s.resource.id))
-        : scored.filter((s) => s.resource.tags.includes(filter));
+    selectedCategories.length === 0
+      ? bySaved
+      : bySaved.filter((s) => s.resource.tags.some((t) => selectedCategories.includes(t)));
   const list =
     on && radiusMiles !== "all"
       ? byCategory.filter((s) => {
@@ -53,7 +81,7 @@ function ForYou() {
   const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
   const coreCats = CORE_CATEGORIES.filter((c) => cats.includes(c));
   const moreCats = cats.filter((c) => !CORE_CATEGORIES.includes(c));
-  const moreSelected = filter !== "all" && filter !== "saved" && moreCats.includes(filter as CategoryId);
+  const hiddenSelected = showMore ? 0 : moreCats.filter((c) => selectedCategories.includes(c)).length;
 
   return (
     <div className="container-kih py-8 sm:py-12">
@@ -119,15 +147,20 @@ function ForYou() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setFilter("all")}
-            className={`chip min-h-11 cursor-pointer px-4 ${filter === "all" ? "bg-ink text-cream" : ""}`}
+            onClick={() => {
+              setSelectedCategories([]);
+              setSavedOnly(false);
+            }}
+            aria-pressed={showingAll}
+            className={`chip min-h-11 cursor-pointer px-4 ${showingAll ? "bg-ink text-cream" : ""}`}
           >
             All
           </button>
           <button
             type="button"
-            onClick={() => setFilter("saved")}
-            className={`chip min-h-11 cursor-pointer px-4 ${filter === "saved" ? "bg-ink text-cream" : ""}`}
+            onClick={() => setSavedOnly((v) => !v)}
+            aria-pressed={savedOnly}
+            className={`chip min-h-11 cursor-pointer px-4 ${savedOnly ? "bg-ink text-cream" : ""}`}
           >
             Saved ({saved.length})
           </button>
@@ -135,8 +168,9 @@ function ForYou() {
             <button
               key={c}
               type="button"
-              onClick={() => setFilter(c)}
-              className={`chip min-h-11 cursor-pointer px-4 ${filter === c ? "bg-ink text-cream" : ""}`}
+              onClick={() => toggleCategory(c)}
+              aria-pressed={selectedCategories.includes(c)}
+              className={`chip min-h-11 cursor-pointer px-4 ${selectedCategories.includes(c) ? "bg-ink text-cream" : ""}`}
             >
               {CATEGORIES[c].emoji} {CATEGORIES[c].label}
             </button>
@@ -149,8 +183,9 @@ function ForYou() {
               <button
                 key={c}
                 type="button"
-                onClick={() => setFilter(c)}
-                className={`chip min-h-11 cursor-pointer px-4 ${filter === c ? "bg-ink text-cream" : ""}`}
+                onClick={() => toggleCategory(c)}
+                aria-pressed={selectedCategories.includes(c)}
+                className={`chip min-h-11 cursor-pointer px-4 ${selectedCategories.includes(c) ? "bg-ink text-cream" : ""}`}
               >
                 {CATEGORIES[c].emoji} {CATEGORIES[c].label}
               </button>
@@ -168,8 +203,10 @@ function ForYou() {
           >
             {showMore ? "Show Less ↑" : "More Categories ↓"}
           </button>
-          {!showMore && moreSelected && (
-            <span className="text-sm font-bold text-brand">1 additional category selected</span>
+          {hiddenSelected > 0 && (
+            <span className="text-sm font-bold text-brand">
+              {hiddenSelected} additional {hiddenSelected === 1 ? "category" : "categories"} selected
+            </span>
           )}
         </div>
       </div>

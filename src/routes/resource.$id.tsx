@@ -8,7 +8,8 @@ import { useApp } from "@/lib/app-store";
 import { logEngagement } from "@/lib/impact";
 import { toast } from "sonner";
 import { CallButton, PhoneLine } from "@/components/kih/CallButton";
-import { verifiedPhone } from "@/data/resource-contacts";
+import { verifiedContact, verifiedPhone } from "@/data/resource-contacts";
+import { resourceCoords } from "@/lib/resource-distance";
 
 export const Route = createFileRoute("/resource/$id")({
   validateSearch: (s: Record<string, unknown>): { step?: "get-there" | "check-in" } =>
@@ -49,7 +50,9 @@ function ResourcePage() {
   const getThereRef = useRef<HTMLDivElement>(null);
   const checkInRef = useRef<HTMLDivElement>(null);
   const cat = CATEGORIES[resource.category];
-  const contact = verifiedPhone(resource.id);
+  const phone = verifiedPhone(resource.id);
+  const contact = verifiedContact(resource.id);
+  const hasPlace = resourceCoords(resource) !== null;
   // Getting there stays the lead action when the next step is about travelling there.
   const travelFirst = resource.category === "transportation" || /ride|bus|transit|pick ?up/i.test(resource.nextStep);
 
@@ -118,13 +121,24 @@ function ResourcePage() {
 
           <p className="mt-5 rounded-2xl bg-sun/30 px-4 py-3 font-semibold">➡️ Next step: {resource.nextStep}</p>
 
-          {contact && (
+          {phone && (
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <CallButton slug={resource.id} name={resource.name} className={travelFirst ? "btn-outline" : ""} />
               <PhoneLine slug={resource.id} name={resource.name} />
             </div>
           )}
-          {contact?.website && (
+          {resource.links?.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mr-4 mt-3 inline-flex min-h-11 items-center gap-1 font-bold text-sky underline-offset-4 hover:underline"
+            >
+              {l.label} ↗
+            </a>
+          ))}
+          {contact?.website && !resource.links?.length && (
             <a
               href={contact.website}
               target="_blank"
@@ -136,9 +150,9 @@ function ResourcePage() {
           )}
 
           <div className="mt-5 grid gap-2 sm:grid-cols-3">
-            <button type="button" onClick={() => setStage("get-there")} className={`btn-base ${contact && !travelFirst ? "btn-outline" : "btn-brand"}`}>
+            {hasPlace && <button type="button" onClick={() => setStage("get-there")} className={`btn-base ${phone && !travelFirst ? "btn-outline" : "btn-brand"}`}>
               Help Me Get There
-            </button>
+            </button>}
             <button
               type="button"
               onClick={() => {
@@ -154,7 +168,11 @@ function ResourcePage() {
             </button>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            {resource.isOfficialResource ? "Official resource." : "Realistic demonstration listing."} Always verify details, hours and eligibility with the provider.
+            {resource.sourceLabel
+              ? `${resource.sourceLabel}.`
+              : resource.isOfficialResource
+                ? "Official resource."
+                : "Realistic demonstration listing."} Always verify details, hours and eligibility with the provider.
           </p>
         </article>
 

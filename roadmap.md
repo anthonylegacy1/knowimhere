@@ -119,3 +119,5 @@
 - [x] Add 10 verified Midtown resource records around 950 Selden St with street-level geocodes
 - [x] Verify GPS sorting places 950 Selden resources first when tested at Jefferson Hub
 - [x] Voice (talk-to-text) input in Ask KIH using browser speech recognition, with typing fallback
+
+- [ ] Category filters must be true multi-select (array/Set + toggle, OR filtering, aria-pressed, survives Show More/Less) on home category pills, onboarding interests and For You Today
