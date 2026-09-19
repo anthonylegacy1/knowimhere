@@ -63,6 +63,19 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
           <p className="text-sm text-foreground/60">{resource.location}</p>
         </div>
       </div>
+      <div className="mt-5 rounded-2xl border-2 border-sun bg-sun/15 p-4">
+        <p className="text-xs font-extrabold uppercase tracking-wide text-ink">Important near your route</p>
+        <ul className="mt-2 grid gap-1.5 text-sm font-semibold text-foreground/75">
+          <li>⚠️ Community-reported activity near this route — not yet verified by an official source.</li>
+          <li>🚧 Official road closure affecting this route.</li>
+        </ul>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <a href="/live" className="btn-base btn-ink btn-sm">View update</a>
+          <button type="button" className="btn-base btn-sm border-2 border-border bg-card" onClick={() => toast("Prototype: route options would be compared here.")}>Compare route options</button>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">Buildathon demonstration data. Know I&apos;m Here shares relevant information; it does not calculate or guarantee a safe route.</p>
+      </div>
+
       <div className="mt-5 grid gap-2 sm:grid-cols-2">
         {options.map((o) => (
           <button
