@@ -43,6 +43,10 @@ function WorkAfter55() {
         text="Some people want the income. Some want the routine and the people. Either way, Know I'm Here helps you find the next step — and how to get there."
       />
 
+      <div className="mt-6">
+        <EverydayConnectTip text="Need help with email, applications, or online job tools?" linkLabel="Visit Everyday Connect" />
+      </div>
+
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {PATHS.map((p) => (
           <div key={p.title} className="card-flat p-5">
