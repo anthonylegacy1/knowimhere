@@ -1,4 +1,4 @@
-import maplibregl, { type Map as MapLibreMap, type Marker as MapLibreMarker } from "maplibre-gl";
+import { Map as MapLibreMap, Marker as MapLibreMarker, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import type { Coords } from "@/lib/geo";
