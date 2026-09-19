@@ -40,6 +40,7 @@ interface Turn {
   intent: Intent;
   results: Scored[];
   source: "ai" | "rules";
+  window: TimeWindow;
 }
 
 export function AskKIH({
