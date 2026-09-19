@@ -36,7 +36,7 @@ export const VERIFICATION_POLICY = {
   /** Automatic re-reads attempted before asking the resident what to do. */
   maxRetries: 1,
   /** Per-attempt timeout for a verification reading, in ms. */
-  readTimeoutMs: 15_000,
+  readTimeoutMs: 8_000,
 } as const;
 
 export const CHECKIN_PROXIMITY_METERS = VERIFICATION_POLICY.proximityMeters;
