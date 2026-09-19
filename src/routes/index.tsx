@@ -195,11 +195,13 @@ function Index() {
         <div className="mt-8">
           <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Explore opportunities</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {CORE_OPPORTUNITIES.map((item) => <Link key={item.label} to={item.to} search={item.search as never} params={{} as never} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+            <Link to="/opportunities" className={OPP_CHIP}><span aria-hidden>🎓</span> Youth &amp; Education</Link>
+            <Link to="/work-after-55" className={OPP_CHIP}><span aria-hidden>💼</span> Jobs &amp; Training</Link>
+            {CORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
           </div>
           {showMoreOpportunities && (
             <div id="more-opportunities" className="mt-2 flex flex-wrap gap-2">
-              {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+              {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
             </div>
           )}
           <Button type="button" variant="ghost" className="mt-3 min-h-12 font-bold text-ink" aria-expanded={showMoreOpportunities} aria-controls="more-opportunities" onClick={() => setShowMoreOpportunities((v) => !v)}>
