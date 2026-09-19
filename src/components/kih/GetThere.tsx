@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { toast } from "sonner";
 import type { Resource } from "@/data/resources";
 import { cityResource } from "@/data/city-resources";
+import { useLocationState } from "@/lib/location";
+import { distanceToResource } from "@/lib/resource-distance";
 import { CityResourceCard } from "./CityResourceCard";
 
 interface Option {
@@ -17,6 +19,9 @@ interface Option {
 
 export function GetThere({ resource, onDone }: { resource: Resource; onDone?: () => void }) {
   const dest = encodeURIComponent(resource.location);
+  const { activeCoords, precise, areaLabel } = useLocationState();
+  const live = distanceToResource(resource, activeCoords);
+  const originParam = precise && activeCoords ? `&origin=${activeCoords.lat},${activeCoords.lng}` : "";
   const options: Option[] = [
     {
       id: "transit",
