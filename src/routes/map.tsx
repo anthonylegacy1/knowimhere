@@ -209,7 +209,7 @@ function MapPage() {
             </button>
           </div>
         </div>
-      )}
+      ) : null}
 
       {selected && (
         <div className="card-pop mt-4 p-5">
