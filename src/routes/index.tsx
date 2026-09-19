@@ -152,6 +152,31 @@ function Index() {
         </div>
       </section>
 
+      <section className="bg-background py-12 sm:py-14">
+        <div className="container-kih">
+          <div className="mx-auto max-w-3xl">
+            <div className="text-center">
+              <span className="eyebrow">Welcome to Know I&apos;m Here</span>
+              <p className="mt-3 text-foreground/65">
+                See how Know I&apos;m Here helps connect Detroit residents to resources, opportunities and support already around them.
+              </p>
+            </div>
+            <div className="card-pop mt-6 overflow-hidden p-2 sm:p-3">
+              <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: "1920/1080" }}>
+                <iframe
+                  src="https://share.synthesia.io/embeds/videos/4f709c8e-32d2-40a5-bd27-2fa4e9bc27b9"
+                  loading="lazy"
+                  title="Synthesia video player - Know I'm Here Welcome Video - Connect Detroit to Resources"
+                  allowFullScreen
+                  allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"
+                  style={{ position: "absolute", width: "100%", height: "100%", top: 0, left: 0, border: "none", padding: 0, margin: 0, overflow: "hidden" }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
         <div className="container-kih">
           <div className="mx-auto max-w-2xl text-center">
