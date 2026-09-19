@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789805278243,
+      "tag": "0000_kih_secure_data_layer",
+      "breakpoints": true
+    }
+  ]
 }
