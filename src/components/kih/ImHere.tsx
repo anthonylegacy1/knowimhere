@@ -198,7 +198,7 @@ export function ImHereSwitch({ className = "" }: { className?: string }) {
 /** The primary I'm Here control: real permission flow, manual fallback, off switch. */
 export function ImHereControl() {
   const {
-    on, mode, precise, areaLabel, phase, requestGps, turnOff, radiusMiles, setRadius, error, savedArea,
+    on, mode, precise, areaLabel, phase, requestGps, turnOff, radiusMiles, setRadius, error, savedArea, lowConfidence,
   } = useLocationState();
   const { profile } = useApp();
   const [ask, setAsk] = useState(false);
@@ -225,6 +225,17 @@ export function ImHereControl() {
                 : "Using the area you selected to personalize nearby resources."
               : "Turn on location to personalize nearby resources and opportunities."}
           </p>
+          {phase === "requesting" && (
+            <p className="mt-2 text-sm font-bold text-foreground/70" role="status" aria-live="polite">
+              Getting your location… This may take a few seconds, especially indoors.
+            </p>
+          )}
+          {on && precise && lowConfidence && (
+            <p className="mt-2 text-sm font-semibold text-foreground/70">
+              This is an approximate location reading — good enough to show what&apos;s nearby, but a check-in still
+              needs a precise reading.
+            </p>
+          )}
           {on && areaLabel && (
             <p className="mt-2 text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
               Your area · <span className="text-foreground">{areaLabel}</span>
