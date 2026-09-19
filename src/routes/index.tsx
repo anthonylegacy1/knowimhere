@@ -546,6 +546,9 @@ function Index() {
               </p>
             </div>
           </div>
+            </div>
+          </div>
+
 
           <div className="mt-10 rounded-xl bg-ink p-8 text-center text-cream sm:p-12">
             <p className="text-xs font-extrabold uppercase tracking-widest text-sun">The goal isn&apos;t simply to spend more.</p>
