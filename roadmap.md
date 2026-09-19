@@ -124,4 +124,4 @@
 - [x] Fast Freddy Experience (hub + 5 street-verified class locations) and Everyday Connect added as real, non-demonstration resources
 - [x] Life Stage is multi-select (array), Age Range stays single-select
 
-- [ ] Move existing Ask KIH card directly below I'm Here/location on homepage (no duplicate, keep sticky bar)
+- [x] Move existing Ask KIH card directly below I'm Here/location on homepage (no duplicate, keep sticky bar)
