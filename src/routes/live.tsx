@@ -3,7 +3,6 @@ import {
   ArrowRight,
   BellRing,
   Check,
-  ChevronDown,
   Eye,
   MapPin,
   Radio,
@@ -408,5 +407,3 @@ function Principle({ icon, title, text }: { icon: React.ReactNode; title: string
     </div>
   );
 }
-
-export { ChevronDown };
