@@ -17,8 +17,10 @@ const MORE_NAV = [
   { to: "/work-after-55", label: "Work After 55" },
   { to: "/learn", label: "Everyday Connect Learning" },
   { to: "/neighborhood", label: "My Neighborhood" },
+  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
   { to: "/partners", label: "Partner Impact" },
 ] as const;
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -71,13 +73,15 @@ export function Header() {
           <div className="container-kih flex flex-col gap-1 py-3">
             {[...NAV, ...MORE_NAV].map((n) => (
               <Link
-                key={n.to}
+                key={n.label}
                 to={n.to}
+                {...("hash" in n ? { hash: n.hash } : {})}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-4 py-3 text-base font-bold text-foreground hover:bg-secondary"
               >
                 {n.label}
               </Link>
+
             ))}
             <Link to="/demo" onClick={() => setOpen(false)} className="btn-base btn-brand mt-2">
               View Demo Experience

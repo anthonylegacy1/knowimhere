@@ -373,7 +373,8 @@ function Index() {
       </section>
 
 
-      <section className="border-y border-border bg-card">
+      <section id="detroit-economic-impact" className="scroll-mt-24 border-y border-border bg-card">
+
         <div className="container-kih py-14">
           <SectionHeading
             eyebrow="Detroit economic impact"
