@@ -167,7 +167,13 @@ export function scoreResources(
     if (onlyYouth && r.audience === "senior-specific") score -= 4;
     if (onlyOlder && r.audience === "youth-specific") score -= 4;
 
-    out.push({ resource: r, score, reasons: Array.from(new Set(reasons)) });
+    out.push({
+      resource: r,
+      score,
+      reasons: Array.from(new Set(reasons)),
+      ...(scheduleLabel ? { scheduleLabel } : {}),
+      ...(unconfirmed ? { availabilityUnconfirmed: true } : {}),
+    });
   }
   return out.sort((a, b) => b.score - a.score);
 }
