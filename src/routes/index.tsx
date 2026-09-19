@@ -105,7 +105,18 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-card pb-12 pt-2 text-center">
+      <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
+        <div className="container-kih">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-sky">See Know I&apos;m Here in action</p>
+            <h2 className="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">One connection layer. Different needs.</h2>
+            <p className="mt-3 text-foreground/65">See how Know I&apos;m Here can surface relevant opportunities, resources and support based on what matters to each resident.</p>
+          </div>
+          <div className="mt-8"><PhoneDemo /></div>
+        </div>
+      </section>
+
+      <section className="bg-card pb-12 pt-12 text-center">
         <div className="container-kih">
           <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
           <p aria-label="Discover, Connect, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
