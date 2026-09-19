@@ -5,6 +5,8 @@ import { parseIntent } from "@/lib/ask.functions";
 import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
 import { CATEGORIES, EMERGENCY_KEYWORDS, type Resource } from "@/data/resources";
+import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
+import { LiveSummary } from "./LiveSummary";
 import { ResourceCard } from "./ResourceCard";
 import { IssueFlow } from "./IssueFlow";
 import { EmergencyNotice } from "./EmergencyNotice";
