@@ -166,6 +166,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, [savedArea, reading]);
 
   const setManualArea = useCallback((input: string) => {
+    sessionToken.current += 1;
     const resolved: ResolvedArea | null = resolveArea(input);
     if (!resolved) return false;
     setSavedArea({ label: resolved.label, coords: resolved.coords, kind: resolved.kind });
@@ -184,6 +185,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const turnOff = useCallback(() => {
+    sessionToken.current += 1;
     // Clear the precise reading from active state immediately.
     setReading(null);
     setGpsArea(null);
