@@ -3,6 +3,8 @@ import { Bookmark, BookmarkCheck, ChevronDown, MapPin, Clock, Accessibility, Bus
 import { useState } from "react";
 import { CATEGORIES, type Resource } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
+import { useLocationState } from "@/lib/location";
+import { distanceToResource } from "@/lib/resource-distance";
 import { toast } from "sonner";
 
 const TONE: Record<string, string> = {
@@ -25,6 +27,8 @@ export function ResourceCard({
   onGetThere?: ((r: Resource) => void) | undefined;
 }) {
   const { saved, toggleSaved, markInterested, dismiss, interested } = useApp();
+  const { activeCoords } = useLocationState();
+  const live = distanceToResource(resource, activeCoords);
   const [why, setWhy] = useState(false);
   const cat = CATEGORIES[resource.category];
   const isSaved = saved.includes(resource.id);
@@ -42,10 +46,16 @@ export function ResourceCard({
       <p className="mt-1 text-sm text-foreground/60">{resource.summary}</p>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
-        {resource.distanceMiles > 0 && (
-          <span className="chip">
-            <MapPin className="size-3.5" aria-hidden /> {resource.distanceMiles} mi
+        {live ? (
+          <span className="chip" title="Approximate distance from your area to this neighborhood">
+            <MapPin className="size-3.5" aria-hidden /> ~{live.miles.toFixed(1)} mi away
           </span>
+        ) : (
+          resource.distanceMiles > 0 && (
+            <span className="chip">
+              <MapPin className="size-3.5" aria-hidden /> {resource.distanceMiles} mi
+            </span>
+          )
         )}
         <span className="chip">
           <Clock className="size-3.5" aria-hidden /> {(resource.whenLabel.split("•")[0] ?? "").trim()}
