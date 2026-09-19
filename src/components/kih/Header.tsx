@@ -61,6 +61,17 @@ export function Header() {
           <Button
             type="button"
             variant="outline"
+            className="hidden min-h-11 gap-2 rounded-full px-4 font-bold md:inline-flex"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            Menu
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
             size="icon"
             className="size-11 rounded-full md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -73,8 +84,8 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-card md:hidden" aria-label="Mobile">
-          <div className="container-kih flex flex-col gap-1 py-3">
+        <nav className="border-t border-border bg-card" aria-label="Site">
+          <div className="container-kih flex flex-col gap-1 py-3 md:grid md:grid-cols-3 md:gap-x-4 lg:grid-cols-4">
             {[...NAV, ...MORE_NAV].map((n) => (
               <Link
                 key={n.label}
