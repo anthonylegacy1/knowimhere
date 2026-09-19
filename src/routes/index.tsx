@@ -130,6 +130,7 @@ function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
   const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
   const [showCityResources, setShowCityResources] = useState(false);
+  const [showTransportOptions, setShowTransportOptions] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [showLoop, setShowLoop] = useState(false);
   const [showCityValue, setShowCityValue] = useState(false);
@@ -208,18 +209,26 @@ function Index() {
         <div id="help-me-get-there" className="mt-8 scroll-mt-24 rounded-lg border border-border bg-card p-6">
           <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Help me get there</p>
           <h3 className="mt-2 text-xl font-extrabold">Found something useful? See how to get there.</h3>
-          <div className="mt-4 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-background text-foreground/60">Community Ride · Coming Soon</span></div>
-          <p className="mt-3 text-xs text-muted-foreground">Know I&apos;m Here does not provide transportation. Non-integrated options stay clearly marked as potential or coming soon.</p>
-          <div className="mt-4"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div>
-          <details className="group mt-4 rounded-lg border border-border bg-background p-4">
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-bold text-ink">View Example Route <ChevronDown className="size-5 transition-transform group-open:rotate-180" /></summary>
-            <div className="mt-4">
-              <p className="text-xs font-extrabold uppercase text-sky">Example route</p>
-              <h4 className="mt-1 text-lg font-bold">Patton Recreation Center</h4>
-              <p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div>
+          <p className="mt-2 text-sm font-semibold text-foreground/65">Bus / Transit · Walking · Ride Assistance</p>
+          <Button type="button" variant="ghost" className="mt-3 min-h-12 font-bold text-ink" aria-expanded={showTransportOptions} aria-controls="transport-options" onClick={() => setShowTransportOptions((v) => !v)}>
+            {showTransportOptions ? <>Hide transportation options <ChevronUp /></> : <>Explore transportation options <ChevronDown /></>}
+          </Button>
+          {showTransportOptions && (
+            <div id="transport-options">
+              <div className="mt-4 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-background text-foreground/60">Community Ride · Coming Soon</span></div>
+              <p className="mt-3 text-xs text-muted-foreground">Know I&apos;m Here does not provide transportation. Non-integrated options stay clearly marked as potential or coming soon.</p>
+              <div className="mt-4"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div>
+              <details className="group mt-4 rounded-lg border border-border bg-background p-4">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-bold text-ink">View Example Route <ChevronDown className="size-5 transition-transform group-open:rotate-180" /></summary>
+                <div className="mt-4">
+                  <p className="text-xs font-extrabold uppercase text-sky">Example route</p>
+                  <h4 className="mt-1 text-lg font-bold">Patton Recreation Center</h4>
+                  <p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div>
+                </div>
+              </details>
             </div>
-          </details>
+          )}
         </div>
       </section>
 
