@@ -120,9 +120,14 @@ export function scoreResources(
     } else if (intent.freeOnly) {
       score -= 3;
     }
-    if (r.when === "today") {
+    if (scheduleLabel) {
+      score += 2;
+      reasons.push(`Confirmed for ${window?.label ?? "the date you asked about"}: ${scheduleLabel}`);
+    } else if (unconfirmed) {
+      reasons.push(UNCONFIRMED_LABEL);
+    } else if (!dateFiltered && r.when === "today") {
       score += 1;
-      reasons.push("Available today");
+      reasons.push("Listed as available today");
     }
     if (intent.when !== "any") {
       if (r.when === intent.when || r.when === "ongoing") score += 2;
