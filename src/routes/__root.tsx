@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppProvider } from "@/lib/app-store";
+import { startSession } from "@/lib/analytics";
 import { LocationProvider } from "@/lib/location";
 import { Header } from "@/components/kih/Header";
 import { Footer } from "@/components/kih/Footer";
