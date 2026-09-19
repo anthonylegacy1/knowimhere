@@ -50,7 +50,6 @@ import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
-import { FoodSupport } from "@/components/kih/FoodSupport";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
 import { CITY_RESOURCES } from "@/data/city-resources";
@@ -291,7 +290,18 @@ function Index() {
         </div>
       </section>
 
-      <FoodSupport />
+      <section className="container-kih py-10">
+        <article className="card-flat p-6 sm:p-8">
+          <span className="eyebrow">Community + public health</span>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
+          <p className="mt-2 max-w-2xl text-foreground/70">
+            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
+          </p>
+          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
+            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </article>
+      </section>
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-sm text-foreground/70">Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it helps residents find the right resource and understand where to start.</p><p className="mt-3 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 

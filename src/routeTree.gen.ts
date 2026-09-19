@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AskRouteImport } from './routes/ask'
 import { Route as ChangelogRouteImport } from './routes/changelog'
+import { Route as CommunityHealthRouteImport } from './routes/community-health'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ForYouRouteImport } from './routes/for-you'
 import { Route as HelpRouteImport } from './routes/help'
@@ -39,6 +40,11 @@ const AskRoute = AskRouteImport.update({
 const ChangelogRoute = ChangelogRouteImport.update({
   id: '/changelog',
   path: '/changelog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityHealthRoute = CommunityHealthRouteImport.update({
+  id: '/community-health',
+  path: '/community-health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
@@ -148,6 +156,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
   '/help': typeof HelpRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/community-health'
     | '/demo'
     | '/for-you'
     | '/help'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/community-health'
     | '/demo'
     | '/for-you'
     | '/help'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/community-health'
     | '/demo'
     | '/for-you'
     | '/help'
@@ -223,6 +235,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AskRoute: typeof AskRoute
   ChangelogRoute: typeof ChangelogRoute
+  CommunityHealthRoute: typeof CommunityHealthRoute
   DemoRoute: typeof DemoRoute
   ForYouRoute: typeof ForYouRoute
   HelpRoute: typeof HelpRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/changelog'
       fullPath: '/changelog'
       preLoaderRoute: typeof ChangelogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community-health': {
+      id: '/community-health'
+      path: '/community-health'
+      fullPath: '/community-health'
+      preLoaderRoute: typeof CommunityHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -359,6 +379,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AskRoute: AskRoute,
   ChangelogRoute: ChangelogRoute,
+  CommunityHealthRoute: CommunityHealthRoute,
   DemoRoute: DemoRoute,
   ForYouRoute: ForYouRoute,
   HelpRoute: HelpRoute,

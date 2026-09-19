@@ -11,6 +11,7 @@ const NAV = [
 ] as const;
 
 const MORE_NAV = [
+  { to: "/community-health", label: "Community + Public Health" },
   { to: "/for-you", label: "For You" },
   { to: "/ask", label: "Ask KIH" },
   { to: "/live", label: "KIH Live" },
