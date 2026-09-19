@@ -6,6 +6,8 @@ import { useApp } from "@/lib/app-store";
 import { useLocationState } from "@/lib/location";
 import { distanceToResource } from "@/lib/resource-distance";
 import { toast } from "sonner";
+import { CallButton } from "@/components/kih/CallButton";
+import { verifiedPhone } from "@/data/resource-contacts";
 
 const TONE: Record<string, string> = {
   mint: "bg-mint/15 text-mint",
@@ -33,6 +35,7 @@ export function ResourceCard({
   const cat = CATEGORIES[resource.category];
   const isSaved = saved.includes(resource.id);
   const isInterested = interested.includes(resource.id);
+  const contact = verifiedPhone(resource.id);
 
   return (
     <article className="card-pop flex flex-col p-5 transition-transform hover:-translate-y-0.5">
@@ -107,6 +110,7 @@ export function ResourceCard({
       )}
 
       <div className="mt-4 grid grid-cols-2 gap-2">
+        {contact && <CallButton slug={resource.id} name={resource.name} size="sm" className="col-span-2" />}
         <Link to="/resource/$id" params={{ id: resource.id }} className="btn-base btn-ink btn-sm">
           View Details
         </Link>
@@ -120,6 +124,16 @@ export function ResourceCard({
           </Link>
         )}
       </div>
+      {contact?.website && (
+        <a
+          href={contact.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-sky underline-offset-4 hover:underline"
+        >
+          Visit Website ↗
+        </a>
+      )}
       {!compact && (
         <div className="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1 text-sm font-bold">
           <button
