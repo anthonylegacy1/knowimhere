@@ -29,34 +29,9 @@ const FILTER_KEY = "kih:for-you:filters:v1";
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
   const { on, activeCoords, areaLabel, precise, radiusMiles, setRadius } = useLocationState();
-  // Interest categories are a true multi-select set; "saved" is a separate view.
-  const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>([]);
-  const [savedOnly, setSavedOnly] = useState(false);
+  // One shared multi-select category state, also used by the nearby map.
+  const { selectedCategories, savedOnly, toggleCategory, setSavedOnly, clearFilters } = useCategoryFilters();
   const [showMore, setShowMore] = useState(false);
-
-  // Restore the resident's selections for this device.
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(FILTER_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as { categories?: CategoryId[]; savedOnly?: boolean };
-        if (Array.isArray(parsed.categories)) setSelectedCategories(parsed.categories);
-        if (parsed.savedOnly) setSavedOnly(true);
-      }
-    } catch {
-      /* ignore unreadable stored filters */
-    }
-  }, []);
-  useEffect(() => {
-    try {
-      localStorage.setItem(FILTER_KEY, JSON.stringify({ categories: selectedCategories, savedOnly }));
-    } catch {
-      /* storage unavailable — filters simply do not persist */
-    }
-  }, [selectedCategories, savedOnly]);
-
-  const toggleCategory = (c: CategoryId) =>
-    setSelectedCategories((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
   const showingAll = selectedCategories.length === 0 && !savedOnly;
 
   const distances = useMemo(() => distanceMap(RESOURCES, activeCoords), [activeCoords]);
