@@ -297,6 +297,10 @@ function Index() {
 
       <section className="container-kih py-14">
         <SectionHeading eyebrow="The experience behind the pilot" title="More Than Entertainment. A Platform for Active, Connected Living." />
+        <figure className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-lg border border-border">
+          <img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
+          <figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption>
+        </figure>
         <div className="mx-auto mt-4 max-w-3xl space-y-3 text-center text-foreground/70">
           <p>Fast Freddy Experience helps older adults stay active, connected, confident and engaged through culturally relevant experiences built around movement, music, Detroit culture, technology, social connection and shared experiences.</p>
           <p>Powered by the legacy of Detroit dance and fashion icon Frederick “Fast Freddy” Anderson, the model brings trusted in-person experiences together with modern tools that can extend participation beyond the room.</p>
@@ -315,9 +319,8 @@ function Index() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+        <div className="mt-8">
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
-          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover" loading="lazy" /><figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption></figure>
         </div>
 
         <div className="mt-8 rounded-lg border border-border bg-card p-6 sm:p-8">
