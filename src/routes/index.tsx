@@ -90,8 +90,28 @@ const FF_PILLARS = [
   { icon: <Smartphone />, label: "Digital", text: "Technology Made Simple + Everyday Connect help build smartphone confidence and practical digital skills." },
 ];
 
+const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
+
+const CORE_OPPORTUNITIES = [
+  { emoji: "❤️", label: "Health & Wellness", q: "Health and wellness programs near me" },
+  { emoji: "🌼", label: "Senior Programs", q: "Senior programs near me" },
+  { emoji: "🤝", label: "Community Activities", q: "Community activities near me" },
+  { emoji: "🏀", label: "Recreation", q: "Recreation near me" },
+];
+
+const MORE_OPPORTUNITIES = [
+  { emoji: "🥬", label: "Food Resources", q: "Food resources near me" },
+  { emoji: "🚌", label: "Transportation", q: "Transportation help near me" },
+  { emoji: "🏠", label: "Housing Resources", q: "Housing resources near me" },
+  { emoji: "📱", label: "Technology", q: "Technology help near me" },
+  { emoji: "🎵", label: "Arts & Culture", q: "Arts and culture near me" },
+  { emoji: "📚", label: "Education", q: "Education programs near me" },
+  { emoji: "🏘️", label: "Neighborhood Information", q: "Neighborhood information" },
+];
+
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
+  const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
 
   return (
     <div>
@@ -171,36 +191,65 @@ function Index() {
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          <article className="card-flat p-6 sm:p-8">
-            <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">For You Today</p><h3 className="text-2xl font-extrabold">A shorter path to what fits.</h3></div></div>
-            <p className="mt-4 text-foreground/70">See relevant resources and opportunities based on the interests and location you choose—not assumptions about your age.</p>
-            <Button asChild variant="outline" className="mt-5"><Link to="/for-you">See personalized picks <ArrowRight /></Link></Button>
-          </article>
-          <article className="card-flat bg-ink p-6 text-cream sm:p-8">
-            <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
-            <p className="mt-4 text-cream/75">“What can I do with my kids this weekend?” “Where can I get resume help?” Start with your question.</p>
-            <Button asChild className="mt-5 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
-          </article>
+      </section>
+
+      <section className="container-kih pb-14">
+        <SectionHeading eyebrow="For You Today" title="Find what fits. Then find your way there." text="Ask in your own words or explore opportunities based on the interests and location you choose. When you find something useful, Know I'm Here can help you understand your next step and how to get there." />
+
+        <article className="card-flat mt-7 bg-ink p-6 text-cream sm:p-8">
+          <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
+          <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Where can I get resume help?”</li>
+            <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“Are there free activities near me?”</li>
+          </ul>
+          <Button asChild className="mt-5 min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask">Ask Know I&apos;m Here <ArrowRight /></Link></Button>
+        </article>
+
+        <article className="card-flat mt-4 p-6">
+          <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">Personalized for you</p><h3 className="text-xl font-extrabold">A shorter path to what fits.</h3></div></div>
+          <p className="mt-3 text-foreground/70">See relevant resources and opportunities based on the interests and location you choose.</p>
+          <Button asChild variant="outline" className="mt-4 min-h-12"><Link to="/for-you">See Personalized Picks <ArrowRight /></Link></Button>
+        </article>
+
+        <div className="mt-8">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Explore opportunities</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link to="/opportunities" className={OPP_CHIP}><span aria-hidden>🎓</span> Youth &amp; Education</Link>
+            <Link to="/work-after-55" className={OPP_CHIP}><span aria-hidden>💼</span> Jobs &amp; Training</Link>
+            {CORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+          </div>
+          {showMoreOpportunities && (
+            <div id="more-opportunities" className="mt-2 flex flex-wrap gap-2">
+              {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+            </div>
+          )}
+          <Button type="button" variant="ghost" className="mt-3 min-h-12 font-bold text-ink" aria-expanded={showMoreOpportunities} aria-controls="more-opportunities" onClick={() => setShowMoreOpportunities((v) => !v)}>
+            {showMoreOpportunities ? <>Show Less <ChevronUp /></> : <>More Opportunities <ChevronDown /></>}
+          </Button>
+        </div>
+
+        <div className="mt-8 rounded-lg border border-border bg-card p-6">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Help me get there</p>
+          <h3 className="mt-2 text-xl font-extrabold">Found something useful? See how to get there.</h3>
+          <div className="mt-4 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-background text-foreground/60">Community Ride · Coming Soon</span></div>
+          <p className="mt-3 text-xs text-muted-foreground">Know I&apos;m Here does not provide transportation. Non-integrated options stay clearly marked as potential or coming soon.</p>
+          <div className="mt-4"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div>
+          <details className="group mt-4 rounded-lg border border-border bg-background p-4">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-bold text-ink">View Example Route <ChevronDown className="size-5 transition-transform group-open:rotate-180" /></summary>
+            <div className="mt-4">
+              <p className="text-xs font-extrabold uppercase text-sky">Example route</p>
+              <h4 className="mt-1 text-lg font-bold">Patton Recreation Center</h4>
+              <p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div>
+            </div>
+          </details>
         </div>
       </section>
+
 
       <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-sm text-foreground/70">Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it helps residents find the right resource and understand where to start.</p><p className="mt-3 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 
-      <section className="container-kih py-14">
-        <SectionHeading eyebrow="Opportunities for every stage" title="More than one kind of next step." text="Explore learning, work, youth opportunity, health, recreation and everyday digital confidence." />
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <HubCard icon={<Users />} title="Education & Youth Opportunities" text="After-school, tutoring, summer jobs, internships, mentoring, sports, STEM and youth wellness." to="/opportunities" action="Open the hub" />
-          <HubCard icon={<BriefcaseBusiness />} title="Work After 55" text="Part-time and flexible work, paid training, resume help, digital skills and transportation support." to="/work-after-55" action="Explore work support" />
-          <HubCard icon={<HeartHandshake />} title="Health & Community Support" text="Find trusted programs, practical help and a clear next action close to home." to="/for-you" action="See resources" />
-        </div>
-      </section>
-
-
-      <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-2">
-        <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div><div className="mt-5"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div></div>
-        <article className="card-flat p-6"><p className="text-xs font-extrabold uppercase text-sky">Example route</p><h3 className="mt-2 text-xl font-bold">Patton Recreation Center</h3><p className="mt-1 text-sm text-foreground/60">1.8 miles away · Tuesday · 11:00 AM</p><div className="mt-5 grid grid-cols-2 gap-2"><Button asChild variant="outline"><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Bus Route</Link></Button><Button asChild><Link to="/resource/$id" params={{ id: "senior-fitness" }} search={{ step: "get-there" }}>Ride help</Link></Button></div></article>
-      </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
@@ -386,14 +435,18 @@ function Index() {
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
-      <section className="mx-auto max-w-4xl px-5 py-16 text-center"><p className="mx-auto max-w-2xl text-xl font-bold leading-snug">Senior or student. Job or health resource. Community event or career opportunity.<br /><span className="text-brand">The question is the same: what does Detroit have for me?</span></p><p className="mt-10 text-2xl font-bold text-brand">KNOW I&apos;M HERE</p><h2 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">The right resource. The right opportunity.<br />For the right Detroit resident.<br /><span className="text-sky">At the right moment.</span></h2><p className="mt-4 font-medium text-foreground/60">Different generations. Different needs. One connection layer.</p><div className="mt-7 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div></section>
+      <section className="mx-auto max-w-4xl px-5 py-12 text-center sm:py-16">
+        <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-brand">Know I&apos;m Here</p>
+        <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
+          The right resource.<br />The right opportunity.<br />For the right Detroit resident.<br />
+          <span className="text-sky">At the right moment.</span>
+        </h2>
+        <div className="mt-8 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div>
+      </section>
     </div>
   );
 }
 
-function HubCard({ icon, title, text, to, action }: { icon: ReactNode; title: string; text: string; to: "/opportunities" | "/work-after-55" | "/for-you"; action: string }) {
-  return <Link to={to} className="card-flat p-6 transition-transform hover:-translate-y-0.5"><span className="grid size-11 place-items-center rounded-lg bg-aqua-soft text-sky">{icon}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm text-foreground/65">{text}</p><p className="mt-4 text-sm font-bold text-brand">{action} →</p></Link>;
-}
 
 function ImpactStep({ icon, title, text, accent = false }: { icon: ReactNode; title: string; text: string; accent?: boolean }) {
   return (
