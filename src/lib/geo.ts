@@ -118,3 +118,36 @@ export function evaluateProximity(
     accuracyTooLow,
   };
 }
+
+export type ArrivalOutcome =
+  | { status: "verified"; distanceMeters: number; accuracyMeters: number }
+  | { status: "out_of_range"; distanceMeters: number; accuracyMeters: number }
+  | { status: "low_accuracy"; distanceMeters: number; accuracyMeters: number }
+  | { status: "error"; kind: GeoErrorKind };
+
+/**
+ * Takes a FRESH device reading and decides whether arrival can be verified.
+ * Both the distance threshold and the accuracy limit come from
+ * VERIFICATION_POLICY — a coordinate that lands inside the threshold with a
+ * poor accuracy radius is never treated as verified.
+ */
+export async function verifyArrival(destination: Coords): Promise<ArrivalOutcome> {
+  let last: ArrivalOutcome | null = null;
+  for (let attempt = 0; attempt <= VERIFICATION_POLICY.maxRetries; attempt += 1) {
+    try {
+      const reading = await getCurrentPositionOnce({ timeout: VERIFICATION_POLICY.readTimeoutMs });
+      const p = evaluateProximity(reading, destination, VERIFICATION_POLICY.proximityMeters);
+      if (p.accuracyTooLow) {
+        last = { status: "low_accuracy", distanceMeters: p.distanceMeters, accuracyMeters: p.accuracyMeters };
+        continue; // a retry may return a tighter fix
+      }
+      return p.withinRange
+        ? { status: "verified", distanceMeters: p.distanceMeters, accuracyMeters: p.accuracyMeters }
+        : { status: "out_of_range", distanceMeters: p.distanceMeters, accuracyMeters: p.accuracyMeters };
+    } catch (e) {
+      last = { status: "error", kind: e instanceof GeoError ? e.kind : "unavailable" };
+      if (last.kind === "denied" || last.kind === "unsupported") return last;
+    }
+  }
+  return last ?? { status: "error", kind: "unavailable" };
+}
