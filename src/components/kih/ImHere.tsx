@@ -233,6 +233,7 @@ export function ImHereControl() {
   const [ask, setAsk] = useState(false);
   const [manual, setManual] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+  const askLocation = useAskLocation((ok) => { if (ok) setAsk(false); });
 
   return (
     <div className="card-flat overflow-hidden">
