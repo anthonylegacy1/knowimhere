@@ -84,8 +84,8 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-card md:hidden" aria-label="Mobile">
-          <div className="container-kih flex flex-col gap-1 py-3">
+        <nav className="border-t border-border bg-card" aria-label="Site">
+          <div className="container-kih flex flex-col gap-1 py-3 md:grid md:grid-cols-3 md:gap-x-4 lg:grid-cols-4">
             {[...NAV, ...MORE_NAV].map((n) => (
               <Link
                 key={n.label}
