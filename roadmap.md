@@ -126,3 +126,10 @@
 
 - [x] Move existing Ask KIH card directly below I'm Here/location on homepage (no duplicate, keep sticky bar)
 - [x] Homepage order: hero, phone, For You Today, Ask KIH, core problem
+
+## Analytics upgrade + private admin dashboard
+- [ ] Expanded privacy-safe engagement events (no GPS stored) and aggregate database functions.
+- [ ] Track sessions, location choice, Ask KIH topics, saves, map use, calls, external opens, check-ins.
+- [ ] Partner Impact page shows only approved live aggregates, clearly labeled.
+- [ ] Private /admin/analytics dashboard (passphrase-protected, server-side) with overview, funnel, Ask KIH topics, category demand, resource performance, neighborhood insights (min 5 residents), resource gaps, location + map usage, partner summary builder with CSV/print.
+- [ ] Privacy copy: what KIH measures + About KIH data.
