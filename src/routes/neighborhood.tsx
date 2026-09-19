@@ -73,6 +73,18 @@ function Neighborhood() {
         <ImHereControl />
       </div>
 
+      <div className="card-flat mt-6 flex flex-wrap items-center justify-between gap-3 p-5">
+        <div>
+          <p className="eyebrow">Map what&apos;s around me</p>
+          <p className="mt-1 font-display text-lg font-bold">
+            See resources, programs and opportunities around the area you choose.
+          </p>
+        </div>
+        <Link to="/map" className="btn-base btn-brand min-h-12 px-5">
+          View Map
+        </Link>
+      </div>
+
       <section className="mt-6 card-flat p-6">
         <h2 className="font-display text-xl font-extrabold">Based on your current area</h2>
         <p className="mt-1 text-sm text-foreground/70">
