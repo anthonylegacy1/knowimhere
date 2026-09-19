@@ -137,6 +137,8 @@ function Index() {
   const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
   const [showCityResources, setShowCityResources] = useState(false);
   const [showModel, setShowModel] = useState(false);
+  const [showLoop, setShowLoop] = useState(false);
+  const [showCityValue, setShowCityValue] = useState(false);
 
   return (
     <div>
