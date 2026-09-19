@@ -188,6 +188,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       savedArea,
       radiusMiles,
       error,
+      lowConfidence: mode === "gps" && lowConfidence,
+      staleReading: mode === "gps" && staleReading,
       supported,
       hydrated,
       requestGps,
