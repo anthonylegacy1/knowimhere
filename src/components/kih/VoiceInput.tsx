@@ -34,6 +34,8 @@ export function VoiceInput({ onTranscript }: { onTranscript: (text: string) => v
   const [status, setStatus] = useState<Status>("ready");
   const [heard, setHeard] = useState("");
   const recRef = useRef<RecognitionLike | null>(null);
+  const heardRef = useRef("");
+  const failedRef = useRef(false);
 
   useEffect(() => {
     setSupported(getRecognitionCtor() !== null);
@@ -55,23 +57,29 @@ export function VoiceInput({ onTranscript }: { onTranscript: (text: string) => v
     rec.onresult = (e) => {
       let text = "";
       for (const r of Array.from(e.results)) text += r[0].transcript;
+      heardRef.current = text;
       setHeard(text);
       if (Array.from(e.results).some((r) => r.isFinal)) finalText = text;
     };
     rec.onerror = (e) => {
+      failedRef.current = true;
       setStatus(e.error === "not-allowed" || e.error === "service-not-allowed" ? "denied" : "error");
     };
     rec.onend = () => {
       recRef.current = null;
-      setStatus((s) => {
-        if (s === "denied" || s === "error") return s;
-        const text = (finalText || heard).trim();
-        if (!text) return "error";
-        onTranscript(text);
-        return "transcript";
-      });
+      if (failedRef.current) return;
+      const text = (finalText || heardRef.current).trim();
+      if (!text) {
+        setStatus("error");
+        return;
+      }
+      setHeard(text);
+      onTranscript(text);
+      setStatus("transcript");
     };
     setHeard("");
+    heardRef.current = "";
+    failedRef.current = false;
     setStatus("listening");
     rec.start();
   }
