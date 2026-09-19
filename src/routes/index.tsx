@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronUp,
   Eye,
+  ExternalLink,
   HeartHandshake,
   LockKeyhole,
   MapPin,
@@ -52,7 +53,6 @@ import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
 import { CITY_RESOURCES } from "@/data/city-resources";
-import { ExternalLink } from "lucide-react";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
