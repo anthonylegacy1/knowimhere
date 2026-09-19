@@ -103,8 +103,14 @@ export function AskKIH({
       intent.isIssueReport = intent.isIssueReport || kw.isIssueReport;
       intent.needsTransit = intent.needsTransit || kw.needsTransit;
     }
-    const results = intent.isEmergency || intent.isIssueReport ? [] : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords)).slice(0, 4);
-    const turn: Turn = { question: text, intent, results, source };
+    // Resolve the requested Detroit-local date window, then filter by date
+    // inside scoreResources before anything is ranked.
+    const window = parseTimeWindow(text, intent.when);
+    const results =
+      intent.isEmergency || intent.isIssueReport
+        ? []
+        : scoreResources(profile, intent, dismissed, distanceMap(RESOURCES, activeCoords), window).slice(0, 4);
+    const turn: Turn = { question: text, intent, results, source, window };
     setTurns((t) => [turn, ...t]);
     onResults?.(turn);
     setBusy(false);
