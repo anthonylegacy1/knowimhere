@@ -13,6 +13,7 @@ import { EmergencyNotice } from "./EmergencyNotice";
 
 export const EXAMPLE_QUESTIONS = [
   "What can I do near me today?",
+  "What's happening around me?",
   "I need transportation.",
   "Find free senior activities.",
   "What programs are available for my teenager?",

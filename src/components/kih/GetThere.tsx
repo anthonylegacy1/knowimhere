@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Bus, Footprints, Car, Smartphone, Users, HeartHandshake, Stethoscope, UserRound, Hand } from "lucide-react";
 import type { ReactNode } from "react";
 import { toast } from "sonner";
@@ -70,7 +71,7 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
           <li>🚧 Official road closure affecting this route.</li>
         </ul>
         <div className="mt-3 flex flex-wrap gap-2">
-          <a href="/live" className="btn-base btn-ink btn-sm">View update</a>
+          <Link to="/live" className="btn-base btn-ink btn-sm">View update</Link>
           <button type="button" className="btn-base btn-sm border-2 border-border bg-card" onClick={() => toast("Prototype: route options would be compared here.")}>Compare route options</button>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">Buildathon demonstration data. Know I&apos;m Here shares relevant information; it does not calculate or guarantee a safe route.</p>
