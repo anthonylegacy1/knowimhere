@@ -3,6 +3,7 @@ import {
   GeoError,
   geolocationSupported,
   getCurrentPositionOnce,
+  locateForDiscovery,
   type Coords,
   type GeoErrorKind,
   type GeoReading,
