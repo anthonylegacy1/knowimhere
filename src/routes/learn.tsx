@@ -108,9 +108,18 @@ function Learn() {
             Everyday Connect helps people build the digital confidence to use technology. Know I&apos;m Here helps people use that confidence to
             discover resources, programs, services and opportunities around them.
           </p>
-          <p className="mt-5 inline-flex rounded-full bg-ink px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-cream">
-            Video coming soon
-          </p>
+          <div className="mt-6 w-full overflow-hidden rounded-xl border border-border shadow-md">
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1920/1080" }}>
+              <iframe
+                src="https://share.synthesia.io/embeds/videos/099fb05f-20a2-4447-a486-a998e1387f69"
+                loading="lazy"
+                title="Synthesia video player - Connecting Know I'm Here & Everday Connect"
+                allowFullScreen
+                allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"
+                className="absolute left-0 top-0 m-0 h-full w-full border-0 p-0"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
