@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { ImHereControl, RADIUS_OPTIONS, radiusLabel } from "@/components/kih/ImHere";
 import { greeting, useApp } from "@/lib/app-store";
 import { useLocationState } from "@/lib/location";
+import { useCategoryFilters } from "@/lib/category-filters";
 import { distanceMap } from "@/lib/resource-distance";
 import { scoreResources } from "@/lib/recommend";
 import { CATEGORIES, RESOURCES, type CategoryId } from "@/data/resources";
@@ -24,7 +25,6 @@ export const Route = createFileRoute("/for-you")({
 });
 
 const CORE_CATEGORIES: CategoryId[] = ["community", "health", "senior", "youth", "employment", "neighborhood"];
-const FILTER_KEY = "kih:for-you:filters:v1";
 
 function ForYou() {
   const { profile, dismissed, saved, hydrated } = useApp();
@@ -122,10 +122,7 @@ function ForYou() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => {
-              setSelectedCategories([]);
-              setSavedOnly(false);
-            }}
+            onClick={clearFilters}
             aria-pressed={showingAll}
             className={`chip min-h-11 cursor-pointer px-4 ${showingAll ? "bg-ink text-cream" : ""}`}
           >
@@ -133,7 +130,7 @@ function ForYou() {
           </button>
           <button
             type="button"
-            onClick={() => setSavedOnly((v) => !v)}
+            onClick={() => setSavedOnly(!savedOnly)}
             aria-pressed={savedOnly}
             className={`chip min-h-11 cursor-pointer px-4 ${savedOnly ? "bg-ink text-cream" : ""}`}
           >
