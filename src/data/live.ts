@@ -6,6 +6,8 @@ export type LiveScope = "near" | "neighborhood" | "detroit" | "transportation" |
 
 export interface LiveItem {
   id: string;
+  /** Approximate coordinates for the prototype item, used for real radius filtering. */
+  coords?: { lat: number; lng: number };
   source: LiveSource;
   emoji: string;
   title: string;
@@ -39,6 +41,7 @@ export const LIVE_TABS: { id: LiveScope; label: string }[] = [
 export const LIVE_ITEMS: LiveItem[] = [
   {
     id: "gunfire",
+    coords: { lat: 42.3218, lng: -83.1012 },
     source: "community",
     emoji: "⚠️",
     title: "Possible gunfire reported",
@@ -55,6 +58,7 @@ export const LIVE_ITEMS: LiveItem[] = [
   },
   {
     id: "road-closure",
+    coords: { lat: 42.3652, lng: -83.1210 },
     source: "official",
     emoji: "🚧",
     title: "Road closure",
@@ -68,6 +72,7 @@ export const LIVE_ITEMS: LiveItem[] = [
   },
   {
     id: "bus-delay",
+    coords: { lat: 42.3419, lng: -83.0905 },
     source: "official",
     emoji: "🚌",
     title: "Bus route running behind schedule",
@@ -81,6 +86,7 @@ export const LIVE_ITEMS: LiveItem[] = [
   },
   {
     id: "news",
+    coords: { lat: 42.3190, lng: -83.1180 },
     source: "news",
     emoji: "📰",
     title: "Developing local story",
@@ -93,6 +99,7 @@ export const LIVE_ITEMS: LiveItem[] = [
   },
   {
     id: "meeting",
+    coords: { lat: 42.3305, lng: -83.0975 },
     source: "community",
     emoji: "🏘️",
     title: "Neighborhood meeting tonight",
@@ -105,6 +112,7 @@ export const LIVE_ITEMS: LiveItem[] = [
   },
   {
     id: "health",
+    coords: { lat: 42.3480, lng: -83.0680 },
     source: "kih",
     emoji: "🩺",
     title: "Community health screening open today",
@@ -129,7 +137,16 @@ export const REPORT_TYPES = [
 
 export const REPORT_WHEN = ["Now", "Within 15 minutes", "Within 1 hour"];
 
-export const ALERT_RADIUS = ["½ mile", "1 mile", "3 miles", "My neighborhood"];
+export const ALERT_RADIUS = ["½ mile", "1 mile", "3 miles", "My neighborhood"] as const;
+export type AlertRadius = (typeof ALERT_RADIUS)[number];
+
+/** Radius labels mapped to real miles used for distance filtering. */
+export const ALERT_RADIUS_MILES: Record<AlertRadius, number> = {
+  "½ mile": 0.5,
+  "1 mile": 1,
+  "3 miles": 3,
+  "My neighborhood": 3,
+};
 
 export const LIVE_ASK_SUMMARY: { label: string; source: string; text: string }[] = [
   { label: "Safety", source: "Community report", text: "1 recent community report within your selected area." },
