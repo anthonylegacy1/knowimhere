@@ -98,24 +98,33 @@ export function getCurrentPositionOnce(options?: PositionOptions): Promise<GeoRe
 }
 
 /**
- * Discovery reads (nearby resources, For You Today, Get There origin) use these.
+ * Discovery reads (nearby resources, For You Today, Get There origin) go for a
+ * usable position FAST. A wide-radius fix is fine for sorting and distances.
  * Check-in verification keeps its own stricter policy above.
  */
+export const DISCOVERY_FAST_OPTIONS: PositionOptions = {
+  enableHighAccuracy: false,
+  timeout: 5_000,
+  maximumAge: 60_000,
+};
+
+/** Used only if the fast read fails — never as the first thing a resident waits on. */
 export const DISCOVERY_PRIMARY_OPTIONS: PositionOptions = {
   enableHighAccuracy: true,
-  timeout: 15_000,
+  timeout: 12_000,
   maximumAge: 30_000,
 };
 
-export const DISCOVERY_FALLBACK_OPTIONS: PositionOptions = {
-  enableHighAccuracy: false,
-  timeout: 10_000,
-  maximumAge: 60_000,
+/** Optional quiet upgrade after discovery is already working. */
+export const PRECISION_UPGRADE_OPTIONS: PositionOptions = {
+  enableHighAccuracy: true,
+  timeout: 12_000,
+  maximumAge: 30_000,
 };
 
 export interface GeoDiagnostic {
   at: number;
-  mode: "high_accuracy" | "network_fallback";
+  mode: "fast" | "high_accuracy" | "precision_upgrade";
   outcome: "success" | "error";
   errorKind?: GeoErrorKind;
   accuracyMeters?: number;
