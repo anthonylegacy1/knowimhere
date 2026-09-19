@@ -41,6 +41,7 @@ import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.ass
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
+import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
