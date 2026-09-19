@@ -115,36 +115,66 @@ export type Database = {
       engagement_events: {
         Row: {
           anonymous_session_id: string | null
+          area_type: string | null
           created_at: string
+          device_type: string | null
+          distance_bucket: string | null
           event_type: string
           id: string
           neighborhood: string | null
+          query_topic: string | null
+          referral_source: string | null
           resource_category: string | null
           resource_id: string | null
           resource_slug: string | null
+          result_count: number | null
+          search_radius: number | null
+          source_page: string | null
+          subcategory: string | null
           user_id: string | null
+          zip: string | null
         }
         Insert: {
           anonymous_session_id?: string | null
+          area_type?: string | null
           created_at?: string
+          device_type?: string | null
+          distance_bucket?: string | null
           event_type: string
           id?: string
           neighborhood?: string | null
+          query_topic?: string | null
+          referral_source?: string | null
           resource_category?: string | null
           resource_id?: string | null
           resource_slug?: string | null
+          result_count?: number | null
+          search_radius?: number | null
+          source_page?: string | null
+          subcategory?: string | null
           user_id?: string | null
+          zip?: string | null
         }
         Update: {
           anonymous_session_id?: string | null
+          area_type?: string | null
           created_at?: string
+          device_type?: string | null
+          distance_bucket?: string | null
           event_type?: string
           id?: string
           neighborhood?: string | null
+          query_topic?: string | null
+          referral_source?: string | null
           resource_category?: string | null
           resource_id?: string | null
           resource_slug?: string | null
+          result_count?: number | null
+          search_radius?: number | null
+          source_page?: string | null
+          subcategory?: string | null
           user_id?: string | null
+          zip?: string | null
         }
         Relationships: [
           {
@@ -359,6 +389,80 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      analytics_category_demand: {
+        Args: never
+        Returns: {
+          category: string
+          events: number
+          share: number
+        }[]
+      }
+      analytics_funnel: {
+        Args: never
+        Returns: {
+          events: number
+          stage: string
+          step_order: number
+        }[]
+      }
+      analytics_location_preference: {
+        Args: never
+        Returns: {
+          average_radius_miles: number
+          gps_sessions: number
+          manual_sessions: number
+        }[]
+      }
+      analytics_neighborhood_engagement: {
+        Args: { min_sessions?: number }
+        Returns: {
+          events: number
+          neighborhood: string
+          top_category: string
+          unique_residents: number
+        }[]
+      }
+      analytics_overview: {
+        Args: never
+        Returns: {
+          ask_kih_questions: number
+          calls_initiated: number
+          external_opens: number
+          get_there_clicks: number
+          kih_live_views: number
+          map_views: number
+          resident_sessions: number
+          resource_views: number
+          resources_saved: number
+          return_sessions: number
+          self_reported_checkins: number
+          verified_checkins: number
+        }[]
+      }
+      analytics_purge_old_events: { Args: never; Returns: number }
+      analytics_resource_performance: {
+        Args: never
+        Returns: {
+          calls: number
+          category: string
+          external_opens: number
+          get_there: number
+          resource_slug: string
+          saves: number
+          self_reported_checkins: number
+          verified_checkins: number
+          views: number
+        }[]
+      }
+      analytics_search_demand: {
+        Args: { min_searches?: number }
+        Returns: {
+          average_results: number
+          query_topic: string
+          resource_gap: boolean
+          searches: number
+        }[]
+      }
       impact_by_category: {
         Args: never
         Returns: {
