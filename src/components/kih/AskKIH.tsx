@@ -6,6 +6,8 @@ import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
 import { CATEGORIES, EMERGENCY_KEYWORDS, type Resource } from "@/data/resources";
 import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
+import { matchCityResources, DETROIT_OPPORTUNITIES } from "@/data/city-resources";
+import { CityResourceCard } from "./CityResourceCard";
 import { LiveSummary } from "./LiveSummary";
 import { ResourceCard } from "./ResourceCard";
 import { IssueFlow } from "./IssueFlow";
@@ -20,6 +22,10 @@ export const EXAMPLE_QUESTIONS = [
   "Where can I get a health screening?",
   "Help me report a neighborhood problem.",
   "What job training is near me?",
+  "When is my bus coming?",
+  "Find a park near me.",
+  "I need help paying my utilities.",
+  "My 16-year-old needs a summer job.",
   "What is happening in my neighborhood this weekend?",
 ];
 
