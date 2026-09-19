@@ -49,7 +49,7 @@ import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
-import { CATEGORIES, EXTERNAL_LINKS, FRONT_DOOR, NEED_CATEGORIES, PERSONAS, PRIORITIES } from "@/data/resources";
+import { EXTERNAL_LINKS, PERSONAS, PRIORITIES } from "@/data/resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
@@ -172,9 +172,6 @@ function Index() {
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
-        <div className="mt-7 flex flex-wrap gap-2.5">
-          {NEED_CATEGORIES.map((id) => { const category = CATEGORIES[id]; return <Link key={id} to="/ask" search={{ q: `Show me ${category.label.toLowerCase()} near me.` }} className="chip min-h-12 cursor-pointer px-4 text-base hover:bg-card"><span aria-hidden>{category.emoji}</span> {category.label}</Link>; })}
-        </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           <article className="card-flat p-6 sm:p-8">
             <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-sky/15 text-sky"><Sparkles /></span><div><p className="text-xs font-extrabold uppercase text-sky">For You Today</p><h3 className="text-2xl font-extrabold">A shorter path to what fits.</h3></div></div>
@@ -189,6 +186,8 @@ function Index() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-sm text-foreground/70">Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it helps residents find the right resource and understand where to start.</p><p className="mt-3 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
+
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Opportunities for every stage" title="More than one kind of next step." text="Explore learning, work, youth opportunity, health, recreation and everyday digital confidence." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -198,10 +197,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card"><div className="container-kih py-14">
-        <SectionHeading eyebrow="One intelligent front door" title="Find the right door without replacing Detroit’s trusted organizations." text="The provider delivers the service. Know I'm Here helps residents understand where to start and what to do next." />
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{FRONT_DOOR.map((item) => <div key={item.need} className="card-flat flex items-center gap-3 p-4"><span aria-hidden>{item.emoji}</span><span className="font-bold">{item.need}</span><ArrowRight className="size-4 text-muted-foreground" /><span className="text-sm font-semibold text-foreground/70">{item.route}</span></div>)}</div>
-      </div></section>
 
       <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-2">
         <div><SectionHeading eyebrow="Help me get there" title="Finding something useful is only half the solution." text="Compare practical ways to get there. Non-integrated options stay clearly marked as potential or coming soon." /><div className="mt-5 flex flex-wrap gap-2"><span className="chip bg-sky/15 text-sky"><BusFront className="size-4" /> Bus / Transit</span><span className="chip bg-mint/15 text-mint"><Navigation className="size-4" /> Walking</span><span className="chip bg-brand/15 text-brand">Ride Assistance</span><span className="chip bg-card text-foreground/60">Community Ride · Coming Soon</span></div><div className="mt-5"><EverydayConnectTip text="Need help using maps or transportation apps? Everyday Connect can walk you through it." /></div></div>
@@ -406,7 +401,6 @@ function Index() {
       </section>
 
 
-      <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
 
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Check-ins are private by default. Recommendations explain why they appear. Know I&apos;m Here identifies official resources but never files a City report for you.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency service.</p></div></section>
 
