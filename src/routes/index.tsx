@@ -186,6 +186,8 @@ function Index() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-card"><div className="container-kih py-14"><SectionHeading eyebrow="Resident priorities" title="Detroit already told us what matters." text="The Rise Higher Detroit process organized community priorities around six areas. Know I'm Here can help residents find related resources and opportunities." /><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PRIORITIES.map((priority) => <article key={priority.title} className="card-flat p-5"><h3 className="text-lg font-bold">{priority.emoji} {priority.title}</h3><ul className="mt-3 flex flex-wrap gap-1.5">{priority.items.map((item) => <li key={item} className="chip bg-card text-xs text-foreground/70">{item}</li>)}</ul></article>)}</div><p className="mt-6 max-w-3xl text-sm text-foreground/70">Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it helps residents find the right resource and understand where to start.</p><p className="mt-3 max-w-3xl text-xs text-muted-foreground">Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit initiative.</p></div></section>
+
       <section className="container-kih py-14">
         <SectionHeading eyebrow="Opportunities for every stage" title="More than one kind of next step." text="Explore learning, work, youth opportunity, health, recreation and everyday digital confidence." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
