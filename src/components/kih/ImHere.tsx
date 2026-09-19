@@ -38,11 +38,13 @@ function PrePermissionDialog({
   onManual,
   onClose,
   busy,
+  found = false,
 }: {
   onUse: () => void;
   onManual: () => void;
   onClose: () => void;
   busy: boolean;
+  found?: boolean;
 }) {
   return createPortal(
     <div className="fixed inset-0 z-[100] grid place-items-center bg-ink/60 p-5" role="dialog" aria-modal="true" aria-labelledby="use-location-title">
@@ -53,12 +55,12 @@ function PrePermissionDialog({
           information. Precise location is not made public. You can turn it off anytime.
         </p>
         <div className="mt-6 grid gap-2">
-          <Button type="button" className="min-h-14 text-lg" disabled={busy} onClick={onUse} aria-label="Turn on location personalization">
-            {busy ? <><Loader2 className="size-5 animate-spin" /> Getting your location…</> : "Use My Location"}
+          <Button type="button" className="min-h-14 text-lg" disabled={busy || found} onClick={onUse} aria-label="Turn on location personalization">
+            {found ? <><Check className="size-5" /> Found your area ✓</> : busy ? <><Loader2 className="size-5 animate-spin" /> Finding your location…</> : "Use My Location"}
           </Button>
-          {busy && (
+          {busy && !found && (
             <p className="text-center text-sm font-semibold text-foreground/70" role="status" aria-live="polite">
-              This may take a few seconds, especially indoors.
+              This usually takes a few seconds.
             </p>
           )}
           <Button type="button" variant="outline" className="min-h-12" disabled={busy} onClick={onClose}>Not Now</Button>
