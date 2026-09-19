@@ -8,9 +8,9 @@ const FOOD_RESOURCES: FoodResource[] = [
   {
     name: "City of Detroit Food Pantry Map",
     badge: "City resource",
-    blurb: "Verified food pantry locations across Detroit.",
+    blurb: "Explore food pantry locations and food-support resources across Detroit.",
     cta: "Find Food Pantries",
-    href: "https://detroitmi.gov/news/city-detroit-launches-interactive-one-stop-map-food-pantries-support-snap-recipients",
+    href: "https://experience.arcgis.com/experience/67edf7a2d5b14c398b03dacd6d610f97",
   },
   {
     name: "Forgotten Harvest",
@@ -174,7 +174,7 @@ export function FoodSupport() {
                   <span className="inline-flex items-center rounded-full bg-sky/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-sky">{r.badge}</span>
                   <h4 className="mt-2 font-display text-lg font-bold leading-tight">{r.name}</h4>
                   <p className="mt-1 text-sm text-foreground/70">{r.blurb}</p>
-                  <a href={r.href} target="_blank" rel="noreferrer" className="btn-base btn-brand btn-sm mt-3 inline-flex min-h-11 items-center gap-2">
+                  <a href={r.href} target="_blank" rel="noopener noreferrer" className="btn-base btn-brand btn-sm mt-3 inline-flex min-h-11 items-center gap-2">
                     {r.cta} <ExternalLink className="size-4" aria-hidden />
                   </a>
                 </div>
@@ -205,7 +205,7 @@ export function FoodSupport() {
           </ol>
           <div className="mt-4 flex flex-wrap gap-2">
             <Button asChild className="min-h-12 bg-aqua text-ink hover:bg-aqua/90"><Link to="/ask" search={{ q: "Where can I get food near me today?" }}>Ask Know I&apos;m Here <ArrowRight /></Link></Button>
-            <a href="https://detroitmi.gov/news/city-detroit-launches-interactive-one-stop-map-food-pantries-support-snap-recipients" target="_blank" rel="noreferrer" className="btn-base btn-sm inline-flex min-h-12 items-center gap-2 border-2 border-cream/30 text-cream">
+            <a href="https://experience.arcgis.com/experience/67edf7a2d5b14c398b03dacd6d610f97" target="_blank" rel="noopener noreferrer" className="btn-base btn-sm inline-flex min-h-12 items-center gap-2 border-2 border-cream/30 text-cream">
               Visit Official Resource <ExternalLink className="size-4" aria-hidden />
             </a>
           </div>
