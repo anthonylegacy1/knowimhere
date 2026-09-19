@@ -75,7 +75,7 @@ export function Header() {
               <Link
                 key={n.label}
                 to={n.to}
-                hash={"hash" in n ? n.hash : undefined}
+                {...("hash" in n ? { hash: n.hash } : {})}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-4 py-3 text-base font-bold text-foreground hover:bg-secondary"
               >
