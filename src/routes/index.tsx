@@ -106,12 +106,6 @@ const FF_PILLARS = [
   { icon: <Smartphone />, label: "Digital", text: "Technology Made Simple + Everyday Connect help build smartphone confidence and practical digital skills." },
 ];
 
-const FF_SUMMARY = [
-  { icon: <PersonStanding />, label: "Move", text: "Movement, dance and active recreation." },
-  { icon: <Users />, label: "Connect", text: "Social experiences that build friendship and belonging." },
-  { icon: <MapPin />, label: "Experience", text: "Senior-friendly outings and community experiences." },
-  { icon: <Music />, label: "Celebrate", text: "Detroit music, fashion, dance and cultural history." },
-];
 
 const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
 
@@ -339,17 +333,6 @@ function Index() {
         </div>
         <p className="mx-auto mt-6 max-w-2xl rounded-lg border border-sun/40 bg-sun/10 px-5 py-4 text-center text-lg font-extrabold text-ink">Creating Joy. Building Community. Celebrating Every Generation.</p>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2">
-          {FF_SUMMARY.map((pillar) => (
-            <article key={pillar.label} className="card-flat flex items-start gap-3 p-4">
-              <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-sky/15 text-sky">{pillar.icon}</span>
-              <div>
-                <h3 className="text-sm font-extrabold uppercase tracking-wide text-ink">{pillar.label}</h3>
-                <p className="mt-1 text-sm text-foreground/65">{pillar.text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
 
         <div className="mt-8">
           <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
