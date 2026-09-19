@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Check, Loader2, MapPin, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/lib/app-store";
@@ -224,6 +224,213 @@ export function ImHereSwitch({ className = "" }: { className?: string }) {
   );
 }
 
+function PrivacyCard({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-4">
+      <p className="text-sm font-extrabold uppercase tracking-wide text-brand">{title}</p>
+      <div className="mt-2 space-y-2 text-sm text-foreground/75">{children}</div>
+    </div>
+  );
+}
+
+function SubPanel({ title, children }: { title: string; children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-border bg-background">
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="flex min-h-12 w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-extrabold uppercase tracking-wide"
+      >
+        {title}
+        <span aria-hidden>{open ? "−" : "+"}</span>
+      </button>
+      {open && <div className="space-y-2 border-t border-border px-4 py-3 text-sm text-foreground/75">{children}</div>}
+    </div>
+  );
+}
+
+/**
+ * Resident-facing explanation of what the existing location feature does.
+ * Copy here is written against the real implementation: session-only precise
+ * coordinates, no watchPosition, no coordinates in the database.
+ */
+function LocationPrivacyPanel() {
+  const [open, setOpen] = useState(false);
+  const { on, turnOff } = useLocationState();
+  const [manual, setManual] = useState(false);
+
+  return (
+    <section className="mt-4 rounded-lg border-2 border-border bg-background">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="imhere-privacy"
+        onClick={() => setOpen((v) => !v)}
+        className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
+      >
+        <span className="font-display text-base font-extrabold sm:text-lg">
+          What happens when I turn on I&apos;m Here?
+        </span>
+        <span className="text-xl font-extrabold text-brand" aria-hidden>{open ? "−" : "+"}</span>
+      </button>
+
+      {open && (
+        <div id="imhere-privacy" className="space-y-4 border-t border-border p-4 sm:p-5">
+          <div>
+            <span className="chip text-xs font-extrabold uppercase">Your location. Your choice.</span>
+            <h3 className="mt-2 font-display text-xl font-bold">What happens when I turn on I&apos;m Here?</h3>
+            <p className="mt-2 text-sm text-foreground/75">
+              When you turn on I&apos;m Here, Know I&apos;m Here uses your current location to help identify nearby
+              resources, programs and opportunities.
+            </p>
+            <p className="mt-2 text-sm text-foreground/75">
+              Your location helps KIH understand what is around you. It is not intended to create a record of everywhere
+              you go.
+            </p>
+          </div>
+
+          <div className="rounded-lg border-2 border-sky/40 bg-sky/10 p-4">
+            <p className="font-display text-base font-bold">
+              Your location helps KIH find what&apos;s around you. It does not mean KIH tracks everywhere you go.
+            </p>
+            <ul className="mt-2 grid gap-1 text-sm font-semibold text-foreground/75">
+              <li>• Your location is not public.</li>
+              <li>• Background tracking is not used.</li>
+              <li>• You can turn location off anytime.</li>
+              <li>• You can use a ZIP code or neighborhood instead.</li>
+              <li>• Check-in only happens when you choose it.</li>
+            </ul>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <PrivacyCard title="Used to help you find what's nearby">
+              <p>
+                Your current location can help Know I&apos;m Here calculate distance, show nearby resources, personalize
+                recommendations, support maps and provide relevant neighborhood information.
+              </p>
+              <ul className="grid gap-1 font-semibold">
+                <li>• Nearby resources</li>
+                <li>• Distance</li>
+                <li>• Map results</li>
+                <li>• For You Today</li>
+                <li>• My Neighborhood</li>
+                <li>• Help Me Get There</li>
+                <li>• KIH Live</li>
+              </ul>
+            </PrivacyCard>
+
+            <PrivacyCard title="Not used to follow you around">
+              <p>
+                Know I&apos;m Here does not continuously track your movement in the background or create a travel
+                history as you move around the city.
+              </p>
+              <p className="font-semibold">No background location tracking is currently implemented.</p>
+            </PrivacyCard>
+
+            <PrivacyCard title="Your individual location is not a sponsor product">
+              <p>
+                Partners, sponsors and other residents do not receive your individual precise location, location history
+                or private check-in records through the KIH sponsorship model.
+              </p>
+              <p>
+                Partners may receive privacy-conscious aggregate engagement information, such as how many resources were
+                viewed or how many residents used Get There, without seeing an individual resident&apos;s movement
+                history.
+              </p>
+            </PrivacyCard>
+
+            <PrivacyCard title="You decide when location is used">
+              <p>You can turn I&apos;m Here off at any time or choose a ZIP code or neighborhood instead.</p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                {on && (
+                  <Button type="button" variant="outline" className="min-h-12" onClick={turnOff}>
+                    Turn Off Location
+                  </Button>
+                )}
+                <Button type="button" variant="outline" className="min-h-12" onClick={() => setManual((v) => !v)}>
+                  Choose Area Manually
+                </Button>
+              </div>
+              {manual && <AreaPicker compact onDone={() => setManual(false)} />}
+            </PrivacyCard>
+          </div>
+
+          <div className="grid gap-3">
+            <SubPanel title="How location works">
+              <p>
+                When location is turned on, your browser provides Know I&apos;m Here with a current location reading,
+                including latitude, longitude, accuracy and time.
+              </p>
+              <p>KIH uses this reading during your active experience to calculate what is nearby.</p>
+              <p>General discovery can reuse the current session location instead of repeatedly requesting GPS.</p>
+              <p>Precise coordinates are not displayed publicly.</p>
+              <p>Turning location off clears the active precise location from the current experience.</p>
+            </SubPanel>
+
+            <SubPanel title="Location is not check-in">
+              <p>Turning on location does not mean you attended a resource or event.</p>
+              <p>Check-in only happens when you choose to tap Check In.</p>
+              <p>
+                If you check in at a resource with a verified street address, a fresh location reading may be used to
+                confirm that your device is reasonably close to the selected destination.
+              </p>
+            </SubPanel>
+
+            <SubPanel title="What can be recorded when I check in?">
+              <p>
+                A voluntary check-in may record the selected resource, its category and neighborhood, the check-in time,
+                whether the check-in was location-verified or self-reported, and the approximate distance in meters used
+                for verification.
+              </p>
+              <p>Exact GPS coordinates are not stored as part of the check-in record.</p>
+              <p>
+                Your own check-in history is also kept in this browser so you can see it. Nobody else can read your
+                individual check-ins.
+              </p>
+            </SubPanel>
+
+            <SubPanel title="What KIH may measure">
+              <ul className="grid gap-1 font-semibold">
+                <li>• Resource views</li>
+                <li>• Get There actions</li>
+                <li>• Saved resources</li>
+                <li>• Self-reported check-ins</li>
+                <li>• Location-verified check-ins</li>
+                <li>• Category interest</li>
+                <li>• Aggregate neighborhood-level engagement</li>
+              </ul>
+              <p>
+                These measurements are intended to help understand whether community resources are being discovered and
+                used.
+              </p>
+              <p>
+                Public and partner-facing analytics stay aggregate and do not expose individual resident location
+                histories.
+              </p>
+            </SubPanel>
+          </div>
+
+          <div className="rounded-lg bg-ink p-4 text-cream">
+            <p className="font-display text-base font-extrabold uppercase">
+              Sponsor the connection — not the resident&apos;s data.
+            </p>
+            <p className="mt-2 text-sm text-cream/85">
+              Organizations can support the infrastructure and learn from aggregate engagement patterns without
+              purchasing individual resident location histories or private check-in records.
+            </p>
+          </div>
+
+          <p className="text-xs text-foreground/60">
+            Prototype. Know I&apos;m Here is not an official City of Detroit service.
+          </p>
+        </div>
+      )}
+    </section>
+  );
+}
+
 /** The primary I'm Here control: real permission flow, manual fallback, off switch. */
 export function ImHereControl() {
   const {
@@ -314,6 +521,8 @@ export function ImHereControl() {
           Know I&apos;m Here uses your location to personalize nearby information. Precise location is not made public,
           and you can turn this off anytime.
         </p>
+
+        <LocationPrivacyPanel />
 
         {error && <ErrorPanel />}
         {manual && <div className="mt-4"><AreaPicker onDone={() => setManual(false)} /></div>}
