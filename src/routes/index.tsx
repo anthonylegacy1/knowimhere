@@ -56,17 +56,28 @@ import { CITY_RESOURCES } from "@/data/city-resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
+const SHARE_TITLE = "Your Detroit. Connected to You.";
+const SHARE_DESC = "Discover nearby resources, events, wellness support and opportunities.";
+const SHARE_IMAGE = "https://knowimhere.lovable.app/og-share.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESC },
+      { property: "og:title", content: SHARE_TITLE },
+      { property: "og:description", content: SHARE_DESC },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://knowimhere.lovable.app/" },
+      { property: "og:image", content: SHARE_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SHARE_TITLE },
+      { name: "twitter:description", content: SHARE_DESC },
+      { name: "twitter:image", content: SHARE_IMAGE },
     ],
+    links: [{ rel: "canonical", href: "https://knowimhere.lovable.app/" }],
   }),
   component: Index,
 });
