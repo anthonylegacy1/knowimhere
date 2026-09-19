@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EXTERNAL_LINKS } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
 const TITLE = "Everyday Connect Learning — Digital Confidence for Everyday Life | Know I'm Here";
 const DESC =
@@ -124,6 +126,18 @@ function Learn() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-bold">Need digital support?</h2>
+        <p className="mt-2 max-w-2xl text-foreground/70">
+          <span className="font-bold">Connect 313</span> is Detroit-wide digital inclusion infrastructure — devices, internet access and technical
+          support. <span className="font-bold">Everyday Connect</span> is simple guided education that helps residents use technology comfortably. Both
+          are useful, for different reasons.
+        </p>
+        <div className="mt-4">
+          <CityResourceCard resource={cityResource("connect-313")} />
+        </div>
       </section>
 
       <section className="card-pop mt-10 p-6 sm:p-8">

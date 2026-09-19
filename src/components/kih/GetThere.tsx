@@ -3,6 +3,8 @@ import { Bus, Footprints, Car, Smartphone, Users, HeartHandshake, Stethoscope, U
 import type { ReactNode } from "react";
 import { toast } from "sonner";
 import type { Resource } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "./CityResourceCard";
 
 interface Option {
   id: string;
@@ -75,6 +77,14 @@ export function GetThere({ resource, onDone }: { resource: Resource; onDone?: ()
           <button type="button" className="btn-base btn-sm border-2 border-border bg-card" onClick={() => toast("Prototype: route options would be compared here.")}>Compare route options</button>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">Buildathon demonstration data. Know I&apos;m Here shares relevant information; it does not calculate or guarantee a safe route.</p>
+      </div>
+
+      <div className="mt-5">
+        <CityResourceCard
+          resource={cityResource("ddot")}
+          lead="Public transit · Route information, live Bus Tracker and service information."
+          compact
+        />
       </div>
 
       <div className="mt-5 grid gap-2 sm:grid-cols-2">

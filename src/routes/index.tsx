@@ -51,6 +51,8 @@ import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
+import { CITY_RESOURCES } from "@/data/city-resources";
+import { ExternalLink } from "lucide-react";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
 const DESC = "Know I'm Here connects Detroit residents with nearby resources, activities, transportation options and opportunities personalized to their needs.";
@@ -534,6 +536,79 @@ function Index() {
         </div>
         <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
       </section>
+
+      {/* CONNECTED TO DETROIT'S EXISTING RESOURCES */}
+      <section className="container-kih py-14" aria-labelledby="connected-resources">
+        <p className="eyebrow">Connected to Detroit&apos;s existing resources</p>
+        <h2 id="connected-resources" className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-4xl">
+          Detroit already has resources. Know I&apos;m Here helps you reach them.
+        </h2>
+        <p className="mt-3 max-w-3xl text-lg text-foreground/70">
+          Know I&apos;m Here is not designed to replace the services Detroit already provides. It helps residents understand which resource may fit
+          their need and connects them to the right next step.
+        </p>
+
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {CITY_RESOURCES.map((r) => (
+            <li key={r.id}>
+              <a
+                href={r.href}
+                target="_blank"
+                rel="noreferrer"
+                className="card-flat flex h-full flex-col p-5 transition-colors hover:bg-cream"
+              >
+                <span className="font-display text-lg font-bold leading-tight">{r.name.split(" — ")[0]}</span>
+                <span className="mt-1 text-sm text-foreground/60">{r.tile}</span>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-sky">
+                  Open <ExternalLink className="size-4" aria-hidden />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="card-pop mt-8 p-6 sm:p-8">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Detroit doesn&apos;t lack digital resources</p>
+          <p className="mt-3 text-lg font-semibold">The problem: the resident has to know where to look.</p>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {[
+              ["Neighborhood issue", "Improve Detroit"],
+              ["Job", "Detroit at Work"],
+              ["Bus", "DDOT"],
+              ["Park / recreation", "Park Finder"],
+              ["Essential assistance", "211"],
+              ["Activities", "Visit Detroit"],
+              ["Technology support", "Connect 313"],
+              ["Youth opportunity", "Youth & Education"],
+            ].map(([need, dest]) => (
+              <li key={need} className="flex items-center gap-2 rounded-xl bg-cream px-3 py-2 text-sm">
+                <span className="font-bold">{need}</span>
+                <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+                <span className="text-foreground/70">{dest}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 rounded-2xl bg-ink p-6 text-cream">
+            <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Detroit needs a better front door</p>
+            <p className="mt-2 font-display text-2xl font-bold">Know I&apos;m Here — one intelligent front door.</p>
+            <ol className="mt-4 grid gap-2 text-sm font-semibold text-cream/80 sm:grid-cols-2">
+              <li className="rounded-xl bg-cream/10 px-3 py-2">Resident asks: “What do I need?”</li>
+              <li className="rounded-xl bg-cream/10 px-3 py-2">AI understands the request</li>
+              <li className="rounded-xl bg-cream/10 px-3 py-2">Location + preferences + accessibility</li>
+              <li className="rounded-xl bg-cream/10 px-3 py-2">Best trusted Detroit resource → clear next action</li>
+            </ol>
+            <p className="mt-4 text-sm font-bold text-sun">Different services. One intelligent front door.</p>
+          </div>
+
+          <p className="mt-4 text-xs text-muted-foreground">
+            These are recommended resource links for the Buildathon prototype. Know I&apos;m Here does not operate these services and no technical
+            integration, partnership or endorsement is implied.
+          </p>
+        </div>
+      </section>
+
+
 
 
 

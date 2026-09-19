@@ -4,6 +4,8 @@ import { IssueFlow } from "@/components/kih/IssueFlow";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { ISSUE_TYPES, NEIGHBORHOOD_UPDATES, type UpdateKind } from "@/data/resources";
 import { useApp } from "@/lib/app-store";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
 const TITLE = "My Neighborhood — Know What's Happening Around You | Know I'm Here";
 const DESC = "Community meetings, rec-center updates, cooling centers, road closures and City notices for your Detroit neighborhood, plus help reporting neighborhood issues.";
@@ -130,6 +132,11 @@ function Neighborhood() {
           {submitted && (
             <div className="mt-6">
               <IssueFlow text={submitted} neighborhood={hood} />
+            </div>
+          )}
+          {!submitted && (
+            <div className="mt-6">
+              <CityResourceCard resource={cityResource("improve-detroit")} />
             </div>
           )}
           <p className="mt-4 text-sm font-semibold text-muted-foreground">Know I&apos;m Here does not replace City services. It helps residents find and use them. For emergencies, call 911.</p>

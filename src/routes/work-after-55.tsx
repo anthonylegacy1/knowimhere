@@ -3,6 +3,8 @@ import { ResourceCard } from "@/components/kih/ResourceCard";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { RESOURCES } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "@/components/kih/CityResourceCard";
 
 const TITLE = "Work After 55 — Senior Employment Resources in Detroit | Know I'm Here";
 const DESC =
@@ -69,6 +71,10 @@ function WorkAfter55() {
         {list.map((r) => (
           <ResourceCard key={r.id} resource={r} />
         ))}
+      </div>
+
+      <div className="mt-10">
+        <CityResourceCard resource={cityResource("detroit-at-work")} lead="Looking for work?" />
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">

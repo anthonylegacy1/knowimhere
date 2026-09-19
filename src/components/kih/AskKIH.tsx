@@ -6,6 +6,8 @@ import { useApp } from "@/lib/app-store";
 import { EMPTY_INTENT, keywordIntent, scoreResources, type Intent, type Scored } from "@/lib/recommend";
 import { CATEGORIES, EMERGENCY_KEYWORDS, type Resource } from "@/data/resources";
 import { LIVE_QUESTION_KEYWORDS } from "@/data/live";
+import { matchCityResources, DETROIT_OPPORTUNITIES } from "@/data/city-resources";
+import { CityResourceCard } from "./CityResourceCard";
 import { LiveSummary } from "./LiveSummary";
 import { ResourceCard } from "./ResourceCard";
 import { IssueFlow } from "./IssueFlow";
@@ -20,6 +22,10 @@ export const EXAMPLE_QUESTIONS = [
   "Where can I get a health screening?",
   "Help me report a neighborhood problem.",
   "What job training is near me?",
+  "When is my bus coming?",
+  "Find a park near me.",
+  "I need help paying my utilities.",
+  "My 16-year-old needs a summer job.",
   "What is happening in my neighborhood this weekend?",
 ];
 
@@ -193,6 +199,24 @@ export function AskKIH({
                       ))}
                     </div>
                   )}
+                  {(() => {
+                    const matches = matchCityResources(t.question);
+                    const list = matches.length > 0 ? matches : t.results.length === 0 ? [DETROIT_OPPORTUNITIES] : [];
+                    if (list.length === 0) return null;
+                    return (
+                      <div className="mt-5">
+                        <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Connected resource</p>
+                        <p className="mt-1 text-sm text-foreground/70">
+                          Know I&apos;m Here matched your request to a trusted Detroit resource that already exists.
+                        </p>
+                        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                          {list.map((c) => (
+                            <CityResourceCard key={c.id} resource={c} showWhy compact />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
                   <p className="mt-3 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
                     {t.source === "ai" ? "AI-interpreted request · prototype recommendation logic" : "Keyword matching · prototype recommendation logic"}
                     {" · "}Verify details with the provider.

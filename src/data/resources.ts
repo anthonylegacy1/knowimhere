@@ -1201,5 +1201,5 @@ export const NEED_CATEGORIES: CategoryId[] = [
 export const EXTERNAL_LINKS = {
   fastFreddy: "https://fastfreddyexperience.com",
   everydayConnect: "https://everydayconnect.lovable.app",
-  improveDetroit: "https://detroitmi.gov/how-do-i/report-problem",
+  improveDetroit: "https://detroitmi.gov/ImproveDetroit",
 };

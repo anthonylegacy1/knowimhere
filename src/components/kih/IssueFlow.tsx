@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { EXTERNAL_LINKS, ISSUE_TYPES, type IssueType } from "@/data/resources";
+import { ISSUE_TYPES, type IssueType } from "@/data/resources";
+import { cityResource } from "@/data/city-resources";
+import { CityResourceCard } from "./CityResourceCard";
 
 export function detectIssue(text: string): IssueType {
   const s = text.toLowerCase();
@@ -60,10 +62,10 @@ export function IssueFlow({ text, neighborhood }: { text: string; neighborhood?:
         </li>
       </ol>
 
-      <a href={EXTERNAL_LINKS.improveDetroit} target="_blank" rel="noreferrer" className="btn-base btn-brand mt-5 w-full">
-        ➡️ Continue to Official Reporting Resource
-      </a>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
+      <div className="mt-5">
+        <CityResourceCard resource={cityResource("improve-detroit")} lead="Know I'm Here helped identify the right place to report this issue." />
+      </div>
+      <p className="mt-3 text-xs text-muted-foreground">
         Know I&apos;m Here does not replace City services. It helps residents find and use them. Reports are submitted through the official City resource, not through this prototype.
       </p>
     </div>
