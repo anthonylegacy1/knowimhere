@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { AskKIH } from "@/components/kih/AskKIH";
 import { RESOURCES, type Resource } from "@/data/resources";
 

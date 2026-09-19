@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { RESOURCES } from "@/data/resources";
 
 const TITLE = "Work After 55 — Senior Employment Resources in Detroit | Know I'm Here";
