@@ -19,6 +19,8 @@ import {
   LockKeyhole,
   MapPin,
   MessageCircle,
+  Minus,
+  Plus,
   Music,
   Navigation,
   PersonStanding,
