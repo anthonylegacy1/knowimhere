@@ -74,6 +74,31 @@ function PrePermissionDialog({
   );
 }
 
+/**
+ * Shared "Use My Location" handler: one request at a time, a brief
+ * "Found your area" confirmation, then the modal closes on its own.
+ */
+function useAskLocation(onDone: (ok: boolean) => void) {
+  const { requestGps } = useLocationState();
+  const [found, setFound] = useState(false);
+  const done = useRef(onDone);
+  done.current = onDone;
+  const run = () => {
+    void requestGps().then((ok) => {
+      if (!ok) {
+        done.current(false);
+        return;
+      }
+      setFound(true);
+      window.setTimeout(() => {
+        setFound(false);
+        done.current(true);
+      }, 700);
+    });
+  };
+  return { found, run };
+}
+
 /** ZIP / neighborhood entry. Works with location permission off. */
 export function AreaPicker({ onDone, compact = false }: { onDone?: () => void; compact?: boolean }) {
   const { setManualArea, savedArea, clearSavedArea } = useLocationState();
