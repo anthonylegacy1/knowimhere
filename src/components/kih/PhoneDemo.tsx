@@ -25,6 +25,7 @@ import transportImage from "@/assets/carousel-transport-detroit.jpg";
 import opportunityImage from "@/assets/carousel-opportunity-detroit.jpg";
 import healthImage from "@/assets/carousel-health-detroit.jpg";
 import neighborhoodImage from "@/assets/carousel-neighborhood-detroit.jpg";
+import foodImage from "@/assets/carousel-food-detroit.jpg";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
 import communityClassAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
