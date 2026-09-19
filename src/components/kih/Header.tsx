@@ -17,8 +17,10 @@ const MORE_NAV = [
   { to: "/work-after-55", label: "Work After 55" },
   { to: "/learn", label: "Everyday Connect Learning" },
   { to: "/neighborhood", label: "My Neighborhood" },
+  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
   { to: "/partners", label: "Partner Impact" },
 ] as const;
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
