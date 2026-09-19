@@ -154,6 +154,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     setSavedArea({ label: resolved.label, coords: resolved.coords, kind: resolved.kind });
     setReading(null);
     setGpsArea(null);
+    setLowConfidence(false);
+    setStaleReading(false);
     setMode("manual");
     setError(null);
     return true;
@@ -168,6 +170,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     // Clear the precise reading from active state immediately.
     setReading(null);
     setGpsArea(null);
+    setLowConfidence(false);
+    setStaleReading(false);
     setMode("off");
     setError(null);
   }, []);
@@ -200,7 +204,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       clearError: () => setError(null),
       readFreshLocation,
     };
-  }, [mode, phase, reading, gpsArea, savedArea, radiusMiles, error, supported, hydrated, requestGps, setManualArea, clearSavedArea, turnOff, readFreshLocation]);
+  }, [mode, phase, reading, gpsArea, savedArea, radiusMiles, error, lowConfidence, staleReading, supported, hydrated, requestGps, setManualArea, clearSavedArea, turnOff, readFreshLocation]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
