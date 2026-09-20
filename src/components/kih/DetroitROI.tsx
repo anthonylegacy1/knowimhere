@@ -474,22 +474,16 @@ export function DetroitROI() {
         </p>
         <Expandable label="View metrics">
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
-              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-                {RESIDENT_METRICS.map((m) => (
-                  <li key={m}>• {m}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
-              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-                {PARTNER_METRICS.map((m) => (
-                  <li key={m}>• {m}</li>
-                ))}
-              </ul>
-            </div>
+            {METRIC_GROUPS.map(([group, items]) => (
+              <div key={group} className="card-flat p-6">
+                <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{group}</p>
+                <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                  {items.map((m) => (
+                    <li key={m}>• {m}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </Expandable>
         <p className="mt-3 text-xs text-muted-foreground">
