@@ -23,6 +23,7 @@ interface TabContent {
   journey: string[];
   partnerValue?: string;
   extra?: "health" | "civic";
+  journeyAsList?: boolean;
   highlight?: string;
 }
 
@@ -82,6 +83,7 @@ const TABS: TabContent[] = [
       "“Where is my early-voting location?”",
       "“How do I view my sample ballot?”",
     ],
+    journeyAsList: true,
     extra: "civic",
   },
   {
@@ -192,7 +194,17 @@ function TabPanel({ tab }: { tab: TabContent }) {
       </Block>
       <Block label="Example resident journey">
         <p className="font-semibold text-foreground">{tab.journeyTitle}</p>
-        <JourneyChain steps={tab.journey} />
+        {tab.journeyAsList ? (
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            {tab.journey.map((s) => (
+              <li key={s} className="rounded-lg border border-border bg-cream px-3 py-2 text-sm font-semibold text-foreground/80">
+                {s}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <JourneyChain steps={tab.journey} />
+        )}
       </Block>
       {tab.highlight && (
         <p className="rounded-lg border border-border bg-cream p-4 font-bold text-foreground">{tab.highlight}</p>
