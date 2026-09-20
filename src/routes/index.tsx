@@ -49,6 +49,7 @@ import imHerePhoneVisual from "@/assets/im-here-private-phone.jpg";
 import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
+import { DetroitROI } from "@/components/kih/DetroitROI";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
