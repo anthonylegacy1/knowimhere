@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { ArrowDown, Minus, Plus } from "lucide-react";
+import { ArrowDown, ChevronDown, ChevronUp } from "lucide-react";
 
 /**
  * Detroit Economic Impact & ROI.
@@ -23,23 +23,18 @@ const INVESTMENT = [
   "Events",
 ];
 
-const RETURN = [
-  "More Awareness",
-  "More Participation",
-  "Less Fragmented Outreach",
-  "Better Utilization",
-  "Better Engagement Data",
-  "Better Future Decisions",
-];
+const RETURN_PRIMARY = ["More Awareness", "More Participation", "Better Utilization"];
+
+const RETURN_MORE = ["Less Fragmented Outreach", "Better Engagement Data", "Better Future Decisions"];
 
 const ROI_CARDS: Array<[string, string]> = [
   ["More awareness", "Help more residents discover funded programs and resources that already exist."],
   ["More participation", "Increase the opportunity for programs to reach the residents they were designed to serve."],
+  ["Better utilization", "Help existing services reach more of their available capacity."],
   [
     "Less fragmented outreach",
     "Complement individual flyers, websites, social campaigns, manual calls and disconnected promotion with one connected discovery layer.",
   ],
-  ["Better utilization", "Help existing services reach more of their available capacity."],
   [
     "Better engagement data",
     "Provide privacy-conscious aggregate insight into what residents discover, select and voluntarily engage with.",
@@ -150,7 +145,15 @@ const REVENUE_STREAMS = [
   "Legally appropriate transaction or referral revenue",
 ];
 
-function Expandable({ label, children }: { label: string; children: ReactNode }) {
+function Expandable({
+  label,
+  closeLabel = "Show less",
+  children,
+}: {
+  label: string;
+  closeLabel?: string;
+  children: ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   const id = `roi-${label.replace(/\W+/g, "-").toLowerCase()}`;
   return (
@@ -160,10 +163,14 @@ function Expandable({ label, children }: { label: string; children: ReactNode })
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={id}
-        className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+        className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold uppercase tracking-wide text-ink shadow-sm transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       >
-        <span>{open ? `Hide ${label}` : label}</span>
-        {open ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+        <span className="min-w-0">{open ? closeLabel : label}</span>
+        {open ? (
+          <ChevronUp className="size-5 shrink-0 text-brand" aria-hidden />
+        ) : (
+          <ChevronDown className="size-5 shrink-0 text-brand" aria-hidden />
+        )}
       </button>
       <div
         id={id}
@@ -186,7 +193,7 @@ function Arrow() {
 
 export function DetroitROI() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-10 sm:space-y-14">
       {/* 1 — PRIMARY ROI MESSAGE */}
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
@@ -238,12 +245,21 @@ export function DetroitROI() {
           <div className="card-flat bg-aqua-soft/60 p-5">
             <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {RETURN.map((r) => (
+              {RETURN_PRIMARY.map((r) => (
                 <li key={r} className="chip text-sm">
                   {r}
                 </li>
               ))}
             </ul>
+            <Expandable label="View all potential returns">
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {RETURN_MORE.map((r) => (
+                  <li key={r} className="chip text-sm">
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </Expandable>
           </div>
         </div>
         <p className="mt-4 text-center text-sm text-foreground/70">
@@ -261,20 +277,33 @@ export function DetroitROI() {
           <span className="text-brand">More impact per dollar.</span>
         </h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ROI_CARDS.map(([t, d]) => (
+          {ROI_CARDS.slice(0, 3).map(([t, d]) => (
             <div key={t} className="card-flat p-5">
               <p className="font-display text-lg font-bold uppercase">{t}</p>
               <p className="mt-2 text-sm text-foreground/75">{d}</p>
             </div>
           ))}
         </div>
+        <Expandable label="View all ROI benefits">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ROI_CARDS.slice(3).map(([t, d]) => (
+              <div key={t} className="card-flat p-5">
+                <p className="font-display text-lg font-bold uppercase">{t}</p>
+                <p className="mt-2 text-sm text-foreground/75">{d}</p>
+              </div>
+            ))}
+          </div>
+        </Expandable>
       </div>
 
       {/* 4 — SINGLE RESIDENT JOURNEY */}
       <div>
         <h3 className="font-display text-2xl font-bold sm:text-3xl">How a single resident journey creates value</h3>
-        <ol className="mt-5 grid gap-3 lg:grid-cols-5">
-          {JOURNEY.map(([n, t, d]) => (
+        <p className="mt-3 max-w-3xl text-foreground/70">
+          See how Know I&apos;m Here moves a resident from need to discovery, action, and measurable engagement.
+        </p>
+        <ol className="mt-5 grid gap-3 md:grid-cols-2">
+          {JOURNEY.slice(0, 2).map(([n, t, d]) => (
             <li key={n} className="card-flat p-5">
               <p className="text-[11px] font-extrabold uppercase tracking-wide text-brand">{n}</p>
               <p className="mt-1 font-display text-lg font-bold">{t}</p>
@@ -282,24 +311,35 @@ export function DetroitROI() {
             </li>
           ))}
         </ol>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="card-pop p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident value</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {RESIDENT_VALUE.map((v) => (
-                <li key={v}>• {v}</li>
-              ))}
-            </ul>
+        <Expandable label="Continue the resident journey">
+          <ol className="mt-4 grid gap-3 lg:grid-cols-3">
+            {JOURNEY.slice(2).map(([n, t, d]) => (
+              <li key={n} className="card-flat p-5">
+                <p className="text-[11px] font-extrabold uppercase tracking-wide text-brand">{n}</p>
+                <p className="mt-1 font-display text-lg font-bold">{t}</p>
+                <p className="mt-2 text-sm text-foreground/75">{d}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="card-pop p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident value</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {RESIDENT_VALUE.map((v) => (
+                  <li key={v}>• {v}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card-pop bg-ink p-6 text-cream">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Organization value</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {ORG_VALUE.map((v) => (
+                  <li key={v}>• {v}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="card-pop bg-ink p-6 text-cream">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Organization value</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {ORG_VALUE.map((v) => (
-                <li key={v}>• {v}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </Expandable>
         <p className="mt-4 rounded-2xl bg-sun/30 px-5 py-4 text-lg font-bold">
           The resident receives access while the organization gets another opportunity to turn funded capacity into
           actual participation.
@@ -355,7 +395,7 @@ export function DetroitROI() {
           programs that already exist and residents who may benefit from them.
         </p>
         <ol className="mx-auto mt-6 max-w-md">
-          {CAPACITY_CHAIN.map((step, i) => (
+          {CAPACITY_CHAIN.slice(0, 4).map((step, i) => (
             <li key={step}>
               {i > 0 && <Arrow />}
               <div
@@ -368,6 +408,18 @@ export function DetroitROI() {
             </li>
           ))}
         </ol>
+        <div className="mx-auto max-w-md">
+          <Expandable label="See how the connection becomes participation">
+            <ol className="mt-4">
+              {CAPACITY_CHAIN.slice(4).map((step, i) => (
+                <li key={step}>
+                  {i > 0 && <Arrow />}
+                  <div className="card-flat rounded-2xl p-4 text-center font-extrabold uppercase">{step}</div>
+                </li>
+              ))}
+            </ol>
+          </Expandable>
+        </div>
       </div>
 
       {/* 7 — GOVERNMENT ROI */}
@@ -401,24 +453,26 @@ export function DetroitROI() {
         <p className="mt-4 inline-flex rounded-full bg-sun/40 px-4 py-2 text-xs font-extrabold uppercase tracking-wide">
           Pilot metrics to measure — not existing performance statistics
         </p>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="card-flat p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {RESIDENT_METRICS.map((m) => (
-                <li key={m}>• {m}</li>
-              ))}
-            </ul>
+        <Expandable label="View metrics">
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="card-flat p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {RESIDENT_METRICS.map((m) => (
+                  <li key={m}>• {m}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card-flat p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {PARTNER_METRICS.map((m) => (
+                  <li key={m}>• {m}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="card-flat p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {PARTNER_METRICS.map((m) => (
-                <li key={m}>• {m}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </Expandable>
         <p className="mt-3 text-xs text-muted-foreground">
           No results are shown here. These are the measurements a pilot would collect.
         </p>
