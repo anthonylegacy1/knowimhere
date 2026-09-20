@@ -14,7 +14,7 @@ const MORE_NAV = [
   { to: "/community-health", label: "Community + Public Health" },
   { to: "/partners", label: "Partner Impact" },
   { to: "/sponsorship", label: "Partners + Sponsorship" },
-  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact" },
+  { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact & ROI" },
   { to: "/learn", label: "Everyday Connect Learning" },
   { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
   { to: "/for-you", label: "For You" },
