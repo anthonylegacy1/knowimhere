@@ -10,7 +10,7 @@ import { ArrowDown, ChevronDown, ChevronUp } from "lucide-react";
  * model are labelled separately.
  */
 
-const PILLARS = ["Discovery", "Access", "Participation", "Utilization", "Measurement"];
+const PILLARS = ["Discovery", "Access", "Participation", "Utilization", "Measurement", "Adoption"];
 
 const INVESTMENT = [
   "Health",
@@ -99,27 +99,27 @@ const CITY_BENEFITS = [
   "Create better engagement insight",
 ];
 
-const RESIDENT_METRICS = [
-  "Resource views",
-  "Ask KIH searches",
-  "Get There clicks",
-  "Resource saves",
-  "Registrations and referrals",
-  "Voluntary check-ins",
-  "Repeat usage",
-  "Repeat participation",
-];
-
-const PARTNER_METRICS = [
-  "Referral traffic",
-  "Program registrations",
-  "Attendance",
-  "Utilization rates",
-  "Outreach conversion",
-  "Cost per resident reached",
-  "Category demand",
-  "Neighborhood demand",
-  "Resource gaps",
+const METRIC_GROUPS: Array<[string, string[]]> = [
+  ["Resident discovery", ["Useful searches", "Resource views", "Category interest patterns"]],
+  ["Resident access", ["Next-step clicks", "Direction / transportation interest", "Saved resources"]],
+  ["Participation signals", ["Voluntary I'm Here check-ins", "Repeat visits", "Event or program engagement"]],
+  [
+    "Digital confidence / adoption",
+    [
+      "QR code comfort",
+      "Assisted onboarding completions",
+      "Everyday Connect training interest",
+      "Repeat use after training",
+    ],
+  ],
+  [
+    "Partner value",
+    [
+      "Outreach-to-engagement patterns",
+      "Resource utilization signals",
+      "Gaps where residents search but do not find enough relevant options",
+    ],
+  ],
 ];
 
 const CUSTOMER_GROUPS = [
@@ -198,13 +198,11 @@ export function DetroitROI() {
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
         <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
-          Detroit is already investing in the resources.
+          Turning community investment into measurable engagement
         </h2>
-        <p className="mt-3 font-display text-2xl font-extrabold uppercase leading-tight text-brand sm:text-3xl">
-          Know I&apos;m Here helps turn community investment into measurable engagement.
-        </p>
-        <p className="mt-2 max-w-2xl text-sm font-semibold text-foreground/70 sm:text-base">
-          Helping Detroit and its partners improve discovery, access, participation, utilization, and measurement.
+        <p className="mt-3 max-w-3xl font-display text-xl font-extrabold uppercase leading-tight text-brand sm:text-2xl">
+          Know I&apos;m Here improves discovery and access. Everyday Connect strengthens adoption. Together, they help
+          Detroit and its partners improve participation, utilization, and measurement.
         </p>
         <p className="mt-5 max-w-3xl text-base text-foreground/70 sm:text-lg">
           Detroit and its community partners already invest in health programs, recreation, transportation, workforce
@@ -215,14 +213,18 @@ export function DetroitROI() {
           The opportunity is making sure residents can actually find them, reach them, use them, and return to them.
         </p>
         <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Know I&apos;m Here helps close that gap by connecting residents to relevant resources while giving
-          participating organizations a clearer view of whether outreach is translating into discovery, access,
-          participation, and utilization.
+          Know I&apos;m Here helps close the discovery and access gap by connecting residents to relevant resources.
+          Everyday Connect helps close the digital-confidence gap by teaching residents how to use the technology
+          required to access those opportunities.
         </p>
         <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Over time, privacy-conscious engagement data can help partners better understand how their programs are being
-          reached and used, where additional outreach may be needed, and whether community investment dollars are
-          generating meaningful resident engagement.
+          Together, they can help participating organizations better understand whether outreach is translating into
+          discovery, access, participation, and utilization.
+        </p>
+        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+          Over time, privacy-conscious engagement data can help partners understand how programs are being reached and
+          used, where additional outreach may be needed, and whether community investment dollars are generating
+          meaningful resident engagement.
         </p>
         <p className="mt-4 max-w-3xl rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">
           The goal is simple: help Detroit and its partners get more measurable value from the resources they are
@@ -472,22 +474,16 @@ export function DetroitROI() {
         </p>
         <Expandable label="View metrics">
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
-              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-                {RESIDENT_METRICS.map((m) => (
-                  <li key={m}>• {m}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
-              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-                {PARTNER_METRICS.map((m) => (
-                  <li key={m}>• {m}</li>
-                ))}
-              </ul>
-            </div>
+            {METRIC_GROUPS.map(([group, items]) => (
+              <div key={group} className="card-flat p-6">
+                <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{group}</p>
+                <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                  {items.map((m) => (
+                    <li key={m}>• {m}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </Expandable>
         <p className="mt-3 text-xs text-muted-foreground">
@@ -501,6 +497,11 @@ export function DetroitROI() {
         <p className="mt-3 max-w-3xl text-foreground/70">
           The same connection layer that creates value for residents and community partners can also support recurring
           institutional revenue.
+        </p>
+        <p className="mt-3 max-w-3xl font-semibold text-foreground/80">
+          The adoption model matters because civic technology only becomes valuable when people actually use it.
+          Everyday Connect and the Fast Freddy pilot help Know I&apos;m Here test real community adoption, not just app
+          functionality.
         </p>
         <p className="mt-3 inline-flex rounded-full bg-cream px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-brand">
           Future business model — nothing here is contracted or sold today
@@ -550,6 +551,11 @@ export function DetroitROI() {
           Know I&apos;m Here is not designed to create another layer of disconnected programming. It is designed to help
           Detroit get more measurable impact from resources, services, opportunities, and investments that already
           exist.
+        </p>
+        <p className="mx-auto mt-6 max-w-3xl rounded-2xl bg-cream/10 px-5 py-4 font-semibold text-cream">
+          Know I&apos;m Here solves the connection gap. Everyday Connect solves the digital-confidence gap. Fast Freddy
+          solves the trust and adoption gap. Together, they help residents move from awareness to access to
+          participation.
         </p>
       </div>
     </div>
