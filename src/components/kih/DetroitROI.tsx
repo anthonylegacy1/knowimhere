@@ -30,11 +30,11 @@ const RETURN_MORE = ["Less Fragmented Outreach", "Better Engagement Data", "Bett
 const ROI_CARDS: Array<[string, string]> = [
   ["More awareness", "Help more residents discover funded programs and resources that already exist."],
   ["More participation", "Increase the opportunity for programs to reach the residents they were designed to serve."],
+  ["Better utilization", "Help existing services reach more of their available capacity."],
   [
     "Less fragmented outreach",
     "Complement individual flyers, websites, social campaigns, manual calls and disconnected promotion with one connected discovery layer.",
   ],
-  ["Better utilization", "Help existing services reach more of their available capacity."],
   [
     "Better engagement data",
     "Provide privacy-conscious aggregate insight into what residents discover, select and voluntarily engage with.",
