@@ -56,7 +56,7 @@ import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { ResidentPriorities } from "@/components/kih/ResidentPriorities";
 import { Button } from "@/components/ui/button";
-import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
+import { EXTERNAL_LINKS } from "@/data/resources";
 import { CITY_RESOURCES } from "@/data/city-resources";
 
 const TITLE = "Know I'm Here — Discover What Detroit Has For You";
