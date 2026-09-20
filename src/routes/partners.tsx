@@ -257,7 +257,7 @@ function Partners() {
   const max = FUNNEL[0]!.n;
 
   return (
-    <div className="container-kih py-8 sm:py-12">
+    <div className="container-kih py-8 pb-36 sm:py-12 sm:pb-36">
       <SectionHeading
         eyebrow="For organizations and partners"
         title="From discovery to measurable impact"
@@ -523,7 +523,20 @@ function Partners() {
       )}
 
       <div className="mt-12 text-center">
-        <Link to="/demo" className="btn-base btn-brand">See the resident experience</Link>
+        <h2 className="font-display text-xl font-bold">See the bigger ROI model</h2>
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-foreground/75">
+          These engagement signals are designed to help test a larger question: can better discovery and access help
+          existing Detroit programs generate more participation and more measurable impact from investments already
+          being made?
+        </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <Link to="/" hash="detroit-economic-impact" className="btn-base btn-brand">
+            View Detroit Economic Impact &amp; ROI
+          </Link>
+          <Link to="/demo" className="btn-base border-2 border-ink/15 bg-card font-bold text-ink">
+            See the resident experience
+          </Link>
+        </div>
       </div>
     </div>
   );
