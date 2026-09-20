@@ -54,6 +54,7 @@ import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
+import { ResidentPriorities } from "@/components/kih/ResidentPriorities";
 import { Button } from "@/components/ui/button";
 import { EXTERNAL_LINKS, PRIORITIES } from "@/data/resources";
 import { CITY_RESOURCES } from "@/data/city-resources";
