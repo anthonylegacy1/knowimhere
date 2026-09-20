@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { ArrowDown, Minus, Plus } from "lucide-react";
+import { ArrowDown, ChevronDown, ChevronUp } from "lucide-react";
 
 /**
  * Detroit Economic Impact & ROI.
