@@ -348,15 +348,45 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-14"><div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
-        <div><p className="text-xs font-extrabold uppercase text-sky">Digital confidence</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Everyday Connect</h2><p className="mt-4 text-foreground/70">Practical digital confidence for older adults, working adults, parents, students and youth—from smartphone basics and accessibility to healthcare technology and useful AI.</p><div className="mt-5 flex flex-wrap gap-2"><span className="chip">Easy to use</span><span className="chip">Safe & secure</span><span className="chip">Everyday support</span></div>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Button asChild className="min-h-14"><Link to="/learn">Start learning <ArrowRight /></Link></Button>
-            <Button asChild variant="outline" className="min-h-14"><a href="https://everydayconnect.lovable.app/" target="_blank" rel="noopener noreferrer">Start connecting <ExternalLink /></a></Button>
+      <section className="container-kih py-14">
+        <div className="max-w-3xl">
+          <p className="text-xs font-extrabold uppercase text-sky">The ecosystem</p>
+          <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Connecting Resources Is Only Half the Solution</h2>
+          <p className="mt-4 text-foreground/70">Detroit already has programs, services, opportunities, and digital resources. Know I&apos;m Here helps residents discover and reach them. Everyday Connect helps residents build the confidence and practical skills to use the technology required to access them.</p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Fast Freddy Experience", "Creates trusted community access and a real-world pilot environment."],
+            ["Everyday Connect", "Builds digital confidence through simple, practical technology education."],
+            ["Know I'm Here", "Connects residents to relevant resources, programs, services, and opportunities."],
+            ["Community Partners", "Gain privacy-conscious insight into discovery, engagement, and participation."],
+          ].map(([title, text]) => (
+            <article key={title} className="card-flat p-5">
+              <h3 className="font-display text-lg font-bold uppercase leading-snug">{title}</h3>
+              <p className="mt-2 text-sm text-foreground/70">{text}</p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">We are not just building a better way to find resources. We are helping make sure residents can confidently use the technology that connects them to those resources.</p>
+
+        <div className="mt-10 grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
+          <div>
+            <p className="text-xs font-extrabold uppercase text-sky">Everyday Connect</p>
+            <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Digital Confidence for Everyday Life</h2>
+            <p className="mt-4 font-semibold text-foreground/80">Technology only creates access when people feel confident using it.</p>
+            <p className="mt-3 text-foreground/70">Everyday Connect provides simple, practical digital-confidence training that helps residents use smartphones, QR codes, maps, online services, AI tools, transportation technology, and community platforms like Know I&apos;m Here.</p>
+            <p className="mt-3 text-foreground/70">The goal is not simply to teach technology. It is to help people use technology to reach opportunities that already exist around them.</p>
+            <p className="mt-3 text-sm text-foreground/65">Everyday Connect can support older adults, youth, families, caregivers, working adults, and community members who want more confidence using everyday technology.</p>
+            <p className="mt-4 rounded-2xl bg-aqua-soft/60 px-5 py-4 text-base font-bold">Everyday Connect teaches people how to use the technology. Know I&apos;m Here helps them use that confidence to connect with opportunities around them.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button asChild className="min-h-14"><Link to="/learn">Start learning <ArrowRight /></Link></Button>
+              <Button asChild variant="outline" className="min-h-14"><a href="https://everydayconnect.lovable.app/" target="_blank" rel="noopener noreferrer">Start connecting <ExternalLink /></a></Button>
+            </div>
           </div>
         </div>
-      </div></section>
+      </section>
+
 
       <section className="bg-ink text-cream"><div className="container-kih py-14">
         <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
