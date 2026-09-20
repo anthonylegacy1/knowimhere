@@ -258,7 +258,15 @@ function Partners() {
 
   return (
     <div className="container-kih py-8 sm:py-12">
-      <SectionHeading eyebrow="For organizations and partners" title="From Outreach to Measurable Participation" text="Flyers tell you how many you printed. Know I'm Here shows who was matched, who showed interest, who got there, and who participated." />
+      <SectionHeading
+        eyebrow="For organizations and partners"
+        title="From discovery to measurable impact"
+        text="Detroit already invests in programs, services, and community resources. Know I'm Here is designed to help partners understand whether improved discovery and access translate into measurable resident engagement."
+      />
+      <p className="mt-4 text-sm font-extrabold uppercase tracking-wide text-foreground/70">
+        Discover <span className="text-brand">→</span> Act <span className="text-brand">→</span> Participate{" "}
+        <span className="text-brand">→</span> Return <span className="text-brand">→</span> Measure
+      </p>
 
       <div className="mt-6 flex gap-2" role="tablist">
         {TABS.map((t) => (
