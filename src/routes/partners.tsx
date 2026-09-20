@@ -110,7 +110,7 @@ function LiveImpact() {
     ["Voluntary check-ins — location-verified", totals.verifiedCheckIns],
   ];
 
-  const sessionsLag = totals.residentSessions === 0 && totals.resourceViews > 0;
+  const sessionsLag = totals.residentSessions < totals.resourceViews;
   const demandTotal = demand.reduce((sum, d) => sum + d.events, 0);
 
   return (
@@ -140,7 +140,7 @@ function LiveImpact() {
         {sessionsLag && (
           <p className="mt-3 rounded-2xl bg-sun/25 px-4 py-3 text-sm font-semibold">
             Resident sessions reads a session event that was added to the prototype after resource-view tracking, so
-            the views above were recorded before any session could be counted. The two numbers cover different tracking
+            earlier views were recorded before any session could be counted. These two numbers cover different tracking
             periods and should not be read as a ratio.
           </p>
         )}
