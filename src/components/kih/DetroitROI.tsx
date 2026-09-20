@@ -498,6 +498,11 @@ export function DetroitROI() {
           The same connection layer that creates value for residents and community partners can also support recurring
           institutional revenue.
         </p>
+        <p className="mt-3 max-w-3xl font-semibold text-foreground/80">
+          The adoption model matters because civic technology only becomes valuable when people actually use it.
+          Everyday Connect and the Fast Freddy pilot help Know I&apos;m Here test real community adoption, not just app
+          functionality.
+        </p>
         <p className="mt-3 inline-flex rounded-full bg-cream px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-brand">
           Future business model — nothing here is contracted or sold today
         </p>
