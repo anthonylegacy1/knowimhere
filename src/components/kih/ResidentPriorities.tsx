@@ -31,6 +31,7 @@ const TABS: TabContent[] = [
   {
     id: "neighborhoods",
     title: "Safe, Just & Thriving Neighborhoods",
+    badge: "Expansion application",
     concern:
       "Stronger neighborhood stability, safer communities, housing resources, healthy food, public spaces, youth opportunities, and neighborhood support.",
     helps:
@@ -55,6 +56,7 @@ const TABS: TabContent[] = [
   {
     id: "transportation",
     title: "Reliable Transportation, Infrastructure & Sustainability",
+    badge: "Expansion application",
     concern:
       "Reliable transportation and infrastructure affect whether people can reach jobs, health care, education, recreation, civic services, and other opportunities.",
     helps:
@@ -67,6 +69,7 @@ const TABS: TabContent[] = [
   {
     id: "government",
     title: "Open, Accessible & Responsible Government",
+    badge: "Expansion application",
     concern:
       "Easier access to city services, clearer information, better customer service, transparency, and trusted civic information.",
     helps:
@@ -89,6 +92,7 @@ const TABS: TabContent[] = [
   {
     id: "youth",
     title: "Future of Education & Youth Opportunities",
+    badge: "Expansion application",
     concern:
       "Safe environments, after-school opportunities, youth mental-health resources, education support, recreation, training, and pathways into employment.",
     helps:
@@ -100,7 +104,7 @@ const TABS: TabContent[] = [
   {
     id: "future",
     title: "Future of Detroit",
-    badge: "Longer-term expansion",
+    badge: "Expansion application · longer-term",
     concern:
       "This Venture 313 category can include physical AI, cross-border opportunity, waterfront activity, sports, entertainment, media, tourism, festivals, events, and local business activation.",
     helps:
@@ -183,7 +187,13 @@ function TabPanel({ tab }: { tab: TabContent }) {
       <div className="flex flex-wrap items-center gap-3">
         <h3 className="font-display text-xl font-bold sm:text-2xl">{tab.title}</h3>
         {tab.badge && (
-          <span className="chip bg-brand text-xs font-extrabold uppercase tracking-wide text-background">{tab.badge}</span>
+          <span
+            className={`chip text-xs font-extrabold uppercase tracking-wide ${
+              tab.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
+            }`}
+          >
+            {tab.badge}
+          </span>
         )}
       </div>
       <Block label="What residents are concerned about">
@@ -254,24 +264,30 @@ export function ResidentPriorities() {
         </p>
 
         {/* Ecosystem diagram */}
-        <ol className="mt-8 grid gap-2">
+        <ol className="mt-8 grid gap-2 lg:grid-flow-col lg:auto-cols-fr lg:items-stretch lg:gap-0">
           {ECOSYSTEM.map((step, i) => (
-            <li key={step.label} className="flex flex-col items-center">
-              <div className="w-full max-w-xl rounded-lg border border-border bg-background px-4 py-3 text-center">
-                <p className="font-display font-bold">{step.label}</p>
-                <p className="text-sm text-foreground/65">{step.note}</p>
+            <li key={step.label} className="flex flex-col items-center lg:flex-row lg:items-stretch">
+              <div className="w-full max-w-xl rounded-lg border border-border bg-background px-3 py-3 text-center lg:h-full">
+                <p className="font-display text-sm font-bold">{step.label}</p>
+                <p className="text-xs text-foreground/65">{step.note}</p>
               </div>
               {i < ECOSYSTEM.length - 1 && (
-                <span aria-hidden className="py-1 text-brand">
-                  ↓
+                <span aria-hidden className="py-1 text-brand lg:grid lg:place-items-center lg:px-1.5 lg:py-0">
+                  <span className="lg:hidden">↓</span>
+                  <span className="hidden lg:inline">→</span>
                 </span>
               )}
             </li>
           ))}
         </ol>
 
+        <p className="mt-8 max-w-3xl font-semibold text-foreground">
+          Community &amp; Public Health is where we prove the model. Detroit&apos;s other challenge areas show where the same connection
+          architecture can extend.
+        </p>
+
         {/* Tabs */}
-        <div className="mt-10" role="tablist" aria-label="Detroit resident priority areas">
+        <div className="mt-5" role="tablist" aria-label="Detroit resident priority areas">
           <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
             {TABS.map((t) => {
               const on = t.id === active;
@@ -285,11 +301,15 @@ export function ResidentPriorities() {
                   aria-controls={`priority-panel-${t.id}`}
                   onClick={() => setActive(t.id)}
                   className={`min-h-11 shrink-0 rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${
-                    on ? "border-brand bg-brand text-background" : "border-border bg-background text-foreground/75 hover:bg-cream"
+                    on
+                      ? "border-brand bg-brand text-background"
+                      : t.id === "health"
+                        ? "border-brand bg-background text-brand hover:bg-cream"
+                        : "border-border bg-background text-foreground/70 hover:bg-cream"
                   }`}
                 >
                   {t.title}
-                  {t.id === "health" && <span className="ml-1.5 text-xs font-extrabold uppercase">· Primary</span>}
+                  {t.id === "health" && <span className="ml-1.5 text-xs font-extrabold uppercase">· Primary focus</span>}
                 </button>
               );
             })}
@@ -308,9 +328,9 @@ export function ResidentPriorities() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-3xl text-sm text-foreground/70">
-          Know I&apos;m Here doesn&apos;t replace Detroit&apos;s trusted organizations—it is the connection layer that helps residents find the
-          right resource and understand where to start.
+        <p className="mt-6 max-w-3xl rounded-lg border-2 border-border bg-cream p-4 font-bold text-foreground">
+          Know I&apos;m Here does not replace Detroit&apos;s programs, organizations, or official systems. It helps residents find them, understand
+          them, reach them, and use them.
         </p>
         <p className="mt-3 max-w-3xl text-xs text-muted-foreground">
           Know I&apos;m Here is an independent prototype and is not an official City of Detroit platform or endorsed by the Rise Higher Detroit
