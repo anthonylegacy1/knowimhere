@@ -277,13 +277,23 @@ export function DetroitROI() {
           <span className="text-brand">More impact per dollar.</span>
         </h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ROI_CARDS.map(([t, d]) => (
+          {ROI_CARDS.slice(0, 3).map(([t, d]) => (
             <div key={t} className="card-flat p-5">
               <p className="font-display text-lg font-bold uppercase">{t}</p>
               <p className="mt-2 text-sm text-foreground/75">{d}</p>
             </div>
           ))}
         </div>
+        <Expandable label="View all ROI benefits">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ROI_CARDS.slice(3).map(([t, d]) => (
+              <div key={t} className="card-flat p-5">
+                <p className="font-display text-lg font-bold uppercase">{t}</p>
+                <p className="mt-2 text-sm text-foreground/75">{d}</p>
+              </div>
+            ))}
+          </div>
+        </Expandable>
       </div>
 
       {/* 4 — SINGLE RESIDENT JOURNEY */}
