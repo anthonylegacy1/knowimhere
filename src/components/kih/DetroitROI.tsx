@@ -198,13 +198,11 @@ export function DetroitROI() {
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
         <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
-          Detroit is already investing in the resources.
+          Turning community investment into measurable engagement
         </h2>
-        <p className="mt-3 font-display text-2xl font-extrabold uppercase leading-tight text-brand sm:text-3xl">
-          Know I&apos;m Here helps turn community investment into measurable engagement.
-        </p>
-        <p className="mt-2 max-w-2xl text-sm font-semibold text-foreground/70 sm:text-base">
-          Helping Detroit and its partners improve discovery, access, participation, utilization, and measurement.
+        <p className="mt-3 max-w-3xl font-display text-xl font-extrabold uppercase leading-tight text-brand sm:text-2xl">
+          Know I&apos;m Here improves discovery and access. Everyday Connect strengthens adoption. Together, they help
+          Detroit and its partners improve participation, utilization, and measurement.
         </p>
         <p className="mt-5 max-w-3xl text-base text-foreground/70 sm:text-lg">
           Detroit and its community partners already invest in health programs, recreation, transportation, workforce
@@ -215,14 +213,18 @@ export function DetroitROI() {
           The opportunity is making sure residents can actually find them, reach them, use them, and return to them.
         </p>
         <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Know I&apos;m Here helps close that gap by connecting residents to relevant resources while giving
-          participating organizations a clearer view of whether outreach is translating into discovery, access,
-          participation, and utilization.
+          Know I&apos;m Here helps close the discovery and access gap by connecting residents to relevant resources.
+          Everyday Connect helps close the digital-confidence gap by teaching residents how to use the technology
+          required to access those opportunities.
         </p>
         <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Over time, privacy-conscious engagement data can help partners better understand how their programs are being
-          reached and used, where additional outreach may be needed, and whether community investment dollars are
-          generating meaningful resident engagement.
+          Together, they can help participating organizations better understand whether outreach is translating into
+          discovery, access, participation, and utilization.
+        </p>
+        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+          Over time, privacy-conscious engagement data can help partners understand how programs are being reached and
+          used, where additional outreach may be needed, and whether community investment dollars are generating
+          meaningful resident engagement.
         </p>
         <p className="mt-4 max-w-3xl rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">
           The goal is simple: help Detroit and its partners get more measurable value from the resources they are
