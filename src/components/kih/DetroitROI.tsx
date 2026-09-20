@@ -23,14 +23,9 @@ const INVESTMENT = [
   "Events",
 ];
 
-const RETURN = [
-  "More Awareness",
-  "More Participation",
-  "Less Fragmented Outreach",
-  "Better Utilization",
-  "Better Engagement Data",
-  "Better Future Decisions",
-];
+const RETURN_PRIMARY = ["More Awareness", "More Participation", "Better Utilization"];
+
+const RETURN_MORE = ["Less Fragmented Outreach", "Better Engagement Data", "Better Future Decisions"];
 
 const ROI_CARDS: Array<[string, string]> = [
   ["More awareness", "Help more residents discover funded programs and resources that already exist."],
