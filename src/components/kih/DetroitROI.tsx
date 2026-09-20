@@ -453,24 +453,26 @@ export function DetroitROI() {
         <p className="mt-4 inline-flex rounded-full bg-sun/40 px-4 py-2 text-xs font-extrabold uppercase tracking-wide">
           Pilot metrics to measure — not existing performance statistics
         </p>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="card-flat p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {RESIDENT_METRICS.map((m) => (
-                <li key={m}>• {m}</li>
-              ))}
-            </ul>
+        <Expandable label="View metrics">
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="card-flat p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {RESIDENT_METRICS.map((m) => (
+                  <li key={m}>• {m}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card-flat p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {PARTNER_METRICS.map((m) => (
+                  <li key={m}>• {m}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="card-flat p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner ROI / utilization</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {PARTNER_METRICS.map((m) => (
-                <li key={m}>• {m}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </Expandable>
         <p className="mt-3 text-xs text-muted-foreground">
           No results are shown here. These are the measurements a pilot would collect.
         </p>
