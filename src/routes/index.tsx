@@ -367,6 +367,7 @@ function Index() {
             </article>
           ))}
         </div>
+        <p className="mt-6 max-w-4xl border-l-4 border-brand pl-5 text-base text-foreground/75 sm:text-lg">Detroit already has resources. Know I&apos;m Here helps residents find and reach them. Everyday Connect helps residents build the digital confidence to use the technology required to access them. The Fast Freddy Experience gives us a trusted community environment to test whether that full loop works in real life.</p>
         <p className="mt-6 rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">We are not just building a better way to find resources. We are helping make sure residents can confidently use the technology that connects them to those resources.</p>
 
         <div className="mt-10 grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
