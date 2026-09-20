@@ -552,6 +552,11 @@ export function DetroitROI() {
           Detroit get more measurable impact from resources, services, opportunities, and investments that already
           exist.
         </p>
+        <p className="mx-auto mt-6 max-w-3xl rounded-2xl bg-cream/10 px-5 py-4 font-semibold text-cream">
+          Know I&apos;m Here solves the connection gap. Everyday Connect solves the digital-confidence gap. Fast Freddy
+          solves the trust and adoption gap. Together, they help residents move from awareness to access to
+          participation.
+        </p>
       </div>
     </div>
   );
