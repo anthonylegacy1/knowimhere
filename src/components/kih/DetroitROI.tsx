@@ -193,7 +193,7 @@ function Arrow() {
 
 export function DetroitROI() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-10 sm:space-y-14">
       {/* 1 — PRIMARY ROI MESSAGE */}
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
