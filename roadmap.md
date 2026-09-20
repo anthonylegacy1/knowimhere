@@ -148,3 +148,4 @@
 - [ ] Pilot metrics to measure (resident engagement + partner ROI), no fake results.
 - [ ] "Why this can become a sustainable business" customer groups + revenue streams.
 - [ ] Closing ROI message; conditional claim language only; label current vs pilot vs future.
+- [ ] KIH_ANALYTICS_KEY server-side only: no browser storage, no client code, no logs; ROI page stays public.
