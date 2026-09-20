@@ -276,14 +276,153 @@ function Partners() {
         ))}
       </div>
 
+      {tab === "Impact" && (
+        <>
+          <div className="card-pop mt-6 p-5 sm:p-6">
+            <h2 className="font-display text-xl font-bold">Why these metrics matter</h2>
+            <Flow
+              steps={[
+                "Public + community investment",
+                "Know I'm Here",
+                "Discovery",
+                "Resident action",
+                "Participation",
+                "Measurable engagement",
+                "Better resource utilization",
+              ]}
+            />
+            <p className="mt-5 text-sm font-semibold text-foreground/75">
+              Know I&apos;m Here does not create the underlying community program. It creates another pathway between an
+              existing investment and the resident it was designed to serve.
+            </p>
+          </div>
+
+          <div className="mt-6 rounded-xl bg-ink p-6 text-cream sm:p-8">
+            <p className="font-display text-xl font-extrabold uppercase leading-tight sm:text-3xl">
+              Detroit is already investing in the resources.
+            </p>
+            <p className="mt-2 font-display text-lg font-extrabold uppercase leading-tight text-sun sm:text-2xl">
+              Know I&apos;m Here is designed to increase the potential return on that investment by improving:
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {["Discovery", "Access", "Participation", "Utilization", "Measurement"].map((p) => (
+                <li key={p} className="chip bg-cream/15 text-sm font-extrabold uppercase tracking-wide text-cream">
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-cream/80">
+              Forward-looking. No ROI result is claimed until a pilot measures one.
+            </p>
+          </div>
+        </>
+      )}
+
       {tab === "Impact" && <LiveImpact />}
 
       {tab === "Impact" && (
-        <div className="mt-6 grid gap-5 lg:grid-cols-5">
-          <div className="card-pop p-6 lg:col-span-3">
+        <div className="card-pop mt-6 p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold">From information to engagement</h2>
+          <Flow
+            steps={[
+              "Resident has a need — food or wellness support",
+              "KIH surfaces a relevant resource",
+              "Resident opens resource",
+              "Get There",
+              "Voluntary check-in, registration or action",
+              "Partner receives aggregated engagement signal",
+            ]}
+          />
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="card-flat p-5">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident value</p>
+              <ul className="mt-2 space-y-1 text-sm font-semibold">
+                <li>• Easier discovery</li>
+                <li>• Relevant information</li>
+                <li>• Clearer next steps</li>
+                <li>• Access and navigation support</li>
+              </ul>
+            </div>
+            <div className="card-flat bg-ink p-5 text-cream">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Partner value</p>
+              <ul className="mt-2 space-y-1 text-sm font-semibold">
+                <li>• Another pathway to reach residents</li>
+                <li>• Opportunity for greater participation</li>
+                <li>• Better understanding of engagement</li>
+                <li>• Opportunity to improve utilization of funded capacity</li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-4 rounded-2xl bg-sun/30 px-5 py-4 font-bold">
+            The resident receives access while the organization gets another opportunity to turn funded capacity into
+            actual participation.
+          </p>
+        </div>
+      )}
+
+      {tab === "Impact" && (
+        <div className="card-pop mt-6 border-2 border-sky/40 p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold">Measurement without surveillance</h2>
+          <p className="mt-2 text-sm text-foreground/75">
+            Know I&apos;m Here is being designed around consent-based engagement signals. Location access is optional.
+            Check-in is voluntary. The partner dashboard emphasizes aggregated trends rather than exposing individual
+            resident histories.
+          </p>
+          <p className="mt-4 font-display text-lg font-extrabold uppercase leading-tight">
+            Not silent tracking.
+            <br />
+            Not automatic attendance.
+            <br />
+            <span className="text-brand">Consent-based participation signals.</span>
+          </p>
+          <LearnMore label="Learn more: location access is not check-in">
+            <p>
+              <strong>Location access</strong> is used voluntarily to personalize nearby information.{" "}
+              <strong>Check-in</strong> is a separate voluntary action where the resident confirms arrival or
+              participation. A check-in marked location-verified means the resident tapped Check In and the app took a
+              fresh reading to confirm the device was reasonably close. Attendance is never inferred silently.
+            </p>
+          </LearnMore>
+        </div>
+      )}
+
+      {tab === "Impact" && (
+        <div className="card-pop mt-6 p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold">From funded capacity to actual participation</h2>
+          <p className="mt-2 text-sm text-foreground/75">
+            The goal is not simply more clicks. The goal is understanding whether discovery leads to meaningful resident
+            action.
+          </p>
+          <Flow
+            steps={[
+              "Resource funded",
+              "Resource published",
+              "Resource discovered",
+              "Resident takes action",
+              "Resident participates",
+              "Repeat engagement",
+              "Partner measures utilization",
+            ]}
+          />
+        </div>
+      )}
+
+      {tab === "Impact" && (
+        <div className="mt-10">
+          <h2 className="font-display text-xl font-bold">How partner ROI could be measured</h2>
+          <p className="mt-2 max-w-3xl text-sm text-foreground/75">
+            This scenario demonstrates how a future partner could measure movement from discovery to participation.
+            These figures are illustrative and are not current resident usage.
+          </p>
+        </div>
+      )}
+
+      {tab === "Impact" && (
+        <div className="mt-4 grid gap-5 lg:grid-cols-5">
+          <div className="card-pop p-5 sm:p-6 lg:col-span-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="font-display text-xl font-bold">{PROGRAMS[program]!.name}</h2>
-              <span className="chip chip-sun text-[11px] uppercase tracking-wide">Buildathon demonstration data</span>
+              <span className="chip chip-sun text-[11px] uppercase tracking-wide">Buildathon demonstration</span>
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {PROGRAMS.map((p, i) => (
