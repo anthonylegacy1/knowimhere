@@ -1,8 +1,81 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { ArrowDown } from "lucide-react";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { fetchCategoryDemand, fetchImpactTotals, type CategoryDemand, type ImpactTotals } from "@/lib/impact";
 import { CATEGORIES, type CategoryId } from "@/data/resources";
+
+/**
+ * Data-source audit (verified against the database, Sept 20 2026):
+ *
+ * Every number in "What this MVP is measuring" is a real aggregate over the
+ * engagement_events and checkins tables, written by prototype interactions
+ * during Buildathon building and testing. Nothing in that block is seeded or
+ * hard-coded. The activity is internal testing, so it is labelled
+ * "Buildathon test activity", never resident adoption.
+ *
+ * Resident sessions read the session_started event, which was added after
+ * resource-view tracking, so earlier views have no matching session. That is
+ * explained on screen rather than patched over.
+ *
+ * The Senior Wellness / Youth Technology funnels are hard-coded illustrative
+ * scenarios and stay in their own clearly badged section.
+ */
+
+function Flow({ steps }: { steps: string[] }) {
+  return (
+    <ol className="mx-auto mt-5 max-w-sm">
+      {steps.map((s, i) => (
+        <li key={s}>
+          {i > 0 && (
+            <div className="flex justify-center py-1.5 text-foreground/40" aria-hidden>
+              <ArrowDown className="size-5" />
+            </div>
+          )}
+          <div
+            className={`rounded-2xl px-4 py-3 text-center text-sm font-extrabold uppercase ${
+              s.startsWith("Know I") ? "bg-brand text-brand-foreground" : "card-flat"
+            }`}
+          >
+            {s}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function LearnMore({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <details className="mt-3 rounded-2xl border-2 border-ink/10 bg-card px-4 py-3">
+      <summary className="min-h-11 cursor-pointer list-none text-sm font-extrabold text-ink">{label}</summary>
+      <div className="mt-2 text-sm text-foreground/75">{children}</div>
+    </details>
+  );
+}
+
+const PILOT_RESIDENT = [
+  "Resource discovery",
+  "Resource detail views",
+  "Get There clicks",
+  "Registrations and referrals",
+  "Voluntary check-ins",
+  "Repeat visits",
+  "Repeat participation",
+  "Category demand",
+];
+
+const PILOT_PARTNER = [
+  "Referral traffic",
+  "Program registrations",
+  "Attendance and utilization",
+  "Outreach conversion",
+  "Available capacity vs participation",
+  "Cost per resident reached",
+  "Repeat engagement",
+  "Neighborhood demand",
+  "Resource gaps",
+];
 
 function LiveImpact() {
   const [totals, setTotals] = useState<ImpactTotals | null>(null);
@@ -24,7 +97,7 @@ function LiveImpact() {
 
   if (!loaded || !totals) return null;
 
-  const items = [
+  const items: Array<[string, number]> = [
     ["Resident sessions", totals.residentSessions],
     ["Return visits", totals.returnSessions],
     ["Resource views", totals.resourceViews],
@@ -33,46 +106,107 @@ function LiveImpact() {
     ["Resources saved", totals.resourcesSaved],
     ["Get There actions", totals.getThereClicks],
     ["Calls initiated", totals.callsInitiated],
-    ["Self-reported check-ins", totals.selfReportedCheckIns],
-    ["Location-verified check-ins", totals.verifiedCheckIns],
-  ] as const;
+    ["Voluntary check-ins — self-reported", totals.selfReportedCheckIns],
+    ["Voluntary check-ins — location-verified", totals.verifiedCheckIns],
+  ];
+
+  const sessionsLag = totals.residentSessions === 0 && totals.resourceViews > 0;
+  const demandTotal = demand.reduce((sum, d) => sum + d.events, 0);
 
   return (
-    <div className="card-pop mt-6 border-2 border-mint p-6">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="font-display text-xl font-bold">Measured in this MVP</h2>
-        <span className="chip bg-mint/25 text-[11px] uppercase tracking-wide">Live MVP data</span>
-      </div>
-      <p className="mt-1 text-sm text-foreground/70">
-        Real aggregate counts from this prototype. Totals only — no individual resident, question, location or history
-        is shown or stored here.
-      </p>
-      <dl className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {items.map(([label, n]) => (
-          <div key={label} className="card-flat p-4">
-            <dd className="font-display text-3xl font-bold">{n}</dd>
-            <dt className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">{label}</dt>
-          </div>
-        ))}
-      </dl>
+    <>
+      {/* SECTION A — WHAT THIS MVP IS MEASURING */}
+      <div className="card-pop mt-6 border-2 border-mint p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-display text-xl font-bold">What this MVP is measuring</h2>
+          <span className="chip bg-mint/25 text-[11px] uppercase tracking-wide">Buildathon test activity</span>
+        </div>
+        <p className="mt-1 text-sm text-foreground/70">
+          Prototype interaction data — not yet a measure of citywide impact. Includes Buildathon testing activity by the
+          team. Totals only: no individual resident, question, location or history is shown or stored here.
+        </p>
 
-      <h3 className="mt-6 font-display text-lg font-bold">Most explored categories</h3>
-      {demand.length === 0 ? (
-        <p className="mt-2 text-sm font-bold uppercase tracking-wide text-muted-foreground">No data yet</p>
-      ) : (
-        <ul className="mt-2 space-y-1.5">
-          {demand.slice(0, 6).map((d) => (
-            <li key={d.category} className="flex items-baseline justify-between text-sm">
-              <span className="font-bold">{CATEGORIES[d.category as CategoryId]?.label ?? d.category}</span>
-              <span className="font-display text-lg font-bold">{d.share}%</span>
-            </li>
+        <dl className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+          {items.map(([label, n]) => (
+            <div key={label} className="card-flat p-3">
+              <dd className="font-display text-2xl font-bold leading-none sm:text-3xl">{n}</dd>
+              <dt className="mt-1 text-[11px] font-bold uppercase leading-tight tracking-wide text-muted-foreground">
+                {label}
+              </dt>
+            </div>
           ))}
-        </ul>
-      )}
-      <p className="mt-3 text-xs text-muted-foreground">
-        The funnel below is separate Buildathon demonstration data, not live usage.
-      </p>
-    </div>
+        </dl>
+
+        {sessionsLag && (
+          <p className="mt-3 rounded-2xl bg-sun/25 px-4 py-3 text-sm font-semibold">
+            Resident sessions reads a session event that was added to the prototype after resource-view tracking, so
+            the views above were recorded before any session could be counted. The two numbers cover different tracking
+            periods and should not be read as a ratio.
+          </p>
+        )}
+
+        <LearnMore label="Learn more: where each number comes from">
+          <ul className="list-disc space-y-1 pl-5">
+            <li>All counts are database aggregates over recorded prototype events and voluntary check-ins.</li>
+            <li>Nothing in this block is seeded, sampled or hard-coded.</li>
+            <li>Activity so far is building and testing by the team, not public resident use.</li>
+            <li>A metric showing 0 means no such event has been recorded yet — never a placeholder.</li>
+          </ul>
+        </LearnMore>
+
+        <h3 className="mt-6 font-display text-lg font-bold">Most explored categories</h3>
+        {demand.length === 0 ? (
+          <p className="mt-2 text-sm font-bold uppercase tracking-wide text-muted-foreground">No data yet</p>
+        ) : (
+          <>
+            <p className="mt-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+              Early prototype activity — based on {demandTotal} tracked category interactions
+            </p>
+            <ul className="mt-2 space-y-1.5">
+              {demand.slice(0, 6).map((d) => (
+                <li key={d.category} className="flex items-baseline justify-between gap-3 text-sm">
+                  <span className="font-bold">{CATEGORIES[d.category as CategoryId]?.label ?? d.category}</span>
+                  <span className="whitespace-nowrap">
+                    <span className="font-display text-lg font-bold">{d.share}%</span>{" "}
+                    <span className="text-xs text-muted-foreground">({d.events})</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-muted-foreground">
+              This sample is small and mostly internal testing. It is not representative of Detroit resident demand.
+            </p>
+          </>
+        )}
+      </div>
+
+      {/* SECTION B — WHAT A REAL PILOT WOULD MEASURE */}
+      <div className="card-pop mt-6 p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-display text-xl font-bold">What a real pilot would measure</h2>
+          <span className="chip chip-sun text-[11px] uppercase tracking-wide">Pilot metrics — not current results</span>
+        </div>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="card-flat p-5">
+            <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident engagement</p>
+            <ul className="mt-2 space-y-1 text-sm font-semibold">
+              {PILOT_RESIDENT.map((m) => (
+                <li key={m}>• {m}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="card-flat p-5">
+            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Partner / ROI metrics</p>
+            <ul className="mt-2 space-y-1 text-sm font-semibold">
+              {PILOT_PARTNER.map((m) => (
+                <li key={m}>• {m}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-muted-foreground">No values are shown here. These are measurements a pilot would collect.</p>
+      </div>
+    </>
   );
 }
 
