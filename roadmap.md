@@ -136,3 +136,15 @@
 - [ ] Admin dashboard sections menu: Overview, Resident Funnel, Ask KIH Insights, Category Demand, Resource Performance, Neighborhood Insights, Resource Gap Analysis, Location Usage, Map Engagement, Partner Report Builder.
 
 - [x] Admin nav includes Resource Gap Analysis (anchor scroll) + report exact live URL
+
+## Detroit Economic Impact & ROI section
+- [ ] Primary ROI headline: Detroit is already investing / KIH increases potential return + Discovery, Access, Participation, Utilization, Measurement.
+- [ ] Investment -> connection layer -> potential return flow diagram.
+- [ ] "More connection. More utilization. More impact per dollar." six ROI cards.
+- [ ] "How a single resident journey creates value" 5 steps + resident/organization split value.
+- [ ] "From providing information to measuring engagement" with consent/no-surveillance language.
+- [ ] Funded capacity -> actual participation vertical flow.
+- [ ] "What does ROI mean for Detroit?" + four benefit cards.
+- [ ] Pilot metrics to measure (resident engagement + partner ROI), no fake results.
+- [ ] "Why this can become a sustainable business" customer groups + revenue streams.
+- [ ] Closing ROI message; conditional claim language only; label current vs pilot vs future.
