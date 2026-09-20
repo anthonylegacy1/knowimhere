@@ -49,6 +49,7 @@ import imHerePhoneVisual from "@/assets/im-here-private-phone.jpg";
 import ffEventAsset from "@/assets/fast-freddy-community-event-original.jpeg.asset.json";
 import ffMayorAsset from "@/assets/fast-freddy-mayor-sheffield.jpg.asset.json";
 import { PhoneDemo } from "@/components/kih/PhoneDemo";
+import { DetroitROI } from "@/components/kih/DetroitROI";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
@@ -508,21 +509,15 @@ function Index() {
       <section id="detroit-economic-impact" className="scroll-mt-24 border-y border-border bg-card">
 
         <div className="container-kih py-14">
-          <p className="mb-4 text-sm font-bold uppercase tracking-wider text-sun">When organizations connect, the city can get more value from the resources it already supports.</p>
-          <SectionHeading
-            eyebrow="Detroit economic impact"
-            title="More connection. More impact. Better use of city resources."
-            text="Know I'm Here helps Detroit get more value from the resources it already invests in."
-          />
-          <p className="mt-4 max-w-3xl text-foreground/70">
-            Detroit and its community partners already invest in health programs, recreation, transportation, workforce
-            development, senior services, youth programs, neighborhood initiatives, events and other resources. The
-            opportunity is making sure residents can find them, reach them and use them.
-          </p>
+          <DetroitROI />
 
-          <p className="mt-8 text-sm font-extrabold uppercase tracking-wide text-foreground/70">
-            Discover <span className="text-brand">→</span> Get There <span className="text-brand">→</span> Check In <span className="text-brand">→</span> Measure Impact
-          </p>
+          <div className="mt-14 border-t border-border pt-10">
+            <h3 className="font-display text-2xl font-bold">Current functionality in this prototype</h3>
+            <p className="mt-2 max-w-3xl text-foreground/70">
+              What Know I&apos;m Here already does today, and how the connection loop works.
+            </p>
+          </div>
+
 
           <button
             type="button"

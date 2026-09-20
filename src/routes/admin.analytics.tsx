@@ -44,7 +44,9 @@ const RANGES = [
 
 type RangeId = (typeof RANGES)[number][0];
 
-const KEY_STORE = "kih:admin-key";
+// The admin passphrase is never persisted anywhere in the browser (no
+// localStorage, sessionStorage or cookie). It lives in React state for the
+// current page view only and is sent to the server function to be verified.
 
 function resourceName(slug: string): string {
   return RESOURCES.find((r) => r.id === slug)?.name ?? slug;
@@ -100,7 +102,7 @@ function Empty({ text = "No data yet" }: { text?: string }) {
 
 function AdminAnalytics() {
   const run = useServerFn(getAdminAnalytics);
-  const [key, setKey] = useState(() => (typeof window === "undefined" ? "" : (window.sessionStorage.getItem(KEY_STORE) ?? "")));
+  const [key, setKey] = useState("");
   const [range, setRange] = useState<RangeId>("30");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
@@ -117,7 +119,6 @@ function AdminAnalytics() {
       try {
         const res = (await run({ data: { key: pass, ...bounds } })) as AdminResult;
         setResult(res);
-        if (res.status === "ok") window.sessionStorage.setItem(KEY_STORE, pass);
       } finally {
         setLoading(false);
       }
