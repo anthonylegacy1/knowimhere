@@ -10,7 +10,7 @@ import { ArrowDown, ChevronDown, ChevronUp } from "lucide-react";
  * model are labelled separately.
  */
 
-const PILLARS = ["Discovery", "Access", "Participation", "Utilization", "Measurement"];
+const PILLARS = ["Discovery", "Access", "Participation", "Utilization", "Measurement", "Adoption"];
 
 const INVESTMENT = [
   "Health",
