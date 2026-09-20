@@ -245,12 +245,21 @@ export function DetroitROI() {
           <div className="card-flat bg-aqua-soft/60 p-5">
             <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {RETURN.map((r) => (
+              {RETURN_PRIMARY.map((r) => (
                 <li key={r} className="chip text-sm">
                   {r}
                 </li>
               ))}
             </ul>
+            <Expandable label="View all potential returns">
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {RETURN_MORE.map((r) => (
+                  <li key={r} className="chip text-sm">
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </Expandable>
           </div>
         </div>
         <p className="mt-4 text-center text-sm text-foreground/70">
