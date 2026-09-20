@@ -395,7 +395,7 @@ export function DetroitROI() {
           programs that already exist and residents who may benefit from them.
         </p>
         <ol className="mx-auto mt-6 max-w-md">
-          {CAPACITY_CHAIN.map((step, i) => (
+          {CAPACITY_CHAIN.slice(0, 4).map((step, i) => (
             <li key={step}>
               {i > 0 && <Arrow />}
               <div
@@ -408,6 +408,18 @@ export function DetroitROI() {
             </li>
           ))}
         </ol>
+        <div className="mx-auto max-w-md">
+          <Expandable label="See how the connection becomes participation">
+            <ol className="mt-4">
+              {CAPACITY_CHAIN.slice(4).map((step, i) => (
+                <li key={step}>
+                  {i > 0 && <Arrow />}
+                  <div className="card-flat rounded-2xl p-4 text-center font-extrabold uppercase">{step}</div>
+                </li>
+              ))}
+            </ol>
+          </Expandable>
+        </div>
       </div>
 
       {/* 7 — GOVERNMENT ROI */}
