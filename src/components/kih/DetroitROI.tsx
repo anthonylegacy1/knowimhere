@@ -299,8 +299,11 @@ export function DetroitROI() {
       {/* 4 — SINGLE RESIDENT JOURNEY */}
       <div>
         <h3 className="font-display text-2xl font-bold sm:text-3xl">How a single resident journey creates value</h3>
-        <ol className="mt-5 grid gap-3 lg:grid-cols-5">
-          {JOURNEY.map(([n, t, d]) => (
+        <p className="mt-3 max-w-3xl text-foreground/70">
+          See how Know I&apos;m Here moves a resident from need to discovery, action, and measurable engagement.
+        </p>
+        <ol className="mt-5 grid gap-3 md:grid-cols-2">
+          {JOURNEY.slice(0, 2).map(([n, t, d]) => (
             <li key={n} className="card-flat p-5">
               <p className="text-[11px] font-extrabold uppercase tracking-wide text-brand">{n}</p>
               <p className="mt-1 font-display text-lg font-bold">{t}</p>
@@ -308,24 +311,35 @@ export function DetroitROI() {
             </li>
           ))}
         </ol>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="card-pop p-6">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident value</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {RESIDENT_VALUE.map((v) => (
-                <li key={v}>• {v}</li>
-              ))}
-            </ul>
+        <Expandable label="Continue the resident journey">
+          <ol className="mt-4 grid gap-3 lg:grid-cols-3">
+            {JOURNEY.slice(2).map(([n, t, d]) => (
+              <li key={n} className="card-flat p-5">
+                <p className="text-[11px] font-extrabold uppercase tracking-wide text-brand">{n}</p>
+                <p className="mt-1 font-display text-lg font-bold">{t}</p>
+                <p className="mt-2 text-sm text-foreground/75">{d}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="card-pop p-6">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Resident value</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {RESIDENT_VALUE.map((v) => (
+                  <li key={v}>• {v}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="card-pop bg-ink p-6 text-cream">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Organization value</p>
+              <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                {ORG_VALUE.map((v) => (
+                  <li key={v}>• {v}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="card-pop bg-ink p-6 text-cream">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sun">Organization value</p>
-            <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-              {ORG_VALUE.map((v) => (
-                <li key={v}>• {v}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </Expandable>
         <p className="mt-4 rounded-2xl bg-sun/30 px-5 py-4 text-lg font-bold">
           The resident receives access while the organization gets another opportunity to turn funded capacity into
           actual participation.
