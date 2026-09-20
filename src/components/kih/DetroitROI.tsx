@@ -99,27 +99,27 @@ const CITY_BENEFITS = [
   "Create better engagement insight",
 ];
 
-const RESIDENT_METRICS = [
-  "Resource views",
-  "Ask KIH searches",
-  "Get There clicks",
-  "Resource saves",
-  "Registrations and referrals",
-  "Voluntary check-ins",
-  "Repeat usage",
-  "Repeat participation",
-];
-
-const PARTNER_METRICS = [
-  "Referral traffic",
-  "Program registrations",
-  "Attendance",
-  "Utilization rates",
-  "Outreach conversion",
-  "Cost per resident reached",
-  "Category demand",
-  "Neighborhood demand",
-  "Resource gaps",
+const METRIC_GROUPS: Array<[string, string[]]> = [
+  ["Resident discovery", ["Useful searches", "Resource views", "Category interest patterns"]],
+  ["Resident access", ["Next-step clicks", "Direction / transportation interest", "Saved resources"]],
+  ["Participation signals", ["Voluntary I'm Here check-ins", "Repeat visits", "Event or program engagement"]],
+  [
+    "Digital confidence / adoption",
+    [
+      "QR code comfort",
+      "Assisted onboarding completions",
+      "Everyday Connect training interest",
+      "Repeat use after training",
+    ],
+  ],
+  [
+    "Partner value",
+    [
+      "Outreach-to-engagement patterns",
+      "Resource utilization signals",
+      "Gaps where residents search but do not find enough relevant options",
+    ],
+  ],
 ];
 
 const CUSTOMER_GROUPS = [
