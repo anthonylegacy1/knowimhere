@@ -150,7 +150,15 @@ const REVENUE_STREAMS = [
   "Legally appropriate transaction or referral revenue",
 ];
 
-function Expandable({ label, children }: { label: string; children: ReactNode }) {
+function Expandable({
+  label,
+  closeLabel = "Show less",
+  children,
+}: {
+  label: string;
+  closeLabel?: string;
+  children: ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   const id = `roi-${label.replace(/\W+/g, "-").toLowerCase()}`;
   return (
@@ -160,10 +168,14 @@ function Expandable({ label, children }: { label: string; children: ReactNode })
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={id}
-        className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+        className="mt-4 flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold uppercase tracking-wide text-ink shadow-sm transition-colors hover:bg-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       >
-        <span>{open ? `Hide ${label}` : label}</span>
-        {open ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+        <span className="min-w-0">{open ? closeLabel : label}</span>
+        {open ? (
+          <ChevronUp className="size-5 shrink-0 text-brand" aria-hidden />
+        ) : (
+          <ChevronDown className="size-5 shrink-0 text-brand" aria-hidden />
+        )}
       </button>
       <div
         id={id}
