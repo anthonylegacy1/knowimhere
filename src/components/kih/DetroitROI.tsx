@@ -201,15 +201,32 @@ export function DetroitROI() {
           Detroit is already investing in the resources.
         </h2>
         <p className="mt-3 font-display text-2xl font-extrabold uppercase leading-tight text-brand sm:text-3xl">
-          Know I&apos;m Here helps increase the potential return on that investment.
+          Know I&apos;m Here helps turn community investment into measurable engagement.
         </p>
-        <p className="mt-5 max-w-3xl text-lg text-foreground/70">
+        <p className="mt-2 max-w-2xl text-sm font-semibold text-foreground/70 sm:text-base">
+          Helping Detroit and its partners improve discovery, access, participation, utilization, and measurement.
+        </p>
+        <p className="mt-5 max-w-3xl text-base text-foreground/70 sm:text-lg">
           Detroit and its community partners already invest in health programs, recreation, transportation, workforce
-          development, senior services, youth programs, neighborhood initiatives, events, and other resources.
+          development, senior services, youth programs, neighborhood initiatives, events, and other community
+          resources.
         </p>
-        <p className="mt-3 max-w-3xl text-lg text-foreground/70">
-          The opportunity is making sure residents can find them, reach them, use them, and that participating
-          organizations can better understand whether outreach is translating into engagement.
+        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+          The opportunity is making sure residents can actually find them, reach them, use them, and return to them.
+        </p>
+        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+          Know I&apos;m Here helps close that gap by connecting residents to relevant resources while giving
+          participating organizations a clearer view of whether outreach is translating into discovery, access,
+          participation, and utilization.
+        </p>
+        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+          Over time, privacy-conscious engagement data can help partners better understand how their programs are being
+          reached and used, where additional outreach may be needed, and whether community investment dollars are
+          generating meaningful resident engagement.
+        </p>
+        <p className="mt-4 max-w-3xl rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">
+          The goal is simple: help Detroit and its partners get more measurable value from the resources they are
+          already investing in.
         </p>
         <ul className="mt-6 flex flex-wrap gap-2">
           {PILLARS.map((p) => (
