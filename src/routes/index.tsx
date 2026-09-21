@@ -224,14 +224,18 @@ function Index() {
             <Link to="/work-after-55" className={OPP_CHIP}><span aria-hidden>💼</span> Jobs &amp; Training</Link>
             {CORE_OPPORTUNITIES.slice(0, 3).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
             <Link to="/civic" className={OPP_CHIP}><span aria-hidden>🗳️</span> Voting &amp; Civic Access</Link>
+            <Link to="/safety" hash="shelter" className={OPP_CHIP}><span aria-hidden>🏠</span> Housing &amp; Safe Shelter</Link>
             {CORE_OPPORTUNITIES.slice(3).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
           </div>
           <p className="mt-2 max-w-xl text-sm text-foreground/65">Find trusted, official information about voting, registration, polling locations, and civic services.</p>
+          <p className="mt-1 max-w-xl text-sm text-foreground/65">Find emergency shelter, temporary housing and safe-place resources when you need somewhere secure to stay.</p>
           {showMoreOpportunities && (
             <div id="more-opportunities" className="mt-2">
               <div className="flex flex-wrap gap-2">
                 {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+                <Link to="/safety" className={OPP_CHIP}><span aria-hidden>🛡️</span> Safety &amp; Emergency Resources</Link>
               </div>
+              <p className="mt-2 max-w-xl text-sm text-foreground/65">Find trusted safety information, emergency resources, and official reporting options for your school or neighborhood.</p>
             </div>
           )}
           <Button type="button" variant="ghost" className="mt-3 min-h-12 font-bold text-ink" aria-expanded={showMoreOpportunities} aria-controls="more-opportunities" onClick={() => setShowMoreOpportunities((v) => !v)}>
