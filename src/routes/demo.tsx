@@ -84,7 +84,7 @@ function Demo() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="eyebrow">Buildathon Demo Mode · fictional residents</span>
+          <span className="eyebrow">Real Detroit KIH funnel example · fictional residents</span>
           <span className="text-xs font-bold text-muted-foreground">
             Step {step + 1} of {STEPS.length} · {STEPS[step]}
           </span>
