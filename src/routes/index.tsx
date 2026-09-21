@@ -373,6 +373,15 @@ function Index() {
         </div>
       </section>
 
+      <section className="bg-ink text-cream"><div className="container-kih py-14">
+        <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <a href={EXTERNAL_LINKS.fastFreddy} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-sun">Trust + Community</p><h3 className="mt-1 text-xl font-bold">Fast Freddy Experience</h3><p className="mt-2 text-sm text-cream/70">One real Detroit example of culture, movement and welcoming in-person community engagement.</p><p className="mt-4 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p></div></a>
+          <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={everydayLearningAsset.url} alt="Older adults learning to use smartphones with guidance from an instructor" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-aqua">Digital confidence</p><h3 className="mt-1 text-xl font-bold">Everyday Connect</h3><p className="mt-2 text-sm text-cream/70">Build confidence with everyday technology, healthcare tools and useful AI.</p><p className="mt-4 text-sm font-bold text-aqua">Explore Everyday Connect →</p></div></a>
+          <Link to="/story" className="overflow-hidden rounded-lg border border-brand-deep bg-brand text-brand-foreground"><img src={kihConnectionAsset.url} alt="A daughter helps her father use a phone beside the Detroit riverfront and skyline" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-brand-foreground/75">Connection</p><h3 className="mt-1 text-xl font-bold">Know I&apos;m Here</h3><p className="mt-2 text-sm text-brand-foreground/85">Use that confidence to connect with nearby people, resources and opportunities.</p><p className="mt-4 text-sm font-bold">Read our story →</p></div></Link>
+        </div>
+      </div></section>
+
       <section id="fast-freddy" className="container-kih scroll-mt-24 py-14">
         <div className="max-w-2xl">
           <span className="eyebrow">The experience behind the pilot</span>
@@ -498,15 +507,6 @@ function Index() {
           </div>
         </div>
       </section>
-
-      <section className="bg-ink text-cream"><div className="container-kih py-14">
-        <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <a href={EXTERNAL_LINKS.fastFreddy} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-sun">Trust + Community</p><h3 className="mt-1 text-xl font-bold">Fast Freddy Experience</h3><p className="mt-2 text-sm text-cream/70">One real Detroit example of culture, movement and welcoming in-person community engagement.</p><p className="mt-4 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p></div></a>
-          <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={everydayLearningAsset.url} alt="Older adults learning to use smartphones with guidance from an instructor" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-aqua">Digital confidence</p><h3 className="mt-1 text-xl font-bold">Everyday Connect</h3><p className="mt-2 text-sm text-cream/70">Build confidence with everyday technology, healthcare tools and useful AI.</p><p className="mt-4 text-sm font-bold text-aqua">Explore Everyday Connect →</p></div></a>
-          <Link to="/story" className="overflow-hidden rounded-lg border border-brand-deep bg-brand text-brand-foreground"><img src={kihConnectionAsset.url} alt="A daughter helps her father use a phone beside the Detroit riverfront and skyline" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-brand-foreground/75">Connection</p><h3 className="mt-1 text-xl font-bold">Know I&apos;m Here</h3><p className="mt-2 text-sm text-brand-foreground/85">Use that confidence to connect with nearby people, resources and opportunities.</p><p className="mt-4 text-sm font-bold">Read our story →</p></div></Link>
-        </div>
-      </div></section>
 
       <section id="partner-impact" className="container-kih scroll-mt-24 py-14">
         <p className="mb-4 text-sm font-bold uppercase tracking-wider text-sky">When residents connect, organizations can better understand participation.</p>
