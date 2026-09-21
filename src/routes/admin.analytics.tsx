@@ -291,14 +291,25 @@ function AdminAnalytics() {
             <label htmlFor="admin-key" className="text-sm font-bold">
               Admin passphrase
             </label>
-            <input
-              id="admin-key"
-              type="password"
-              value={key}
-              onChange={(e) => setKey(e.target.value)}
-              autoComplete="current-password"
-              className="mt-2 min-h-12 w-full rounded-2xl border-2 border-border bg-card px-4 text-base"
-            />
+            <div className="relative mt-2">
+              <input
+                id="admin-key"
+                type={showKey ? "text" : "password"}
+                value={key}
+                onChange={(e) => setKey(e.target.value)}
+                autoComplete="current-password"
+                className="min-h-12 w-full rounded-2xl border-2 border-border bg-card px-4 pr-14 text-base"
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey((v) => !v)}
+                aria-label={showKey ? "Hide passphrase" : "Show passphrase"}
+                aria-pressed={showKey}
+                className="absolute right-1.5 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-xl text-foreground/60 hover:bg-cream hover:text-foreground"
+              >
+                {showKey ? <EyeOff className="size-5" aria-hidden /> : <Eye className="size-5" aria-hidden />}
+              </button>
+            </div>
             <button type="submit" disabled={loading} className="btn-base btn-brand mt-4 w-full">
               {loading ? "Checking…" : "Open dashboard"}
             </button>
