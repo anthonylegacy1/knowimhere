@@ -197,7 +197,7 @@ function Index() {
               </span>
             ))}
           </p>
-          <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-[0.95rem] leading-snug tracking-tight text-foreground/65 sm:text-base sm:tracking-normal"><span className="block sm:inline">From finding the right opportunity to getting there and </span><span className="block sm:inline">staying connected, Know I&apos;m Here helps close the loop.</span></p>
         </div>
       </section>
 
