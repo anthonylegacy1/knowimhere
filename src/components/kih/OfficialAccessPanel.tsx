@@ -1,5 +1,4 @@
 import { ExternalLink } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 import { CATEGORIES, type CategoryId } from "@/data/resources";
 
 /**
@@ -93,12 +92,7 @@ export function OfficialAccessPanel({ selected }: { selected: CategoryId[] }) {
           <ul className="mt-2 grid gap-2 sm:grid-cols-2">
             {g.links.map((l) => (
               <li key={l.href}>
-                {l.internal ? (
-                  <Link to={l.href} className="flex min-h-14 flex-col justify-center rounded-2xl border-2 border-ink/10 bg-card px-4 py-2 hover:bg-cream">
-                    <span className="font-extrabold">{l.label}</span>
-                    <span className="text-xs text-foreground/70">{l.detail}</span>
-                  </Link>
-                ) : (
+                {(
                   <a
                     href={l.href}
                     target={l.href.startsWith("http") ? "_blank" : undefined}
