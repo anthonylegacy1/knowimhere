@@ -142,6 +142,153 @@ function Block({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
+function Collapsible({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-border bg-cream p-4">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={id}
+        className="flex min-h-11 w-full items-center justify-between gap-3 text-left font-display text-base font-bold"
+      >
+        {title}
+        {open ? <ChevronUp className="size-5 shrink-0" aria-hidden /> : <ChevronDown className="size-5 shrink-0" aria-hidden />}
+      </button>
+      {open && (
+        <div id={id} className="mt-3 space-y-4 text-sm">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuestionList({ items }: { items: string[] }) {
+  return (
+    <ul className="grid gap-2 sm:grid-cols-2">
+      {items.map((q) => (
+        <li key={q} className="rounded-lg border border-border bg-card px-3 py-2 font-semibold text-foreground/80">
+          {q}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SafetyAwareness() {
+  return (
+    <Collapsible id="community-safety-panel" title="Community safety &amp; incident awareness">
+      <p className="text-foreground/75">
+        Know I&apos;m Here can help residents find trusted information about safety concerns affecting their neighborhood and connect them to the
+        appropriate official resources when something is happening nearby.
+      </p>
+      <div>
+        <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Surfaced through verified sources</p>
+        <ul className="mt-1.5 list-inside list-disc text-foreground/75">
+          <li>Official public-safety alerts and emergency notifications</li>
+          <li>Road closures related to incidents</li>
+          <li>Severe weather or emergency conditions</li>
+          <li>Community safety and violence-prevention programs</li>
+          <li>Mental-health crisis resources</li>
+          <li>Official police or public-safety reporting resources</li>
+        </ul>
+      </div>
+      <QuestionList
+        items={[
+          "“Something is happening near my block. Where can I find official information?”",
+          "“How do I report something I witnessed?”",
+          "“Is there an official safety alert for my neighborhood?”",
+        ]}
+      />
+      <JourneyChain steps={["Ask KIH", "Location / neighborhood", "Verified safety source", "Official information / reporting option", "Next step"]} />
+      <p className="rounded-lg border-2 border-brand bg-card p-3 font-bold text-foreground">
+        If someone is in immediate danger or an emergency is happening now, call 911.
+      </p>
+      <p className="text-foreground/75">
+        For non-emergency situations, Know I&apos;m Here routes residents to the appropriate verified City, law-enforcement, school or
+        public-safety channel. Please do not investigate an incident yourself or confront anyone, and KIH never publishes unverified accusations
+        about individuals.
+      </p>
+      <Link to="/safety" className="btn-base btn-outline inline-flex">
+        Report a safety concern
+      </Link>
+    </Collapsible>
+  );
+}
+
+function ShelterAccess() {
+  return (
+    <Collapsible id="safe-shelter-panel" title="Safe place &amp; emergency shelter resources">
+      <p className="text-foreground/75">
+        Know I&apos;m Here can help residents and families quickly find trusted emergency shelter, temporary housing, crisis support, and
+        safe-place resources when they need somewhere secure to stay.
+      </p>
+      <QuestionList
+        items={[
+          "“My family needs a safe place to stay tonight.”",
+          "“Where can I find emergency shelter near me?”",
+          "“I'm worried about losing my housing. Where can I get help?”",
+          "“I need a safe place for me and my children.”",
+        ]}
+      />
+      <JourneyChain steps={["Ask KIH", "Housing / safety need", "Verified shelter or housing resource", "Contact / availability", "Get there"]} />
+      <div className="rounded-lg border border-border bg-card p-4">
+        <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Featured external resource</p>
+        <p className="mt-1 font-display text-lg font-bold">313 Safe Beds</p>
+        <p className="mt-1 text-foreground/75">Find emergency shelter and housing resources across Metro Detroit.</p>
+        <a href="https://www.313safebeds.com/" target="_blank" rel="noreferrer noopener" className="btn-base btn-primary mt-3 inline-flex">
+          Visit 313 Safe Beds
+        </a>
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Know I&apos;m Here does not control shelter availability or intake decisions. Shelter providers and partner organizations make all intake
+        and placement decisions.
+      </p>
+    </Collapsible>
+  );
+}
+
+function SchoolSafety() {
+  return (
+    <Collapsible id="school-safety-panel" title="School safety &amp; family awareness">
+      <p className="text-foreground/75">
+        Families need more than educational opportunities. They also need an easy way to reach trusted information when a school or surrounding
+        area may be affected by a safety concern.
+      </p>
+      <div>
+        <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Verified sources KIH can help families navigate</p>
+        <ul className="mt-1.5 list-inside list-disc text-foreground/75">
+          <li>School safety notifications, district alerts and emergency instructions</li>
+          <li>School closures or schedule changes</li>
+          <li>Nearby public-safety incidents that officially affect school operations</li>
+          <li>Mental-health, counseling, bullying-prevention and youth crisis resources</li>
+          <li>Safe transportation information and school contact information</li>
+          <li>Official reporting resources</li>
+        </ul>
+      </div>
+      <QuestionList
+        items={[
+          "“Is there an official safety alert affecting my child's school?”",
+          "“Where can I find the school district's emergency information?”",
+          "“How do I report a school safety concern?”",
+          "“Are there youth mental-health resources near us?”",
+        ]}
+      />
+      <JourneyChain steps={["Ask KIH", "School / neighborhood", "Verified school or public-safety source", "Alert / guidance", "Contact or next step"]} />
+      <p className="text-foreground/75">
+        When official information shows a school, road, transit route or surrounding area is affected, KIH can also point families to official
+        transportation updates, road closures, transit changes and published pickup or dismissal information. Know I&apos;m Here does not
+        independently determine that a route or location is safe.
+      </p>
+      <Link to="/safety" className="btn-base btn-outline inline-flex">
+        Safety &amp; emergency resources
+      </Link>
+    </Collapsible>
+  );
+}
+
 function CivicAccess() {
   const [open, setOpen] = useState(false);
   return (
