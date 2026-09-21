@@ -1,4 +1,5 @@
-import { Check, Eye, Focus, RotateCcw, Search, Type } from "lucide-react";
+import { Check, Eye, Focus, RotateCcw, Type } from "lucide-react";
+import zoomIcon from "@/assets/accessibility-zoom.png.asset.json";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
