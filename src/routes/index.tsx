@@ -92,6 +92,7 @@ const featuredLandmarks = [
   { title: "Ford Field", type: "Sports + Entertainment", image: fordFieldAsset.url, text: "Games, events and experiences happening in the heart of downtown Detroit.", tags: ["Sports", "Events", "Downtown"] },
   { title: "Hart Plaza", type: "Community + Culture", image: hartPlazaAsset.url, text: "Festivals, community gatherings, music, culture and Detroit experiences.", tags: ["Community", "Culture", "Events"] },
   { title: "Detroit Riverwalk", type: "Public Health + Recreation", image: riverwalkAsset.url, text: "Walking, recreation, wellness and accessible outdoor experiences along Detroit’s riverfront.", tags: ["Wellness", "Recreation", "Outdoors"] },
+  { title: "Joe Louis Fist", type: "Landmarks + Culture", image: joeLouisFistImage, text: "An iconic Detroit landmark representing strength, history and civic pride in the heart of downtown.", tags: ["Landmark", "Culture", "Downtown"] },
 ];
 
 const additionalLandmarks = [
