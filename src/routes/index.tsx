@@ -518,23 +518,16 @@ function Index() {
           text="Flyers tell you how many you printed. Know I'm Here helps participating organizations understand how discovery can move toward real participation."
         />
 
-        <ol className="mt-8 flex flex-wrap items-stretch gap-3">
-          {[
-            { label: "Matched", text: "A resident sees a relevant opportunity." },
-            { label: "Showed interest", text: "They save it or open the details." },
-            { label: "Get there", text: "They plan directions or ride help." },
-            { label: "Participated", text: "They check in privately on arrival." },
-          ].map((stage, index, all) => (
-            <li key={stage.label} className="flex flex-1 basis-56 items-center gap-3">
-              <div className="card-flat h-full w-full p-5">
-                <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Step {index + 1}</p>
-                <p className="mt-1 text-lg font-extrabold uppercase leading-snug">{stage.label}</p>
-                <p className="mt-2 text-sm text-foreground/65">{stage.text}</p>
-              </div>
-              {index < all.length - 1 && <ArrowRight className="hidden size-5 shrink-0 text-foreground/35 lg:block" aria-hidden />}
-            </li>
-          ))}
-        </ol>
+        <details className="group mt-6 sm:hidden">
+          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3 text-base font-extrabold uppercase tracking-wide">
+            See the participation journey
+            <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <ParticipationStages />
+        </details>
+        <div className="hidden sm:block">
+          <ParticipationStages />
+        </div>
         <p className="mt-4 max-w-2xl font-semibold text-foreground/75">Understand how residents move from discovering an opportunity to participating in it.</p>
 
         <div className="mt-8 rounded-xl bg-ink p-8 text-cream sm:p-10">
