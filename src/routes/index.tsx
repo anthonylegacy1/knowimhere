@@ -114,6 +114,7 @@ const FF_PILLARS = [
 
 
 const OPP_CHIP = "chip min-h-12 cursor-pointer px-4 text-base hover:bg-card";
+const OPP_CARD = "flex min-h-16 w-full items-center gap-2 rounded-xl border border-border bg-background px-3 py-3 text-base font-bold leading-snug text-ink hover:bg-card";
 
 const CORE_OPPORTUNITIES = [
   { emoji: "❤️", label: "Health & Wellness", q: "Health and wellness programs near me" },
@@ -242,7 +243,7 @@ function Index() {
           <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Explore opportunities</p>
           <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             <Link to="/opportunities" className={OPP_CARD}><span aria-hidden className="shrink-0">🎓</span> <span className="min-w-0">Youth &amp; Education</span></Link>
-            <Link to="/ask" search={{ q: CORE_OPPORTUNITIES[0].q }} className={OPP_CARD}><span aria-hidden className="shrink-0">{CORE_OPPORTUNITIES[0].emoji}</span> <span className="min-w-0">{CORE_OPPORTUNITIES[0].label}</span></Link>
+            <Link to="/ask" search={{ q: CORE_OPPORTUNITIES[0]!.q }} className={OPP_CARD}><span aria-hidden className="shrink-0">{CORE_OPPORTUNITIES[0]!.emoji}</span> <span className="min-w-0">{CORE_OPPORTUNITIES[0]!.label}</span></Link>
             <Link to="/work-after-55" className={OPP_CARD}><span aria-hidden className="shrink-0">💼</span> <span className="min-w-0">Jobs &amp; Training</span></Link>
             {CORE_OPPORTUNITIES.slice(1).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CARD}><span aria-hidden className="shrink-0">{item.emoji}</span> <span className="min-w-0">{item.label}</span></Link>)}
             <Link to="/civic" className={OPP_CARD}><span aria-hidden className="shrink-0">🗳️</span> <span className="min-w-0">Voting &amp; Civic Access</span></Link>
