@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { RESOURCES, CATEGORIES, type CategoryId } from "@/data/resources";
 import { getAdminAnalytics, MIN_GROUP, type AdminResult, type AdminReport } from "@/lib/admin-analytics.functions";
@@ -192,6 +193,7 @@ function Empty({ text = "No data yet" }: { text?: string }) {
 function AdminAnalytics() {
   const run = useServerFn(getAdminAnalytics);
   const [key, setKey] = useState("");
+  const [showKey, setShowKey] = useState(false);
   const [range, setRange] = useState<RangeId>("30");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
