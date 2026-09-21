@@ -338,18 +338,19 @@ function CivicAccess() {
 function TabPanel({ tab }: { tab: TabContent }) {
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-center gap-3">
-        <h3 className="font-display text-xl font-bold sm:text-2xl">{tab.title}</h3>
+      <div className="flex flex-wrap items-center gap-2">
+        <h4 className="font-display text-lg font-bold sm:text-xl">{tab.title}</h4>
         {tab.badge && (
           <span
-            className={`chip text-xs font-extrabold uppercase tracking-wide ${
+            className={`chip text-[0.7rem] font-extrabold uppercase tracking-wide ${
               tab.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
             }`}
           >
-            {tab.badge}
+            {tab.id === "health" ? "Primary focus" : tab.badge}
           </span>
         )}
       </div>
+
       <Block label="What residents are concerned about">
         <p>{tab.concern}</p>
       </Block>
@@ -476,14 +477,18 @@ export function ResidentPriorities() {
           </div>
         </div>
 
-        <p className="mt-8 max-w-3xl font-semibold text-foreground">
-          Community &amp; Public Health is where we prove the model. Detroit&apos;s other challenge areas show where the same connection
-          architecture can extend.
+        <h3 className="mt-8 font-display text-2xl font-extrabold uppercase leading-tight sm:text-3xl">
+          How KIH responds to the primary focus
+        </h3>
+        <p className="mt-3 max-w-3xl font-semibold text-foreground">
+          Community + Public Health is where Know I&apos;m Here proves the model. The same connection architecture can
+          extend across Detroit&apos;s other resident priorities.
         </p>
         <p className="mt-3 max-w-2xl text-sm text-foreground/70">
-          Venture 313 gives us the challenge framework. Rise Higher Detroit gives us the resident voice. Know I&apos;m Here connects the two by
-          helping residents discover, understand, reach, and use existing resources, programs, services, opportunities, and official sources.
+          Venture 313 provides the challenge framework. Rise Higher Detroit provides the resident voice. KIH connects
+          the two by helping residents discover, understand, reach and use existing resources.
         </p>
+
 
 
         {/* Tabs */}
