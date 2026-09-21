@@ -38,7 +38,7 @@ export function AccessibilityPanel() {
           size="icon"
           className="size-11 gap-0 rounded-full bg-cream text-xs font-extrabold"
         >
-          <Search className="size-4" aria-hidden />
+          <img src={zoomIcon.url} alt="" width={20} height={20} className="size-5 shrink-0" />
           <span aria-hidden>+</span>
         </Button>
       </DialogTrigger>
