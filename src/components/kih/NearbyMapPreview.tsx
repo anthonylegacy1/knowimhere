@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { ClientOnly, Link } from "@tanstack/react-router";
 import { Suspense, lazy, useState } from "react";
 
 import { useNearbyResults } from "@/lib/nearby-results";
@@ -31,24 +31,32 @@ export function NearbyMapPreview() {
 
       {markers.length > 0 && (
         <div className="mt-4">
-          <Suspense
+          <ClientOnly
             fallback={
               <div className="grid h-[220px] place-items-center rounded-lg border-2 border-border bg-card text-sm font-bold text-muted-foreground">
                 Loading map…
               </div>
             }
           >
-            <div className="[&_>div]:!h-[220px] [&_>div]:!min-h-0">
-              <NearbyMap
-                markers={markers}
-                center={center}
-                you={activeCoords}
-                youLabel={youLabel}
-                selectedId={selectedId}
-                onSelect={setSelectedId}
-              />
-            </div>
-          </Suspense>
+            <Suspense
+              fallback={
+                <div className="grid h-[220px] place-items-center rounded-lg border-2 border-border bg-card text-sm font-bold text-muted-foreground">
+                  Loading map…
+                </div>
+              }
+            >
+              <div className="[&_>div]:!h-[220px] [&_>div]:!min-h-0">
+                <NearbyMap
+                  markers={markers}
+                  center={center}
+                  you={activeCoords}
+                  youLabel={youLabel}
+                  selectedId={selectedId}
+                  onSelect={setSelectedId}
+                />
+              </div>
+            </Suspense>
+          </ClientOnly>
         </div>
       )}
 

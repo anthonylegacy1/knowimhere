@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AskKIH } from "@/components/kih/AskKIH";
 import { ResourceCard } from "@/components/kih/ResourceCard";
 import { ImHereControl } from "@/components/kih/ImHere";
@@ -57,10 +57,22 @@ function Demo() {
   const [picked, setPicked] = useState<Resource>(getResource("community-social")!);
   const [checked, setChecked] = useState(false);
 
+  // The demo swaps in a fictional persona. A real resident's saved profile is
+  // kept aside and put back when they leave the demo page.
+  const realProfileRef = useRef<Profile | null>(null);
+
   useEffect(() => {
     if (!hydrated) return;
+    if (!realProfileRef.current && !profile.isDemo) realProfileRef.current = profile;
     if (!profile.isDemo || profile.name !== persona.name) setProfile(toProfile(persona));
-  }, [hydrated, persona, profile.isDemo, profile.name, setProfile]);
+  }, [hydrated, persona, profile, setProfile]);
+
+  useEffect(() => {
+    return () => {
+      const real = realProfileRef.current;
+      if (real) setProfile(real);
+    };
+  }, [setProfile]);
 
   useEffect(() => {
     setPicked(getResource(FALLBACK[personaId])!);
