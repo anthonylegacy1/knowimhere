@@ -706,7 +706,7 @@ function Index() {
           text="Explore the places, programs, events, resources and opportunities that make Detroit move—from neighborhood spaces and community programs to recreation, culture and major city experiences."
         />
         <p className="mt-3 max-w-2xl text-lg text-foreground/65">Know I&apos;m Here helps residents discover what&apos;s around them and what&apos;s relevant to them.</p>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
         </div>
         <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
