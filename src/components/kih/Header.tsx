@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Lock, Menu, X } from "lucide-react";
 import { useState } from "react";
 import mark from "@/assets/kih-mark.png";
 import { Button } from "@/components/ui/button";
@@ -103,6 +103,15 @@ export function Header() {
               <Link to="/help" onClick={() => setOpen(false)}>Watch &amp; Learn</Link>
               <Link to="/privacy" onClick={() => setOpen(false)}>Privacy</Link>
               <Link to="/changelog" onClick={() => setOpen(false)}>Changelog</Link>
+            </div>
+            <div className="mt-3 border-t border-border pt-3 md:col-span-3 lg:col-span-4">
+              <Link
+                to="/admin/analytics"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold text-muted-foreground hover:bg-secondary hover:text-foreground"
+              >
+                <Lock className="size-4" aria-hidden /> Admin Analytics
+              </Link>
             </div>
           </div>
         </nav>
