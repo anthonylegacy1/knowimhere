@@ -83,7 +83,7 @@ export function Header() {
           <img src={mark} alt="" width={44} height={44} className="size-11" />
           <div className="leading-none">
             <p className="font-display text-lg font-bold tracking-tight">Know I&apos;m Here</p>
-            <p className="text-[11px] font-semibold text-muted-foreground">Detroit · Venture 313</p>
+            <p className="text-[11px] font-semibold text-muted-foreground">Detroit</p>
           </div>
         </Link>
 
