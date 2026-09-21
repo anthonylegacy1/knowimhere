@@ -36,9 +36,10 @@ export function AccessibilityPanel() {
           aria-label="Open accessibility settings"
           variant="outline"
           size="icon"
-          className="size-11 rounded-full bg-cream text-xs font-extrabold"
+          className="size-11 gap-0 rounded-full bg-cream text-xs font-extrabold"
         >
-          A+
+          <Search className="size-4" aria-hidden />
+          <span aria-hidden>+</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[min(90dvh,46rem)] w-[calc(100%-2rem)] max-w-xl overflow-y-auto rounded-xl bg-card p-5 [&>button]:grid [&>button]:size-11 [&>button]:place-items-center sm:p-7">
