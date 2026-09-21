@@ -56,6 +56,7 @@ const TABS: TabContent[] = [
     journey: ["Ask KIH", "Housing / home repair resources", "Next step", "Official source or organization", "Get there / follow up"],
     partnerValue:
       "Partners and the City can see, in aggregate, whether neighborhood resources are being discovered and acted on — never individual resident histories.",
+    extras: ["safety", "shelter"],
   },
   {
     id: "transportation",
