@@ -717,7 +717,7 @@ function Index() {
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featuredLandmarks.slice(0, 3).map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
           <div className="hidden lg:block">
-            <DetroitPlaceCard place={featuredLandmarks[3]} featured />
+            <DetroitPlaceCard place={featuredLandmarks[3]!} featured />
           </div>
         </div>
         {/* Mobile: everything after Detroit Riverwalk collapses into one accordion */}
@@ -739,7 +739,7 @@ function Index() {
           >
             <div className="overflow-hidden">
               <div className="grid gap-5 pt-5">
-                <DetroitPlaceCard place={featuredLandmarks[3]} featured interactive={showMorePlaces} />
+                <DetroitPlaceCard place={featuredLandmarks[3]!} featured interactive={showMorePlaces} />
                 {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showMorePlaces} />)}
               </div>
             </div>
