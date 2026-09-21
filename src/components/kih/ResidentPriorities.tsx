@@ -255,36 +255,77 @@ export function ResidentPriorities() {
           title="Detroit already told us what matters."
           text="Through Rise Higher Detroit, residents shared priorities around stronger neighborhoods, safer communities, reliable transportation, economic opportunity, youth opportunities, accessible government, health, wellness, and community support."
         />
-        <p className="mt-3 max-w-2xl text-foreground/70">
-          Venture 313 gives us the challenge framework. Rise Higher Detroit gives us the resident voice. Know I&apos;m Here connects the two by
-          helping residents discover, understand, reach, and use existing resources, programs, services, opportunities, and official sources.
-        </p>
-        <p className="mt-5 inline-block rounded-lg border-2 border-brand bg-cream px-4 py-3 font-bold text-foreground">
-          Primary Buildathon focus: Community &amp; Public Health. Designed to extend across Detroit&apos;s other resident priorities.
-        </p>
+        <div className="mt-5 inline-block rounded-lg border-2 border-brand bg-cream px-4 py-3">
+          <p className="font-display text-lg font-bold text-foreground">Primary Detroit focus: Community &amp; Public Health.</p>
+          <p className="mt-1 font-semibold text-foreground/75">Designed to extend across Detroit&apos;s other resident priorities.</p>
+          <span className="chip mt-2 inline-block bg-brand text-xs font-extrabold uppercase tracking-wide text-background">
+            Venture 313 · Primary Impact Pillar
+          </span>
+        </div>
 
-        {/* Ecosystem diagram */}
-        <ol className="mt-8 grid gap-2 lg:grid-flow-col lg:auto-cols-fr lg:items-stretch lg:gap-0">
-          {ECOSYSTEM.map((step, i) => (
-            <li key={step.label} className="flex flex-col items-center lg:flex-row lg:items-stretch">
-              <div className="w-full max-w-xl rounded-lg border border-border bg-background px-3 py-3 text-center lg:h-full">
-                <p className="font-display text-sm font-bold">{step.label}</p>
-                <p className="text-xs text-foreground/65">{step.note}</p>
-              </div>
-              {i < ECOSYSTEM.length - 1 && (
-                <span aria-hidden className="py-1 text-brand lg:grid lg:place-items-center lg:px-1.5 lg:py-0">
-                  <span className="lg:hidden">↓</span>
-                  <span className="hidden lg:inline">→</span>
-                </span>
-              )}
-            </li>
-          ))}
-        </ol>
+        {/* Ecosystem — collapsible on mobile, always shown on desktop */}
+        <div className="mt-8">
+          <div className="lg:hidden">
+            <h3 className="font-display text-base font-bold uppercase tracking-wide">How the KIH ecosystem works</h3>
+            <p className="mt-1 text-sm text-foreground/70">
+              From Detroit resident priorities to community connection, digital confidence, adoption, and measurable engagement.
+            </p>
+            <p className="mt-2 text-xs font-extrabold uppercase tracking-wide text-brand">
+              Detroit priorities → KIH connection → Digital confidence → Community pilot → Partner insight
+            </p>
+            {!ecoOpen && (
+              <button
+                type="button"
+                onClick={() => setEcoOpen(true)}
+                aria-expanded={false}
+                aria-controls="kih-ecosystem"
+                className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-brand bg-background px-4 py-2 text-sm font-bold text-brand"
+              >
+                View ecosystem <ChevronDown className="size-4" aria-hidden />
+              </button>
+            )}
+          </div>
+
+          <div id="kih-ecosystem" className={ecoOpen ? "" : "hidden lg:block"}>
+            <ol className="mt-3 grid gap-2 lg:mt-0 lg:grid-flow-col lg:auto-cols-fr lg:items-stretch lg:gap-0">
+              {ECOSYSTEM.map((step, i) => (
+                <li key={step.label} className="flex flex-col items-center lg:flex-row lg:items-stretch">
+                  <div className="w-full max-w-xl rounded-lg border border-border bg-background px-3 py-3 text-center lg:h-full">
+                    <p className="font-display text-sm font-bold">{step.label}</p>
+                    <p className="text-xs text-foreground/65">{step.note}</p>
+                  </div>
+                  {i < ECOSYSTEM.length - 1 && (
+                    <span aria-hidden className="py-1 text-brand lg:grid lg:place-items-center lg:px-1.5 lg:py-0">
+                      <span className="lg:hidden">↓</span>
+                      <span className="hidden lg:inline">→</span>
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+            {ecoOpen && (
+              <button
+                type="button"
+                onClick={() => setEcoOpen(false)}
+                aria-expanded
+                aria-controls="kih-ecosystem"
+                className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-border bg-background px-4 py-2 text-sm font-bold text-foreground/75 lg:hidden"
+              >
+                Collapse <ChevronUp className="size-4" aria-hidden />
+              </button>
+            )}
+          </div>
+        </div>
 
         <p className="mt-8 max-w-3xl font-semibold text-foreground">
           Community &amp; Public Health is where we prove the model. Detroit&apos;s other challenge areas show where the same connection
           architecture can extend.
         </p>
+        <p className="mt-3 max-w-2xl text-sm text-foreground/70">
+          Venture 313 gives us the challenge framework. Rise Higher Detroit gives us the resident voice. Know I&apos;m Here connects the two by
+          helping residents discover, understand, reach, and use existing resources, programs, services, opportunities, and official sources.
+        </p>
+
 
         {/* Tabs */}
         <div className="mt-5" role="tablist" aria-label="Detroit resident priority areas">
