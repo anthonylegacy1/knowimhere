@@ -9,6 +9,8 @@ import {
   Clock3,
   HeartHandshake,
   HeartPulse,
+  Home,
+  Vote,
   Landmark,
   MapPin,
   Navigation,
@@ -26,6 +28,8 @@ import opportunityImage from "@/assets/carousel-opportunity-detroit.jpg";
 import healthImage from "@/assets/carousel-health-detroit.jpg";
 import neighborhoodImage from "@/assets/carousel-neighborhood-detroit.jpg";
 import foodImage from "@/assets/carousel-food-detroit.jpg";
+import shelterImage from "@/assets/carousel-shelter-detroit.jpg";
+import civicImage from "@/assets/carousel-civic-detroit.jpg";
 import skylineAsset from "@/assets/detroit-sunset-skyline.png.asset.json";
 import riverwalkAsset from "@/assets/detroit-riverwalk.jpeg.asset.json";
 import communityClassAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
@@ -132,6 +136,28 @@ const slides: Slide[] = [
     image: { src: riverwalkAsset.url, alt: "People enjoying the Detroit Riverwalk" },
     tags: ["Recreation", "Nearby"],
     body: <InfoCard icon={Users} title="Fresh air, movement, and community" meta="Walking group · Today at 4 PM" />,
+  },
+  {
+    id: "shelter",
+    label: "Safe support + shelter",
+    title: "Safe Shelter Near You",
+    subtext: "Detroit",
+    footer: "Matched to urgent needs · Prototype",
+    icon: Home,
+    image: { src: shelterImage, alt: "Staff member welcoming a resident at a Detroit shelter and housing support center", position: "center 45%" },
+    tags: ["Shelter", "Nearby", "Support"],
+    body: <InfoCard icon={Home} title="Need a safe place to stay?" meta="Emergency shelter · Temporary housing · Safe support" />,
+  },
+  {
+    id: "civic",
+    label: "Voting + civic access",
+    title: "Voting Resources Near You",
+    subtext: "Detroit",
+    footer: "Matched to your interests · Nonpartisan information · Prototype",
+    icon: Vote,
+    image: { src: civicImage, alt: "Vote Here sign outside an official municipal building entrance", position: "center 50%" },
+    tags: ["Voting", "Nearby", "Civic"],
+    body: <InfoCard icon={Vote} title="Voter registration and polling information" meta="Check status · Register · Find polling place" />,
   },
   {
     id: "community-events",
