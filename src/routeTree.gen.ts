@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AskRouteImport } from './routes/ask'
 import { Route as ChangelogRouteImport } from './routes/changelog'
+import { Route as CivicRouteImport } from './routes/civic'
 import { Route as CommunityHealthRouteImport } from './routes/community-health'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ForYouRouteImport } from './routes/for-you'
@@ -43,6 +44,11 @@ const AskRoute = AskRouteImport.update({
 const ChangelogRoute = ChangelogRouteImport.update({
   id: '/changelog',
   path: '/changelog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CivicRoute = CivicRouteImport.update({
+  id: '/civic',
+  path: '/civic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommunityHealthRoute = CommunityHealthRouteImport.update({
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/civic': typeof CivicRoute
   '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/civic': typeof CivicRoute
   '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ask': typeof AskRoute
   '/changelog': typeof ChangelogRoute
+  '/civic': typeof CivicRoute
   '/community-health': typeof CommunityHealthRoute
   '/demo': typeof DemoRoute
   '/for-you': typeof ForYouRoute
@@ -204,6 +213,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/civic'
     | '/community-health'
     | '/demo'
     | '/for-you'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/civic'
     | '/community-health'
     | '/demo'
     | '/for-you'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ask'
     | '/changelog'
+    | '/civic'
     | '/community-health'
     | '/demo'
     | '/for-you'
@@ -271,6 +283,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AskRoute: typeof AskRoute
   ChangelogRoute: typeof ChangelogRoute
+  CivicRoute: typeof CivicRoute
   CommunityHealthRoute: typeof CommunityHealthRoute
   DemoRoute: typeof DemoRoute
   ForYouRoute: typeof ForYouRoute
@@ -311,6 +324,13 @@ declare module '@tanstack/react-router' {
       path: '/changelog'
       fullPath: '/changelog'
       preLoaderRoute: typeof ChangelogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/civic': {
+      id: '/civic'
+      path: '/civic'
+      fullPath: '/civic'
+      preLoaderRoute: typeof CivicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/community-health': {
@@ -439,6 +459,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AskRoute: AskRoute,
   ChangelogRoute: ChangelogRoute,
+  CivicRoute: CivicRoute,
   CommunityHealthRoute: CommunityHealthRoute,
   DemoRoute: DemoRoute,
   ForYouRoute: ForYouRoute,
