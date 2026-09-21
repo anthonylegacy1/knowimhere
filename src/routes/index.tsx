@@ -183,6 +183,21 @@ function Index() {
         </div>
       </section>
 
+      <section className="bg-card pb-12 pt-12 text-center">
+        <div className="container-kih">
+          <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
+          <p aria-label="Discover, Know, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
+            {["Discover", "Know", "Get There", "Check In", "Stay Connected"].map((step, index) => (
+              <span key={step} className="flex items-center gap-2">
+                {index > 0 && <ArrowRight className="size-4 shrink-0 text-sky" aria-hidden />}
+                <span className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-bold text-ink sm:text-base">{step}</span>
+              </span>
+            ))}
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
+        </div>
+      </section>
+
       <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
         <div className="container-kih">
           <div className="mx-auto max-w-2xl text-center">
@@ -194,11 +209,48 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih pt-8 pb-4">
-        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
-        <div className="mt-6"><ImHereControl /></div>
-        <div className="mt-6"><NearbyMapPreview /></div>
+      <section id="im-here" className="border-y border-border bg-card scroll-mt-24">
+        <div className="container-kih py-14">
+          <p className="mb-5 text-sm font-bold uppercase tracking-wider text-brand">When the resident arrives, participation can become measurable&mdash;without making it public.</p>
+            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
+              <div>
+                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
+                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
+                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
+                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
+              </div>
+              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
+                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
+              </div>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+              </ol>
+              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
+            </article>
+        </div>
       </section>
+
+      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
+        <article className="card-flat p-6 sm:p-8">
+          <span className="eyebrow">Community + public health</span>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
+          <p className="mt-2 max-w-2xl text-foreground/70">
+            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
+          </p>
+          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
+            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </article>
+      </section>
+
+      <ResidentPriorities />
 
       <section className="container-kih pb-14">
 
@@ -248,6 +300,15 @@ function Index() {
 
         <MyKIHCard />
 
+      </section>
+
+      <section className="container-kih pt-8 pb-4">
+        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
+        <div className="mt-6"><ImHereControl /></div>
+        <div className="mt-6"><NearbyMapPreview /></div>
+      </section>
+
+      <section className="container-kih pb-14">
         <p className="mt-10 text-sm font-bold uppercase tracking-wider text-sky">Finding the resource is only the first step.</p>
         <div id="help-me-get-there" className="mt-8 scroll-mt-24 rounded-lg border border-border bg-card p-6">
           <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Help me get there</p>
@@ -275,40 +336,6 @@ function Index() {
         </div>
       </section>
 
-
-      <section className="bg-card pb-12 pt-12 text-center">
-        <div className="container-kih">
-          <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
-          <p aria-label="Discover, Know, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
-            {["Discover", "Know", "Get There", "Check In", "Stay Connected"].map((step, index) => (
-              <span key={step} className="flex items-center gap-2">
-                {index > 0 && <ArrowRight className="size-4 shrink-0 text-sky" aria-hidden />}
-                <span className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-bold text-ink sm:text-base">{step}</span>
-              </span>
-            ))}
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-foreground/65">From finding the right opportunity to getting there and staying connected, Know I&apos;m Here helps close the loop.</p>
-        </div>
-      </section>
-
-      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
-        <article className="card-flat p-6 sm:p-8">
-          <span className="eyebrow">Community + public health</span>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
-          <p className="mt-2 max-w-2xl text-foreground/70">
-            Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
-          </p>
-          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
-            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </article>
-      </section>
-
-
-
-      <ResidentPriorities />
-
       <section id="my-neighborhood" className="container-kih scroll-mt-24 py-14">
         <p className="text-sm font-bold uppercase tracking-wider text-sky">Connection also means knowing what&apos;s happening around you.</p>
         <div className="mt-5 grid items-start gap-5 lg:grid-cols-2">
@@ -335,171 +362,6 @@ function Index() {
         </article>
         </div>
       </section>
-
-      <section id="im-here" className="border-y border-border bg-card scroll-mt-24">
-        <div className="container-kih py-14">
-          <p className="mb-5 text-sm font-bold uppercase tracking-wider text-brand">When the resident arrives, participation can become measurable&mdash;without making it public.</p>
-            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
-              <div>
-                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
-                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
-                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
-                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
-              </div>
-              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
-                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
-              </div>
-              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
-                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
-              </ol>
-              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
-            </article>
-        </div>
-      </section>
-
-      <section className="container-kih py-14">
-        <div className="max-w-3xl">
-          <p className="text-xs font-extrabold uppercase text-sky">The ecosystem</p>
-          <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Connecting Resources Is Only Half the Solution</h2>
-          <p className="mt-4 text-foreground/70">Detroit already has programs, services, opportunities, and digital resources. Know I&apos;m Here helps residents discover and reach them. Everyday Connect helps residents build the confidence and practical skills to use the technology required to access them.</p>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Fast Freddy Experience", "Creates trusted community access and a real-world pilot environment."],
-            ["Everyday Connect", "Builds digital confidence through simple, practical technology education."],
-            ["Know I'm Here", "Connects residents to relevant resources, programs, services, and opportunities."],
-            ["Community Partners", "Gain privacy-conscious insight into discovery, engagement, and participation."],
-          ].map(([title, text]) => (
-            <article key={title} className="card-flat p-5">
-              <h3 className="font-display text-lg font-bold uppercase leading-snug">{title}</h3>
-              <p className="mt-2 text-sm text-foreground/70">{text}</p>
-            </article>
-          ))}
-        </div>
-        <p className="mt-6 max-w-4xl border-l-4 border-brand pl-5 text-base text-foreground/75 sm:text-lg">Detroit already has resources. Know I&apos;m Here helps residents find and reach them. Everyday Connect helps residents build the digital confidence to use the technology required to access them. The Fast Freddy Experience gives us a trusted community environment to test whether that full loop works in real life.</p>
-        <p className="mt-6 rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">We are not just building a better way to find resources. We are helping make sure residents can confidently use the technology that connects them to those resources.</p>
-
-        <div className="mt-10 grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
-          <div>
-            <p className="text-xs font-extrabold uppercase text-sky">Everyday Connect</p>
-            <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Digital Confidence for Everyday Life</h2>
-            <p className="mt-4 font-semibold text-foreground/80">Technology only creates access when people feel confident using it.</p>
-            <p className="mt-3 text-foreground/70">Everyday Connect provides simple, practical digital-confidence training that helps residents use smartphones, QR codes, maps, online services, AI tools, transportation technology, and community platforms like Know I&apos;m Here.</p>
-            <p className="mt-3 text-foreground/70">The goal is not simply to teach technology. It is to help people use technology to reach opportunities that already exist around them.</p>
-            <p className="mt-3 text-sm text-foreground/65">Everyday Connect can support older adults, youth, families, caregivers, working adults, and community members who want more confidence using everyday technology.</p>
-            <p className="mt-4 rounded-2xl bg-aqua-soft/60 px-5 py-4 text-base font-bold">Everyday Connect teaches people how to use the technology. Know I&apos;m Here helps them use that confidence to connect with opportunities around them.</p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button asChild className="min-h-14"><Link to="/learn">Start learning <ArrowRight /></Link></Button>
-              <Button asChild variant="outline" className="min-h-14"><a href="https://everydayconnect.lovable.app/" target="_blank" rel="noopener noreferrer">Start connecting <ExternalLink /></a></Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <section className="bg-ink text-cream"><div className="container-kih py-14">
-        <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <a href={EXTERNAL_LINKS.fastFreddy} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-sun">Trust + Community</p><h3 className="mt-1 text-xl font-bold">Fast Freddy Experience</h3><p className="mt-2 text-sm text-cream/70">One real Detroit example of culture, movement and welcoming in-person community engagement.</p><p className="mt-4 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p></div></a>
-          <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={everydayLearningAsset.url} alt="Older adults learning to use smartphones with guidance from an instructor" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-aqua">Digital confidence</p><h3 className="mt-1 text-xl font-bold">Everyday Connect</h3><p className="mt-2 text-sm text-cream/70">Build confidence with everyday technology, healthcare tools and useful AI.</p><p className="mt-4 text-sm font-bold text-aqua">Explore Everyday Connect →</p></div></a>
-          <Link to="/story" className="overflow-hidden rounded-lg border border-brand-deep bg-brand text-brand-foreground"><img src={kihConnectionAsset.url} alt="A daughter helps her father use a phone beside the Detroit riverfront and skyline" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-brand-foreground/75">Connection</p><h3 className="mt-1 text-xl font-bold">Know I&apos;m Here</h3><p className="mt-2 text-sm text-brand-foreground/85">Use that confidence to connect with nearby people, resources and opportunities.</p><p className="mt-4 text-sm font-bold">Read our story →</p></div></Link>
-        </div>
-      </div></section>
-
-      <section id="fast-freddy" className="container-kih scroll-mt-24 py-14">
-        <div className="max-w-2xl">
-          <span className="eyebrow">The experience behind the pilot</span>
-          <div className="mt-3">
-            <a
-              href={EXTERNAL_LINKS.fastFreddy}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand/20"
-            >
-              Connect With the Experience
-              <ExternalLink className="size-4" aria-hidden />
-            </a>
-            <p className="mt-2 text-sm text-foreground/65">Explore the Fast Freddy Experience, upcoming programs, events and community engagement.</p>
-          </div>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">More Than Entertainment. A Platform for Active, Connected Living.</h2>
-        </div>
-        <figure className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-lg border border-border">
-          <img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
-          <figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption>
-        </figure>
-        <div className="mx-auto mt-4 max-w-3xl space-y-3 text-center text-foreground/70">
-          <p>Fast Freddy Experience helps older adults stay active, connected, confident and engaged through culturally relevant experiences built around movement, music, Detroit culture, technology, social connection and shared experiences.</p>
-          <p>Powered by the legacy of Detroit dance and fashion icon Frederick “Fast Freddy” Anderson, the model brings trusted in-person experiences together with modern tools that can extend participation beyond the room.</p>
-        </div>
-        <p className="mx-auto mt-6 max-w-2xl rounded-lg border border-sun/40 bg-sun/10 px-5 py-4 text-center text-lg font-extrabold text-ink">Creating Joy. Building Community. Celebrating Every Generation.</p>
-
-
-        <div className="mt-8">
-          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
-        </div>
-
-        <div className="mt-8 rounded-lg border border-border bg-card p-6 sm:p-8">
-          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Real-world pilot</p>
-          <p className="mt-2 max-w-3xl text-foreground/75">The Fast Freddy Experience gives Know I&apos;m Here a real community environment to test the resident journey—from discovering an activity and getting there to checking in and staying connected.</p>
-          <div className="mt-5 flex flex-wrap items-center gap-2">
-            {["Discover", "Get There", "Check In", "Stay Connected"].map((step, index) => (
-              <span key={step} className="flex items-center gap-2">
-                <span className="rounded-full border border-border bg-background px-3 py-1.5 text-sm font-bold text-ink">{step}</span>
-                {index < 3 && <ArrowRight className="size-4 text-muted-foreground" aria-hidden />}
-              </span>
-            ))}
-          </div>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {["Personalized Recommendations", "Transportation Support", "Private “I’m Here” Check-In", "Aggregate Engagement Insights"].map((capability) => <span key={capability} className="chip bg-background text-sm">{capability}</span>)}
-          </div>
-          <p className="mt-3 text-sm text-foreground/60">Proposed pilot capabilities shown for demonstration.</p>
-        </div>
-
-        <details className="group mt-6 overflow-hidden rounded-lg border border-border bg-card">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-sm font-extrabold uppercase tracking-wider text-ink sm:p-6">
-            Explore the Fast Freddy Pilot
-            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-sky/15 text-lg font-bold text-sky"><span className="group-open:hidden">+</span><span className="hidden group-open:inline">–</span></span>
-          </summary>
-          <div className="animate-accordion-down space-y-8 border-t border-border p-5 sm:p-6">
-            <div>
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-sky">What the Fast Freddy Experience can include</h3>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {FF_PILLARS.map((pillar) => (
-                  <article key={pillar.label} className="flex items-start gap-3 rounded-lg border border-border bg-background p-4">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-sky/15 text-sky">{pillar.icon}</span>
-                    <div>
-                      <h4 className="text-sm font-extrabold uppercase tracking-wide text-ink">{pillar.label}</h4>
-                      <p className="mt-1 text-sm text-foreground/65">{pillar.text}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-sky">Proposed pilot capabilities</h3>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {["QR Entry", "Personalized Recommendations", "Saved Information", "Transportation Support", "Private “I’m Here” Check-In", "Aggregate Engagement Insights"].map((capability) => <span key={capability} className="chip bg-background text-sm">{capability}</span>)}
-              </div>
-              <p className="mt-3 text-sm text-foreground/60">Measure participation patterns without making an individual resident&apos;s check-in public. These capabilities are proposed for the prototype and are not currently operational services.</p>
-            </div>
-
-            <div className="rounded-lg border border-brand/25 bg-brand/5 p-5">
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-brand">The opportunity</h3>
-              <p className="mt-2 max-w-4xl text-foreground/75">Senior-serving organizations need programming people want to attend, while residents may face isolation, transportation barriers and difficulty navigating technology. Fast Freddy Experience creates trusted community participation. Everyday Connect builds digital confidence. Know I&apos;m Here connects residents to the right opportunities and helps close the last mile.</p>
-            </div>
-          </div>
-        </details>
-      </section>
-
-
 
       <section id="partner-impact" className="container-kih scroll-mt-24 py-14">
         <p className="mb-4 text-sm font-bold uppercase tracking-wider text-sky">When residents connect, organizations can better understand participation.</p>
@@ -550,7 +412,6 @@ function Index() {
 
         <p className="mt-4 text-xs text-muted-foreground">Prototype concept. No paying partners, integrations or measured outcomes are claimed. Demonstration metrics appear inside the Partner Impact experience.</p>
       </section>
-
 
       <section id="detroit-economic-impact" className="scroll-mt-24 border-y border-border bg-card">
 
@@ -702,6 +563,141 @@ function Index() {
         </div>
       </section>
 
+      <section className="container-kih py-14">
+        <div className="max-w-3xl">
+          <p className="text-xs font-extrabold uppercase text-sky">The ecosystem</p>
+          <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Connecting Resources Is Only Half the Solution</h2>
+          <p className="mt-4 text-foreground/70">Detroit already has programs, services, opportunities, and digital resources. Know I&apos;m Here helps residents discover and reach them. Everyday Connect helps residents build the confidence and practical skills to use the technology required to access them.</p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Fast Freddy Experience", "Creates trusted community access and a real-world pilot environment."],
+            ["Everyday Connect", "Builds digital confidence through simple, practical technology education."],
+            ["Know I'm Here", "Connects residents to relevant resources, programs, services, and opportunities."],
+            ["Community Partners", "Gain privacy-conscious insight into discovery, engagement, and participation."],
+          ].map(([title, text]) => (
+            <article key={title} className="card-flat p-5">
+              <h3 className="font-display text-lg font-bold uppercase leading-snug">{title}</h3>
+              <p className="mt-2 text-sm text-foreground/70">{text}</p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-6 max-w-4xl border-l-4 border-brand pl-5 text-base text-foreground/75 sm:text-lg">Detroit already has resources. Know I&apos;m Here helps residents find and reach them. Everyday Connect helps residents build the digital confidence to use the technology required to access them. The Fast Freddy Experience gives us a trusted community environment to test whether that full loop works in real life.</p>
+        <p className="mt-6 rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">We are not just building a better way to find resources. We are helping make sure residents can confidently use the technology that connects them to those resources.</p>
+
+        <div className="mt-10 grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="overflow-hidden rounded-lg border border-border bg-card"><img src={everydayAsset.url} alt="Everyday Connect is not a seniors-only program — people of all generations building technology confidence, shown with six accessible phone screens" className="aspect-[16/10] w-full object-contain" loading="lazy" /></div>
+          <div>
+            <p className="text-xs font-extrabold uppercase text-sky">Everyday Connect</p>
+            <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Digital Confidence for Everyday Life</h2>
+            <p className="mt-4 font-semibold text-foreground/80">Technology only creates access when people feel confident using it.</p>
+            <p className="mt-3 text-foreground/70">Everyday Connect provides simple, practical digital-confidence training that helps residents use smartphones, QR codes, maps, online services, AI tools, transportation technology, and community platforms like Know I&apos;m Here.</p>
+            <p className="mt-3 text-foreground/70">The goal is not simply to teach technology. It is to help people use technology to reach opportunities that already exist around them.</p>
+            <p className="mt-3 text-sm text-foreground/65">Everyday Connect can support older adults, youth, families, caregivers, working adults, and community members who want more confidence using everyday technology.</p>
+            <p className="mt-4 rounded-2xl bg-aqua-soft/60 px-5 py-4 text-base font-bold">Everyday Connect teaches people how to use the technology. Know I&apos;m Here helps them use that confidence to connect with opportunities around them.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button asChild className="min-h-14"><Link to="/learn">Start learning <ArrowRight /></Link></Button>
+              <Button asChild variant="outline" className="min-h-14"><a href="https://everydayconnect.lovable.app/" target="_blank" rel="noopener noreferrer">Start connecting <ExternalLink /></a></Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ink text-cream"><div className="container-kih py-14">
+        <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase text-aqua">How we got here</p><h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Trust → Confidence → Connection</h2><p className="mt-3 text-cream/70">Know I&apos;m Here grew from real Detroit community engagement—not a theoretical technology idea.</p></div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <a href={EXTERNAL_LINKS.fastFreddy} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={communityAsset.url} alt="Fast Freddy leading a Detroit community movement class" className="aspect-[16/9] w-full object-cover" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-sun">Trust + Community</p><h3 className="mt-1 text-xl font-bold">Fast Freddy Experience</h3><p className="mt-2 text-sm text-cream/70">One real Detroit example of culture, movement and welcoming in-person community engagement.</p><p className="mt-4 text-sm font-bold text-sun">Visit Fast Freddy Experience →</p></div></a>
+          <a href={EXTERNAL_LINKS.everydayConnect} target="_blank" rel="noreferrer" className="overflow-hidden rounded-lg border border-cream/15 bg-cream/5 transition-colors hover:bg-cream/10"><img src={everydayLearningAsset.url} alt="Older adults learning to use smartphones with guidance from an instructor" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-aqua">Digital confidence</p><h3 className="mt-1 text-xl font-bold">Everyday Connect</h3><p className="mt-2 text-sm text-cream/70">Build confidence with everyday technology, healthcare tools and useful AI.</p><p className="mt-4 text-sm font-bold text-aqua">Explore Everyday Connect →</p></div></a>
+          <Link to="/story" className="overflow-hidden rounded-lg border border-brand-deep bg-brand text-brand-foreground"><img src={kihConnectionAsset.url} alt="A daughter helps her father use a phone beside the Detroit riverfront and skyline" className="aspect-[16/9] w-full object-cover object-center" loading="lazy" /><div className="p-6"><p className="text-xs font-bold uppercase text-brand-foreground/75">Connection</p><h3 className="mt-1 text-xl font-bold">Know I&apos;m Here</h3><p className="mt-2 text-sm text-brand-foreground/85">Use that confidence to connect with nearby people, resources and opportunities.</p><p className="mt-4 text-sm font-bold">Read our story →</p></div></Link>
+        </div>
+      </div></section>
+
+      <section id="fast-freddy" className="container-kih scroll-mt-24 py-14">
+        <div className="max-w-2xl">
+          <span className="eyebrow">The experience behind the pilot</span>
+          <div className="mt-3">
+            <a
+              href={EXTERNAL_LINKS.fastFreddy}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 text-sm font-extrabold uppercase tracking-wide text-brand transition-colors hover:bg-brand/20"
+            >
+              Connect With the Experience
+              <ExternalLink className="size-4" aria-hidden />
+            </a>
+            <p className="mt-2 text-sm text-foreground/65">Explore the Fast Freddy Experience, upcoming programs, events and community engagement.</p>
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">More Than Entertainment. A Platform for Active, Connected Living.</h2>
+        </div>
+        <figure className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-lg border border-border">
+          <img src={ffMayorAsset.url} alt="Fast Freddy with Detroit Mayor Mary Sheffield" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
+          <figcaption className="p-2 text-center text-xs text-muted-foreground">Fast Freddy with Detroit Mayor Mary Sheffield</figcaption>
+        </figure>
+        <div className="mx-auto mt-4 max-w-3xl space-y-3 text-center text-foreground/70">
+          <p>Fast Freddy Experience helps older adults stay active, connected, confident and engaged through culturally relevant experiences built around movement, music, Detroit culture, technology, social connection and shared experiences.</p>
+          <p>Powered by the legacy of Detroit dance and fashion icon Frederick “Fast Freddy” Anderson, the model brings trusted in-person experiences together with modern tools that can extend participation beyond the room.</p>
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl rounded-lg border border-sun/40 bg-sun/10 px-5 py-4 text-center text-lg font-extrabold text-ink">Creating Joy. Building Community. Celebrating Every Generation.</p>
+
+
+        <div className="mt-8">
+          <figure className="overflow-hidden rounded-lg border border-border"><img src={ffEventAsset.url} alt="A Fast Freddy Experience community event gathering in Detroit" className="aspect-[4/3] w-full object-cover" loading="lazy" /></figure>
+        </div>
+
+        <div className="mt-8 rounded-lg border border-border bg-card p-6 sm:p-8">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Real-world pilot</p>
+          <p className="mt-2 max-w-3xl text-foreground/75">The Fast Freddy Experience gives Know I&apos;m Here a real community environment to test the resident journey—from discovering an activity and getting there to checking in and staying connected.</p>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {["Discover", "Get There", "Check In", "Stay Connected"].map((step, index) => (
+              <span key={step} className="flex items-center gap-2">
+                <span className="rounded-full border border-border bg-background px-3 py-1.5 text-sm font-bold text-ink">{step}</span>
+                {index < 3 && <ArrowRight className="size-4 text-muted-foreground" aria-hidden />}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["Personalized Recommendations", "Transportation Support", "Private “I’m Here” Check-In", "Aggregate Engagement Insights"].map((capability) => <span key={capability} className="chip bg-background text-sm">{capability}</span>)}
+          </div>
+          <p className="mt-3 text-sm text-foreground/60">Proposed pilot capabilities shown for demonstration.</p>
+        </div>
+
+        <details className="group mt-6 overflow-hidden rounded-lg border border-border bg-card">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-sm font-extrabold uppercase tracking-wider text-ink sm:p-6">
+            Explore the Fast Freddy Pilot
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-sky/15 text-lg font-bold text-sky"><span className="group-open:hidden">+</span><span className="hidden group-open:inline">–</span></span>
+          </summary>
+          <div className="animate-accordion-down space-y-8 border-t border-border p-5 sm:p-6">
+            <div>
+              <h3 className="text-xs font-extrabold uppercase tracking-wider text-sky">What the Fast Freddy Experience can include</h3>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {FF_PILLARS.map((pillar) => (
+                  <article key={pillar.label} className="flex items-start gap-3 rounded-lg border border-border bg-background p-4">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-sky/15 text-sky">{pillar.icon}</span>
+                    <div>
+                      <h4 className="text-sm font-extrabold uppercase tracking-wide text-ink">{pillar.label}</h4>
+                      <p className="mt-1 text-sm text-foreground/65">{pillar.text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-extrabold uppercase tracking-wider text-sky">Proposed pilot capabilities</h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {["QR Entry", "Personalized Recommendations", "Saved Information", "Transportation Support", "Private “I’m Here” Check-In", "Aggregate Engagement Insights"].map((capability) => <span key={capability} className="chip bg-background text-sm">{capability}</span>)}
+              </div>
+              <p className="mt-3 text-sm text-foreground/60">Measure participation patterns without making an individual resident&apos;s check-in public. These capabilities are proposed for the prototype and are not currently operational services.</p>
+            </div>
+
+            <div className="rounded-lg border border-brand/25 bg-brand/5 p-5">
+              <h3 className="text-xs font-extrabold uppercase tracking-wider text-brand">The opportunity</h3>
+              <p className="mt-2 max-w-4xl text-foreground/75">Senior-serving organizations need programming people want to attend, while residents may face isolation, transportation barriers and difficulty navigating technology. Fast Freddy Experience creates trusted community participation. Everyday Connect builds digital confidence. Know I&apos;m Here connects residents to the right opportunities and helps close the last mile.</p>
+            </div>
+          </div>
+        </details>
+      </section>
+
       <section id="discover-detroit" className="container-kih scroll-mt-24 py-14">
         <SectionHeading
           eyebrow="Detroit around you"
@@ -727,7 +723,6 @@ function Index() {
         <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
       </section>
 
-      {/* CONNECTED TO DETROIT'S EXISTING RESOURCES */}
       <section className="container-kih py-14" aria-labelledby="connected-resources">
         <p className="eyebrow">Connected to Detroit&apos;s existing resources</p>
         <h2 id="connected-resources" className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -817,11 +812,6 @@ function Index() {
         </div>
       </section>
 
-
-
-
-
-
       <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Your location, check-ins, and preferences stay under your control. Know I&apos;m Here explains why recommendations appear and connects you to trusted official resources without sharing more than you choose.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency response service.</p></div></section>
 
       <section className="mx-auto max-w-4xl px-5 py-12 text-center sm:py-16">
@@ -832,6 +822,7 @@ function Index() {
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3"><Button asChild><Link to="/onboarding">Find What I Need</Link></Button><Button asChild variant="outline"><Link to="/for-you">Explore Around Me</Link></Button></div>
       </section>
+
     </div>
   );
 }
