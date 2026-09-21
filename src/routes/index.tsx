@@ -155,7 +155,7 @@ function Index() {
           <div className="mt-7 grid w-full max-w-sm gap-3">
             <NearMeButton className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90" />
             <Button asChild size="lg" variant="outline" className="min-h-14 border-cream/40 bg-ink/65 text-cream backdrop-blur hover:bg-ink hover:text-cream"><Link to="/ask"><MessageCircle /> Ask Know I&apos;m Here</Link></Button>
-            <Button asChild variant="link" className="text-cream hover:text-aqua"><Link to="/for-you">Explore Detroit Resources <ArrowRight /></Link></Button>
+            <Button asChild variant="link" className="text-cream hover:text-aqua"><Link to="/for-you">Explore Detroit Resources</Link></Button>
           </div>
           <ArrowDown className="mt-6 size-5 text-aqua" aria-hidden />
         </div>
