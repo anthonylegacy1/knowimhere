@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
@@ -179,7 +180,7 @@ function QuestionList({ items }: { items: string[] }) {
 
 function SafetyAwareness() {
   return (
-    <Collapsible id="community-safety-panel" title="Community safety &amp; incident awareness">
+    <Collapsible id="community-safety-panel" title="Community safety & incident awareness">
       <p className="text-foreground/75">
         Know I&apos;m Here can help residents find trusted information about safety concerns affecting their neighborhood and connect them to the
         appropriate official resources when something is happening nearby.
@@ -220,7 +221,7 @@ function SafetyAwareness() {
 
 function ShelterAccess() {
   return (
-    <Collapsible id="safe-shelter-panel" title="Safe place &amp; emergency shelter resources">
+    <Collapsible id="safe-shelter-panel" title="Safe place & emergency shelter resources">
       <p className="text-foreground/75">
         Know I&apos;m Here can help residents and families quickly find trusted emergency shelter, temporary housing, crisis support, and
         safe-place resources when they need somewhere secure to stay.
@@ -252,7 +253,7 @@ function ShelterAccess() {
 
 function SchoolSafety() {
   return (
-    <Collapsible id="school-safety-panel" title="School safety &amp; family awareness">
+    <Collapsible id="school-safety-panel" title="School safety & family awareness">
       <p className="text-foreground/75">
         Families need more than educational opportunities. They also need an easy way to reach trusted information when a school or surrounding
         area may be affected by a safety concern.
