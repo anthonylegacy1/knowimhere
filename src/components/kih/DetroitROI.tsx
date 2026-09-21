@@ -194,9 +194,31 @@ function Arrow() {
 export function DetroitROI() {
   return (
     <div className="space-y-10 sm:space-y-14">
-      {/* 1 — PRIMARY ROI MESSAGE */}
+      {/* 0 — SECTION VIDEO */}
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
+        <h3 className="mt-4 font-display text-xl font-extrabold uppercase tracking-tight text-brand sm:text-2xl">
+          See the economic impact
+        </h3>
+        <p className="mt-2 max-w-3xl text-base text-foreground/70">
+          How Know I&apos;m Here can help turn community investment into measurable engagement.
+        </p>
+        <div className="mt-5 overflow-hidden rounded-3xl border-2 border-ink/10 bg-card shadow-sm">
+          <div className="relative aspect-video w-full">
+            <iframe
+              src="https://share.synthesia.io/embeds/videos/3c6f9762-87e9-40a7-b291-02597da37456"
+              loading="lazy"
+              title="Synthesia video player - KIH Detroit Economic Impact & ROI"
+              allowFullScreen
+              allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"
+              className="absolute left-0 top-0 h-full w-full border-0"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* 1 — PRIMARY ROI MESSAGE */}
+      <div>
         <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
           Turning community investment into measurable engagement
         </h2>
