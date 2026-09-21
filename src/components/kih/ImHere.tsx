@@ -646,7 +646,9 @@ export function ImHereControl() {
 
         <LocationPrivacyPanel />
 
-        {error && <ErrorPanel />}
+        <LocationHelpPanel open={openHelp} setOpen={setOpenHelp} />
+
+        {error && <ErrorPanel onOpenHelp={() => setOpenHelp(true)} />}
         {manual && <div className="mt-4"><AreaPicker onDone={() => setManual(false)} /></div>}
 
         <button
