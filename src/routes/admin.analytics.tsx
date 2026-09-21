@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { RESOURCES, CATEGORIES, type CategoryId } from "@/data/resources";
 import { getAdminAnalytics, MIN_GROUP, type AdminResult, type AdminReport } from "@/lib/admin-analytics.functions";
@@ -192,6 +193,7 @@ function Empty({ text = "No data yet" }: { text?: string }) {
 function AdminAnalytics() {
   const run = useServerFn(getAdminAnalytics);
   const [key, setKey] = useState("");
+  const [showKey, setShowKey] = useState(false);
   const [range, setRange] = useState<RangeId>("30");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
@@ -291,14 +293,25 @@ function AdminAnalytics() {
             <label htmlFor="admin-key" className="text-sm font-bold">
               Admin passphrase
             </label>
-            <input
-              id="admin-key"
-              type="password"
-              value={key}
-              onChange={(e) => setKey(e.target.value)}
-              autoComplete="current-password"
-              className="mt-2 min-h-12 w-full rounded-2xl border-2 border-border bg-card px-4 text-base"
-            />
+            <div className="relative mt-2">
+              <input
+                id="admin-key"
+                type={showKey ? "text" : "password"}
+                value={key}
+                onChange={(e) => setKey(e.target.value)}
+                autoComplete="current-password"
+                className="min-h-12 w-full rounded-2xl border-2 border-border bg-card px-4 pr-14 text-base"
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey((v) => !v)}
+                aria-label={showKey ? "Hide passphrase" : "Show passphrase"}
+                aria-pressed={showKey}
+                className="absolute right-1.5 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-xl text-foreground/60 hover:bg-cream hover:text-foreground"
+              >
+                {showKey ? <EyeOff className="size-5" aria-hidden /> : <Eye className="size-5" aria-hidden />}
+              </button>
+            </div>
             <button type="submit" disabled={loading} className="btn-base btn-brand mt-4 w-full">
               {loading ? "Checking…" : "Open dashboard"}
             </button>
