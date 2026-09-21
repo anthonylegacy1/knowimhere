@@ -246,6 +246,8 @@ function TabPanel({ tab }: { tab: TabContent }) {
 
 export function ResidentPriorities() {
   const [active, setActive] = useState("health");
+  const [ecoOpen, setEcoOpen] = useState(false);
+
 
   return (
     <section className="border-y border-border bg-card">
