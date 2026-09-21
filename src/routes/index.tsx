@@ -897,6 +897,23 @@ function DemoJourneyStep({ icon, title, text }: { icon: ReactNode; title: string
   );
 }
 
+function ImHereJourney() {
+  return (
+    <>
+      <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+        <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<Radio />} title="Know" text="See what&apos;s happening around you first." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+      </ol>
+      <Button asChild className="mt-6 min-h-14 bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
+    </>
+  );
+}
+
 type DetroitPlace = { title: string; type: string; image: string; text: string; tags: string[] };
 
 function DetroitPlaceCard({ place, featured = false, interactive = true }: { place: DetroitPlace; featured?: boolean; interactive?: boolean }) {
