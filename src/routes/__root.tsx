@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -109,6 +110,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdmin = pathname.startsWith("/admin");
 
   // One anonymous session marker per browser tab. No identity, no location.
   useEffect(() => {
@@ -130,8 +133,16 @@ function RootComponent() {
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>
-        <Footer />
-        <AskBar />
+        {isAdmin ? (
+          <footer className="border-t-2 border-border bg-cream py-6 text-center text-xs text-muted-foreground print:hidden">
+            Know I&apos;m Here — internal admin area. Aggregate data only.
+          </footer>
+        ) : (
+          <>
+            <Footer />
+            <AskBar />
+          </>
+        )}
         <Toaster position="top-center" />
         </LocationProvider>
       </AppProvider>
