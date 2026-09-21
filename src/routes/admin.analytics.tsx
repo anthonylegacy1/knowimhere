@@ -200,6 +200,8 @@ function AdminAnalytics() {
   const [reportCategory, setReportCategory] = useState("all");
   const [reportNeighborhood, setReportNeighborhood] = useState("all");
   const [sortBy, setSortBy] = useState<"views" | "getThere" | "calls" | "saves">("views");
+  const [showTechnical, setShowTechnical] = useState(false);
+  const [openResource, setOpenResource] = useState<string | null>(null);
 
   const load = useCallback(
     async (pass: string) => {
