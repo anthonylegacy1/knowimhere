@@ -149,3 +149,6 @@
 - [x] "Why this can become a sustainable business" customer groups + revenue streams.
 - [x] Closing ROI message; conditional claim language only; label current vs pilot vs future.
 - [x] KIH_ANALYTICS_KEY server-side only: no browser storage, no client code, no logs; ROI page stays public.
+
+- [x] Resident Activity Summary dashboard on /admin/analytics
+- [x] Hide Ask KIH bar + resident footer on /admin/* routes
