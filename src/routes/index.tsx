@@ -211,32 +211,6 @@ function Index() {
         </div>
       </section>
 
-      <section id="im-here" className="border-y border-border bg-card scroll-mt-24">
-        <div className="container-kih py-14">
-          <p className="mb-5 text-sm font-bold uppercase tracking-wider text-brand">When the resident arrives, participation can become measurable&mdash;without making it public.</p>
-            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
-              <div>
-                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
-                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
-                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
-                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
-              </div>
-              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
-                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
-              </div>
-              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
-                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
-              </ol>
-              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
-            </article>
-        </div>
-      </section>
 
       <section id="for-you" className="container-kih scroll-mt-24 pb-14">
 
@@ -342,6 +316,33 @@ function Index() {
 
       <ResidentPriorities />
 
+
+      <section id="im-here" className="border-y border-border bg-card scroll-mt-24">
+        <div className="container-kih py-14">
+          <p className="mb-5 text-sm font-bold uppercase tracking-wider text-brand">When the resident arrives, participation can become measurable&mdash;without making it public.</p>
+            <article className="flex flex-col rounded-lg bg-brand p-6 text-brand-foreground sm:p-8">
+              <div>
+                <span className="grid size-12 place-items-center rounded-lg bg-card text-brand"><Check /></span>
+                <p className="mt-5 text-xs font-extrabold uppercase text-brand-foreground/75">Private participation</p>
+                <h2 className="mt-2 text-4xl font-extrabold sm:text-5xl">I&apos;M HERE ✓</h2>
+                <p className="mt-3 max-w-2xl text-lg leading-relaxed text-brand-foreground/90">When you arrive, tap in. It closes the loop between a resource existing and a resident using it—without making your check-in public.</p>
+              </div>
+              <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
+                <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
+              </div>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+              </ol>
+              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
+            </article>
+        </div>
+      </section>
 
       <section id="my-neighborhood" className="container-kih scroll-mt-24 py-14">
         <p className="text-sm font-bold uppercase tracking-wider text-sky">Connection also means knowing what&apos;s happening around you.</p>
