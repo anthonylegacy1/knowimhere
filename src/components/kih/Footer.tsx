@@ -48,6 +48,7 @@ export function Footer() {
               </li>
               <li><Link to="/story" className="hover:text-brand">How We Got Here</Link></li>
               <li><Link to="/privacy" className="hover:text-brand">Privacy · Responsible AI · Terms</Link></li>
+              <li><Link to="/admin/analytics" className="text-muted-foreground hover:text-brand">Admin Access</Link></li>
             </ul>
           </div>
         </div>
