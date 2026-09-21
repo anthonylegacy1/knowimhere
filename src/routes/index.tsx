@@ -890,6 +890,28 @@ function DemoJourneyStep({ icon, title, text }: { icon: ReactNode; title: string
   );
 }
 
+function ParticipationStages() {
+  return (
+    <ol className="mt-4 flex flex-wrap items-stretch gap-3 sm:mt-8">
+      {[
+        { label: "Matched", text: "A resident sees a relevant opportunity." },
+        { label: "Showed interest", text: "They save it or open the details." },
+        { label: "Get there", text: "They plan directions or ride help." },
+        { label: "Participated", text: "They check in privately on arrival." },
+      ].map((stage, index, all) => (
+        <li key={stage.label} className="flex flex-1 basis-56 items-center gap-3">
+          <div className="card-flat h-full w-full p-5">
+            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Step {index + 1}</p>
+            <p className="mt-1 text-lg font-extrabold uppercase leading-snug">{stage.label}</p>
+            <p className="mt-2 text-sm text-foreground/65">{stage.text}</p>
+          </div>
+          {index < all.length - 1 && <ArrowRight className="hidden size-5 shrink-0 text-foreground/35 lg:block" aria-hidden />}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function ImHereJourney() {
   return (
     <>
