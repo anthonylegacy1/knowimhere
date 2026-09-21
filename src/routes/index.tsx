@@ -298,9 +298,8 @@ function Index() {
           </Button>
         </div>
 
-        <MyKIHCard />
-
       </section>
+
 
       <section id="nearby-map" className="container-kih scroll-mt-24 pt-8 pb-4">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
@@ -813,6 +812,11 @@ function Index() {
       </section>
 
       <section id="privacy-ai" className="border-y border-border bg-card scroll-mt-24"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Your location, check-ins, and preferences stay under your control. Know I&apos;m Here explains why recommendations appear and connects you to trusted official resources without sharing more than you choose.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency response service.</p></div></section>
+
+      <section id="my-kih" className="container-kih scroll-mt-24 py-12">
+        <MyKIHCard />
+      </section>
+
 
       <section id="kih-live-closing" className="mx-auto max-w-4xl scroll-mt-24 px-5 py-12 text-center sm:py-16">
         <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-brand">Know I&apos;m Here</p>
