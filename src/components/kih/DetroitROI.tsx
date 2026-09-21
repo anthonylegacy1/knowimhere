@@ -422,21 +422,19 @@ export function DetroitROI() {
               <li>• Identify gaps in access</li>
               <li>• Improve future resource decisions</li>
             </ul>
-          </div>
-        </Expandable>
-        <Expandable label="See economic impact opportunities">
-          <div className="grid gap-4 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-            {CITY_BENEFITS.map((b) => (
-              <div key={b} className="card-flat p-5">
-                <p className="font-display text-lg font-bold uppercase leading-snug">{b}</p>
-              </div>
-            ))}
-            {ROI_CARDS.slice(3).map(([t, d]) => (
-              <div key={t} className="card-flat p-5">
-                <p className="font-display text-lg font-bold uppercase">{t}</p>
-                <p className="mt-2 text-sm text-foreground/75">{d}</p>
-              </div>
-            ))}
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {CITY_BENEFITS.map((b) => (
+                <div key={b} className="card-flat p-5">
+                  <p className="font-display text-lg font-bold uppercase leading-snug">{b}</p>
+                </div>
+              ))}
+              {ROI_CARDS.slice(3).map(([t, d]) => (
+                <div key={t} className="card-flat p-5">
+                  <p className="font-display text-lg font-bold uppercase">{t}</p>
+                  <p className="mt-2 text-sm text-foreground/75">{d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </Expandable>
       </div>
