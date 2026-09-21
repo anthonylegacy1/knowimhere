@@ -246,6 +246,8 @@ function Index() {
           </Button>
         </div>
 
+        <MyKIHCard />
+
         <p className="mt-10 text-sm font-bold uppercase tracking-wider text-sky">Finding the resource is only the first step.</p>
         <div id="help-me-get-there" className="mt-8 scroll-mt-24 rounded-lg border border-border bg-card p-6">
           <p className="text-xs font-extrabold uppercase tracking-wider text-sky">Help me get there</p>
