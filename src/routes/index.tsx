@@ -320,19 +320,25 @@ function Index() {
         </div>
       </section>
 
-      <section id="community-public-health" className="container-kih scroll-mt-24 py-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">Start with one everyday need.</p>
+      <section id="community-public-health" className="container-kih scroll-mt-24 py-8 sm:py-10">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-brand">One everyday example</p>
         <article className="card-flat p-6 sm:p-8">
           <span className="eyebrow">Community + public health</span>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Food support, connected around you.</h2>
           <p className="mt-2 max-w-2xl text-foreground/70">
             Detroit already has pantries, nutrition programs, grocery assistance and community health resources. Know I&apos;m Here helps residents find them in one place.
           </p>
-          <Link to="/community-health" className="btn-base btn-brand mt-4 inline-flex min-h-12 items-center gap-2">
-            Explore Community + Public Health <ArrowRight className="size-4" aria-hidden />
-          </Link>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <a href="#how-kih-responds" className="btn-base btn-brand inline-flex min-h-12 items-center gap-2">
+              See how KIH connects the need <ArrowRight className="size-4" aria-hidden />
+            </a>
+            <Link to="/community-health" className="btn-base btn-outline inline-flex min-h-12 items-center gap-2">
+              Explore food support
+            </Link>
+          </div>
         </article>
       </section>
+
 
       <ResidentPriorities />
 
