@@ -225,8 +225,12 @@ function Index() {
             {CORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
           </div>
           {showMoreOpportunities && (
-            <div id="more-opportunities" className="mt-2 flex flex-wrap gap-2">
-              {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+            <div id="more-opportunities" className="mt-2">
+              <div className="flex flex-wrap gap-2">
+                {MORE_OPPORTUNITIES.map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+                <Link to="/civic" className={OPP_CHIP}><span aria-hidden>🗳️</span> Voting &amp; Civic Access</Link>
+              </div>
+              <p className="mt-2 max-w-xl text-sm text-foreground/65">Find trusted, official information about voting, registration, polling locations, and civic services.</p>
             </div>
           )}
           <Button type="button" variant="ghost" className="mt-3 min-h-12 font-bold text-ink" aria-expanded={showMoreOpportunities} aria-controls="more-opportunities" onClick={() => setShowMoreOpportunities((v) => !v)}>
