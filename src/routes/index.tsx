@@ -306,16 +306,16 @@ function Index() {
               <div className="mt-5 overflow-hidden rounded-lg border border-brand-foreground/20 bg-card shadow-lg">
                 <img src={imHerePhoneVisual} alt="A Detroit resident holds a phone showing Know I'm Here switched on with private participation enabled" width={1408} height={912} className="aspect-[14/9] w-full object-cover" loading="eager" />
               </div>
-              <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
-                <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
-                <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-                <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
-              </ol>
-              <Button asChild className="mt-6 min-h-14 self-start bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
+              <details className="group mt-5 sm:hidden">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-lg border border-brand-foreground/25 bg-brand-foreground/10 px-4 py-3 text-base font-extrabold uppercase">
+                  See the resident journey
+                  <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
+                </summary>
+                <ImHereJourney />
+              </details>
+              <div className="hidden sm:block">
+                <ImHereJourney />
+              </div>
             </article>
         </div>
       </section>
@@ -894,6 +894,23 @@ function DemoJourneyStep({ icon, title, text }: { icon: ReactNode; title: string
         <span className="mt-1 block text-sm leading-snug text-brand-foreground/85">{text}</span>
       </span>
     </li>
+  );
+}
+
+function ImHereJourney() {
+  return (
+    <>
+      <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
+        <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
+        <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
+        <DemoJourneyStep icon={<Check />} title="Check In" text="Tap in privately when you arrive." />
+      </ol>
+      <Button asChild className="mt-6 min-h-14 bg-card px-6 text-base text-brand hover:bg-card/90"><Link to="/demo">See Know I&apos;m Here Resident Funnel <ArrowRight /></Link></Button>
+    </>
   );
 }
 
