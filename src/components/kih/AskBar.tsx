@@ -1,10 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 
+import { useMenuOpen } from "@/lib/menu-state";
+
 // Sticky mobile "Ask KIH" bar — the primary mobile entry point.
 export function AskBar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const menuOpen = useMenuOpen();
   if (pathname.startsWith("/ask") || pathname.startsWith("/demo") || pathname.startsWith("/onboarding")) return null;
+  if (menuOpen) return null;
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-3 lg:hidden">
       <Link
