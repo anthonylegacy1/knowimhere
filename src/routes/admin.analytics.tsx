@@ -50,7 +50,95 @@ type RangeId = (typeof RANGES)[number][0];
 // current page view only and is sent to the server function to be verified.
 
 function resourceName(slug: string): string {
-  return RESOURCES.find((r) => r.id === slug)?.name ?? slug;
+  const found = RESOURCES.find((r) => r.id === slug)?.name;
+  if (found) return found;
+  return slug
+    .split(/[-_]/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/** Plain-English names for the technical event codes stored in the database. */
+const EVENT_LABELS: Record<string, string> = {
+  session_started: "Visit Started",
+  return_visit: "Return Visit",
+  resource_view: "Resource Viewed",
+  get_there: "Get There Used",
+  ask_kih_query: "Ask KIH Question",
+  search_submitted: "Search Made",
+  map_opened: "Map Opened",
+  map_marker_selected: "Map Marker Opened",
+  call_clicked: "Call Initiated",
+  resource_saved: "Resource Saved",
+  resource_interested: "Marked Interested",
+  external_resource_opened: "Partner Website Opened",
+  category_selected: "Category Explored",
+  location_enabled: "Current Location Used",
+  manual_area_selected: "Area Chosen Manually",
+  transportation_option_viewed: "Transportation Option Viewed",
+  kih_live_viewed: "KIH Live Viewed",
+  food_resource_viewed: "Food Resource Viewed",
+  fast_freddy_resource_viewed: "Fast Freddy Resource Viewed",
+  everyday_connect_opened: "Everyday Connect Opened",
+  verified_checkin: "Verified Check-In",
+  self_reported_checkin: "Self-Reported Check-In",
+};
+
+function eventLabel(type: string): string {
+  return EVENT_LABELS[type] ?? type.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function activitySentence(row: { eventType: string; slug: string | null; category: string | null }): string {
+  const res = row.slug ? resourceName(row.slug) : null;
+  const cat = row.category ? categoryLabel(row.category) : null;
+  switch (row.eventType) {
+    case "resource_view":
+      return res ? `Resident viewed ${res}.` : cat ? `Resident opened a ${cat} resource.` : "Resident viewed a resource.";
+    case "get_there":
+      return res ? `Resident used Get There for ${res}.` : "Resident used Get There.";
+    case "call_clicked":
+      return res ? `Resident started a call to ${res}.` : "Resident started a call to a provider.";
+    case "resource_saved":
+      return res ? `Resident saved ${res}.` : "Resident saved a resource.";
+    case "ask_kih_query":
+      return "Resident asked Know I'm Here a question.";
+    case "map_opened":
+      return "Resident opened the map.";
+    case "map_marker_selected":
+      return res ? `Resident opened ${res} from the map.` : "Resident opened a map marker.";
+    case "category_selected":
+      return cat ? `Resident explored ${cat}.` : "Resident explored a category.";
+    case "session_started":
+      return "Resident started a visit.";
+    case "return_visit":
+      return "Resident came back to Know I'm Here.";
+    case "external_resource_opened":
+      return res ? `Resident opened the website for ${res}.` : "Resident opened a partner website.";
+    default:
+      return res ? `${eventLabel(row.eventType)} — ${res}.` : `${eventLabel(row.eventType)}.`;
+  }
+}
+
+/** Event types the current app actually records; anything else is "not yet tracked". */
+const IMPLEMENTED = new Set(Object.keys(EVENT_LABELS));
+
+function Bars({ rows }: { rows: { label: string; value: number }[] }) {
+  const max = Math.max(1, ...rows.map((r) => r.value));
+  return (
+    <ul className="space-y-2">
+      {rows.map((r) => (
+        <li key={r.label}>
+          <div className="flex items-baseline justify-between gap-3 text-sm">
+            <span className="font-bold">{r.label}</span>
+            <span className="font-display text-lg font-bold">{r.value}</span>
+          </div>
+          <div className="mt-1 h-3 rounded-full bg-foreground/10">
+            <div className="h-3 rounded-full bg-brand" style={{ width: `${(r.value / max) * 100}%` }} />
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 function categoryLabel(id: string | null): string {
