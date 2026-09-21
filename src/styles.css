@@ -283,7 +283,9 @@ html.reduce-motion *::after {
   background-color: var(--cream);
   color: var(--ink);
   border: 1px solid oklch(0.24 0.03 265 / 8%);
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 @utility chip-sun {
   background-color: oklch(0.86 0.17 88 / 30%);

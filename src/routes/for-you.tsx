@@ -85,7 +85,6 @@ function ForYou() {
             </p>
           )}
         </div>
-        <span className="chip chip-sun text-[11px] uppercase tracking-wide">Prototype recommendation logic</span>
       </div>
 
       <div className="mt-6">

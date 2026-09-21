@@ -160,3 +160,13 @@
 - [x] Homepage order: Vision → Resident Funnel → Community + Public Health → For You → Ask KIH → Nearby Map → Help Me Get There → Partner Impact → Economic Impact → Everyday Connect → Fast Freddy → Discover Detroit → Privacy → Closing
 - [x] Grouped mobile menu (Resident Experience / Detroit Impact / Adoption + Community) with collapsed About + More
 - [x] Floating Ask KIH bar hides while the menu is open
+
+## Final submission QA (Venture 313)
+- [x] Full-site mobile crawl: all routes 200, no console errors, no horizontal overflow.
+- [x] Fixed mobile overflow on personalized picks and opportunities (card + chip wrapping).
+- [x] Removed the "Prototype recommendation logic" badge from the personalized header.
+- [x] Schedule/date regression tests pass (Saturday vs Wednesday Fast Freddy bug).
+- [x] Database + RLS audit: insert-only anon writes, no public reads of check-ins or events.
+- [x] Admin analytics passphrase verified server-side only.
+- [x] README rewritten for Buildathon submission.
+- [ ] GitHub connection requires the user to link the repo from the Lovable editor.

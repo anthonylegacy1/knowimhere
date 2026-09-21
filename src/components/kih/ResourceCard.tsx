@@ -47,7 +47,7 @@ export function ResourceCard({
   const hasPlace = resourceCoords(resource) !== null;
 
   return (
-    <article className="card-pop flex flex-col p-5 transition-transform hover:-translate-y-0.5">
+    <article className="card-pop flex min-w-0 flex-col break-words p-5 transition-transform hover:-translate-y-0.5">
       <div className="flex items-center justify-between gap-2">
         <span className="text-3xl" aria-hidden>
           {cat.emoji}
