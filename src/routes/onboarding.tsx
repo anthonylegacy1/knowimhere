@@ -220,6 +220,24 @@ function Onboarding() {
                 />
               ))}
             </div>
+            <div className="mt-6 rounded-2xl border-2 border-border bg-card p-4">
+              <label className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-1 size-5 shrink-0 accent-[var(--brand,#FF5A1F)]"
+                />
+                <span className="text-base font-bold text-ink">
+                  I have read and accept the{" "}
+                  <Link to="/privacy" className="underline">Terms of Use</Link> and{" "}
+                  <Link to="/privacy" className="underline">Privacy Policy</Link>.
+                </span>
+              </label>
+              <p className="mt-2 text-sm text-foreground/65">
+                Your profile is saved on this device. KIH can use your selected preferences and activity to improve your recommendations. You control your profile, location settings and preferences.
+              </p>
+            </div>
           </section>
         )}
 
