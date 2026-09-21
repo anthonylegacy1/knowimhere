@@ -256,7 +256,7 @@ function Index() {
 
         <SectionHeading eyebrow="For You Today" title="Find what fits. Then find your way there." text="Ask in your own words or explore opportunities based on the interests and location you choose. When you find something useful, Know I'm Here can help you understand your next step and how to get there." />
 
-        <article className="card-flat mt-6 bg-ink p-6 text-cream sm:p-8">
+        <article id="ask-kih" className="card-flat mt-6 scroll-mt-24 bg-ink p-6 text-cream sm:p-8">
           <div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-lg bg-aqua text-ink"><MessageCircle /></span><div><p className="text-xs font-extrabold uppercase text-aqua">Ask KIH</p><h3 className="text-2xl font-extrabold">Ask the way you normally would.</h3></div></div>
           <ul className="mt-4 grid gap-2 text-cream/80 sm:grid-cols-3">
             <li className="rounded-lg bg-cream/10 px-3 py-2 text-sm">“What can I do with my kids this weekend?”</li>
