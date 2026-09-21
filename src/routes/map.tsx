@@ -12,6 +12,7 @@ import { useApp } from "@/lib/app-store";
 import { distanceToResource, isApproximate } from "@/lib/resource-distance";
 import { useNearbyResults } from "@/lib/nearby-results";
 import { track } from "@/lib/analytics";
+import { OfficialAccessPanel } from "@/components/kih/OfficialAccessPanel";
 
 // The map library only downloads once the resident opens the map.
 const NearbyMap = lazy(() => import("@/components/kih/NearbyMap"));
@@ -166,6 +167,8 @@ function MapPage() {
           </button>
         </div>
       </div>
+
+      <OfficialAccessPanel selected={selectedCategories} />
 
       {markers.length === 0 ? (
         <div className="card-flat mt-6 p-6 text-center">
