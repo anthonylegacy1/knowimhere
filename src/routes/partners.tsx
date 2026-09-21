@@ -538,6 +538,17 @@ function Partners() {
           </Link>
         </div>
       </div>
+
+      <div className="mt-10 rounded-2xl border-2 border-border bg-card p-6 text-center">
+        <h2 className="font-display text-lg font-bold">Interested in partnering with Know I&apos;m Here?</h2>
+        <p className="mx-auto mt-2 max-w-xl text-sm text-foreground/70">
+          Partnership opportunities, resource updates or community feedback — we&apos;d like to hear from you.
+        </p>
+        <a href="mailto:info@knowimhere.com" className="btn-base btn-brand mt-4 inline-flex">
+          Contact KIH
+        </a>
+        <p className="mt-3 text-xs font-semibold text-muted-foreground">info@knowimhere.com</p>
+      </div>
     </div>
   );
 }
