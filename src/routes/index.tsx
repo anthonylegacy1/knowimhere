@@ -240,13 +240,13 @@ function Index() {
 
         <div className="mt-8">
           <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Explore opportunities</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Link to="/opportunities" className={OPP_CHIP}><span aria-hidden>🎓</span> Youth &amp; Education</Link>
-            <Link to="/work-after-55" className={OPP_CHIP}><span aria-hidden>💼</span> Jobs &amp; Training</Link>
-            {CORE_OPPORTUNITIES.slice(0, 3).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
-            <Link to="/civic" className={OPP_CHIP}><span aria-hidden>🗳️</span> Voting &amp; Civic Access</Link>
-            <Link to="/safety" hash="shelter" className={OPP_CHIP}><span aria-hidden>🏠</span> Housing &amp; Safe Shelter</Link>
-            {CORE_OPPORTUNITIES.slice(3).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CHIP}><span aria-hidden>{item.emoji}</span> {item.label}</Link>)}
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            <Link to="/opportunities" className={OPP_CARD}><span aria-hidden className="shrink-0">🎓</span> <span className="min-w-0">Youth &amp; Education</span></Link>
+            <Link to="/ask" search={{ q: CORE_OPPORTUNITIES[0].q }} className={OPP_CARD}><span aria-hidden className="shrink-0">{CORE_OPPORTUNITIES[0].emoji}</span> <span className="min-w-0">{CORE_OPPORTUNITIES[0].label}</span></Link>
+            <Link to="/work-after-55" className={OPP_CARD}><span aria-hidden className="shrink-0">💼</span> <span className="min-w-0">Jobs &amp; Training</span></Link>
+            {CORE_OPPORTUNITIES.slice(1).map((item) => <Link key={item.label} to="/ask" search={{ q: item.q }} className={OPP_CARD}><span aria-hidden className="shrink-0">{item.emoji}</span> <span className="min-w-0">{item.label}</span></Link>)}
+            <Link to="/civic" className={OPP_CARD}><span aria-hidden className="shrink-0">🗳️</span> <span className="min-w-0">Voting &amp; Civic Access</span></Link>
+            <Link to="/safety" hash="shelter" className={OPP_CARD}><span aria-hidden className="shrink-0">🏠</span> <span className="min-w-0">Housing &amp; Safe Shelter</span></Link>
           </div>
           <p className="mt-2 max-w-xl text-sm text-foreground/65">Find trusted, official information about voting, registration, polling locations, and civic services.</p>
           <p className="mt-1 max-w-xl text-sm text-foreground/65">Find emergency shelter, temporary housing and safe-place resources when you need somewhere secure to stay.</p>
