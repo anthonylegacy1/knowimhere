@@ -53,6 +53,7 @@ import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { DetroitROI } from "@/components/kih/DetroitROI";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
+import { MyKIHCard } from "@/components/kih/MyKIHCard";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { ResidentPriorities } from "@/components/kih/ResidentPriorities";
