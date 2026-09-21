@@ -183,6 +183,44 @@ function Expandable({
   );
 }
 
+function WhereKihFits() {
+  return (
+    <>
+      <div className="mx-auto mt-4 max-w-3xl sm:mt-5">
+        <div className="card-flat p-5">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Public + community investment</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {INVESTMENT.map((i) => (
+              <li key={i} className="chip text-sm">
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Arrow />
+        <div className="rounded-lg bg-brand p-5 text-brand-foreground">
+          <p className="text-xs font-extrabold uppercase tracking-wide">Know I&apos;m Here connection layer</p>
+          <p className="mt-2 font-display text-xl font-extrabold uppercase">Discover → Get There → Check In → Measure</p>
+        </div>
+        <Arrow />
+        <div className="card-flat bg-aqua-soft/60 p-5">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {[...RETURN_PRIMARY, ...RETURN_MORE].map((r) => (
+              <li key={r} className="chip text-sm">
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p className="mt-4 text-center text-sm text-foreground/70">
+        Know I&apos;m Here is designed to sit between investment that already exists and actual resident participation.
+      </p>
+    </>
+  );
+}
+
 function Arrow() {
   return (
     <div className="flex justify-center py-2 text-foreground/40" aria-hidden>
@@ -285,40 +323,16 @@ export function DetroitROI() {
       {/* 4 — WHERE KNOW I'M HERE SITS (always visible) */}
       <div>
         <h3 className="font-display text-2xl font-bold">Where Know I&apos;m Here sits</h3>
-        <div className="mx-auto mt-5 max-w-3xl">
-          <div className="card-flat p-5">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Public + community investment</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {INVESTMENT.map((i) => (
-                <li key={i} className="chip text-sm">
-                  {i}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Arrow />
-          <div className="rounded-lg bg-brand p-5 text-brand-foreground">
-            <p className="text-xs font-extrabold uppercase tracking-wide">Know I&apos;m Here connection layer</p>
-            <p className="mt-2 font-display text-xl font-extrabold uppercase">
-              Discover → Get There → Check In → Measure
-            </p>
-          </div>
-          <Arrow />
-          <div className="card-flat bg-aqua-soft/60 p-5">
-            <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {[...RETURN_PRIMARY, ...RETURN_MORE].map((r) => (
-                <li key={r} className="chip text-sm">
-                  {r}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <details className="group mt-4 sm:hidden">
+          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3 text-base font-extrabold uppercase tracking-wide">
+            See where KIH fits
+            <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
+          </summary>
+          <WhereKihFits />
+        </details>
+        <div className="hidden sm:block">
+          <WhereKihFits />
         </div>
-        <p className="mt-4 text-center text-sm text-foreground/70">
-          Know I&apos;m Here is designed to sit between investment that already exists and actual resident
-          participation.
-        </p>
       </div>
 
       {/* 5 — SINGLE RESIDENT JOURNEY (steps 1-2 visible) */}
