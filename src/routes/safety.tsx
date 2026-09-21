@@ -229,6 +229,77 @@ function Safety() {
         </Link>
       </section>
 
+      <section id="shelter" className="mt-12 scroll-mt-24">
+        <h2 className="font-display text-2xl font-bold">Safe place &amp; emergency shelter resources</h2>
+        <p className="mt-1 text-foreground/70">
+          Know I&apos;m Here can help residents and families quickly find trusted emergency shelter, temporary housing, crisis support, and
+          safe-place resources when they need somewhere secure to stay.
+        </p>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {[
+            "“My family needs a safe place to stay tonight.”",
+            "“Where can I find emergency shelter near me?”",
+            "“I'm worried about losing my housing. Where can I get help?”",
+            "“I need a safe place for me and my children.”",
+          ].map((q) => (
+            <li key={q} className="rounded-lg border border-border bg-cream px-3 py-2 text-sm font-semibold text-foreground/80">
+              {q}
+            </li>
+          ))}
+        </ul>
+        <ol className="mt-4 flex flex-wrap items-center gap-2">
+          {["Ask KIH", "Housing / safety need", "Verified shelter or housing resource", "Contact / availability", "Get there"].map((s, i, a) => (
+            <li key={s} className="flex items-center gap-2">
+              <span className="chip bg-card text-xs font-semibold text-foreground/80">{s}</span>
+              {i < a.length - 1 && <span aria-hidden className="text-brand">→</span>}
+            </li>
+          ))}
+        </ol>
+
+        <div className="card-pop mt-5 p-5">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Featured external resource</p>
+          <h3 className="mt-1 font-display text-xl font-bold">313 Safe Beds</h3>
+          <p className="mt-1 text-foreground/75">Find emergency shelter and housing resources across Metro Detroit.</p>
+          <a
+            href="https://www.313safebeds.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn-base btn-primary mt-4 inline-flex"
+          >
+            Visit 313 Safe Beds <ArrowUpRight className="size-5" aria-hidden />
+          </a>
+          <p className="mt-3 text-xs text-muted-foreground">
+            External resource, operated independently of Know I&apos;m Here.
+          </p>
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <ItemLink
+            item={{
+              label: "Detroit housing & homelessness help",
+              note: "City housing assistance, eviction help and homelessness services.",
+              source: "City of Detroit",
+              href: "https://detroitmi.gov/departments/housing-and-revitalization-department",
+            }}
+          />
+          <ItemLink
+            item={{
+              label: "Domestic violence support, 24/7",
+              note: "Confidential help finding a safe place for you and your children.",
+              source: "National Domestic Violence Hotline",
+              tel: "800-799-7233",
+            }}
+          />
+        </div>
+
+        <p className="mt-4 rounded-lg border border-border bg-cream p-4 text-sm font-semibold text-foreground">
+          Know I&apos;m Here does not control shelter availability or intake decisions. Shelter providers and partner organizations make all
+          intake and placement decisions.
+        </p>
+      </section>
+
+
+
       <section className="mt-12">
         <h2 className="font-display text-2xl font-bold">Getting there when something is affecting the area</h2>
         <p className="mt-1 text-foreground/70">
