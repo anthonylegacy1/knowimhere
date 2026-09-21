@@ -143,7 +143,7 @@ function Index() {
 
   return (
     <div>
-      <section className="home-hero relative overflow-hidden">
+      <section id="vision" className="home-hero scroll-mt-24 relative overflow-hidden">
         <img src={heroAsset.url} alt="Detroit skyline and Renaissance Center glowing at sunset across the river" width={1672} height={941} className="absolute inset-0 size-full object-cover" />
         <div className="container-kih relative z-10 flex min-h-[34rem] flex-col items-center px-5 pb-14 pt-16 text-center text-cream sm:min-h-[39rem] sm:pb-20 sm:pt-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-ink/55 px-4 py-2 text-xs font-extrabold uppercase tracking-wider backdrop-blur"><MapPin className="size-3.5 text-aqua" /> Venture 313 Buildathon Prototype · Detroit</span>
@@ -198,7 +198,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="product-demo-band bg-background pb-14 pt-8 sm:pt-10">
+      <section id="resident-funnel" className="product-demo-band scroll-mt-24 bg-background pb-14 pt-8 sm:pt-10">
         <div className="container-kih">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-extrabold uppercase tracking-wider text-sky">See Know I&apos;m Here in action</p>
@@ -252,7 +252,7 @@ function Index() {
 
       <ResidentPriorities />
 
-      <section className="container-kih pb-14">
+      <section id="for-you" className="container-kih scroll-mt-24 pb-14">
 
         <SectionHeading eyebrow="For You Today" title="Find what fits. Then find your way there." text="Ask in your own words or explore opportunities based on the interests and location you choose. When you find something useful, Know I'm Here can help you understand your next step and how to get there." />
 
@@ -302,7 +302,7 @@ function Index() {
 
       </section>
 
-      <section className="container-kih pt-8 pb-4">
+      <section id="nearby-map" className="container-kih scroll-mt-24 pt-8 pb-4">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
         <div className="mt-6"><ImHereControl /></div>
         <div className="mt-6"><NearbyMapPreview /></div>
@@ -563,7 +563,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="container-kih py-14">
+      <section id="everyday-connect" className="container-kih scroll-mt-24 py-14">
         <div className="max-w-3xl">
           <p className="text-xs font-extrabold uppercase text-sky">The ecosystem</p>
           <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Connecting Resources Is Only Half the Solution</h2>
@@ -812,9 +812,9 @@ function Index() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Your location, check-ins, and preferences stay under your control. Know I&apos;m Here explains why recommendations appear and connects you to trusted official resources without sharing more than you choose.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency response service.</p></div></section>
+      <section id="privacy-ai" className="border-y border-border bg-card scroll-mt-24"><div className="container-kih grid gap-6 py-14 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase text-sky">Privacy + responsible AI</p><h2 className="mt-2 text-3xl font-extrabold">You stay in control.</h2><p className="mt-3 text-foreground/70">Your location, check-ins, and preferences stay under your control. Know I&apos;m Here explains why recommendations appear and connects you to trusted official resources without sharing more than you choose.</p><Button asChild variant="outline" className="mt-5"><Link to="/privacy">Read our commitments <ArrowRight /></Link></Button></div><div className="grid gap-3 sm:grid-cols-3"><Promise icon={<LockKeyhole />} title="Private by default" /><Promise icon={<Eye />} title="Explain the match" /><Promise icon={<ShieldCheck />} title="You choose what to share" /></div><p className="lg:col-span-2 text-sm font-bold text-brand">For emergencies, call 911. Know I&apos;m Here is not an emergency response service.</p></div></section>
 
-      <section className="mx-auto max-w-4xl px-5 py-12 text-center sm:py-16">
+      <section id="kih-live-closing" className="mx-auto max-w-4xl scroll-mt-24 px-5 py-12 text-center sm:py-16">
         <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-brand">Know I&apos;m Here</p>
         <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
           The right resource.<br />The right opportunity.<br />For the right Detroit resident.<br />
