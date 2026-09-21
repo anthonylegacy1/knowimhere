@@ -25,6 +25,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as WorkAfter55RouteImport } from './routes/work-after-55'
@@ -111,6 +112,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SponsorshipRoute = SponsorshipRouteImport.update({
   id: '/sponsorship',
   path: '/sponsorship',
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
   '/sponsorship': typeof SponsorshipRoute
   '/story': typeof StoryRoute
   '/work-after-55': typeof WorkAfter55Route
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/partners'
     | '/privacy'
+    | '/safety'
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/partners'
     | '/privacy'
+    | '/safety'
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/partners'
     | '/privacy'
+    | '/safety'
     | '/sponsorship'
     | '/story'
     | '/work-after-55'
@@ -296,6 +308,7 @@ export interface RootRouteChildren {
   OpportunitiesRoute: typeof OpportunitiesRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
+  SafetyRoute: typeof SafetyRoute
   SponsorshipRoute: typeof SponsorshipRoute
   StoryRoute: typeof StoryRoute
   WorkAfter55Route: typeof WorkAfter55Route
@@ -417,6 +430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sponsorship': {
       id: '/sponsorship'
       path: '/sponsorship'
@@ -472,6 +492,7 @@ const rootRouteChildren: RootRouteChildren = {
   OpportunitiesRoute: OpportunitiesRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
+  SafetyRoute: SafetyRoute,
   SponsorshipRoute: SponsorshipRoute,
   StoryRoute: StoryRoute,
   WorkAfter55Route: WorkAfter55Route,
