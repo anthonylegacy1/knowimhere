@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { ClientOnly, createFileRoute, Link } from "@tanstack/react-router";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { Bookmark, BookmarkCheck, MapPin } from "lucide-react";
 import { toast } from "sonner";
@@ -184,23 +184,31 @@ function MapPage() {
         </div>
       ) : view === "map" ? (
         <div className="mt-6">
-          <Suspense
+          <ClientOnly
             fallback={
               <div className="grid h-[45vh] min-h-[280px] place-items-center rounded-lg border-2 border-border bg-card text-sm font-bold text-muted-foreground sm:h-[420px]">
                 Loading map…
               </div>
             }
           >
-            <NearbyMap
-              markers={markers}
-              center={center}
-              you={activeCoords}
-              youLabel={youLabel}
-              selectedId={selectedId}
-              onSelect={selectMarker}
-              expanded={expanded}
-            />
-          </Suspense>
+            <Suspense
+              fallback={
+                <div className="grid h-[45vh] min-h-[280px] place-items-center rounded-lg border-2 border-border bg-card text-sm font-bold text-muted-foreground sm:h-[420px]">
+                  Loading map…
+                </div>
+              }
+            >
+              <NearbyMap
+                markers={markers}
+                center={center}
+                you={activeCoords}
+                youLabel={youLabel}
+                selectedId={selectedId}
+                onSelect={selectMarker}
+                expanded={expanded}
+              />
+            </Suspense>
+          </ClientOnly>
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
             <p>
               {markers.length} mapped {markers.length === 1 ? "resource" : "resources"} · dashed markers are approximate
