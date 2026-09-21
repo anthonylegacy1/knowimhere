@@ -338,18 +338,19 @@ function CivicAccess() {
 function TabPanel({ tab }: { tab: TabContent }) {
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-center gap-3">
-        <h3 className="font-display text-xl font-bold sm:text-2xl">{tab.title}</h3>
+      <div className="flex flex-wrap items-center gap-2">
+        <h4 className="font-display text-lg font-bold sm:text-xl">{tab.title}</h4>
         {tab.badge && (
           <span
-            className={`chip text-xs font-extrabold uppercase tracking-wide ${
+            className={`chip text-[0.7rem] font-extrabold uppercase tracking-wide ${
               tab.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
             }`}
           >
-            {tab.badge}
+            {tab.id === "health" ? "Primary focus" : tab.badge}
           </span>
         )}
       </div>
+
       <Block label="What residents are concerned about">
         <p>{tab.concern}</p>
       </Block>
