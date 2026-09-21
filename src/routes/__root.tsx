@@ -133,8 +133,16 @@ function RootComponent() {
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>
-        <Footer />
-        <AskBar />
+        {isAdmin ? (
+          <footer className="border-t-2 border-border bg-cream py-6 text-center text-xs text-muted-foreground print:hidden">
+            Know I&apos;m Here — internal admin area. Aggregate data only.
+          </footer>
+        ) : (
+          <>
+            <Footer />
+            <AskBar />
+          </>
+        )}
         <Toaster position="top-center" />
         </LocationProvider>
       </AppProvider>
