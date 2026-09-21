@@ -232,6 +232,12 @@ function Index() {
           <Button asChild variant="outline" className="mt-4 min-h-12"><Link to="/for-you">See Personalized Picks <ArrowRight /></Link></Button>
         </article>
 
+        <div id="nearby-map" className="mt-8 scroll-mt-24">
+          <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
+          <div className="mt-6"><ImHereControl /></div>
+          <div className="mt-6"><NearbyMapPreview /></div>
+        </div>
+
         <div className="mt-8">
           <p className="text-xs font-extrabold uppercase tracking-wider text-brand">Explore opportunities</p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -258,12 +264,6 @@ function Index() {
           </Button>
         </div>
 
-      </section>
-
-      <section id="nearby-map" className="container-kih scroll-mt-24 pt-8 pb-10">
-        <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
-        <div className="mt-6"><ImHereControl /></div>
-        <div className="mt-6"><NearbyMapPreview /></div>
       </section>
 
       <section id="community-public-health" className="container-kih scroll-mt-24 py-8 sm:py-10">
