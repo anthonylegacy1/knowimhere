@@ -156,12 +156,103 @@ export function AreaPicker({ onDone, compact = false }: { onDone?: () => void; c
   );
 }
 
-function ErrorPanel() {
+/** Collapsed-by-default phone permission help. No GPS requests are made from here. */
+function LocationHelpPanel({
+  open,
+  setOpen,
+  id = "imhere-permission-help",
+}: {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+  id?: string;
+}) {
+  const [manual, setManual] = useState(false);
+  return (
+    <section className="mt-4 rounded-lg border-2 border-border bg-background">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen(!open)}
+        className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
+      >
+        <span>
+          <span className="block font-display text-base font-extrabold sm:text-lg">
+            Having trouble turning on location?
+          </span>
+          <span className="block text-sm font-semibold text-foreground/65">Check your phone settings</span>
+        </span>
+        <span className="text-xl font-extrabold text-brand" aria-hidden>{open ? "−" : "+"}</span>
+      </button>
+
+      {open && (
+        <div id={id} className="space-y-4 border-t border-border p-4 sm:p-5">
+          <div className="rounded-lg border border-border bg-card p-4">
+            <p className="text-sm font-extrabold uppercase tracking-wide text-brand">iPhone / Safari</p>
+            <p className="mt-1 text-sm font-semibold text-foreground/70">If location is not working:</p>
+            <ol className="mt-2 grid list-decimal gap-1 pl-5 text-sm text-foreground/80">
+              <li>Open Settings</li>
+              <li>Tap Privacy &amp; Security</li>
+              <li>Tap Location Services</li>
+              <li>Make sure Location Services is ON</li>
+              <li>Scroll to Safari Websites</li>
+              <li>Select While Using the App</li>
+              <li>Turn Precise Location ON</li>
+              <li>Return to Know I&apos;m Here and tap Update My Location</li>
+            </ol>
+            <p className="mt-2 text-sm text-foreground/65">
+              If Safari previously had location set to Never, changing this setting may be required before Know
+              I&apos;m Here can access your location.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-border bg-card p-4">
+            <p className="text-sm font-extrabold uppercase tracking-wide text-brand">Android / Chrome</p>
+            <p className="mt-1 text-sm font-semibold text-foreground/70">If location is not working:</p>
+            <ol className="mt-2 grid list-decimal gap-1 pl-5 text-sm text-foreground/80">
+              <li>Open Settings</li>
+              <li>Tap Location</li>
+              <li>Make sure Use Location is ON</li>
+              <li>Open App permissions / Location permissions</li>
+              <li>Select Chrome or the browser you are using</li>
+              <li>Choose Allow only while using the app</li>
+              <li>Turn Use precise location ON if available</li>
+              <li>Return to Know I&apos;m Here and tap Update My Location</li>
+            </ol>
+            <p className="mt-2 text-sm text-foreground/65">
+              If the browser still does not ask for location, open the browser&apos;s site permissions for
+              knowimhere.com and make sure Location is set to Allow.
+            </p>
+          </div>
+
+          <div className="rounded-lg border-2 border-sky/40 bg-sky/10 p-4">
+            <p className="font-display text-base font-bold">Still having trouble?</p>
+            <Button type="button" className="mt-2 min-h-12" onClick={() => setManual((v) => !v)}>
+              Choose Area Manually
+            </Button>
+            <p className="mt-2 text-sm text-foreground/70">
+              You can always enter a Detroit ZIP code or neighborhood without turning on precise location.
+            </p>
+            {manual && <div className="mt-3"><AreaPicker compact onDone={() => setManual(false)} /></div>}
+          </div>
+
+          <p className="text-sm text-foreground/65">
+            Location is optional. Know I&apos;m Here uses it to personalize nearby resources. Your precise location is
+            not made public.
+          </p>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ErrorPanel({ onOpenHelp }: { onOpenHelp?: () => void }) {
   const { error, requestGps, phase, staleReading } = useLocationState();
   const [manual, setManual] = useState(false);
   if (!error) return null;
   const retryable = error.kind !== "unsupported";
   const trouble = error.kind === "timeout" || error.kind === "unavailable";
+  const permissionHelp = error.kind === "denied" || trouble;
   return (
     <div className="mt-4 rounded-lg border-2 border-sun bg-sun/15 p-4" role="status" aria-live="polite">
       <p className="font-bold">{error.message}</p>
@@ -170,10 +261,21 @@ function ErrorPanel() {
           We&apos;re having trouble getting a precise location right now.
         </p>
       )}
+      {permissionHelp && (
+        <p className="mt-1 text-sm font-semibold text-foreground/70">
+          We couldn&apos;t access your location. Check your phone&apos;s location permissions or choose your area
+          manually.
+        </p>
+      )}
       <div className="mt-3 flex flex-wrap gap-2">
         {retryable && (
           <Button type="button" variant="outline" className="min-h-12" disabled={phase === "requesting"} onClick={() => void requestGps()}>
             {phase === "requesting" ? <><Loader2 className="size-5 animate-spin" /> Finding your location…</> : "Try Again"}
+          </Button>
+        )}
+        {permissionHelp && onOpenHelp && (
+          <Button type="button" variant="outline" className="min-h-12" onClick={onOpenHelp}>
+            Check Location Settings
           </Button>
         )}
         <Button type="button" className="min-h-12" onClick={() => setManual((v) => !v)}>
@@ -184,6 +286,7 @@ function ErrorPanel() {
     </div>
   );
 }
+
 
 /** Compact on/off switch used in tight spots. */
 export function ImHereSwitch({ className = "" }: { className?: string }) {
@@ -459,6 +562,7 @@ export function ImHereControl() {
   const [ask, setAsk] = useState(false);
   const [manual, setManual] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+  const [openHelp, setOpenHelp] = useState(false);
   const askLocation = useAskLocation((ok) => { if (ok) setAsk(false); });
 
   return (
@@ -543,7 +647,9 @@ export function ImHereControl() {
 
         <LocationPrivacyPanel />
 
-        {error && <ErrorPanel />}
+        <LocationHelpPanel open={openHelp} setOpen={setOpenHelp} />
+
+        {error && <ErrorPanel onOpenHelp={() => setOpenHelp(true)} />}
         {manual && <div className="mt-4"><AreaPicker onDone={() => setManual(false)} /></div>}
 
         <button
