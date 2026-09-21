@@ -257,7 +257,7 @@ function Onboarding() {
                 </button>
               </>
             ) : (
-              <button type="button" onClick={finish} className="btn-base btn-brand">
+              <button type="button" onClick={finish} disabled={!agreed} className="btn-base btn-brand disabled:opacity-50">
                 Show me what&apos;s for me
               </button>
             )}
