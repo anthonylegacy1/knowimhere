@@ -53,6 +53,7 @@ import { PhoneDemo } from "@/components/kih/PhoneDemo";
 import { DetroitROI } from "@/components/kih/DetroitROI";
 import { ImHereControl, NearMeButton } from "@/components/kih/ImHere";
 import { NearbyMapPreview } from "@/components/kih/NearbyMapPreview";
+import { MyKIHCard } from "@/components/kih/MyKIHCard";
 import { EverydayConnectTip } from "@/components/kih/EverydayConnectTip";
 import { SectionHeading } from "@/components/kih/SectionHeading";
 import { ResidentPriorities } from "@/components/kih/ResidentPriorities";
@@ -244,6 +245,8 @@ function Index() {
             {showMoreOpportunities ? <>Show Less <ChevronUp /></> : <>More Opportunities <ChevronDown /></>}
           </Button>
         </div>
+
+        <MyKIHCard />
 
         <p className="mt-10 text-sm font-bold uppercase tracking-wider text-sky">Finding the resource is only the first step.</p>
         <div id="help-me-get-there" className="mt-8 scroll-mt-24 rounded-lg border border-border bg-card p-6">

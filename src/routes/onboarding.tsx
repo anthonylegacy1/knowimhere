@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { EMPTY_PROFILE, useApp, type Profile } from "@/lib/app-store";
 import {
@@ -55,6 +55,7 @@ function Onboarding() {
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState<Profile>(EMPTY_PROFILE);
   const [showMore, setShowMore] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   useEffect(() => {
     if (hydrated) setDraft({ ...profile, isDemo: false });
@@ -220,6 +221,24 @@ function Onboarding() {
                 />
               ))}
             </div>
+            <div className="mt-6 rounded-2xl border-2 border-border bg-card p-4">
+              <label className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-1 size-5 shrink-0 accent-[var(--brand,#FF5A1F)]"
+                />
+                <span className="text-base font-bold text-ink">
+                  I have read and accept the{" "}
+                  <Link to="/privacy" className="underline">Terms of Use</Link> and{" "}
+                  <Link to="/privacy" className="underline">Privacy Policy</Link>.
+                </span>
+              </label>
+              <p className="mt-2 text-sm text-foreground/65">
+                Your profile is saved on this device. KIH can use your selected preferences and activity to improve your recommendations. You control your profile, location settings and preferences.
+              </p>
+            </div>
           </section>
         )}
 
@@ -238,7 +257,7 @@ function Onboarding() {
                 </button>
               </>
             ) : (
-              <button type="button" onClick={finish} className="btn-base btn-brand">
+              <button type="button" onClick={finish} disabled={!agreed} className="btn-base btn-brand disabled:opacity-50">
                 Show me what&apos;s for me
               </button>
             )}
