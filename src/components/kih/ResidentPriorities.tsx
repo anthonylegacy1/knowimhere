@@ -335,21 +335,24 @@ function CivicAccess() {
   );
 }
 
-function TabPanel({ tab }: { tab: TabContent }) {
+function TabPanel({ tab, hideTitle = false }: { tab: TabContent; hideTitle?: boolean }) {
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap items-center gap-2">
-        <h4 className="font-display text-lg font-bold sm:text-xl">{tab.title}</h4>
-        {tab.badge && (
-          <span
-            className={`chip text-[0.7rem] font-extrabold uppercase tracking-wide ${
-              tab.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
-            }`}
-          >
-            {tab.id === "health" ? "Primary focus" : tab.badge}
-          </span>
-        )}
-      </div>
+      {!hideTitle && (
+        <div className="flex flex-wrap items-center gap-2">
+          <h4 className="font-display text-lg font-bold sm:text-xl">{tab.title}</h4>
+          {tab.badge && (
+            <span
+              className={`chip text-[0.7rem] font-extrabold uppercase tracking-wide ${
+                tab.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
+              }`}
+            >
+              {tab.id === "health" ? "Primary focus" : tab.badge}
+            </span>
+          )}
+        </div>
+      )}
+
 
       <Block label="What residents are concerned about">
         <p>{tab.concern}</p>
@@ -529,9 +532,35 @@ export function ResidentPriorities() {
               aria-labelledby={`priority-tab-${t.id}`}
               className="card-flat mt-5 p-5 sm:p-7"
             >
-              <TabPanel tab={t} />
+              <div className="flex flex-wrap items-center gap-2">
+                <h4 className="font-display text-lg font-bold sm:text-xl">{t.title}</h4>
+                {t.badge && (
+                  <span
+                    className={`chip text-[0.7rem] font-extrabold uppercase tracking-wide ${
+                      t.id === "health" ? "bg-brand text-background" : "bg-cream text-foreground/70"
+                    }`}
+                  >
+                    {t.id === "health" ? "Primary focus" : t.badge}
+                  </span>
+                )}
+              </div>
+              <p className="mt-2 max-w-3xl text-sm text-foreground/70">
+                {t.id === "health"
+                  ? "See how KIH connects resident needs to existing health, food, wellness, senior, caregiver, recreation and community resources."
+                  : "See how the same connection architecture could apply to this Detroit priority area."}
+              </p>
+              <details key={`${t.id}-details`} className="group mt-4 rounded-lg border-2 border-border bg-background">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-extrabold uppercase tracking-wide">
+                  <span>Explore {t.title} details</span>
+                  <ChevronDown className="size-5 shrink-0 text-brand transition-transform group-open:rotate-180" aria-hidden />
+                </summary>
+                <div className="border-t border-border px-4 py-5">
+                  <TabPanel tab={t} hideTitle />
+                </div>
+              </details>
             </div>
           ))}
+
         </div>
 
         <p className="mt-6 max-w-3xl rounded-lg border-2 border-border bg-cream p-4 font-bold text-foreground">
