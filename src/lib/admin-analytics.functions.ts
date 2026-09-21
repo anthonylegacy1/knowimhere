@@ -326,8 +326,23 @@ export const getAdminAnalytics = createServerFn({ method: "POST" })
       checkInsFromMap: checkins.filter((c) => c.source === "map").length,
     };
 
+    const dayMap = new Map<string, number>();
+    for (const e of events) {
+      const d = e.created_at.slice(0, 10);
+      dayMap.set(d, (dayMap.get(d) ?? 0) + 1);
+    }
+
     return {
       status: "ok",
+      eventTypes: countBy(events, (e) => e.event_type).map((c) => ({ eventType: c.label, count: c.value })),
+      recent: events.slice(0, 40).map((e) => ({
+        eventType: e.event_type,
+        slug: e.resource_slug,
+        category: e.resource_category,
+        at: e.created_at,
+      })),
+      daily: [...dayMap.entries()].map(([date, ev]) => ({ date, events: ev })).sort((a, b) => a.date.localeCompare(b.date)),
+      checkInTotal: checkins.length,
       generatedAt: new Date().toISOString(),
       rangeLabel: data.from ? `${data.from.slice(0, 10)} → ${(data.to ?? new Date().toISOString()).slice(0, 10)}` : "All time",
       eventCount: events.length,
