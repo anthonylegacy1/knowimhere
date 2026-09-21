@@ -628,3 +628,243 @@ function AdminAnalytics() {
     </div>
   );
 }
+
+function ResidentActivity({
+  report,
+  showTechnical,
+  setShowTechnical,
+  openResource,
+  setOpenResource,
+}: {
+  report: AdminReport;
+  showTechnical: boolean;
+  setShowTechnical: (v: boolean) => void;
+  openResource: string | null;
+  setOpenResource: (v: string | null) => void;
+}) {
+  const count = (type: string): number | null => {
+    const row = report.eventTypes.find((e) => e.eventType === type);
+    if (row) return row.count;
+    return IMPLEMENTED.has(type) ? 0 : null;
+  };
+
+  const cards: { label: string; value: number | null }[] = [
+    { label: "Total engagement events", value: report.eventCount },
+    { label: "Resource views", value: count("resource_view") },
+    { label: "Get There actions", value: count("get_there") },
+    { label: "Ask KIH questions", value: count("ask_kih_query") },
+    { label: "Map opens", value: count("map_opened") },
+    { label: "Map marker clicks", value: count("map_marker_selected") },
+    { label: "Call actions", value: count("call_clicked") },
+    { label: "Saved resources", value: count("resource_saved") },
+    { label: "Check-ins", value: report.checkInTotal },
+    { label: "Return visits", value: count("return_visit") },
+  ];
+
+  const topViewed = report.resources.filter((r) => r.views > 0).slice(0, 8);
+  const topGetThere = [...report.resources].filter((r) => r.getThere > 0).sort((a, b) => b.getThere - a.getThere).slice(0, 8);
+  const topCategories = report.categories.slice(0, 8);
+  const detail = openResource ? report.resources.find((r) => r.slug === openResource) ?? null : null;
+
+  const insights: string[] = [];
+  if (topCategories[0] && topCategories[0].total >= 3) {
+    insights.push(`${categoryLabel(topCategories[0].category)} is the most explored category in this period.`);
+  }
+  if (topViewed[0] && topViewed[0].views >= 3) {
+    insights.push(`${resourceName(topViewed[0].slug)} received the most resource views (${topViewed[0].views}).`);
+  }
+  if (topGetThere[0] && topGetThere[0].getThere >= 2) {
+    insights.push(`${resourceName(topGetThere[0].slug)} generated the most Get There activity.`);
+  }
+  const busiest = [...report.daily].sort((a, b) => b.events - a.events)[0];
+  if (busiest && report.daily.length > 1) {
+    insights.push(`The busiest day in this period was ${busiest.date} with ${busiest.events} recorded actions.`);
+  }
+
+  function exportSummary() {
+    const rows: string[][] = [["Section", "Item", "Metric", "Value"]];
+    cards.forEach((c) => rows.push(["Summary", c.label, "count", c.value === null ? "Not yet tracked" : String(c.value)]));
+    report.eventTypes.forEach((e) => rows.push(["Activity type", eventLabel(e.eventType), "events", String(e.count)]));
+    topViewed.forEach((r) => rows.push(["Most viewed resources", resourceName(r.slug), "views", String(r.views)]));
+    topCategories.forEach((c) => rows.push(["Most explored categories", categoryLabel(c.category), "views", String(c.views)]));
+    topGetThere.forEach((r) => rows.push(["Get There activity", resourceName(r.slug), "get there actions", String(r.getThere)]));
+    const csv = rows.map((r) => r.map((v) => `"${v.replace(/"/g, '""')}"`).join(",")).join("\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `kih-resident-activity-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <SectionCard
+      id="activity"
+      title="Resident activity summary"
+      lead="Plain-English view of what residents actually did. Aggregate only — no names, emails, question text or precise locations."
+    >
+      <div className="flex flex-wrap items-center gap-2 print:hidden">
+        <button type="button" onClick={exportSummary} className="btn-base btn-sm border-2 border-border bg-card">
+          Export summary (CSV)
+        </button>
+        <button
+          type="button"
+          aria-pressed={showTechnical}
+          onClick={() => setShowTechnical(!showTechnical)}
+          className={`chip min-h-11 cursor-pointer px-4 ${showTechnical ? "bg-ink text-cream" : ""}`}
+        >
+          {showTechnical ? "Hide technical details" : "Show technical details"}
+        </button>
+      </div>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {cards.map((c) =>
+          c.value === null ? (
+            <div key={c.label} className="card-flat p-4">
+              <p className="font-display text-sm font-bold uppercase tracking-wide text-muted-foreground">Not yet tracked</p>
+              <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">{c.label}</p>
+            </div>
+          ) : (
+            <Stat key={c.label} label={c.label} value={c.value} />
+          ),
+        )}
+      </div>
+
+      {insights.length > 0 && (
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {insights.map((text) => (
+            <p key={text} className="card-flat p-4 text-sm font-bold">
+              {text}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <div>
+          <h3 className="font-display text-lg font-bold">Most viewed resources</h3>
+          {topViewed.length === 0 ? (
+            <Empty />
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {topViewed.map((r) => (
+                <li key={r.slug}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenResource(openResource === r.slug ? null : r.slug)}
+                    className="card-flat flex w-full items-center justify-between gap-3 p-3 text-left"
+                  >
+                    <span className="font-bold">{resourceName(r.slug)}</span>
+                    <span className="text-sm text-foreground/70">
+                      {r.views} views{showTechnical ? ` · ${r.slug}` : ""}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          {detail && (
+            <div className="card-flat mt-3 border-2 border-brand p-4">
+              <p className="font-display text-xl font-bold">{resourceName(detail.slug)}</p>
+              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{categoryLabel(detail.category)}</p>
+              <ul className="mt-3 grid gap-1 text-sm font-bold sm:grid-cols-2">
+                <li>{detail.views} resource views</li>
+                <li>{detail.getThere} Get There actions</li>
+                <li>{detail.calls} call actions</li>
+                <li>{detail.saves} saves</li>
+                <li>{detail.selfReportedCheckIns + detail.verifiedCheckIns} check-ins</li>
+                <li>{detail.externalOpens} partner website opens</li>
+              </ul>
+              {showTechnical && <p className="mt-2 text-xs text-muted-foreground">Technical id: {detail.slug}</p>}
+              <p className="mt-2 text-xs text-muted-foreground">Aggregate totals for the selected date range. No individual resident records.</p>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h3 className="font-display text-lg font-bold">Most explored categories</h3>
+          {topCategories.length === 0 ? (
+            <Empty />
+          ) : (
+            <div className="mt-3">
+              <Bars rows={topCategories.map((c) => ({ label: categoryLabel(c.category), value: c.total }))} />
+              <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
+                {topCategories.map((c) => (
+                  <li key={c.category}>
+                    <strong>{categoryLabel(c.category)}</strong>: {c.views} views · {c.getThere} Get There · {c.saves} saves
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h3 className="font-display text-lg font-bold">Where are residents trying to go?</h3>
+          {topGetThere.length === 0 ? (
+            <Empty text="No Get There actions in this period" />
+          ) : (
+            <div className="mt-3">
+              <Bars rows={topGetThere.map((r) => ({ label: resourceName(r.slug), value: r.getThere }))} />
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h3 className="font-display text-lg font-bold">Activity over time</h3>
+          {report.daily.length === 0 ? (
+            <Empty />
+          ) : (
+            <div className="mt-3">
+              <Bars rows={report.daily.slice(-14).map((d) => ({ label: d.date, value: d.events }))} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <h3 className="font-display text-lg font-bold">Recent Know I&apos;m Here activity</h3>
+        {report.recent.length === 0 ? (
+          <Empty />
+        ) : (
+          <ul className="mt-3 space-y-2">
+            {report.recent.slice(0, 20).map((r, i) => (
+              <li key={`${r.at}-${i}`} className="card-flat flex flex-wrap items-baseline justify-between gap-2 p-3 text-sm">
+                <span className="font-bold">{activitySentence(r)}</span>
+                <span className="text-xs text-muted-foreground">
+                  {r.category ? `${categoryLabel(r.category)} · ` : ""}
+                  {new Date(r.at).toLocaleString()}
+                  {showTechnical ? ` · ${r.eventType}` : ""}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {showTechnical && (
+        <div className="mt-6">
+          <h3 className="font-display text-lg font-bold">Technical details</h3>
+          <table className="mt-3 w-full text-left text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                <th className="py-2">Plain English</th>
+                <th>Database event_type</th>
+                <th>Events</th>
+              </tr>
+            </thead>
+            <tbody>
+              {report.eventTypes.map((e) => (
+                <tr key={e.eventType} className="border-t border-border">
+                  <td className="py-2 font-bold">{eventLabel(e.eventType)}</td>
+                  <td className="font-mono text-xs">{e.eventType}</td>
+                  <td>{e.count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </SectionCard>
+  );
+}
