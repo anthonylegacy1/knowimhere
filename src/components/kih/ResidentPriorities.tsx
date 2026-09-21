@@ -54,18 +54,6 @@ const TABS: TabContent[] = [
       "Partners and the City can see, in aggregate, whether neighborhood resources are being discovered and acted on — never individual resident histories.",
   },
   {
-    id: "health",
-    title: "Community & Public Health",
-    badge: "Primary Buildathon focus",
-    concern:
-      "Food assistance, health and wellness resources, mental-health support, senior services, caregiver support, recreation, family support, and community programs.",
-    helps:
-      "Instead of requiring residents to know which department or organization owns a service, residents can start with: “What do you need today?” Know I'm Here uses resident interests, needs, neighborhood, and optional location context to surface relevant resources and next steps.",
-    journeyTitle: "“What do you need today?”",
-    journey: ["Ask KIH", "Nearby health, food or wellness resource", "Understand the next step", "Get there", "Voluntary check-in"],
-    extra: "health",
-  },
-  {
     id: "transportation",
     title: "Reliable Transportation, Infrastructure & Sustainability",
     badge: "Expansion application",
