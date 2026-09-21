@@ -21,6 +21,7 @@ export const Route = createFileRoute("/admin/analytics")({
 });
 
 const SECTIONS = [
+  ["activity", "Resident Activity Summary"],
   ["overview", "Overview"],
   ["funnel", "Resident Funnel"],
   ["ask", "Ask KIH Insights"],
