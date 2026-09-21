@@ -477,17 +477,18 @@ export function ResidentPriorities() {
           </div>
         </div>
 
-        <h3 className="mt-8 font-display text-2xl font-extrabold uppercase leading-tight sm:text-3xl">
+        <h3 id="how-kih-responds" className="mt-8 scroll-mt-24 font-display text-xl font-extrabold uppercase leading-tight sm:text-2xl">
           How KIH responds to the primary focus
         </h3>
-        <p className="mt-3 max-w-3xl font-semibold text-foreground">
+        <p className="mt-2 max-w-3xl font-semibold text-foreground">
           Community + Public Health is where Know I&apos;m Here proves the model. The same connection architecture can
           extend across Detroit&apos;s other resident priorities.
         </p>
-        <p className="mt-3 max-w-2xl text-sm text-foreground/70">
+        <p className="mt-2 max-w-2xl text-sm text-foreground/70">
           Venture 313 provides the challenge framework. Rise Higher Detroit provides the resident voice. KIH connects
           the two by helping residents discover, understand, reach and use existing resources.
         </p>
+
 
 
 
