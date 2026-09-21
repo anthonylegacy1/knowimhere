@@ -409,7 +409,7 @@ export function ResidentPriorities() {
 
   return (
     <section className="border-y border-border bg-card">
-      <div className="container-kih py-14">
+      <div className="container-kih py-10 sm:py-14">
         <SectionHeading
           eyebrow="Resident priorities"
           title="Detroit already told us what matters."
