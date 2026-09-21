@@ -1,5 +1,5 @@
 import { Check, Eye, Focus, RotateCcw, Type } from "lucide-react";
-import zoomIcon from "@/assets/accessibility-zoom.png.asset.json";
+import zoomIcon from "@/assets/accessibility-zoom-transparent.png.asset.json";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -39,7 +39,7 @@ export function AccessibilityPanel() {
           size="icon"
           className="size-11 gap-0 rounded-full bg-cream text-xs font-extrabold"
         >
-          <img src={zoomIcon.url} alt="" width={20} height={20} className="size-5 shrink-0" />
+          <img src={zoomIcon.url} alt="" width={20} height={20} className="size-5 shrink-0 bg-transparent" />
           <span aria-hidden>+</span>
         </Button>
       </DialogTrigger>
