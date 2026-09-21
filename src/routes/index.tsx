@@ -40,6 +40,7 @@ import renaissanceAsset from "@/assets/renaissance-center.jpeg.asset.json";
 import fordFieldAsset from "@/assets/ford-field.jpeg.asset.json";
 import littleCaesarsAsset from "@/assets/little-caesars-arena.jpeg.asset.json";
 import comericaAsset from "@/assets/comerica-park.png.asset.json";
+import joeLouisFistImage from "@/assets/joe-louis-fist.jpg";
 import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
 import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
 import everydayAsset from "@/assets/everyday-connect-multigenerational.png.asset.json";
@@ -91,6 +92,7 @@ const featuredLandmarks = [
   { title: "Ford Field", type: "Sports + Entertainment", image: fordFieldAsset.url, text: "Games, events and experiences happening in the heart of downtown Detroit.", tags: ["Sports", "Events", "Downtown"] },
   { title: "Hart Plaza", type: "Community + Culture", image: hartPlazaAsset.url, text: "Festivals, community gatherings, music, culture and Detroit experiences.", tags: ["Community", "Culture", "Events"] },
   { title: "Detroit Riverwalk", type: "Public Health + Recreation", image: riverwalkAsset.url, text: "Walking, recreation, wellness and accessible outdoor experiences along Detroit’s riverfront.", tags: ["Wellness", "Recreation", "Outdoors"] },
+  { title: "Joe Louis Fist", type: "Landmarks + Culture", image: joeLouisFistImage, text: "An iconic Detroit landmark representing strength, history and civic pride in the heart of downtown.", tags: ["Landmark", "Culture", "Downtown"] },
 ];
 
 const additionalLandmarks = [
@@ -704,7 +706,7 @@ function Index() {
           text="Explore the places, programs, events, resources and opportunities that make Detroit move—from neighborhood spaces and community programs to recreation, culture and major city experiences."
         />
         <p className="mt-3 max-w-2xl text-lg text-foreground/65">Know I&apos;m Here helps residents discover what&apos;s around them and what&apos;s relevant to them.</p>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
         </div>
         <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
