@@ -109,6 +109,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdmin = pathname.startsWith("/admin");
 
   // One anonymous session marker per browser tab. No identity, no location.
   useEffect(() => {
