@@ -715,19 +715,50 @@ function Index() {
         />
         <p className="mt-3 max-w-2xl text-lg text-foreground/65">Know I&apos;m Here helps residents discover what&apos;s around them and what&apos;s relevant to them.</p>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
+          {featuredLandmarks.slice(0, 3).map((place) => <DetroitPlaceCard key={place.title} place={place} featured />)}
+          <div className="hidden lg:block">
+            <DetroitPlaceCard place={featuredLandmarks[3]} featured />
+          </div>
         </div>
-        <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
-          <div className="overflow-hidden">
-            <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-              {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
+        {/* Mobile: everything after Detroit Riverwalk collapses into one accordion */}
+        <div className="mt-6 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setShowMorePlaces((v) => !v)}
+            aria-expanded={showMorePlaces}
+            aria-controls="more-detroit-places-panel"
+            className="flex min-h-14 w-full items-center justify-between gap-3 rounded-2xl border-2 border-ink/15 bg-card px-5 text-left font-extrabold text-ink shadow-sm transition-colors hover:bg-cream"
+          >
+            <span>{showMorePlaces ? "Hide more Detroit places" : "Explore More Detroit Places"}</span>
+            {showMorePlaces ? <Minus className="size-5 shrink-0 text-brand" aria-hidden /> : <Plus className="size-5 shrink-0 text-brand" aria-hidden />}
+          </button>
+          <div
+            id="more-detroit-places-panel"
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showMorePlaces ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`}
+            aria-hidden={!showMorePlaces}
+          >
+            <div className="overflow-hidden">
+              <div className="grid gap-5 pt-5">
+                <DetroitPlaceCard place={featuredLandmarks[3]} featured interactive={showMorePlaces} />
+                {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showMorePlaces} />)}
+              </div>
             </div>
           </div>
         </div>
-        <div className="mt-7 flex justify-center">
-          <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
-            {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
-          </Button>
+        {/* Desktop: keep the existing expanded layout */}
+        <div className="hidden lg:block">
+          <div id="more-detroit-locations" className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showAllDetroit ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"}`} aria-hidden={!showAllDetroit}>
+            <div className="overflow-hidden">
+              <div className="grid gap-5 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+                {additionalLandmarks.map((place) => <DetroitPlaceCard key={place.title} place={place} interactive={showAllDetroit} />)}
+              </div>
+            </div>
+          </div>
+          <div className="mt-7 flex justify-center">
+            <Button type="button" variant="outline" size="lg" className="min-h-12 border-2 border-ink/15 bg-card px-6 font-bold text-ink shadow-sm" aria-expanded={showAllDetroit} aria-controls="more-detroit-locations" onClick={() => setShowAllDetroit((current) => !current)}>
+              {showAllDetroit ? <>Show Less <ChevronUp /></> : <>Explore More of Detroit <ChevronDown /></>}
+            </Button>
+          </div>
         </div>
         <p className="mt-5 text-xs text-muted-foreground">Location photography is used for discovery context. Verify resource availability with the official provider.</p>
       </section>
