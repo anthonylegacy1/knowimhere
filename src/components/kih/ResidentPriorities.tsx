@@ -42,6 +42,7 @@ const TABS: TabContent[] = [
     journeyTitle: "“What do you need today?”",
     journey: ["Ask KIH", "Nearby health, food or wellness resource", "Understand the next step", "Get there", "Voluntary check-in"],
     extra: "health",
+    extras: ["shelter"],
   },
   {
     id: "neighborhoods",
