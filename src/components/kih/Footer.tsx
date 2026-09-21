@@ -51,6 +51,21 @@ export function Footer() {
             </ul>
           </div>
         </div>
+        <div className="mt-8 border-t border-border pt-5">
+          <p className="font-display font-bold">Contact Know I&apos;m Here</p>
+          <p className="mt-2 max-w-md text-sm text-muted-foreground">
+            Questions, partnership opportunities, resource updates or community feedback?
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <a href="mailto:info@knowimhere.com" className="btn-base btn-brand text-sm">
+              Email us
+            </a>
+            <a href="mailto:info@knowimhere.com" className="text-sm font-semibold text-foreground/70 hover:text-brand">
+              info@knowimhere.com
+            </a>
+          </div>
+        </div>
+
         <div className="mt-8 border-t border-border pt-5 text-xs text-muted-foreground">
           <p>
             Know I&apos;m Here is an independent prototype. It is not an official City of Detroit platform and is not
