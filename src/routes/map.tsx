@@ -78,7 +78,22 @@ function MapPage() {
   const selected = sorted.find((x) => x.resource.id === selectedId) ?? null;
   const selectedDistance = selected ? distanceToResource(selected.resource, activeCoords) : null;
 
-  const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
+  // "SHOW ME" order: urgent needs first. Shelter, Safety and Voting & Civic are
+  // always in the first row even though they route to official sources rather
+  // than mapped pins.
+  const LEAD: CategoryId[] = [
+    "health",
+    "food",
+    "shelter",
+    "safety",
+    "transportation",
+    "youth",
+    "senior",
+    "employment",
+    "civic",
+  ];
+  const inData = new Set(RESOURCES.flatMap((r) => r.tags) as CategoryId[]);
+  const cats = [...LEAD, ...Array.from(inData).filter((c) => !LEAD.includes(c))];
 
   return (
     <div className="container-kih py-8 sm:py-12">
