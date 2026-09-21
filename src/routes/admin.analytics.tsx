@@ -374,6 +374,14 @@ function AdminAnalytics() {
       </p>
 
       <div className="mt-8 grid gap-6">
+        <ResidentActivity
+          report={report}
+          showTechnical={showTechnical}
+          setShowTechnical={setShowTechnical}
+          openResource={openResource}
+          setOpenResource={setOpenResource}
+        />
+
         <SectionCard id="overview" title="Overview">
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {Object.entries(report.overview).map(([label, value]) => (
