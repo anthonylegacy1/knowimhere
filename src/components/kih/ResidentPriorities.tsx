@@ -13,6 +13,8 @@ const ECOSYSTEM: { label: string; note: string }[] = [
 
 const FLOW = ["Discovery", "Access", "Participation", "Utilization", "Measurement", "Adoption"];
 
+type Extra = "health" | "civic" | "safety" | "shelter" | "school-safety";
+
 interface TabContent {
   id: string;
   title: string;
@@ -22,7 +24,8 @@ interface TabContent {
   journeyTitle: string;
   journey: string[];
   partnerValue?: string;
-  extra?: "health" | "civic";
+  extra?: Extra;
+  extras?: Extra[];
   journeyAsList?: boolean;
   highlight?: string;
 }
