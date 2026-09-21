@@ -188,7 +188,7 @@ function Index() {
 
       <section className="bg-card pb-12 pt-12 text-center">
         <div className="container-kih">
-          <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-lg font-medium text-foreground/65 sm:text-xl">The challenge is connecting the right resource to the right resident at the right time.</span></p>
+          <p className="mx-auto max-w-3xl text-2xl font-extrabold leading-tight text-ink sm:text-3xl">Detroit has resources.<span className="mt-1.5 block text-base font-medium leading-snug tracking-tight text-foreground/65 sm:text-xl sm:tracking-normal"><span className="block sm:inline">The challenge is connecting the right </span><span className="block sm:inline">resource to the right resident at the right time.</span></span></p>
           <p aria-label="Discover, Know, Get There, Check In, Stay Connected" className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
             {["Discover", "Know", "Get There", "Check In", "Stay Connected"].map((step, index) => (
               <span key={step} className="flex items-center gap-2">
