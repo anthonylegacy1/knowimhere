@@ -183,6 +183,44 @@ function Expandable({
   );
 }
 
+function WhereKihFits() {
+  return (
+    <>
+      <div className="mx-auto mt-4 max-w-3xl sm:mt-5">
+        <div className="card-flat p-5">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Public + community investment</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {INVESTMENT.map((i) => (
+              <li key={i} className="chip text-sm">
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Arrow />
+        <div className="rounded-lg bg-brand p-5 text-brand-foreground">
+          <p className="text-xs font-extrabold uppercase tracking-wide">Know I&apos;m Here connection layer</p>
+          <p className="mt-2 font-display text-xl font-extrabold uppercase">Discover → Get There → Check In → Measure</p>
+        </div>
+        <Arrow />
+        <div className="card-flat bg-aqua-soft/60 p-5">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {[...RETURN_PRIMARY, ...RETURN_MORE].map((r) => (
+              <li key={r} className="chip text-sm">
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p className="mt-4 text-center text-sm text-foreground/70">
+        Know I&apos;m Here is designed to sit between investment that already exists and actual resident participation.
+      </p>
+    </>
+  );
+}
+
 function Arrow() {
   return (
     <div className="flex justify-center py-2 text-foreground/40" aria-hidden>
