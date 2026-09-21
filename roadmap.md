@@ -152,3 +152,6 @@
 
 - [x] Resident Activity Summary dashboard on /admin/analytics
 - [x] Hide Ask KIH bar + resident footer on /admin/* routes
+
+- [x] Map: add Shelter, Safety, Voting & Civic categories + official-source panel
+- [ ] Admin passphrase: owner sets their own value via secure form

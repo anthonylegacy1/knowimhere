@@ -14,6 +14,9 @@ export type CategoryId =
   | "transportation"
   | "neighborhood"
   | "housing"
+  | "shelter"
+  | "safety"
+  | "civic"
   | "technology"
   | "arts"
   | "education"
@@ -30,6 +33,9 @@ export const CATEGORIES: Record<CategoryId, { label: string; emoji: string; tone
   transportation: { label: "Transportation", emoji: "🚌", tone: "sky" },
   neighborhood: { label: "Neighborhood Information", emoji: "🏘️", tone: "brand" },
   housing: { label: "Housing Resources", emoji: "🏠", tone: "plum" },
+  shelter: { label: "Shelter & Safe Support", emoji: "🛏️", tone: "plum" },
+  safety: { label: "Safety & Crisis Resources", emoji: "🛡️", tone: "brand" },
+  civic: { label: "Voting & Civic Access", emoji: "🗳️", tone: "sky" },
   technology: { label: "Technology", emoji: "📱", tone: "sky" },
   arts: { label: "Arts & Culture", emoji: "🎵", tone: "plum" },
   education: { label: "Education", emoji: "📚", tone: "sun" },

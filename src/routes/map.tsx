@@ -12,6 +12,7 @@ import { useApp } from "@/lib/app-store";
 import { distanceToResource, isApproximate } from "@/lib/resource-distance";
 import { useNearbyResults } from "@/lib/nearby-results";
 import { track } from "@/lib/analytics";
+import { OfficialAccessPanel } from "@/components/kih/OfficialAccessPanel";
 
 // The map library only downloads once the resident opens the map.
 const NearbyMap = lazy(() => import("@/components/kih/NearbyMap"));
@@ -78,7 +79,22 @@ function MapPage() {
   const selected = sorted.find((x) => x.resource.id === selectedId) ?? null;
   const selectedDistance = selected ? distanceToResource(selected.resource, activeCoords) : null;
 
-  const cats = Array.from(new Set(RESOURCES.flatMap((r) => r.tags))) as CategoryId[];
+  // "SHOW ME" order: urgent needs first. Shelter, Safety and Voting & Civic are
+  // always in the first row even though they route to official sources rather
+  // than mapped pins.
+  const LEAD: CategoryId[] = [
+    "health",
+    "food",
+    "shelter",
+    "safety",
+    "transportation",
+    "youth",
+    "senior",
+    "employment",
+    "civic",
+  ];
+  const inData = new Set(RESOURCES.flatMap((r) => r.tags) as CategoryId[]);
+  const cats = [...LEAD, ...Array.from(inData).filter((c) => !LEAD.includes(c))];
 
   return (
     <div className="container-kih py-8 sm:py-12">
@@ -151,6 +167,8 @@ function MapPage() {
           </button>
         </div>
       </div>
+
+      <OfficialAccessPanel selected={selectedCategories} />
 
       {markers.length === 0 ? (
         <div className="card-flat mt-6 p-6 text-center">
