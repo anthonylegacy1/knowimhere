@@ -19,24 +19,24 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
     items: [
       { to: "/", hash: "community-public-health", label: "Community + Public Health" },
       { to: "/for-you", label: "For You" },
+      { to: "/", hash: "nearby-map", label: "Map What's Around Me" },
       { to: "/ask", label: "Ask KIH" },
-      { to: "/map", label: "Nearby Map" },
       { to: "/", hash: "help-me-get-there", label: "Help Me Get There" },
+    ],
+  },
+  {
+    title: "Trust + adoption",
+    items: [
+      { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
+      { to: "/learn", label: "Everyday Connect Learning" },
     ],
   },
   {
     title: "Detroit impact",
     items: [
       { to: "/partners", label: "Partner Impact" },
-      { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact & ROI" },
       { to: "/sponsorship", label: "Partners + Sponsorship" },
-    ],
-  },
-  {
-    title: "Adoption + community",
-    items: [
-      { to: "/learn", label: "Everyday Connect Learning" },
-      { to: "/", hash: "fast-freddy", label: "Fast Freddy Experience" },
+      { to: "/", hash: "detroit-economic-impact", label: "Detroit Economic Impact & ROI" },
       { to: "/", hash: "discover-detroit", label: "Discover Detroit" },
     ],
   },
