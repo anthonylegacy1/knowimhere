@@ -105,6 +105,7 @@ const TABS: TabContent[] = [
     journeyTitle: "“What can my child do after school near us?”",
     journey: ["Ask KIH", "Nearby youth opportunities", "Eligibility / schedule / next step", "Get there", "Participate"],
     highlight: "The opportunity may already exist. Know I'm Here helps the family know it exists and how to participate.",
+    extras: ["school-safety"],
   },
   {
     id: "future",
