@@ -903,7 +903,7 @@ function ImHereJourney() {
       <ol className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center" aria-label="Interactive demo journey">
         <DemoJourneyStep icon={<Search />} title="Discover" text="Find local resources, events and activities." />
         <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
-        <DemoJourneyStep icon={<Radio />} title="Know" text="See what&apos;s happening around you first." />
+        <DemoJourneyStep icon={<Radio />} title="Know" text="See what's happening around you first." />
         <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
         <DemoJourneyStep icon={<BusFront />} title="Get There" text="Get directions or ride assistance." />
         <ArrowRight className="hidden size-5 text-brand-foreground/75 sm:block" aria-hidden />
