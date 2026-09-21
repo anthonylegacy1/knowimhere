@@ -147,8 +147,7 @@ function Index() {
       <section id="vision" className="home-hero scroll-mt-24 relative overflow-hidden">
         <img src={heroAsset.url} alt="Detroit skyline and Renaissance Center glowing at sunset across the river" width={1672} height={941} className="absolute inset-0 size-full object-cover" />
         <div className="container-kih relative z-10 flex min-h-[34rem] flex-col items-center px-5 pb-14 pt-16 text-center text-cream sm:min-h-[39rem] sm:pb-20 sm:pt-20">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-ink/55 px-4 py-2 text-xs font-extrabold uppercase tracking-wider backdrop-blur"><MapPin className="size-3.5 text-aqua" /> Venture 313 Buildathon Prototype · Detroit</span>
-          <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-[1.04] sm:text-7xl">Your Detroit. Connected to You.</h1>
+          <h1 className="max-w-4xl text-5xl font-extrabold leading-[1.04] sm:text-7xl">Your Detroit. Connected to You.</h1>
           <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-cream/90 sm:text-lg">Know I&apos;m Here helps Detroit residents discover nearby resources, services, activities, programs and opportunities based on where they are, what they need and what matters to them.</p>
           <div className="mt-7 grid w-full max-w-sm gap-3">
             <NearMeButton className="min-h-14 bg-aqua text-ink shadow-lg hover:bg-aqua/90" />
