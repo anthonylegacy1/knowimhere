@@ -55,6 +55,7 @@ function Onboarding() {
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState<Profile>(EMPTY_PROFILE);
   const [showMore, setShowMore] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   useEffect(() => {
     if (hydrated) setDraft({ ...profile, isDemo: false });
