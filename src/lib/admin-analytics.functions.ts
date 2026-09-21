@@ -64,8 +64,29 @@ export interface CategoryRow {
   share: number;
 }
 
+export interface EventTypeRow {
+  eventType: string;
+  count: number;
+}
+
+export interface ActivityRow {
+  eventType: string;
+  slug: string | null;
+  category: string | null;
+  at: string;
+}
+
+export interface DayRow {
+  date: string;
+  events: number;
+}
+
 export interface AdminReport {
   status: "ok";
+  eventTypes: EventTypeRow[];
+  recent: ActivityRow[];
+  daily: DayRow[];
+  checkInTotal: number;
   generatedAt: string;
   rangeLabel: string;
   eventCount: number;
