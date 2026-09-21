@@ -193,8 +193,8 @@ function Arrow() {
 
 export function DetroitROI() {
   return (
-    <div className="space-y-10 sm:space-y-14">
-      {/* 0 — SECTION VIDEO */}
+    <div className="space-y-10 pb-24 sm:space-y-14 lg:pb-0">
+      {/* 1 — SECTION VIDEO (must stay first) */}
       <div>
         <span className="eyebrow">Detroit economic impact &amp; ROI</span>
         <h3 className="mt-4 font-display text-xl font-extrabold uppercase tracking-tight text-brand sm:text-2xl">
@@ -217,7 +217,7 @@ export function DetroitROI() {
         </div>
       </div>
 
-      {/* 1 — PRIMARY ROI MESSAGE */}
+      {/* 2 — MAIN ECONOMIC IMPACT THESIS */}
       <div>
         <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
           Turning community investment into measurable engagement
@@ -229,24 +229,8 @@ export function DetroitROI() {
         <p className="mt-5 max-w-3xl text-base text-foreground/70 sm:text-lg">
           Detroit and its community partners already invest in health programs, recreation, transportation, workforce
           development, senior services, youth programs, neighborhood initiatives, events, and other community
-          resources.
-        </p>
-        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          The opportunity is making sure residents can actually find them, reach them, use them, and return to them.
-        </p>
-        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Know I&apos;m Here helps close the discovery and access gap by connecting residents to relevant resources.
-          Everyday Connect helps close the digital-confidence gap by teaching residents how to use the technology
-          required to access those opportunities.
-        </p>
-        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Together, they can help participating organizations better understand whether outreach is translating into
-          discovery, access, participation, and utilization.
-        </p>
-        <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
-          Over time, privacy-conscious engagement data can help partners understand how programs are being reached and
-          used, where additional outreach may be needed, and whether community investment dollars are generating
-          meaningful resident engagement.
+          resources. The opportunity is making sure residents can actually find them, reach them, use them, and return
+          to them.
         </p>
         <p className="mt-4 max-w-3xl rounded-2xl bg-sun/30 px-5 py-4 text-base font-bold sm:text-lg">
           The goal is simple: help Detroit and its partners get more measurable value from the resources they are
@@ -259,9 +243,46 @@ export function DetroitROI() {
             </li>
           ))}
         </ul>
+        <Expandable label="Read the full thesis">
+          <div className="pt-4">
+            <p className="max-w-3xl text-base text-foreground/70 sm:text-lg">
+              Know I&apos;m Here helps close the discovery and access gap by connecting residents to relevant
+              resources. Everyday Connect helps close the digital-confidence gap by teaching residents how to use the
+              technology required to access those opportunities.
+            </p>
+            <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+              Together, they can help participating organizations better understand whether outreach is translating
+              into discovery, access, participation, and utilization.
+            </p>
+            <p className="mt-3 max-w-3xl text-base text-foreground/70 sm:text-lg">
+              Over time, privacy-conscious engagement data can help partners understand how programs are being reached
+              and used, where additional outreach may be needed, and whether community investment dollars are
+              generating meaningful resident engagement.
+            </p>
+          </div>
+        </Expandable>
       </div>
 
-      {/* 2 — CONNECTION FLOW */}
+      {/* 3 — MORE AWARENESS / PARTICIPATION / UTILIZATION (always visible) */}
+      <div>
+        <h3 className="font-display text-3xl font-extrabold uppercase leading-tight sm:text-4xl">
+          More connection.
+          <br />
+          More utilization.
+          <br />
+          <span className="text-brand">More impact per dollar.</span>
+        </h3>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ROI_CARDS.slice(0, 3).map(([t, d]) => (
+            <div key={t} className="card-flat p-5">
+              <p className="font-display text-lg font-bold uppercase">{t}</p>
+              <p className="mt-2 text-sm text-foreground/75">{d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4 — WHERE KNOW I'M HERE SITS (always visible) */}
       <div>
         <h3 className="font-display text-2xl font-bold">Where Know I&apos;m Here sits</h3>
         <div className="mx-auto mt-5 max-w-3xl">
@@ -286,58 +307,21 @@ export function DetroitROI() {
           <div className="card-flat bg-aqua-soft/60 p-5">
             <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential return</p>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {RETURN_PRIMARY.map((r) => (
+              {[...RETURN_PRIMARY, ...RETURN_MORE].map((r) => (
                 <li key={r} className="chip text-sm">
                   {r}
                 </li>
               ))}
             </ul>
-            <Expandable label="View all potential returns">
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {RETURN_MORE.map((r) => (
-                  <li key={r} className="chip text-sm">
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </Expandable>
           </div>
         </div>
         <p className="mt-4 text-center text-sm text-foreground/70">
-          Know I&apos;m Here is designed to sit between investment that already exists and actual resident participation.
+          Know I&apos;m Here is designed to sit between investment that already exists and actual resident
+          participation.
         </p>
       </div>
 
-      {/* 3 — MORE CONNECTION / UTILIZATION / IMPACT PER DOLLAR */}
-      <div>
-        <h3 className="font-display text-3xl font-extrabold uppercase leading-tight sm:text-4xl">
-          More connection.
-          <br />
-          More utilization.
-          <br />
-          <span className="text-brand">More impact per dollar.</span>
-        </h3>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ROI_CARDS.slice(0, 3).map(([t, d]) => (
-            <div key={t} className="card-flat p-5">
-              <p className="font-display text-lg font-bold uppercase">{t}</p>
-              <p className="mt-2 text-sm text-foreground/75">{d}</p>
-            </div>
-          ))}
-        </div>
-        <Expandable label="View all ROI benefits">
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {ROI_CARDS.slice(3).map(([t, d]) => (
-              <div key={t} className="card-flat p-5">
-                <p className="font-display text-lg font-bold uppercase">{t}</p>
-                <p className="mt-2 text-sm text-foreground/75">{d}</p>
-              </div>
-            ))}
-          </div>
-        </Expandable>
-      </div>
-
-      {/* 4 — SINGLE RESIDENT JOURNEY */}
+      {/* 5 — SINGLE RESIDENT JOURNEY (steps 1-2 visible) */}
       <div>
         <h3 className="font-display text-2xl font-bold sm:text-3xl">How a single resident journey creates value</h3>
         <p className="mt-3 max-w-3xl text-foreground/70">
@@ -387,46 +371,7 @@ export function DetroitROI() {
         </p>
       </div>
 
-      {/* 5 — INFORMATION TO MEASURABLE ENGAGEMENT */}
-      <div>
-        <h3 className="font-display text-2xl font-extrabold uppercase leading-tight sm:text-4xl">
-          From providing information
-          <br />
-          <span className="text-brand">to measuring engagement</span>
-        </h3>
-        <p className="mt-4 max-w-3xl text-foreground/70">
-          Know I&apos;m Here is designed to move beyond simply showing residents what exists. When a resident
-          voluntarily takes actions such as viewing a resource, requesting directions, registering, saving an
-          opportunity, or checking in, those actions can create privacy-conscious engagement signals.
-        </p>
-        <p className="mt-5 inline-block rounded-2xl bg-ink px-5 py-4 font-display text-xl font-extrabold uppercase leading-tight text-cream">
-          Not surveillance.
-          <br />
-          Not silent attendance tracking.
-        </p>
-        <p className="mt-4 max-w-3xl text-foreground/70">
-          Consent-based participation signals can eventually help participating organizations understand whether
-          outreach is translating into resident engagement.
-        </p>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="card-flat p-5">
-            <p className="font-display text-lg font-bold uppercase">Location access</p>
-            <p className="mt-2 text-sm text-foreground/75">Used voluntarily to personalize nearby results.</p>
-          </div>
-          <div className="card-flat p-5">
-            <p className="font-display text-lg font-bold uppercase">Check-in</p>
-            <p className="mt-2 text-sm text-foreground/75">
-              A separate voluntary action where the resident confirms that they arrived or participated.
-            </p>
-          </div>
-        </div>
-        <p className="mt-3 text-sm font-semibold text-foreground/70">
-          Device location is never treated as proof of attendance. Attendance is never inferred automatically, and
-          residents are never checked in silently.
-        </p>
-      </div>
-
-      {/* 6 — FUNDED CAPACITY → ACTUAL PARTICIPATION */}
+      {/* 6 — FUNDED CAPACITY → ACTUAL PARTICIPATION (flow collapsed) */}
       <div>
         <h3 className="font-display text-2xl font-extrabold uppercase leading-tight sm:text-3xl">
           Turn funded capacity into more opportunities for actual participation
@@ -435,27 +380,19 @@ export function DetroitROI() {
           Know I&apos;m Here does not replace the underlying program. It is designed to improve the connection between
           programs that already exist and residents who may benefit from them.
         </p>
-        <ol className="mx-auto mt-6 max-w-md">
-          {CAPACITY_CHAIN.slice(0, 4).map((step, i) => (
-            <li key={step}>
-              {i > 0 && <Arrow />}
-              <div
-                className={`rounded-2xl p-4 text-center font-extrabold uppercase ${
-                  step.startsWith("KIH") ? "bg-brand text-brand-foreground" : "card-flat"
-                }`}
-              >
-                {step}
-              </div>
-            </li>
-          ))}
-        </ol>
         <div className="mx-auto max-w-md">
-          <Expandable label="See how the connection becomes participation">
+          <Expandable label="See how the connection works">
             <ol className="mt-4">
-              {CAPACITY_CHAIN.slice(4).map((step, i) => (
+              {CAPACITY_CHAIN.map((step, i) => (
                 <li key={step}>
                   {i > 0 && <Arrow />}
-                  <div className="card-flat rounded-2xl p-4 text-center font-extrabold uppercase">{step}</div>
+                  <div
+                    className={`rounded-2xl p-4 text-center font-extrabold uppercase ${
+                      step.startsWith("KIH") ? "bg-brand text-brand-foreground" : "card-flat"
+                    }`}
+                  >
+                    {step}
+                  </div>
                 </li>
               ))}
             </ol>
@@ -463,102 +400,170 @@ export function DetroitROI() {
         </div>
       </div>
 
-      {/* 7 — GOVERNMENT ROI */}
+      {/* 7 — WHAT ROI MEANS FOR DETROIT */}
       <div>
         <h3 className="font-display text-2xl font-bold sm:text-3xl">What does ROI mean for Detroit?</h3>
         <p className="mt-3 max-w-3xl text-foreground/70">
-          For the City of Detroit and community partners, return on investment does not necessarily mean direct profit.
-          It can mean getting more community impact from dollars that are already being spent.
+          For Detroit and its community partners, return on investment does not always mean direct profit. It can mean
+          generating more community impact from dollars that are already being invested.
         </p>
-        <p className="mt-3 max-w-3xl text-foreground/70">
-          If residents can discover services earlier and participate more consistently, Know I&apos;m Here could help
-          participating organizations improve utilization, increase engagement, reduce some forms of fragmented
-          outreach, and gain better insight into how residents interact with existing resources.
-        </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {CITY_BENEFITS.map((b) => (
-            <div key={b} className="card-flat p-5">
-              <p className="font-display text-lg font-bold uppercase leading-snug">{b}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 8 — PILOT MEASUREMENT */}
-      <div>
-        <h3 className="font-display text-2xl font-bold sm:text-3xl">How we will measure whether it works</h3>
-        <p className="mt-3 max-w-3xl text-foreground/70">
-          The first Know I&apos;m Here pilots should test a simple economic question: does making resources easier to
-          discover and reach increase measurable engagement with programs that already exist?
-        </p>
-        <p className="mt-4 inline-flex rounded-full bg-sun/40 px-4 py-2 text-xs font-extrabold uppercase tracking-wide">
-          Pilot metrics to measure — not existing performance statistics
-        </p>
-        <Expandable label="View metrics">
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {METRIC_GROUPS.map(([group, items]) => (
-              <div key={group} className="card-flat p-6">
-                <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{group}</p>
-                <ul className="mt-3 space-y-1.5 text-sm font-semibold">
-                  {items.map((m) => (
-                    <li key={m}>• {m}</li>
-                  ))}
-                </ul>
+        <Expandable label="Explore the ROI opportunity">
+          <div className="pt-4">
+            <p className="max-w-3xl text-foreground/70">
+              If residents can discover services earlier and participate more consistently, Know I&apos;m Here could
+              help participating organizations improve utilization, increase engagement, reduce some forms of
+              fragmented outreach, and gain better insight into how residents interact with existing resources.
+            </p>
+            <ul className="mt-4 grid max-w-3xl gap-2 text-sm font-semibold text-foreground/80 sm:grid-cols-2">
+              <li>• Improve utilization</li>
+              <li>• Increase engagement</li>
+              <li>• Reduce fragmented outreach</li>
+              <li>• Understand how residents interact with resources</li>
+              <li>• Identify gaps in access</li>
+              <li>• Improve future resource decisions</li>
+            </ul>
+          </div>
+        </Expandable>
+        <Expandable label="See economic impact opportunities">
+          <div className="grid gap-4 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+            {CITY_BENEFITS.map((b) => (
+              <div key={b} className="card-flat p-5">
+                <p className="font-display text-lg font-bold uppercase leading-snug">{b}</p>
+              </div>
+            ))}
+            {ROI_CARDS.slice(3).map(([t, d]) => (
+              <div key={t} className="card-flat p-5">
+                <p className="font-display text-lg font-bold uppercase">{t}</p>
+                <p className="mt-2 text-sm text-foreground/75">{d}</p>
               </div>
             ))}
           </div>
         </Expandable>
-        <p className="mt-3 text-xs text-muted-foreground">
-          No results are shown here. These are the measurements a pilot would collect.
-        </p>
       </div>
 
-      {/* 9 — BUSINESS + INVESTOR CONNECTION */}
+      {/* 8 — DEEPER ECONOMIC IMPACT / ROI DETAILS */}
       <div>
-        <h3 className="font-display text-2xl font-bold sm:text-3xl">Why this can become a sustainable business</h3>
+        <h3 className="font-display text-2xl font-bold sm:text-3xl">Deeper economic impact &amp; ROI details</h3>
         <p className="mt-3 max-w-3xl text-foreground/70">
-          The same connection layer that creates value for residents and community partners can also support recurring
-          institutional revenue.
+          Measurement approach, pilot metrics, and how this could become a sustainable business.
         </p>
-        <p className="mt-3 max-w-3xl font-semibold text-foreground/80">
-          The adoption model matters because civic technology only becomes valuable when people actually use it.
-          Everyday Connect and the Fast Freddy pilot help Know I&apos;m Here test real community adoption, not just app
-          functionality.
-        </p>
-        <p className="mt-3 inline-flex rounded-full bg-cream px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-brand">
-          Future business model — nothing here is contracted or sold today
-        </p>
-        <Expandable label="View potential customers and revenue streams">
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-brand">Potential paying customer groups</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {CUSTOMER_GROUPS.map((c) => (
-                  <li key={c} className="chip text-sm">
-                    {c}
-                  </li>
-                ))}
-              </ul>
+        <Expandable label="See the deeper details">
+          <div className="space-y-10 pt-5">
+            {/* From information to measurable engagement */}
+            <div>
+              <h4 className="font-display text-xl font-extrabold uppercase leading-tight sm:text-3xl">
+                From providing information
+                <br />
+                <span className="text-brand">to measuring engagement</span>
+              </h4>
+              <p className="mt-4 max-w-3xl text-foreground/70">
+                Know I&apos;m Here is designed to move beyond simply showing residents what exists. When a resident
+                voluntarily takes actions such as viewing a resource, requesting directions, registering, saving an
+                opportunity, or checking in, those actions can create privacy-conscious engagement signals.
+              </p>
+              <p className="mt-5 inline-block rounded-2xl bg-ink px-5 py-4 font-display text-xl font-extrabold uppercase leading-tight text-cream">
+                Not surveillance.
+                <br />
+                Not silent attendance tracking.
+              </p>
+              <p className="mt-4 max-w-3xl text-foreground/70">
+                Consent-based participation signals can eventually help participating organizations understand whether
+                outreach is translating into resident engagement.
+              </p>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="card-flat p-5">
+                  <p className="font-display text-lg font-bold uppercase">Location access</p>
+                  <p className="mt-2 text-sm text-foreground/75">Used voluntarily to personalize nearby results.</p>
+                </div>
+                <div className="card-flat p-5">
+                  <p className="font-display text-lg font-bold uppercase">Check-in</p>
+                  <p className="mt-2 text-sm text-foreground/75">
+                    A separate voluntary action where the resident confirms that they arrived or participated.
+                  </p>
+                </div>
+              </div>
+              <p className="mt-3 text-sm font-semibold text-foreground/70">
+                Device location is never treated as proof of attendance. Attendance is never inferred automatically,
+                and residents are never checked in silently.
+              </p>
             </div>
-            <div className="card-flat p-6">
-              <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential revenue streams</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {REVENUE_STREAMS.map((r) => (
-                  <li key={r} className="chip text-sm">
-                    {r}
-                  </li>
+
+            {/* Pilot measurement */}
+            <div>
+              <h4 className="font-display text-xl font-bold sm:text-2xl">How we will measure whether it works</h4>
+              <p className="mt-3 max-w-3xl text-foreground/70">
+                The first Know I&apos;m Here pilots should test a simple economic question: does making resources
+                easier to discover and reach increase measurable engagement with programs that already exist?
+              </p>
+              <p className="mt-4 inline-flex rounded-full bg-sun/40 px-4 py-2 text-xs font-extrabold uppercase tracking-wide">
+                Pilot metrics to measure — not existing performance statistics
+              </p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {METRIC_GROUPS.map(([group, items]) => (
+                  <div key={group} className="card-flat p-6">
+                    <p className="text-xs font-extrabold uppercase tracking-wide text-brand">{group}</p>
+                    <ul className="mt-3 space-y-1.5 text-sm font-semibold">
+                      {items.map((m) => (
+                        <li key={m}>• {m}</li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                No results are shown here. These are the measurements a pilot would collect.
+              </p>
+            </div>
+
+            {/* Business + investor connection */}
+            <div>
+              <h4 className="font-display text-xl font-bold sm:text-2xl">Why this can become a sustainable business</h4>
+              <p className="mt-3 max-w-3xl text-foreground/70">
+                The same connection layer that creates value for residents and community partners can also support
+                recurring institutional revenue.
+              </p>
+              <p className="mt-3 max-w-3xl font-semibold text-foreground/80">
+                The adoption model matters because civic technology only becomes valuable when people actually use it.
+                Everyday Connect and the Fast Freddy pilot help Know I&apos;m Here test real community adoption, not
+                just app functionality.
+              </p>
+              <p className="mt-3 inline-flex rounded-full bg-cream px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-brand">
+                Future business model — nothing here is contracted or sold today
+              </p>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="card-flat p-6">
+                  <p className="text-xs font-extrabold uppercase tracking-wide text-brand">
+                    Potential paying customer groups
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {CUSTOMER_GROUPS.map((c) => (
+                      <li key={c} className="chip text-sm">
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="card-flat p-6">
+                  <p className="text-xs font-extrabold uppercase tracking-wide text-sky">Potential revenue streams</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {REVENUE_STREAMS.map((r) => (
+                      <li key={r} className="chip text-sm">
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <p className="mt-5 rounded-2xl bg-aqua-soft/60 px-5 py-4 text-lg font-bold">
+                The core resident experience can remain free while institutions that benefit from improved engagement
+                help fund the ecosystem.
+              </p>
             </div>
           </div>
         </Expandable>
-        <p className="mt-5 rounded-2xl bg-aqua-soft/60 px-5 py-4 text-lg font-bold">
-          The core resident experience can remain free while institutions that benefit from improved engagement help
-          fund the ecosystem.
-        </p>
       </div>
 
-      {/* 10 — CLOSING */}
+      {/* CLOSING */}
       <div className="rounded-xl bg-ink p-8 text-center text-cream sm:p-12">
         <p className="font-display text-2xl font-extrabold uppercase leading-tight sm:text-4xl">
           Detroit already invests in the opportunity.
