@@ -40,6 +40,7 @@ import renaissanceAsset from "@/assets/renaissance-center.jpeg.asset.json";
 import fordFieldAsset from "@/assets/ford-field.jpeg.asset.json";
 import littleCaesarsAsset from "@/assets/little-caesars-arena.jpeg.asset.json";
 import comericaAsset from "@/assets/comerica-park.png.asset.json";
+import joeLouisFistImage from "@/assets/joe-louis-fist.jpg";
 import communityAsset from "@/assets/fast-freddy-class-wide.jpeg.asset.json";
 import neighborhoodAsset from "@/assets/detroit-multigenerational-community.jpeg.asset.json";
 import everydayAsset from "@/assets/everyday-connect-multigenerational.png.asset.json";
