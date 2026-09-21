@@ -381,7 +381,7 @@ export function DetroitROI() {
           programs that already exist and residents who may benefit from them.
         </p>
         <div className="mx-auto max-w-md">
-          <Expandable label="See how the connection works">
+          <Expandable label="See how funded capacity becomes participation">
             <ol className="mt-4">
               {CAPACITY_CHAIN.map((step, i) => (
                 <li key={step}>
