@@ -135,6 +135,7 @@ const MORE_OPPORTUNITIES = [
 
 function Index() {
   const [showAllDetroit, setShowAllDetroit] = useState(false);
+  const [showMorePlaces, setShowMorePlaces] = useState(false);
   const [showMoreOpportunities, setShowMoreOpportunities] = useState(false);
   const [showCityResources, setShowCityResources] = useState(false);
   const [showTransportOptions, setShowTransportOptions] = useState(false);
