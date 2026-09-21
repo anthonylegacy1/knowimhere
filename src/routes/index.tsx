@@ -298,9 +298,8 @@ function Index() {
           </Button>
         </div>
 
-        <MyKIHCard />
-
       </section>
+
 
       <section id="nearby-map" className="container-kih scroll-mt-24 pt-8 pb-4">
         <SectionHeading eyebrow="Personalized discovery" title="Start with what matters today." text="Choose a need, see what is nearby, or ask in your own words. You control what you share." />
