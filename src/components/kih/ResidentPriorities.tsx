@@ -389,6 +389,9 @@ function TabPanel({ tab }: { tab: TabContent }) {
         </>
       )}
       {tab.extra === "civic" && <CivicAccess />}
+      {tab.extras?.includes("safety") && <SafetyAwareness />}
+      {tab.extras?.includes("shelter") && <ShelterAccess />}
+      {tab.extras?.includes("school-safety") && <SchoolSafety />}
       {tab.partnerValue && (
         <Block label="Value to partners / city">
           <p>{tab.partnerValue}</p>
