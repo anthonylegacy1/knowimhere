@@ -155,3 +155,8 @@
 
 - [x] Map: add Shelter, Safety, Voting & Civic categories + official-source panel
 - [ ] Admin passphrase: owner sets their own value via secure form
+
+## Master story-flow reorder
+- [x] Homepage order: Vision → Resident Funnel → Community + Public Health → For You → Ask KIH → Nearby Map → Help Me Get There → Partner Impact → Economic Impact → Everyday Connect → Fast Freddy → Discover Detroit → Privacy → Closing
+- [x] Grouped mobile menu (Resident Experience / Detroit Impact / Adoption + Community) with collapsed About + More
+- [x] Floating Ask KIH bar hides while the menu is open
